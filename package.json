@@ -1,0 +1,32 @@
+{
+  "name": "yuuko",
+  "version": "1.0.0",
+  "description": "A Discord bot base that I did for some reason.",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Geo1088/Yuuko.git"
+  },
+  "author": "Geo1088",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Geo1088/Yuuko/issues"
+  },
+  "homepage": "https://github.com/Geo1088/Yuuko#readme",
+  "dependencies": {
+    "color": "^2.0.0",
+    "eris": "git+https://github.com/abalabahaha/eris.git#dev",
+    "glob": "^7.1.2",
+    "jsdoc": "^3.5.5",
+    "moment": "^2.18.1",
+    "moment-timezone": "^0.5.13",
+    "request": "^2.82.0"
+  },
+  "optionalDependencies": {
+    "chalk": "^2.1.0"
+  }
+}
