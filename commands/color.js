@@ -1,8 +1,6 @@
 const Command = require('../src/Command')
 const color = require('color')
 
-throw new Error('I\'m an error!')
-
 module.exports = new Command('color', (c, msg, args) => {
     // Parse args as color
     let col
