@@ -2,6 +2,7 @@
 
 const Eris = require('eris')
 const glob = require('glob')
+const util = require('util')
 const Command = require('./Command')
 
 /** The client. */
@@ -49,7 +50,7 @@ class Yuuko extends Eris.Client {
      */
     addCommand (command) {
         if (!(command instanceof Command)) throw new TypeError('Not a command')
-        if (this.commandForName(command.name)) console.error(new Error('Warning: duplicate command found'))
+        if (this.commandForName(command.name)) console.error(new Error(`Duplicate command found (${command.name})`))
         this.commands.push(command)
         return this
     }
@@ -160,6 +161,28 @@ class Yuuko extends Eris.Client {
             }
             sendChunk(left.join(''), maxLength)
         }(content)
+    }
+
+    /**
+     * Evaluates a JavaScript string in the bot's scope and returns the result
+     * converted to a string and formatted for sending as a message. This is
+     * only here to make the eval command possible and should not be used in
+     * other contexts.
+     * @param {string} script - The script to run.
+     * @returns {any}
+     */
+    eval (text) {
+        let response
+        try {
+            response = eval(text.toString())
+        } catch (e) {
+            response = e
+        }
+        let lang = ''
+        if (!(response instanceof Error)) {
+            lang = 'js'
+        }
+        return '```' + lang + '\n' + util.inspect(response) + '\n```'
     }
 }
 
