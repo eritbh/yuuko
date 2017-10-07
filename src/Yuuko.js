@@ -169,7 +169,9 @@ class Yuuko extends Eris.Client {
      * only here to make the eval command possible and should not be used in
      * other contexts.
      * @param {string} script - The script to run.
-     * @returns {any}
+     * @returns {string} - A Markdown-formatted message that represents the
+     *     output of the command. Includes both console logs and the final
+     *     evaluated expression's result.
      */
     eval (text) {
         let og = console.log
@@ -184,12 +186,8 @@ class Yuuko extends Eris.Client {
             response = e
         }
         console.log = og
-        let lang = ''
-        if (!(response instanceof Error)) {
-            lang = 'js'
-        }
-        ___console = ___console.split(/\n/g).map(line => line && lang === 'js' ? '//> ' + line : line).join('\n')
-        return '```' + lang + '\n' + ___console + (___console && response == null ? '' : util.inspect(response)) + '\n```'
+        ___console = ___console.split(/\n/g).map(line => line ? '//> ' + line : '\n').join('\n')
+        return '```js\n' + ___console + (___console && response === undefined ? '' : util.inspect(response)) + '\n```'
     }
 }
 
