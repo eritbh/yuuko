@@ -172,17 +172,24 @@ class Yuuko extends Eris.Client {
      * @returns {any}
      */
     eval (text) {
+        let og = console.log
         let response
+        let ___console = '' // trying really hard to make this not noticeable
+        text = `console.log = function (...args) {
+            ___console += args.join(' ') + '\\n'
+        };` + text.toString()
         try {
-            response = eval(text.toString())
+            response = eval(text)
         } catch (e) {
             response = e
         }
+        console.log = og
         let lang = ''
         if (!(response instanceof Error)) {
             lang = 'js'
         }
-        return '```' + lang + '\n' + util.inspect(response) + '\n```'
+        ___console = ___console.split(/\n/g).map(line => line && lang === 'js' ? '//> ' + line : line).join('\n')
+        return '```' + lang + '\n' + ___console + (___console && response == null ? '' : util.inspect(response)) + '\n```'
     }
 }
 
