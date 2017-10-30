@@ -9,8 +9,11 @@ const Command = require('./Command')
 class Yuuko extends Eris.Client {
   /**
    * Create a client instance.
-   * @param {object} options - Options to start the client with. This object is
+   * @param {Object} options - Options to start the client with. This object is
    *     also passed to Eris.
+   * @param {string} options.token - The token used to log into the bot.
+   * @param {bool} [options.help=true] - Whether or not to enable the default help
+   *     command.
    */
   constructor (options = {}) {
     super(options.token, options) // TODO: Use the same help object for Eris and Yuuko options
@@ -136,7 +139,7 @@ class Yuuko extends Eris.Client {
    * unaffected.
    * @param content
    * @param
-   * @TODO
+   * @TODO everything
    */
   _createMessageChunked (channelId, content, file, maxLength = 2000) {
     let embed
