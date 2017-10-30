@@ -8,10 +8,10 @@ const Command = require('./Command')
 /** The client. */
 class Yuuko extends Eris.Client {
   /**
-     * Create a client instance.
-     * @param {object} options - Options to start the client with. This object is
-     *     also passed to Eris.
-     */
+   * Create a client instance.
+   * @param {object} options - Options to start the client with. This object is
+   *     also passed to Eris.
+   */
   constructor (options = {}) {
     super(options.token, options) // TODO: Use the same help object for Eris and Yuuko options
     this.useHelp = options.help == null ? true : options.help
@@ -29,9 +29,9 @@ class Yuuko extends Eris.Client {
   }
 
   /**
-     * Given a message, see if there is a command and process it if so.
-     * @param msg - The message object recieved from Eris.
-     */
+   * Given a message, see if there is a command and process it if so.
+   * @param msg - The message object recieved from Eris.
+   */
   handleMessage (msg) {
     const [prefix, content] = this.splitPrefixFromContent(msg)
     if (!content) return
@@ -45,9 +45,9 @@ class Yuuko extends Eris.Client {
   }
 
   /**
-     * Register a command to the client.
-     * @param {Command} command - The command to add to the bot.
-     */
+   * Register a command to the client.
+   * @param {Command} command - The command to add to the bot.
+   */
   addCommand (command) {
     if (!(command instanceof Command)) throw new TypeError('Not a command')
     if (this.commandForName(command.name)) console.error(new Error(`Duplicate command found (${command.name})`))
@@ -56,13 +56,13 @@ class Yuuko extends Eris.Client {
   }
 
   /**
-     * Load all the JS files in a directory and attempt to load them each as
-     * commands.
-     * @param {string} dirname - The location of the directory.
-     * @param {bool} relativeMain - Whether the specified directory is relative
-     *     to the main module. Otherwise, the directory is relative to the
-     *     module this is executed from. Defaults to true.
-     */
+   * Load all the JS files in a directory and attempt to load them each as
+   * commands.
+   * @param {string} dirname - The location of the directory.
+   * @param {bool} relativeMain - Whether the specified directory is relative
+   *     to the main module. Otherwise, the directory is relative to the
+   *     module this is executed from. Defaults to true.
+   */
   addCommandDir (dirname, relativeMain = true) {
     if (!dirname.endsWith('/')) dirname += '/'
     const pattern = dirname + '*.js'
@@ -81,21 +81,21 @@ class Yuuko extends Eris.Client {
   }
 
   /**
-     * Checks the list of registered commands and returns one whch is known by a
-     * given name, either as the command's name or an alias of the command.
-     * @param name {string} - The name of the command to look for.
-     * @returns Command|null
-     */
+   * Checks the list of registered commands and returns one whch is known by a
+   * given name, either as the command's name or an alias of the command.
+   * @param name {string} - The name of the command to look for.
+   * @returns Command|null
+   */
   commandForName (name) {
     return this.commands.find(c => [c.name, ...c.aliases].includes(name))
   }
 
   /**
-     * Returns the appropriate prefix string to use for commands based on a
-     * certain message.
-     * @param msg - The message to check the prefix of.
-     * @returns string
-     */
+   * Returns the appropriate prefix string to use for commands based on a
+   * certain message.
+   * @param msg - The message to check the prefix of.
+   * @returns string
+   */
   prefixForMessage (msg) {
     // TODO
     if (msg.channel.guild) return this.defaultPrefix
@@ -103,12 +103,12 @@ class Yuuko extends Eris.Client {
   }
 
   /**
-     * Takes a message, gets the prefix based on the config of any guild it was
-     * sent in, and returns the message's content without the prefix if the
-     * prefix matches, and `null` if it doesn't.
-     * @param msg - The message to process
-     * @returns string|null
-     **/
+   * Takes a message, gets the prefix based on the config of any guild it was
+   * sent in, and returns the message's content without the prefix if the
+   * prefix matches, and `null` if it doesn't.
+   * @param msg - The message to process
+   * @returns string|null
+   **/
   splitPrefixFromContent (msg) {
     // Traditional prefix handling
     const prefix = this.prefixForMessage(msg) // TODO: guild config
@@ -129,15 +129,15 @@ class Yuuko extends Eris.Client {
   }
 
   /**
-     * Creates a message. If the specified message content is longer than 2000
-     * characters, splits the message intelligently into chunks until each chunk
-     * is less than 2000 characters, then sends each chunk as its own message.
-     * Embeds and files are sent with the last message and are otherwise
-     * unaffected.
-     * @param content
-     * @param
-     * @TODO
-     */
+   * Creates a message. If the specified message content is longer than 2000
+   * characters, splits the message intelligently into chunks until each chunk
+   * is less than 2000 characters, then sends each chunk as its own message.
+   * Embeds and files are sent with the last message and are otherwise
+   * unaffected.
+   * @param content
+   * @param
+   * @TODO
+   */
   _createMessageChunked (channelId, content, file, maxLength = 2000) {
     let embed
     if (typeof content === 'object') {
@@ -164,15 +164,15 @@ class Yuuko extends Eris.Client {
   }
 
   /**
-     * Evaluates a JavaScript string in the bot's scope and returns the result
-     * converted to a string and formatted for sending as a message. This is
-     * only here to make the eval command possible and should not be used in
-     * other contexts.
-     * @param {string} script - The script to run.
-     * @returns {string} - A Markdown-formatted message that represents the
-     *     output of the command. Includes both console logs and the final
-     *     evaluated expression's result.
-     */
+   * Evaluates a JavaScript string in the bot's scope and returns the result
+   * converted to a string and formatted for sending as a message. This is
+   * only here to make the eval command possible and should not be used in
+   * other contexts.
+   * @param {string} script - The script to run.
+   * @returns {string} - A Markdown-formatted message that represents the
+   *     output of the command. Includes both console logs and the final
+   *     evaluated expression's result.
+   */
   eval (text) {
     let og = console.log
     let response
