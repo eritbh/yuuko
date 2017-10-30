@@ -21,7 +21,6 @@
     "color": "^2.0.0",
     "eris": "git+https://github.com/abalabahaha/eris.git#dev",
     "glob": "^7.1.2",
-    "jsdoc": "^3.5.5",
     "moment": "^2.18.1",
     "moment-timezone": "^0.5.13",
     "request": "^2.82.0"
@@ -35,6 +34,7 @@
     "eslint-plugin-import": "^2.7.0",
     "eslint-plugin-node": "^5.2.0",
     "eslint-plugin-promise": "^3.5.0",
-    "eslint-plugin-standard": "^3.0.1"
+    "eslint-plugin-standard": "^3.0.1",
+    "jsdoc": "^3.5.5"
   }
 }
