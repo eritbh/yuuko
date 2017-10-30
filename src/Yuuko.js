@@ -150,7 +150,7 @@ class Yuuko extends Eris.Client {
       embed = null
     }
     let self = this
-        ;(function sendChunk (left) {
+    ;(function sendChunk (left) {
       console.log(left.length)
       if (left.length < maxLength) return self.createMessage(channelId, {content, embed}, file)
       let newlineIndex = left.substr(0, maxLength).lastIndexOf('\n')

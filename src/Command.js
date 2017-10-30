@@ -59,9 +59,9 @@ class Command {
   }
 
   /**
-   * Returns all names that can be used to invoke the command - its primary name
-   * in addition to its aliases.
-   * @returns {Array<string>}
+   * All names that can be used to invoke the command - its primary name in
+   * addition to its aliases.
+   * @type {Array<string>}
    */
   get names () {
     return [this.name, ...this.aliases]
