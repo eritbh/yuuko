@@ -39,7 +39,7 @@ a:hover { text-decoration: underline }
 nav {
     background: #FFF;
     overflow-x: auto;
-    /*box-shadow: 0 1px rgba(0,0,0,0.2);*/
+    box-shadow: 0 1px rgba(0,0,0,0.2);
 }
 nav .wrap {
     display: flex;
@@ -88,7 +88,7 @@ main {
     padding: 40px 0;
     position: relative;
     z-index: 1;
-    /*box-shadow: 0 1px rgba(0,0,0,0.2);*/
+    box-shadow: 0 1px rgba(0,0,0,0.2);
 }
 main h1,
 main h2,
