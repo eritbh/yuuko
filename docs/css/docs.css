@@ -42,6 +42,7 @@ nav ul .active a {
         text-shadow: none;
     }
     nav ul .active a { box-shadow: inset 3px 0 #85DA7E }
+    main { padding: 0 }
 }
 
 /* Code highlighting */
