@@ -7,11 +7,11 @@
 <title>{% if page.title %}{{ page.title | escape }} &laquo; {% endif %}{{ site.title | escape }}{% if page.layout == "docs" %} Docs{% endif %}</title>
 
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,500,600">
-<link rel="stylesheet" href="/css/base.css">
-{% if page.layout == "page" %}<link rel="stylesheet" href="/css/page.css">{% endif %}
-{% if page.layout == "post" %}<link rel="stylesheet" href="/css/post.css">{% endif %}
-{% if page.layout == "docs" %}<link rel="stylesheet" href="/css/docs.css">{% endif %}
-<link rel="stylesheet" href="/css/highlight.css">
+<link rel="stylesheet" href="{{ site.baseurl }}/css/base.css">
+{% if page.layout == "page" %}<link rel="stylesheet" href="{{ site.baseurl }}/css/page.css">{% endif %}
+{% if page.layout == "post" %}<link rel="stylesheet" href="{{ site.baseurl }}/css/post.css">{% endif %}
+{% if page.layout == "docs" %}<link rel="stylesheet" href="{{ site.baseurl }}/css/docs.css">{% endif %}
+<link rel="stylesheet" href="{{ site.baseurl }}/css/highlight.css">
 
 <link rel="canonical" href="{{ page.url | replace:"index.html", "" }}">
 
