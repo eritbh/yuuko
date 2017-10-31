@@ -190,7 +190,7 @@ footer .github-things svg {
         flex-direction: column;
     }
     #nav-toggle:checked ~ ul {
-        height: 200px;
+        height: 150px;
     }
     /* Border stuff on left rather than bottom */
     nav ul a {
