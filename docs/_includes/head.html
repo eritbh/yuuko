@@ -4,7 +4,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="{{ page.excerpt | default: site.description | strip_html | normalize_whitespace | truncate: 160 | escape }}">
 
-<title>{% if page.title %}{{ page.title | escape }} &laquo; {% endif %}{{ site.title | escape }}{% if page.layout == "docs" %} Docs{% endif %}</title>
+<title>{% if page.title %}{{ page.title | escape }} &laquo; {% endif %}{{ site.title | escape }}</title>
 
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,600|Ubuntu+Mono">
 <link rel="stylesheet" href="{{ site.baseurl }}/css/base.css">
