@@ -1,0 +1,19 @@
+<nav>
+    <div class="wrap">
+        <h1 class="title"><a href="{{site.baseurl}}/">Yuuko</a></h1>
+        <input type="checkbox" id="nav-toggle"/>
+        <label for="nav-toggle">Menu</label>
+        <ul>
+            {% assign pages = site.pages | sort:"order"  %}
+            {% for node in pages %}
+                {% if node.group == "nav" %}
+                    {% if page.url contains node.url %}
+                        <li class="active"><a href="#">{{node.title}}</a></li>
+                    {% else %}
+                        <li><a href="{{site.baseurl}}{{node.url}}">{{node.title}}</a></li>
+                    {% endif %}
+                {% endif %}
+            {% endfor %}
+        </ul>
+    </div>
+</nav>
