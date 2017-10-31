@@ -11,6 +11,10 @@ body {
     background: fixed linear-gradient(135deg, #8CE24C, #6ACF56);
 }
 
+pre, code {
+    font-family: "Ubuntu Mono", monospace;
+}
+
 a {
     text-decoration: none;
     color: #6ACF56;
