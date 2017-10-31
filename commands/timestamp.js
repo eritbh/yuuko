@@ -1,3 +1,5 @@
+// TODO: This file is incomplete.
+
 'use strict'
 
 const Command = require('../src/Command')
@@ -11,7 +13,7 @@ module.exports = new Command(['timestamp', 'ts'], (c, msg, args) => {
   if (!isNaN(input)) {
     let format = args[1]
     let isMillis = ~~(input / 10 ** 12)
-    if (iMillis) {
+    if (isMillis) {
       date = moment.utc(input)
       inputFormat = 'milliseconds'
     } else {
@@ -25,11 +27,11 @@ module.exports = new Command(['timestamp', 'ts'], (c, msg, args) => {
   let inputFormat
   let timestampMillis = 0
 
-  const isMillis
-
   if (isNaN(input)) {
     timestampMillis = Date.now()
-  } else 
+  } else {
+    // TODO: ??
+  }
   let timestampSeconds = ~~(timestampMillis / 1000)
 
   const dateString = moment.utc(timestampMillis).format('YYYY-MM-DD HH:mm:ss [UTC]')
