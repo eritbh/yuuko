@@ -8,7 +8,7 @@ body {
     font-family: "Open Sans", "Segoe UI Semilight", sans-serif;
     overflow-x: hidden;
     overflow-y: scroll;
-    background: fixed linear-gradient(135deg, #8CE24C, #6ACF56);
+    background: fixed linear-gradient(135deg, #92e099, #83dca2);
 }
 
 pre, code {
@@ -17,7 +17,7 @@ pre, code {
 
 a {
     text-decoration: none;
-    color: #6ACF56;
+    color: #3cc76d;
 }
 a:hover { text-decoration: underline }
 
@@ -79,7 +79,7 @@ nav ul a:hover, #nav-toggle + label:hover {
     box-shadow: inset 0 3px rgba(0,0,0,0.2);
 }
 nav ul .active a, #nav-toggle:checked + label {
-    box-shadow: inset 0 3px #6ACF56;
+    box-shadow: inset 0 3px #3cc76d;
 }
 /* Nav toggle for mobile only */
 #nav-toggle, #nav-toggle + label {
@@ -120,7 +120,7 @@ main hr {
 }
 main code {
     padding: 2px 5px;
-    background: rgba(133, 218, 126, 0.2);
+    background: #F7F7F7;
     border-radius: 5px;
     font-weight: 600;
 }

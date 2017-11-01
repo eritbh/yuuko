@@ -70,7 +70,6 @@ main pre.highlight {
 main table {
     margin: 20px 0;
     padding: 0 5px;
-    /*background-color: #F7F7F7;*/
     border-left: 10px solid #F7F7F7;
     width: auto;
     display: block;
@@ -82,7 +81,4 @@ main table th {
 }
 main table th {
     display: none;
-}
-main table code {
-    /*background: none;*/
 }
