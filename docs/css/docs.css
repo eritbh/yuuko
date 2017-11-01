@@ -48,15 +48,18 @@ nav ul .active a {
 }
 
 /* Code highlighting */
-main div.highlight {
-    margin-left: -20px;
-    margin-right: -20px;
+main div.highlighter-rouge {
+    margin: 20px -20px;
     padding: 0;
 }
-main div.highlight:last-child {
+main div.highlighter-rouge:last-child {
     margin-bottom: -20px;
 }
-main div.highlight pre {
+main div.highlight {
+    margin: 0;
+    padding: 0;
+}
+main pre.highlight {
     margin: 0;
     padding: 20px;
 }
