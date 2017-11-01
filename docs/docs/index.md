@@ -50,40 +50,59 @@ The main client class. Connects to Discord through [Eris](https://npmjs.com/pack
 
 The initializer is passed a config object which does things.
 
+Name | Type | Description
+-----|------|------------
+`config` | Object | An object with config options for the bot. All options except `config.token` are optional.
+
 ## Properties
 
 Name | Type | Description
-:---:|:----:|:-----------
-**`defaultPrefix`** | String | The default prefix the bot will respond to in guilds for which there is no other confguration.
-**`commands`** | Array<Yuuko.Command> | An array of commands which the bot looks for in messages.
+-----|------|------------
+`defaultPrefix` | String | The default prefix the bot will respond to in guilds for which there is no other confguration.
+`commands` | Array<Yuuko.Command> | An array of commands which the bot looks for in messages.
 
 ## Methods
 
-### `addCommand(command)`
+### `addCommand(command)` &rsaquo; `Yuuko`
 
-Register a command to the client.
+Register a command to the client. Returns the Yuuko instance, so this command is chainable.
 
 Name | Type | Description
-:---:|:----:|:-----------
+-----|------|------------
 `command` | Command | The command to add to the bot.
 
-### `addCommandDir(dirname)`
+### `addCommandDir(dirname)` &rsaquo; `Yuuko`
 
-Load all the JS files in a directory and attempt to load them each as commands.
+Load all the JS files in a directory and attempt to load them each as commands. Returns the Yuuko instance, so this command is chainable.
 
 Name | Type | Description
-:---:|:----:|:-----------
+-----|------|------------
 `dirname` | String | The location of the directory.
 `relativeMain` | Boolean? | Whether the specified directory is relative to the main module. Otherwise, the directory is relative to the module this is executed from. Defaults to `true`.
 
-### `commandForName(name)` &rsaquo; Command
+### `commandForName(name)` &rsaquo; `Command`
 
-Checks the list of registered commands and returns one whch is known by a given name, either as the command's name or an alias of the command.
+Checks the list of registered commands and returns one whch is known by a given name, either as the command's name or an alias of the command. If no match is found, returns `null`.
 
 Name | Type | Description
-:---:|:----:|:-----------
+-----|------|------------
 `name` | String | The name of the command to look for.
-Return value | Command\|null | The matching command, or `null` if there is none.
+
+### `prefixForMessage(msg)` &rsaquo; `String`
+
+Returns the appropriate prefix string to use for commands based on a certain message.
+
+Name | Type | Description
+-----|------|------------
+`msg` | Message | The message to check the prefix of.
+
+### `splitPrefixFromContent(msg)` &rsaquo; `Array&lt;String|null&gt;`
+
+Takes a message, gets the prefix based on the config of any guild it was sent in, and returns an array describing the prefix/content split. The first element of the array is the matched prefix, and the second is the rest of the content of the message. If there is no match, returns `[null, null]`.
+
+Name | Type | Description
+-----|------|------------
+`msg` | Message | The message to split the prefix from.
 
 ---
 
