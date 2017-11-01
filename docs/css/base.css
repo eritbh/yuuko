@@ -12,7 +12,7 @@ body {
 }
 
 pre, code {
-    font-family: "Ubuntu Mono", monospace;
+    font-family: "Source Code Pro", monospace;
 }
 
 a {
@@ -100,14 +100,33 @@ main p {
     margin: 0 0 20px;
 }
 main h1 {
-    text-align: center;
-    font-weight: 300;
+    font-weight: 600;
     font-size: 3.2rem;
 }
+main h2,
+main h3,
+main h4,
+main h5,
+main h6,
+main strong {
+    font-weight: 600;
+}
 main hr {
-    height: 1px;
-    background: #BBB;
+    height: 10px;
+    background: #F7F7F7;
     border: 0;
+    margin: 20px -20px;
+}
+main code {
+    padding: 2px 5px;
+    background: rgba(133, 218, 126, 0.2);
+    border-radius: 5px;
+    font-weight: 600;
+}
+main pre code {
+    padding: 0;
+    background: none;
+    font-weight: inherit;
 }
 main .wrap>:last-child {
     margin-bottom: 0;

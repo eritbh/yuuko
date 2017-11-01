@@ -49,6 +49,8 @@ nav ul .active a {
 
 /* Code highlighting */
 main div.highlighter-rouge {
+    background: #F7F7F7;
+    overflow: auto;
     margin: 20px -20px;
     padding: 0;
 }
@@ -62,4 +64,23 @@ main div.highlight {
 main pre.highlight {
     margin: 0;
     padding: 20px;
+}
+
+/* Tables */
+main table {
+    margin: 20px -20px;
+    padding: 5px 10px;
+    background-color: #F7F7F7;
+    width: auto;
+    display: block;
+}
+main table td,
+main table th {
+    padding: 5px 10px;
+}
+main table th {
+    display: none;
+}
+main table code {
+    background: none;gi
 }
