@@ -119,7 +119,7 @@ class Yuuko extends Eris.Client {
    * sent in, and returns the message's content without the prefix if the
    * prefix matches, and `null` if it doesn't.
    * @param {Object} msg - The message to process
-   * @returns {string|null}
+   * @returns {Array<String|null>}
    **/
   splitPrefixFromContent (msg) {
     // Traditional prefix handling
