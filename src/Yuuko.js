@@ -12,13 +12,22 @@ class Yuuko extends Eris.Client {
    * @param {Object} options - Options to start the client with. This object is
    *     also passed to Eris.
    * @param {string} options.token - The token used to log into the bot.
-   * @param {bool} [options.help=true] - Whether or not to enable the default help
-   *     command.
+   * @param {bool} [options.help=true] - Whether or not to enable the default
+   *     help command.
    */
   constructor (options = {}) {
     super(options.token, options) // TODO: Use the same help object for Eris and Yuuko options
-    this.useHelp = options.help == null ? true : options.help
+
+    /**
+     * @prop {string} - The default prefix the bot will respond to in guilds for
+     *     which there is no other confguration.
+     */
     this.defaultPrefix = options.defaultPrefix || 'CHANGE YOUR PREFIX CONFIG'
+
+    /**
+     * @prop {Array<Command>} - An array of commands the bot will respond to.
+     *     respond to.
+     */
     this.commands = []
 
     this.on('ready', () => {
@@ -33,7 +42,7 @@ class Yuuko extends Eris.Client {
 
   /**
    * Given a message, see if there is a command and process it if so.
-   * @param msg - The message object recieved from Eris.
+   * @param {Object} msg - The message object recieved from Eris.
    */
   handleMessage (msg) {
     const [prefix, content] = this.splitPrefixFromContent(msg)
@@ -86,8 +95,8 @@ class Yuuko extends Eris.Client {
   /**
    * Checks the list of registered commands and returns one whch is known by a
    * given name, either as the command's name or an alias of the command.
-   * @param name {string} - The name of the command to look for.
-   * @returns Command|null
+   * @param {string} name - The name of the command to look for.
+   * @returns {Command|null}
    */
   commandForName (name) {
     return this.commands.find(c => [c.name, ...c.aliases].includes(name))
@@ -96,8 +105,8 @@ class Yuuko extends Eris.Client {
   /**
    * Returns the appropriate prefix string to use for commands based on a
    * certain message.
-   * @param msg - The message to check the prefix of.
-   * @returns string
+   * @param {Object} msg - The message to check the prefix of.
+   * @returns {string}
    */
   prefixForMessage (msg) {
     // TODO
@@ -109,8 +118,8 @@ class Yuuko extends Eris.Client {
    * Takes a message, gets the prefix based on the config of any guild it was
    * sent in, and returns the message's content without the prefix if the
    * prefix matches, and `null` if it doesn't.
-   * @param msg - The message to process
-   * @returns string|null
+   * @param {Object} msg - The message to process
+   * @returns {string|null}
    **/
   splitPrefixFromContent (msg) {
     // Traditional prefix handling
