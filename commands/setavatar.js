@@ -1,8 +1,8 @@
 const Command = require('../src/Command')
 const request = require('request')
 
-module.exports = new Command('setavatar', (c, msg, args) => {
-  c.getOAuthApplication().then(app => {
+module.exports = new Command('setavatar', function (msg, args) {
+  this.getOAuthApplication().then(app => {
     if (app.owner.id !== msg.author.id) {
       return msg.channel.createMessage("You're not my dad.")
     }
@@ -17,7 +17,7 @@ module.exports = new Command('setavatar', (c, msg, args) => {
       if (err) return msg.channel.createMessage('Error while retrieving avatar: ' + err)
       else if (res.statusCode !== 200) return msg.channel.createMessage(`Got non-200 response (${res.statusCode} ${res.statusMessage}) while retrieving avatar`)
       // Edit the avatar
-      c.editSelf({
+      this.editSelf({
         avatar: `data:${res.headers['content-type']};base64,${body.toString('base64')}`
       }).then(() => {
         msg.channel.createMessage('Avatar updated!')

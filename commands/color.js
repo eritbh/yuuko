@@ -1,7 +1,7 @@
 const Command = require('../src/Command')
 const color = require('color')
 
-module.exports = new Command('color', (c, msg, args) => {
+module.exports = new Command('color', function (msg, args) {
   // Parse args as color
   let col
   try {

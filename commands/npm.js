@@ -33,7 +33,7 @@ function embedThing (r) {
   }
 }
 
-module.exports = new Command('npm', function (c, msg, args) {
+module.exports = new Command('npm', function (msg, args) {
   args = args.join(' ').toLowerCase()
   let safeArgs = encodeURIComponent(args)
   request(`https://api.npms.io/v2/search?q=${safeArgs}`, (err, res, body) => { // npms.io api <3

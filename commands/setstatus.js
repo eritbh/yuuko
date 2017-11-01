@@ -1,7 +1,7 @@
 const Command = require('../src/Command')
 
-module.exports = new Command(['setstatus', 'setgame'], (c, msg, args) => {
-  c.getOAuthApplication().then(app => {
+module.exports = new Command(['setstatus', 'setgame'], function (msg, args) {
+  this.getOAuthApplication().then(app => {
     if (app.owner.id !== msg.author.id) {
       return msg.channel.createMessage("You're not my dad.")
     }
@@ -30,6 +30,6 @@ module.exports = new Command(['setstatus', 'setgame'], (c, msg, args) => {
         status = 'online'
     }
     const game = args.join(' ')
-    c.editStatus(status, game ? {name: game} : undefined)
+    this.editStatus(status, game ? {name: game} : undefined)
   })
 })

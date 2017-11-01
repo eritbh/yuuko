@@ -1,18 +1,18 @@
 const Command = require('../src/Command')
 
-module.exports = new Command(['help', 'h'], (c, msg, args) => {
-  const prefix = c.prefixForMessage(msg)
+module.exports = new Command(['help', 'h'], function (msg, args) {
+  const prefix = this.prefixForMessage(msg)
 
   // If we got nothing, command list
   if (!args[0]) {
-    const commandList = c.commands.map(c => '`' + prefix + c.name + '`').join(', ')
+    const commandList = this.commands.map(c => '`' + prefix + c.name + '`').join(', ')
     return msg.channel.createMessage(`**=== Help: Command List ===**
 You can use the following commands: ${commandList}
 Use \`${prefix}help [command]\` to get more info on that command!`)
   }
 
   // We got a command, let's try using it
-  let command = c.commandForName(args[0])
+  let command = this.commandForName(args[0])
   if (command) return msg.channel.createMessage(`**=== Help: \`${prefix + command.name}\` ===**\n${command.helpText(prefix)}`)
 
   // Rip, error

@@ -1,6 +1,6 @@
 const Command = require('../src/Command')
 
-module.exports = new Command(['choose', 'c'], (c, msg, args) => {
+module.exports = new Command(['choose', 'c'], function (msg, args) {
   let options = args.join(' ') // Add spaces back into the string
     .split('').reverse().join('') // Reverse the string
     .split(/\s*,(?!\\)\s*/g) // Split on non-escaped commas, and consume any whitespace before or after

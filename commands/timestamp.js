@@ -5,7 +5,7 @@
 const Command = require('../src/Command')
 const moment = require('moment')
 
-module.exports = new Command(['timestamp', 'ts'], (c, msg, args) => {
+module.exports = new Command(['timestamp', 'ts'], function (msg, args) {
   const input = parseInt(args[0], 10)
 
   let dateObject

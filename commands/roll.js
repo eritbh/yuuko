@@ -90,7 +90,7 @@ function constructMessage (results) {
 }
 
 // The command itself
-module.exports = new Command(['roll', 'r'], (c, msg, args) => {
+module.exports = new Command(['roll', 'r'], function (msg, args) {
   let results = rollFromString(args.join(' '))
   msg.channel.createMessage(constructMessage(results))
 }, {

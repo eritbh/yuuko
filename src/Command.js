@@ -34,8 +34,8 @@ class Command {
    * @callback Command~commandProcess
    * A function to be called when a command is executed. Accepts information
    * about the message that triggered the command as arguments.
-   * @param {Yuuko} c - The client instance that recieved the message triggering
-   *     the command.
+   * @this {Yuuko} The client instance that recieved the message triggering the
+   *     command.
    * @param {Object} msg - The Eris message object that triggered the command.
    *     For more information, see the Eris documentation:
    *     {@link https://abal.moe/Eris/docs/Message}

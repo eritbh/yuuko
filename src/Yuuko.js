@@ -43,7 +43,7 @@ class Yuuko extends Eris.Client {
     const command = this.commandForName(commandName)
     if (!command) return
 
-    command.process(this, msg, args, prefix)
+    command.process.call(this, msg, args, prefix)
     console.log('did a thing:', commandName, args.join(' '))
   }
 

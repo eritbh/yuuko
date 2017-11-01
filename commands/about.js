@@ -3,9 +3,9 @@ const moment = require('moment-timezone')
 const childProcess = require('child_process')
 const packageJson = require.main.require('./package.json')
 
-module.exports = new Command(['about', 'uptime', 'info'], (c, msg, args, prefix) => {
-  const uptimeDuration = moment.duration(c.uptime).humanize()
-  const uptimeStart = moment().subtract(c.uptime).tz('America/New_York').format('YYYY-DD-mm kk:mm z')
+module.exports = new Command(['about', 'uptime', 'info'], function (msg, args, prefix) {
+  const uptimeDuration = moment.duration(this.uptime).humanize()
+  const uptimeStart = moment().subtract(this.uptime).tz('America/New_York').format('YYYY-DD-mm kk:mm z')
   const link = packageJson.homepage
   childProcess.exec('git describe --abbrev=0 --tags', (err, tag) => {
     if (err) {
