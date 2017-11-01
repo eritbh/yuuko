@@ -131,40 +131,40 @@ class Yuuko extends Eris.Client {
     return [null, null]
   }
 
-  /**
-   * Creates a message. If the specified message content is longer than 2000
-   * characters, splits the message intelligently into chunks until each chunk
-   * is less than 2000 characters, then sends each chunk as its own message.
-   * Embeds and files are sent with the last message and are otherwise
-   * unaffected.
-   * @param content
-   * @param
-   * @TODO everything
-   */
-  _createMessageChunked (channelId, content, file, maxLength = 2000) {
-    let embed
-    if (typeof content === 'object') {
-      embed = content.embed
-      content = content.content
-    } else {
-      embed = null
-    }
-    let self = this
-    ;(function sendChunk (left) {
-      console.log(left.length)
-      if (left.length < maxLength) return self.createMessage(channelId, {content, embed}, file)
-      let newlineIndex = left.substr(0, maxLength).lastIndexOf('\n')
-      if (newlineIndex < 1) newlineIndex = maxLength - 1
-      console.log(newlineIndex)
-      left = left.split('')
-      const chunk = left.splice(0, newlineIndex)
-      if (!left.length) {
-        // Interesting, the message was exactly good. We'll put the embed and stuff in now.
-        return self.createMessage(channelId, {content: chunk, embed: embed}, file)
-      }
-      sendChunk(left.join(''), maxLength)
-    }(content))
-  }
+  // /**
+  //  * Creates a message. If the specified message content is longer than 2000
+  //  * characters, splits the message intelligently into chunks until each chunk
+  //  * is less than 2000 characters, then sends each chunk as its own message.
+  //  * Embeds and files are sent with the last message and are otherwise
+  //  * unaffected.
+  //  * @param content
+  //  * @param
+  //  * @TODO everything
+  //  */
+  // _createMessageChunked (channelId, content, file, maxLength = 2000) {
+  //   let embed
+  //   if (typeof content === 'object') {
+  //     embed = content.embed
+  //     content = content.content
+  //   } else {
+  //     embed = null
+  //   }
+  //   let self = this
+  //   ;(function sendChunk (left) {
+  //     console.log(left.length)
+  //     if (left.length < maxLength) return self.createMessage(channelId, {content, embed}, file)
+  //     let newlineIndex = left.substr(0, maxLength).lastIndexOf('\n')
+  //     if (newlineIndex < 1) newlineIndex = maxLength - 1
+  //     console.log(newlineIndex)
+  //     left = left.split('')
+  //     const chunk = left.splice(0, newlineIndex)
+  //     if (!left.length) {
+  //       // Interesting, the message was exactly good. We'll put the embed and stuff in now.
+  //       return self.createMessage(channelId, {content: chunk, embed: embed}, file)
+  //     }
+  //     sendChunk(left.join(''), maxLength)
+  //   }(content))
+  // }
 
   /**
    * Evaluates a JavaScript string in the bot's scope and returns the result
