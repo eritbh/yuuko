@@ -9,14 +9,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Geo1088/Yuuko.git"
+    "url": "git+https://github.com/Geo1088/yuuko.git"
   },
   "author": "Geo1088",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/Geo1088/Yuuko/issues"
+    "url": "https://github.com/Geo1088/yuuko/issues"
   },
-  "homepage": "https://github.com/Geo1088/Yuuko#readme",
+  "homepage": "https://github.com/Geo1088/yuuko",
   "dependencies": {
     "color": "^2.0.0",
     "eris": "git+https://github.com/abalabahaha/eris.git#dev",
