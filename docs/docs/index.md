@@ -71,14 +71,25 @@ Name | Type | Description
 -----|------|------------
 `command` | Command | The command to add to the bot.
 
+### `addCommandFile` &rsaquo; `Yuuko`
+
+Load a jS file and try to add an exported command. Returns the Yuuko instance, so this command is chainable.
+
+This command uses `require.main.require()` for more intuitive handling of relative paths; however, there are some caveats of this. For more information, see the [NodeJS Documentation on modules.](https://nodejs.org/api/modules.html#modules_accessing_the_main_module) When in doubt, require the built-in `path` module and call this method with `addCommandFile(path.join(__dirname, 'yourFile.js'))`.
+
+Name | Type | Description
+-----|------|------------
+`filename` | String | The location of the file to load.
+
 ### `addCommandDir(dirname)` &rsaquo; `Yuuko`
 
 Load all the JS files in a directory and attempt to load them each as commands. Returns the Yuuko instance, so this command is chainable.
 
+Since this command calls `addCommandFile`, the same caveats with relative paths apply.
+
 Name | Type | Description
 -----|------|------------
-`dirname` | String | The location of the directory.
-`relativeMain` | Boolean? | Whether the specified directory is relative to the main module. Otherwise, the directory is relative to the module this is executed from. Defaults to `true`.
+`dirname` | String | The location of the directory to load.
 
 ### `commandForName(name)` &rsaquo; `Command`
 

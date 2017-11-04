@@ -88,6 +88,8 @@ class Yuuko extends Eris.Client {
    */
   addCommandFile (filename) {
     try {
+      // Using require.main.require() for arguably more intuitive behavior if
+      // a relative path is used
       const command = require.main.require('./' + filename)
       command.filename = filename
       this.addCommand(command)
