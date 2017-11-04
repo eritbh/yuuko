@@ -27,7 +27,6 @@ class Command {
       desc: help.desc || null,
       args: help.args || null
     }
-    this.source = __filename
   }
 
   /**
