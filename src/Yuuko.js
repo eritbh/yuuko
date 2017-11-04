@@ -71,23 +71,30 @@ class Yuuko extends Eris.Client {
    * Load all the JS files in a directory and attempt to load them each as
    * commands.
    * @param {string} dirname - The location of the directory.
-   * @param {bool} relativeMain - Whether the specified directory is relative
-   *     to the main module. Otherwise, the directory is relative to the
-   *     module this is executed from. Defaults to true.
    */
-  addCommandDir (dirname, relativeMain = true) {
+  addCommandDir (dirname) {
     if (!dirname.endsWith('/')) dirname += '/'
     const pattern = dirname + '*.js'
     const filenames = glob.sync(pattern)
     for (let filename of filenames) {
-      try {
-        const command = (relativeMain ? require.main : global).require('./' + filename)
-        this.addCommand(command)
-        console.log('Added command from', filename)
-      } catch (e) {
-        console.error('Error adding command from', filename)
-        console.error(e)
-      }
+      this.addCommandFile(filename)
+    }
+    return this
+  }
+
+  /**
+   * Load a command exported from a file.
+   * @param {string} filename - The location of the file.
+   */
+  addCommandFile (filename) {
+    try {
+      const command = require.main.require('./' + filename)
+      command.filename = filename
+      this.addCommand(command)
+      console.log('Added command from', filename)
+    } catch (e) {
+      console.error('Error adding command from', filename)
+      console.error(e)
     }
     return this
   }
