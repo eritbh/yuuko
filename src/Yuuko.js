@@ -22,7 +22,8 @@ class Yuuko extends Eris.Client {
      * @prop {string} - The default prefix the bot will respond to in guilds for
      *     which there is no other confguration.
      */
-    this.defaultPrefix = options.defaultPrefix || 'CHANGE YOUR PREFIX CONFIG'
+    this.defaultPrefix = options.defaultPrefix
+    if (!this.defaultPrefix) throw new TypeError('Default prefix is required')
 
     /**
      * @prop {Array<Command>} - An array of commands the bot will respond to.
