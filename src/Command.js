@@ -42,6 +42,7 @@ class Command {
    *     obtained by removing the command name and prefix from the message, then
    *     splitting on spaces. To get the raw text that was passed to the
    *     command, use `args.join(' ')`.
+   * @param {string} prefix - The prefix used in the message.
    */
 
   /**
@@ -50,7 +51,7 @@ class Command {
    *     in usage examples within the returned text.
    * @returns {string}
    */
-  helpText (prefix) {
+  helpText (prefix = '') {
     let txt = ''
     if (this.help.desc) txt += `**Description:** ${this.help.desc}\n`
     if (this.help.args) txt += `**Usage:** \`${prefix}${this.name} ${this.help.args}\`\n`
