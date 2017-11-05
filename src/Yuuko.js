@@ -31,7 +31,7 @@ class Yuuko extends Eris.Client {
     this.commands = []
 
     this.on('ready', () => {
-      console.log(`Logged in as @${this.user.username}#${this.user.discriminator} - in ${this.guilds.size} guilds`)
+      console.log(`Logged in as @${this.user.username}#${this.user.discriminator} - in ${this.guilds.size} guild${this.guilds.size === 1 ? '' : 's'}`)
     }).on('error', err => {
       console.error('Error in client:')
       console.error(err)
