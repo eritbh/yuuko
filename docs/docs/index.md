@@ -54,6 +54,8 @@ Name | Type | Description
 -----|------|------------
 `config` | Object | An object with config options for the bot. All options except `config.token` are optional.
 
+<!-- TODO: Document custom fields -->
+
 ## Properties
 
 Name | Type | Description
@@ -105,7 +107,7 @@ Returns the appropriate prefix string to use for commands based on a certain mes
 
 Name | Type | Description
 -----|------|------------
-`msg` | Message | The message to check the prefix of.
+`msg` | [Message Object](https://abal.moe/Eris/docs/Message) | The message to check the prefix of.
 
 ### `splitPrefixFromContent(msg)` &rsaquo; `Array&lt;String|null&gt;`
 
@@ -113,14 +115,51 @@ Takes a message, gets the prefix based on the config of any guild it was sent in
 
 Name | Type | Description
 -----|------|------------
-`msg` | Message | The message to split the prefix from.
+`msg` | [Message Object](https://abal.moe/Eris/docs/Message) | The message to split the prefix from.
 
 ---
 
 # Class: `Command`
 
-Another thing.
+A command that can be executed by users of the bot.
+
+## Constructor: `new Command(name, process, help)`
+
+Creates a command. Note that a command must be registered to the Yuuko instance with `addCommand()` or another related method before being available to users of your bot.
+
+Name | Type | Description
+-----|------|------------
+`name` | String&#124;Array | The name of the command. Command names are case-insensitive. If a string is passed, that string simply becomes the command's name; if an array is passed, the first element becomes the command's name and the rest become aliases.
+`process` | Function | See below.
+`help` | Object | Optional; default: `{}`. Extra information stored with the command, used by the `helpText()` method.
+`help.desc` | String | A description of the command.
+`help.args` | String | A formatted overview of arguments the command accepts.
+
+### Command Process
+
+A function which is executed each time this command is triggered. The value of `this` inside the function is a reference to the Yuuko instance which picked up the command. Nothing is done with anything the function returns, and it takes up to 3 arguments:
+
+Name | Type | Description
+-----|------|------------
+`msg` | [Message Object](https://abal.moe/Eris/docs/Message) | The message that triggered the command.
+`args` | Array<String> | An array of arguments passed to the command, obtained by removing the command name and prefix from the message, then splitting on spaces. To get the raw text that was passed to the command, use `args.join(' ')`.
+`prefix` | String | The prefix used in the message.
 
 ## Properties
 
-stuff
+Name | Type | Description
+`name` | String | The name of the command.
+`aliases` | Array<String> | An array of aliases, or alternate names, the command can be called by.
+`names` | Array<String> | An array of names the command can be called by. Contains the command's name as the first item, and any aliases of the command as subsequent items.
+`process` | Function | See above.
+`help` | Object | See the description of `help` in the constructor.
+
+## Methods
+
+### `helpText(prefix)` &rsaquo; `String`
+
+Returns a string that is used as a help message for the command based on the command's `help` property.
+
+Name | Type | Description
+-----|------|------------
+`prefix` | String | Optional; default: `''`. The prefix to use for usage examples in the generated message.
