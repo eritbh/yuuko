@@ -12,31 +12,37 @@ This is the documentation for Yuuko. If you want to create your own bot based on
 
 # Quick Start
 
-```bash
-$ git clone https://github.com/Geo1088/yuuko mybot
-$ cd mybot
-$ vi index.js
+Install:
+
+```
+$ npm install --save yuuko
 ```
 
+Use:
+
 ```js
-const Yuuko = require('./src/Yuuko')
+const Yuuko = require('yuuko')
 
 const mybot = new Yuuko({
-    token: 'your_bot_token',  // Token used to auth your bot account
-    defaultPrefix: '.'        // Prefix used to trigger commands
+  token: 'your_bot_token',  // Token used to auth your bot account
+  defaultPrefix: '.'        // Prefix used to trigger commands
 })
 
 const pingCommand = new Yuuko.Command('ping', function (msg) {
-    msg.channel.createMessage('Pong!')
+  msg.channel.createMessage('Pong!')
 })
 
 mybot.addCommand(pingCommand).connect()
 ```
 
-```bash
-$ node index.js
-# poof
+Run:
+
 ```
+$ node index.js
+Logged in as @MyBot#1234 - in 2 guilds
+```
+
+And just like that, you're up and running! To test the bot, add the bot to a server and say `.ping` to it.
 
 For more examples, check out the Examples page.
 
