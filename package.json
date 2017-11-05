@@ -2,16 +2,13 @@
   "name": "yuuko",
   "version": "1.0.0",
   "description": "A Discord bot base that I did for some reason.",
-  "main": "index.js",
+  "main": "src/Yuuko.js",
   "scripts": {
     "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Geo1088/yuuko.git"
-  },
-  "author": "Geo1088",
+  "repository": "Geo1088/yuuko",
+  "author": "Geo1088 <georgej1088@gmail.com>",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/Geo1088/yuuko/issues"
