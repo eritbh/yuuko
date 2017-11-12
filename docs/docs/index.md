@@ -59,6 +59,10 @@ The initializer is passed a config object which does things.
 Name | Type | Description
 -----|------|------------
 `config` | Object | An object with config options for the bot. All options except `config.token` are optional.
+`config.token` | String |
+`config.commandDir` | String |
+`config.defaultPrefix` | String |
+`config.allowMention` | Boolean |
 
 <!-- TODO: Document custom fields -->
 
