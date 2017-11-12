@@ -68,6 +68,7 @@ Name | Type | Description
 -----|------|------------
 `defaultPrefix` | String | The default prefix the bot will respond to in guilds for which there is no other confguration.
 `commands` | Array<Yuuko.Command> | An array of commands which the bot looks for in messages.
+`allowMention` | Boolean | Whether or not the bot can respond to messages starting with a mention of the bot.
 
 ## Methods
 
