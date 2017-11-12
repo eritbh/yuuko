@@ -1,8 +1,14 @@
 # Yuuko [![npm](https://img.shields.io/npm/v/yuuko.svg)](https://www.npmjs.com/package/yuuko) [![dependencies](https://img.shields.io/david/Geo1088/yuuko.svg)](https://david-dm.org/geo1088/yuuko) [![Code Climate](https://img.shields.io/codeclimate/github/geo1088/Yuuko.svg)](https://codeclimate.com/github/geo1088/Yuuko)
 
-A simple Discord bot base that extends [Eris](https://github.com/abalabahaha/eris) and basically amounts to a different version of `Eris.CommandClient`.
+A Discord bot in Node that focuses on getting and manipulating information useful to developers and designers.
 
-## Quick-Start
+## Using the bot
+
+Usage information for the bot (the usable commands, default configuration, and other help topics) can be found [here](https://geo1088.github.io/yuuko).
+
+## Using the package
+
+Yuuko's core is available as [a module on npm](https://www.npmjs.com/package/yuuko). It extends [Eris](https://github.com/abalabahaha/eris) and is basically an alternative to its CommandClient class.
 
 ```bash
 $ npm i yuuko
