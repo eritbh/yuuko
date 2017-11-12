@@ -4,8 +4,8 @@ A simple Discord bot base that extends [Eris](https://github.com/abalabahaha/eri
 
 ## Quick-Start
 
-```
-npm i yuuko
+```bash
+$ npm i yuuko
 ```
 
 ```js
@@ -23,11 +23,9 @@ const pingCommand = new Yuuko.Command('ping', function (msg) {
 mybot.addCommand(pingCommand).connect()
 ```
 
-```
+```bash
 $ node mybot.js
 Logged in as @MyBot#1234 - in 2 guilds
 ```
 
 For more information, see the [API Docs](http://geo1088.github.io/yuuko/docs/).
-
-
