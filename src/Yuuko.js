@@ -23,7 +23,12 @@ class Yuuko extends Eris.Client {
      *     which there is no other confguration.
      */
     this.defaultPrefix = options.defaultPrefix
-    if (!this.defaultPrefix) throw new TypeError('Default prefix is required')
+
+    /**
+     * @prop {boolean} - Whether or not the bot can respond to messages starting
+     *     with a mention of the bot.
+     */
+    this.allowMention = options.allowMention == null ? true : options.allowMention
 
     /**
      * @prop {Array<Command>} - An array of commands the bot will respond to.
@@ -132,14 +137,14 @@ class Yuuko extends Eris.Client {
    * @returns {Array<String|null>}
    **/
   splitPrefixFromContent (msg) {
-    // Traditional prefix handling
+    // Traditional prefix handling - if there is no prefix, skip this rule
     const prefix = this.prefixForMessage(msg) // TODO: guild config
-    if (msg.content.startsWith(prefix)) {
+    if (prefix != null && msg.content.startsWith(prefix)) {
       return [prefix, msg.content.substr(prefix.length)]
     }
     // Allow mentions to be used as prefixes according to config
     const match = msg.content.match(new RegExp(`^<@!?${this.user.id}>\\s?`))
-    if (this.allowMentionPrefix && match) { // TODO: guild config
+    if (this.allowMention && match) { // TODO: guild config
       return [match[0], msg.content.substr(match[0].length)]
     }
     // Allow no prefix in direct message channels
