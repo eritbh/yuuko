@@ -1,4 +1,4 @@
-# Yuuko [![npm](https://img.shields.io/npm/v/yuuko.svg)](https://www.npmjs.com/package/yuuko) [![dependencies](https://img.shields.io/david/Geo1088/yuuko.svg)](https://david-dm.org/geo1088/yuuko)
+# Yuuko [![npm](https://img.shields.io/npm/v/yuuko.svg)](https://www.npmjs.com/package/yuuko) [![dependencies](https://img.shields.io/david/Geo1088/yuuko.svg)](https://david-dm.org/geo1088/yuuko) [![Code Climate](https://img.shields.io/codeclimate/github/geo1088/Yuuko.svg)](https://codeclimate.com/github/geo1088/Yuuko)
 
 A simple Discord bot base that extends [Eris](https://github.com/abalabahaha/eris) and basically amounts to a different version of `Eris.CommandClient`.
 
