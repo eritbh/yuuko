@@ -86,7 +86,7 @@ Name | Type | Description
 
 ### `addCommandFile` &rsaquo; `Yuuko`
 
-Load a jS file and try to add an exported command. Returns the Yuuko instance, so this command is chainable.
+Load a JS file and try to add an exported command. Returns the Yuuko instance, so this command is chainable.
 
 This command uses `require.main.require()` for more intuitive handling of relative paths; however, there are some caveats of this. For more information, see the [NodeJS Documentation on modules.](https://nodejs.org/api/modules.html#modules_accessing_the_main_module) When in doubt, require the built-in `path` module and call this method with `addCommandFile(path.join(__dirname, 'yourFile.js'))`.
 
