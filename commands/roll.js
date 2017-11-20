@@ -25,7 +25,7 @@ function parseRolls (string) {
     var sides = match.replace(adxRegExp, '$4')
     return {
       number: parseInt(number, 10),
-      sides: sides === '%' ? 100 : parseInt(sides, 10), //
+      sides: sides === '%' ? 100 : parseInt(sides, 10),
       string: `${number === 1 ? '' : number}d${sides === '100' ? '%' : sides}` // Uses d6 over 1d6, and d% over d100
     }
   })
@@ -94,6 +94,6 @@ module.exports = new Command(['roll', 'r'], function (msg, args) {
   let results = rollFromString(args.join(' '))
   msg.channel.createMessage(constructMessage(results))
 }, {
-  desc: 'Roll some dice.',
+  desc: 'Roll some dice. Supported roll formats are `AdX` for `A` rolls of an `X`-sided die. `A` can be omitted to mean 1 and `X` can be % (a percent sign) to mean 100.',
   args: '<roll> [roll ...]'
 })

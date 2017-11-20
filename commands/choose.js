@@ -10,6 +10,6 @@ module.exports = new Command(['choose', 'c'], function (msg, args) {
   let option = options[~~(Math.random() * options.length)] // Pick an option at random from the list of entries
   msg.channel.createMessage(`I choose: **${option}**`) // Reply with the option
 }, {
-  desc: 'Choose a random option from a list.',
+  desc: 'Choose a random option from a list. If you want to include a comma in an option, escape it with a backslash.',
   args: '<option>, <option>, [options ...]'
 })

@@ -30,6 +30,6 @@ Please report any bugs or feedback by creating an issue on the repository.`)
     })
   })
 }, {
-  desc: 'Displays information about the bot, including running version and time since last crash.',
+  desc: 'Displays information about the bot, including running version, time since last crash, and a link to its source code.',
   args: ''
 })

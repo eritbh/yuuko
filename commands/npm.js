@@ -60,6 +60,6 @@ module.exports = new Command('npm', function (msg, args) {
     }
   })
 }, {
-  desc: 'Things.',
+  desc: 'Search for, and get information on, npm packages.',
   args: '<search>'
 })
