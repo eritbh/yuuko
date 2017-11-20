@@ -13,7 +13,7 @@
   "bugs": {
     "url": "https://github.com/Geo1088/yuuko/issues"
   },
-  "homepage": "https://github.com/Geo1088/yuuko",
+  "homepage": "https://geo1088.github.io/yuuko",
   "dependencies": {
     "eris": "^0.8.1",
     "glob": "^7.1.2",
