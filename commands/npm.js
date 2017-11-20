@@ -36,6 +36,7 @@ function embedThing (r) {
 module.exports = new Command('npm', function (msg, args) {
   args = args.join(' ').toLowerCase()
   let safeArgs = encodeURIComponent(args)
+  msg.channel.sendTyping()
   request(`https://api.npms.io/v2/search?q=${safeArgs}`, (err, res, body) => { // npms.io api <3
     let result = JSON.parse(body)
     if (!(res.statusCode === 200 && !err)) return msg.channel.createMessage('Something went wrong while searching. Try again with a different query.')

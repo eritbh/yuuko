@@ -5,6 +5,7 @@ module.exports = new Command('reload', function (msg) {
     if (app.owner.id !== msg.author.id) {
       return msg.channel.createMessage("You're not my dad.")
     }
+    msg.channel.sendTyping()
     this.reloadCommands()
     msg.channel.createMessage('Reloaded commands.')
   })

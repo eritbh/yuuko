@@ -11,6 +11,7 @@ module.exports = new Command('setavatar', function (msg, args) {
     if (msg.attachments[0]) url = msg.attachments[0].url // URL specified by upload
     url = url.replace(/<([^>]+)>/, '$1') // Allow suppressed URLs
     if (url === '') return msg.channel.createMessage('No image was uploaded or linked.') // Return if no URL
+    msg.channel.sendTyping()
     // Get the image itself by requesting the URL
     request.get({url: url, method: 'GET', encoding: null}, (err, res, body) => {
       // Handle possible errors
