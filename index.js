@@ -1,8 +1,7 @@
 const Yuuko = require('./src/Yuuko')
-
+const path = require('path')
 let config = require('./config')
-config.commandDir = require('path').join(__dirname, config.commandDir)
-console.log(config)
+
 const c = new Yuuko(config)
 
-c.connect()
+c.addCommandDir(path.join(__dirname, 'commands')).connect()
