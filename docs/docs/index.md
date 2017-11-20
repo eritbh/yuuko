@@ -120,7 +120,7 @@ Name | Type | Description
 -----|------|------------
 `msg` | [Message Object](https://abal.moe/Eris/docs/Message) | The message to check the prefix of.
 
-### `splitPrefixFromContent(msg)` &rsaquo; `Array&lt;String|null&gt;`
+### `splitPrefixFromContent(msg)` &rsaquo; `Array<String|null>`
 
 Takes a message, gets the prefix based on the config of any guild it was sent in, and returns an array describing the prefix/content split. The first element of the array is the matched prefix, and the second is the rest of the content of the message. If there is no match, returns `[null, null]`.
 
