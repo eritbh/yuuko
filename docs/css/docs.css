@@ -83,3 +83,8 @@ main table th {
 main table th {
     display: none;
 }
+
+/* Because mobile sucks */
+main code {
+    word-wrap: break-word;
+}
