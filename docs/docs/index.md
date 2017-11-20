@@ -104,6 +104,10 @@ Name | Type | Description
 -----|------|------------
 `dirname` | String | The location of the directory to load.
 
+## `reloadCommands()` &rsaquo; `Yuuko`
+
+Reloads all commands that were loaded via `addCommandFile` and `addCommandDir`. Useful for development to hot-reload commands as you work on them. Returns the Yuuko instance, so this command is chainable.
+
 ### `commandForName(name)` &rsaquo; `Command`
 
 Checks the list of registered commands and returns one whch is known by a given name, either as the command's name or an alias of the command. If no match is found, returns `null`.

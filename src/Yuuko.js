@@ -106,6 +106,11 @@ class Yuuko extends Eris.Client {
     return this
   }
 
+  /**
+   * Reloads all commands that were loaded via `addCommandFile` and
+   * `addCommandDir`. Useful for development to hot-reload commands as you work
+   * on them.
+   */
   reloadCommands () {
     let i = this.commands.length
     while (i--) {
@@ -115,6 +120,7 @@ class Yuuko extends Eris.Client {
         this.addCommandFile(command.filename)
       }
     }
+    return this
   }
 
   /**
