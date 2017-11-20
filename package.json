@@ -16,7 +16,8 @@
   "homepage": "https://github.com/Geo1088/yuuko",
   "dependencies": {
     "eris": "^0.8.1",
-    "glob": "^7.1.2"
+    "glob": "^7.1.2",
+    "require-reload": "^0.2.2"
   },
   "optionalDependencies": {
     "chalk": "^2.1.0",

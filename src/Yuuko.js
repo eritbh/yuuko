@@ -4,6 +4,7 @@ const Eris = require('eris')
 const glob = require('glob')
 const util = require('util')
 const Command = require('./Command')
+const reload = require('require-reload')(require)
 
 /** The client. */
 class Yuuko extends Eris.Client {
@@ -94,9 +95,7 @@ class Yuuko extends Eris.Client {
    */
   addCommandFile (filename) {
     try {
-      // Using require.main.require() for arguably more intuitive behavior if
-      // a relative path is used
-      const command = require.main.require('./' + filename)
+      const command = reload(filename)
       command.filename = filename
       this.addCommand(command)
       console.log('Added command from', filename)
@@ -105,6 +104,17 @@ class Yuuko extends Eris.Client {
       console.error(e)
     }
     return this
+  }
+
+  reloadCommands () {
+    let i = this.commands.length
+    while (i--) {
+      const command = this.commands[i]
+      if (command.filename) {
+        this.commands.splice(i, 1)
+        this.addCommandFile(command.filename)
+      }
+    }
   }
 
   /**
