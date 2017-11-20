@@ -43,8 +43,6 @@ class Yuuko extends Eris.Client {
       console.error('Error in client:')
       console.error(err)
     }).on('messageCreate', this.handleMessage)
-
-    if (options.commandDir) this.addCommandDir(options.commandDir)
   }
 
   /**
