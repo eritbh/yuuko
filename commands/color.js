@@ -3,11 +3,16 @@ const color = require('color')
 
 module.exports = new Command('color', function (msg, args) {
   // Parse args as color
+  const joinedArgs = args.join(' ')
   let col
   try {
-    col = color(args.join(' '))
+    col = color(joinedArgs)
   } catch (e) {
-    return msg.channel.createMessage("Doesn't look like that's a valid CSS color.")
+    try {
+      col = color('#' + joinedArgs)
+    } catch (e) {
+      return msg.channel.createMessage("Doesn't look like that's a valid CSS color.")
+    }
   }
   const bareHex = col.hex().substr(1).toLowerCase()
 
