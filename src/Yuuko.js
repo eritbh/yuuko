@@ -6,6 +6,8 @@ const util = require('util')
 const Command = require('./Command')
 const reload = require('require-reload')(require)
 
+const u = require('./util.js')
+
 /** The client. */
 class Yuuko extends Eris.Client {
   /**
@@ -38,10 +40,9 @@ class Yuuko extends Eris.Client {
     this.commands = []
 
     this.on('ready', () => {
-      console.log(`Logged in as @${this.user.username}#${this.user.discriminator} - in ${this.guilds.size} guild${this.guilds.size === 1 ? '' : 's'}`)
+      u.ok('Logged in as', u.underline(`@${this.user.username}#${this.user.discriminator}`), `- in ${this.guilds.size} guild${this.guilds.size === 1 ? '' : 's'}`)
     }).on('error', err => {
-      console.error('Error in client:')
-      console.error(err)
+      u.error('Error in client:\n', err)
     }).on('messageCreate', this.handleMessage)
   }
 
@@ -58,7 +59,7 @@ class Yuuko extends Eris.Client {
     if (!command) return
 
     command.process.call(this, msg, args, prefix)
-    console.log('did a thing:', commandName, args.join(' '))
+    u.info('did a thing:', commandName, args.join(' '))
   }
 
   /**
@@ -67,7 +68,7 @@ class Yuuko extends Eris.Client {
    */
   addCommand (command) {
     if (!(command instanceof Command)) throw new TypeError('Not a command')
-    if (this.commandForName(command.name)) console.error(new Error(`Duplicate command found (${command.name})`))
+    if (this.commandForName(command.name)) u.warn(`Duplicate command found (${command.name})`)
     this.commands.push(command)
     return this
   }
@@ -96,10 +97,9 @@ class Yuuko extends Eris.Client {
       const command = reload(filename)
       command.filename = filename
       this.addCommand(command)
-      console.log('Added command from', filename)
+      u.ok('Added command from', filename)
     } catch (e) {
-      console.error('Error adding command from', filename)
-      console.error(e)
+      u.warn('Command from', filename, "couldn't be loaded.\n", e)
     }
     return this
   }
