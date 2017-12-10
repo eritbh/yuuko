@@ -31,7 +31,7 @@ function embedResults (results, search) {
   const searchUrl = search && `https://www.npmjs.com/search?q=${search}`
   return {
     color: 0xC12127, // npm brand color
-    title: `Search results for "${search}"`,
+    title: `Packages for "${search}"`,
     description: `[See more results on npm](${searchUrl})`,
     fields: results.map(r => {
       return {
