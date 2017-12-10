@@ -27,8 +27,9 @@ RGB: \`${col.rgb().string()}\` or \`${col.percentString()}\`
 HSL: \`${col.hsl().round().string()}\`
 ${col.keyword() ? `Keyword: \`${col.keyword()}\`` : ''}`,
       image: {
-        url: `https://dummyimage.com/50/${bareHex}.png?text=+`
-      }
+        url: `https://dummyimage.com/240x50/${bareHex}.png?text=+`
+      },
+      color: col.rgbNumber()
     }
   })
 }, {
