@@ -1,35 +1,53 @@
 const Command = require('../src/Command')
 const request = require('request')
 
-/**
- * Convert a number from 0 to 1 inclusive to a percent with at most 2 decimal places.
- * @param {number} n - The number to convert to a percentage.
- */
-function percent (n) {
-  return Math.round(n * 1000) / 10 + '%'
+function getLinks (r) {
+  let npm = r.package.links.npm
+  let home = (r.package.links.homepage || '').replace(/\/$/, '')
+  let repo = (r.package.links.repository || '').replace(/\/\s*$/, '')
+  if (repo === home) {
+    home = ''
+  }
+  return [
+    `[npm](${npm})`,
+    repo ? `[Repo](${repo})` : '',
+    home ? `[Homepage](${home})` : ''
+  ].filter(l => l).join(' - ')
 }
 
-/**
- * Take a npms result and give back a description string on it.
- * @param r {object} - The decoded JSON data from npms.
- */
-function describeThing (r) {
-  return `<${r.package.links.npm}>`
+function describePackage (r) {
+  const author = r.package.publisher.name || r.package.publisher.username
+  const byline = author ? ` *by ${author}*` : ''
+  return `**\`${r.package.name}@${r.package.version}\`**${byline}
+${r.package.description || '*No description provided.*'}
+${getLinks(r)}`
 }
 
-function embedThing (r) {
+function embedPackage (r) {
   return {
+    color: 0xC12127,
     title: `${r.package.name} on npm`,
-    description: `**\`${r.package.name}@${r.package.version}\`**${r.package.author ? ` *by ${r.package.author.name}*` : ''}\n${
-      r.package.description}${
-      r.package.links.repository ? `\n**Repo:** ${r.package.links.repository}` : ''}${
-      r.package.links.homepage ? `\n**Homepage:** ${r.package.links.homepage}` : ''
-    }`,
+    description: describePackage(r),
     url: r.package.links.npm,
     provider: {
       name: 'npm',
       url: 'https://npmjs.com'
     }
+  }
+}
+
+function embedResults (results, search) {
+  const searchUrl = search && `https://www.npmjs.com/search?q=${encodeURIComponent(search)}`
+  return {
+    color: 0xC12127,
+    title: `Search results for "${search}"`,
+    description: `[See more results on npm ](${searchUrl})`,
+    fields: results.map(r => {
+      return {
+        name: `**${r.package.name}**`,
+        value: describePackage(r)
+      }
+    })
   }
 }
 
@@ -45,17 +63,22 @@ module.exports = new Command('npm', function (msg, args) {
       let r = result.results[0]
       // console.log('Exact match found!')
       msg.channel.createMessage({
-        content: describeThing(r),
-        embed: embedThing(r)
+        content: `Found it! <${r.package.links.npm}>`,
+        embed: embedPackage(r)
+      }).catch(e => {
+        this.u.error(e)
+        msg.channel.createMessage('There was an error displaying the results.')
       })
       // c.reply(msg, JSON.stringify(r, null, 4))
     } else if (result.total > 0) { // Not an exact match, but at least we got *something*
-      let searchResults = result.results.slice(0, 3)
-      let userResponse = `=== **Search results for \`${args}\` ===**`
-      for (let r of searchResults) {
-        userResponse += '\n\n' + describeThing(r)
-      }
-      msg.channel.createMessage(userResponse)
+      let results = result.results.slice(0, 3)
+      msg.channel.createMessage({
+        content: `Top 3 results:${results.map(r => `\n<${r.package.links.npm}>`)}`,
+        embed: embedResults(results, args)
+      }).catch(e => {
+        this.u.error(e)
+        msg.channel.createMessage('There was an error displaying the results.')
+      })
     } else { // fuck
       msg.channel.createMessage('Sorry, no packages matched your search.')
     }
