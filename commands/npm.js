@@ -5,15 +5,21 @@ function describePackage (r) {
   const author = r.package.publisher.name || r.package.publisher.username
   const byline = author ? ` *by ${author}*` : ''
   const npm = r.package.links.npm
-  const repo = (r.package.links.repository || '').replace(/[/#\s]+$/, '')
-  let home = (r.package.links.homepage || '').replace(/[/#\s]+$/, '')
-  if (repo === home) {
+  const repo = r.package.links.repository || ''
+  let home = r.package.links.homepage || ''
+
+  // For the purpose of comparing the URLs, strip off trailing slashes, hashes,
+  // and GitHub #readme anchors. If after that the two are the same, ignore the
+  // homepage.
+  const repoSimple = repo.replace(/[/#\s]*(#readme)?$/i, '')
+  const homeSimple = home.replace(/[/#\s]*(#readme)?$/i, '')
+  if (repoSimple === homeSimple) {
     home = ''
   }
   const links = [
     `[npm](${npm})`,
-    repo ? `[Repo](${repo})` : '',
-    home ? `[Homepage](${home})` : ''
+    repo ? `[repo](${repo})` : '',
+    home ? `[homepage](${home})` : ''
   ].filter(l => l).join(', ')
 
   // \u2013: en-dash
