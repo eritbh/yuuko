@@ -28,11 +28,10 @@ ${r.package.description || '*No description provided.*'}`
 }
 
 function embedResults (results, search) {
-  const searchUrl = search && `https://www.npmjs.com/search?q=${search}`
   return {
     color: 0xC12127, // npm brand color
     title: `Packages for "${search}"`,
-    description: `[See more results on npm](${searchUrl})`,
+    url: `https://www.npmjs.com/search?q=${search}`,
     fields: results.map(r => {
       return {
         name: `**${r.package.name}**`,
