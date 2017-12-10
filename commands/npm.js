@@ -1,47 +1,32 @@
 const Command = require('../src/Command')
 const request = require('request')
 
-function getLinks (r) {
-  let npm = r.package.links.npm
-  let home = (r.package.links.homepage || '').replace(/\/$/, '')
-  let repo = (r.package.links.repository || '').replace(/\/\s*$/, '')
-  if (repo === home) {
-    home = ''
-  }
-  return [
-    `[npm](${npm})`,
-    repo ? `[Repo](${repo})` : '',
-    home ? `[Homepage](${home})` : ''
-  ].filter(l => l).join(' - ')
-}
-
 function describePackage (r) {
   const author = r.package.publisher.name || r.package.publisher.username
   const byline = author ? ` *by ${author}*` : ''
-  return `**\`${r.package.name}@${r.package.version}\`**${byline}
-${r.package.description || '*No description provided.*'}
-${getLinks(r)}`
-}
-
-function embedPackage (r) {
-  return {
-    color: 0xC12127,
-    title: `${r.package.name} on npm`,
-    description: describePackage(r),
-    url: r.package.links.npm,
-    provider: {
-      name: 'npm',
-      url: 'https://npmjs.com'
-    }
+  const npm = r.package.links.npm
+  const repo = (r.package.links.repository || '').replace(/[/#\s]+$/, '')
+  let home = (r.package.links.homepage || '').replace(/[/#\s]+$/, '')
+  if (repo === home) {
+    home = ''
   }
+  const links = [
+    `[npm](${npm})`,
+    repo ? `[Repo](${repo})` : '',
+    home ? `[Homepage](${home})` : ''
+  ].filter(l => l).join(', ')
+
+  // \u2013: en-dash
+  return `**\`${r.package.name}@${r.package.version}\`**${byline} \u2013 ${links}
+${r.package.description || '*No description provided.*'}`
 }
 
 function embedResults (results, search) {
-  const searchUrl = search && `https://www.npmjs.com/search?q=${encodeURIComponent(search)}`
+  const searchUrl = search && `https://www.npmjs.com/search?q=${search}`
   return {
-    color: 0xC12127,
+    color: 0xC12127, // npm brand color
     title: `Search results for "${search}"`,
-    description: `[See more results on npm ](${searchUrl})`,
+    description: `[See more results on npm](${searchUrl})`,
     fields: results.map(r => {
       return {
         name: `**${r.package.name}**`,
@@ -57,31 +42,30 @@ module.exports = new Command('npm', function (msg, args) {
   msg.channel.sendTyping()
   request(`https://api.npms.io/v2/search?q=${safeArgs}`, (err, res, body) => { // npms.io api <3
     let result = JSON.parse(body)
-    if (!(res.statusCode === 200 && !err)) return msg.channel.createMessage('Something went wrong while searching. Try again with a different query.')
-
-    if (result.total > 0 && result.results[0].package.name === args) { // Perfect match
-      let r = result.results[0]
-      // console.log('Exact match found!')
-      msg.channel.createMessage({
-        content: `Found it! <${r.package.links.npm}>`,
-        embed: embedPackage(r)
-      }).catch(e => {
-        this.u.error(e)
-        msg.channel.createMessage('There was an error displaying the results.')
-      })
-      // c.reply(msg, JSON.stringify(r, null, 4))
-    } else if (result.total > 0) { // Not an exact match, but at least we got *something*
-      let results = result.results.slice(0, 3)
-      msg.channel.createMessage({
-        content: `Top 3 results:${results.map(r => `\n<${r.package.links.npm}>`)}`,
-        embed: embedResults(results, args)
-      }).catch(e => {
-        this.u.error(e)
-        msg.channel.createMessage('There was an error displaying the results.')
-      })
-    } else { // fuck
-      msg.channel.createMessage('Sorry, no packages matched your search.')
+    const webLink = `<https://www.npmjs.com/search?q=${safeArgs}>`
+    if (err || res.statusCode !== 200) {
+      return msg.channel.createMessage(`Something went wrong while searching. Try again with a different query.\n${webLink}`)
     }
+    if (result.total < 1) {
+      return msg.channel.createMessage(`No results! ${webLink}`)
+    }
+
+    let results = result.results.slice(0, 3)
+    let content = `Top results from ${webLink}`
+
+    // Handle a perfect match
+    if (results[0].package.name === args) {
+      content += `\n(Exact match: <${result.results[0].package.links.npm}>)`
+    }
+
+    // Generate the message
+    msg.channel.createMessage({
+      content,
+      embed: embedResults(results, args)
+    }).catch(e => {
+      this.u.error(e)
+      msg.channel.createMessage('There was an error displaying the results.')
+    })
   })
 }, {
   desc: 'Search for, and get information on, npm packages.',
