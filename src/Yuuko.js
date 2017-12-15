@@ -35,10 +35,17 @@ class Yuuko extends Eris.Client {
 
     /**
      * @prop {Array<Command>} - An array of commands the bot will respond to.
+     *     respond to.
      */
     this.commands = []
 
     this.on('ready', () => {
+      /**
+       * @prop {RegExp} - The RegExp used to tell whether or not a message starts
+       *     with a mention of the bot. Only present after the 'ready' event.
+       */
+      this.mentionPrefixRegExp = new RegExp(`^<@!?${this.user.id}>\\s?`)
+
       u.ok('Logged in as', u.underline(`@${this.user.username}#${this.user.discriminator}`), `- in ${this.guilds.size} guild${this.guilds.size === 1 ? '' : 's'}`)
     }).on('error', err => {
       u.error('Error in client:\n', err)
@@ -52,7 +59,6 @@ class Yuuko extends Eris.Client {
   handleMessage (msg) {
     const [prefix, content] = this.splitPrefixFromContent(msg)
     if (!content) return
-
     let args = content.split(' ')
     const commandName = args.splice(0, 1)[0]
     const command = this.commandForName(commandName)
@@ -138,7 +144,7 @@ class Yuuko extends Eris.Client {
    * @returns {string}
    */
   prefixForMessage (msg) {
-    // TODO: When guild config, this should return from guild config
+    // TODO
     if (msg.channel.guild) return this.defaultPrefix
     return ''
   }
@@ -157,7 +163,7 @@ class Yuuko extends Eris.Client {
       return [prefix, msg.content.substr(prefix.length)]
     }
     // Allow mentions to be used as prefixes according to config
-    const match = msg.content.match(new RegExp(`^<@!?${this.user.id}>\\s?`))
+    const match = msg.content.match(this.mentionPrefixRegExp)
     if (this.allowMention && match) { // TODO: guild config
       return [match[0], msg.content.substr(match[0].length)]
     }
