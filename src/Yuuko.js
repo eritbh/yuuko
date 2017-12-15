@@ -35,7 +35,6 @@ class Yuuko extends Eris.Client {
 
     /**
      * @prop {Array<Command>} - An array of commands the bot will respond to.
-     *     respond to.
      */
     this.commands = []
 
@@ -53,6 +52,7 @@ class Yuuko extends Eris.Client {
   handleMessage (msg) {
     const [prefix, content] = this.splitPrefixFromContent(msg)
     if (!content) return
+
     let args = content.split(' ')
     const commandName = args.splice(0, 1)[0]
     const command = this.commandForName(commandName)
@@ -138,7 +138,7 @@ class Yuuko extends Eris.Client {
    * @returns {string}
    */
   prefixForMessage (msg) {
-    // TODO
+    // TODO: When guild config, this should return from guild config
     if (msg.channel.guild) return this.defaultPrefix
     return ''
   }
