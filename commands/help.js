@@ -1,5 +1,19 @@
 const Command = require('../src/Command')
 
+/**
+ * Returns the help text for a command.
+ * @param {string} prefix - The prefix to use when generating the text. Used
+ *     in usage examples within the returned text.
+ * @returns {string}
+ */
+function helpText (command, prefix) {
+  let txt = ''
+  if (command.help.desc) txt += `**Description:** ${command.help.desc}\n`
+  if (command.help.args) txt += `**Usage:** \`${prefix}${command.name} ${command.help.args}\`\n`
+  if (command.aliases.length) txt += `**Aliases:** ${command.aliases.map(p => '`' + prefix + p + '`').join(', ')}\n`
+  return txt
+}
+
 module.exports = new Command(['help', 'h'], function (msg, args) {
   const prefix = this.prefixForMessage(msg)
 
@@ -13,7 +27,7 @@ Use \`${prefix}help [command]\` to get more info on that command!`)
 
   // We got a command, let's try using it
   let command = this.commandForName(args[0])
-  if (command) return msg.channel.createMessage(`**=== Help: \`${prefix + command.name}\` ===**\n${command.helpText(prefix)}`)
+  if (command) return msg.channel.createMessage(`**=== Help: \`${prefix + command.name}\` ===**\n${helpText(command, prefix)}`)
 
   // Rip, error
   msg.channel.createMessage(`**=== Help: Unknown Command ===**
