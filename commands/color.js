@@ -32,7 +32,8 @@ ${col.keyword() ? `Keyword: \`${col.keyword()}\`` : ''}`,
       color: col.rgbNumber()
     }
   })
-}, {
+})
+module.exports.help = {
   desc: 'Gets alternate writings of a CSS color, plus a preview.',
   args: '<color>'
-})
+}

@@ -72,7 +72,8 @@ module.exports = new Command('npm', function (msg, args) {
       msg.channel.createMessage('There was an error displaying the results.')
     })
   })
-}, {
+})
+module.exports.help = {
   desc: 'Search for, and get information on, npm packages.',
   args: '<search>'
-})
+}

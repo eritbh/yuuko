@@ -93,7 +93,8 @@ function constructMessage (results) {
 module.exports = new Command(['roll', 'r'], function (msg, args) {
   let results = rollFromString(args.join(' '))
   msg.channel.createMessage(constructMessage(results))
-}, {
+})
+module.exports.help = {
   desc: 'Roll some dice. Supported roll formats are `AdX` for `A` rolls of an `X`-sided die. `A` can be omitted to mean 1 and `X` can be % (a percent sign) to mean 100.',
   args: '<roll> [roll ...]'
-})
+}

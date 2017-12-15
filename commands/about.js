@@ -29,7 +29,8 @@ module.exports = new Command(['about', 'uptime', 'info'], function (msg, args, p
 Please report any bugs or feedback by creating an issue on the repository.`)
     })
   })
-}, {
+})
+module.exports.help =  {
   desc: 'Displays information about the bot, including running version, time since last crash, and a link to its source code.',
   args: ''
-})
+}
