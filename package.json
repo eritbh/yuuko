@@ -20,17 +20,17 @@
     "require-reload": "^0.2.2"
   },
   "optionalDependencies": {
-    "chalk": "^2.1.0",
-    "color": "^2.0.0",
-    "moment-timezone": "^0.5.13",
-    "request": "^2.82.0"
+    "chalk": "^2.1.0"
   },
   "devDependencies": {
+    "color": "^2.0.0",
     "eslint": "^4.8.0",
     "eslint-config-standard": "^10.2.1",
     "eslint-plugin-import": "^2.7.0",
     "eslint-plugin-node": "^5.2.0",
     "eslint-plugin-promise": "^3.5.0",
-    "eslint-plugin-standard": "^3.0.1"
+    "eslint-plugin-standard": "^3.0.1",
+    "moment-timezone": "^0.5.13",
+    "request": "^2.82.0"
   }
 }
