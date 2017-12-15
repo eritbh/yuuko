@@ -1,5 +1,5 @@
 {
     "token": "some_token",
     "defaultPrefix": "~",
-    "commandDir": "commands"
+    "allowMention": true
 }
