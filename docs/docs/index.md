@@ -1,8 +1,9 @@
 ---
-layout: docs
+layout: md
 group: nav
 title: API Docs
 order: 3
+header: ['Documentation']
 ---
 # Welcome!
 

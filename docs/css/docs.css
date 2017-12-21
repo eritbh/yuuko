@@ -1,90 +1,48 @@
-main {
-    margin: 0 auto;
-    padding: 0 20px;
-    max-width: 700px;
-    background: transparent;
-    box-shadow: none;
-}
-main .wrap {
-    padding: 20px;
-    background: #FFF;
-    box-shadow: 0 1px rgba(0,0,0,0.2);
-}
+/*main {*/
+/*    margin: 0 auto;*/
+/*    padding: 20px 0;*/
+/*    background: transparent;*/
+/*    box-shadow: none;*/
+/*}*/
+/*main .wrap {*/
+/*    padding: 20px;*/
+/*    background: #FFF;*/
+/*    box-shadow: 0 1px rgba(0,0,0,0.2);*/
+/*}*/
 
-nav {
-    background: none;
-    color: #FFF;
-    box-shadow: none;
-    text-shadow: 0 1px rgba(0,0,0,0.2);
-}
-nav .title {
-    font-weight: normal;
-    color: inherit;
-}
-nav .title .link-main {
-    color: inherit;
-    font-weight: bold;
-}
-nav .title .link-docs {
-    color: inherit;
-}
+/*nav {*/
+/*    background: none;*/
+/*    color: #FFF;*/
+/*    box-shadow: none;*/
+/*    text-shadow: 0 1px rgba(0,0,0,0.2);*/
+/*}*/
+/*nav .title {*/
+/*    font-weight: normal;*/
+/*    color: inherit;*/
+/*}*/
+/*nav .title .link-main {*/
+/*    color: inherit;*/
+/*    font-weight: bold;*/
+/*}*/
+/*nav .title .link-docs {*/
+/*    color: inherit;*/
+/*}*/
 
-nav ul a, #nav-toggle + label {
-    color: inherit;
-    font-weight: 500;
-}
-nav ul .active a {
-    box-shadow:
-        inset 0 3px #FFF,
-        inset 0 4px rgba(0,0,0,0.2);
-}
-@media screen and (max-width: 600px) {
-    nav ul a {
-        color: #000;
-        text-shadow: none;
-    }
-    nav ul .active a { box-shadow: inset 3px 0 #85DA7E }
-    main { padding: 0 }
-}
+/*nav ul a, #nav-toggle + label {*/
+/*    color: inherit;*/
+/*    font-weight: 500;*/
+/*}*/
+/*nav ul .active a {*/
+/*    box-shadow:*/
+/*        inset 0 3px #FFF,*/
+/*        inset 0 4px rgba(0,0,0,0.2);*/
+/*}*/
+/*@media screen and (max-width: 600px) {*/
+/*    nav ul a {*/
+/*        color: #000;*/
+/*        text-shadow: none;*/
+/*    }*/
+/*    nav ul .active a { box-shadow: inset 3px 0 #85DA7E }*/
+/*    main { padding: 0 }*/
+/*}*/
 
-/* Code highlighting */
-main div.highlighter-rouge {
-    background: #EEE;
-    overflow: auto;
-    margin: 20px -20px;
-    padding: 0;
-}
-main div.highlighter-rouge:last-child {
-    margin-bottom: -20px;
-}
-main div.highlight {
-    margin: 0;
-    padding: 0;
-}
-main pre.highlight {
-    margin: 0;
-    padding: 20px;
-}
-
-/* Tables */
-main table {
-    margin: 20px -20px 20px 0;
-    padding: 0 25px 0 5px;
-    border-left: 10px solid #EEE;
-    width: auto;
-    display: block;
-    overflow: auto;
-}
-main table td,
-main table th {
-    padding: 5px;
-    vertical-align: top;
-}
-main table th {
-    display: none;
-}
-
-/* Because mobile sucks */
-main code {
-    word-wrap: break-word;
-}
