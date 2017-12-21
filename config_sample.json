@@ -1,5 +1,6 @@
 {
     "token": "some_token",
     "defaultPrefix": "~",
-    "allowMention": true
+    "allowMention": true,
+    logLevel: 2
 }
