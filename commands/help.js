@@ -14,7 +14,7 @@ function helpText (command, prefix) {
   return txt
 }
 
-module.exports = new Command(['help', 'h'], function (msg, args) {
+module.exports = new Command(['help', 'man', 'h'], function (msg, args) {
   const prefix = this.prefixForMessage(msg)
 
   // If we got nothing, command list
