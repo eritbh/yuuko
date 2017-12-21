@@ -69,8 +69,9 @@ Name | Type | Description
 Name | Type | Description
 -----|------|------------
 `defaultPrefix` | String | The default prefix the bot will respond to in guilds for which there is no other confguration.
-`commands` | Array<Yuuko.Command> | An array of commands which the bot looks for in messages.
+`commands` | Array&lt;Command&gt; | An array of commands which the bot looks for in messages.
 `allowMention` | Boolean | Whether or not the bot can respond to messages starting with a mention of the bot.
+`mentionPrefixRegExp` | RegExp | The RegExp used to tell whether or not a message starts with a mention of the bot. Only present after the 'ready' event.
 
 ## Methods
 
@@ -152,7 +153,7 @@ A function which is executed each time this command is triggered. The value of `
 Name | Type | Description
 -----|------|------------
 `msg` | [Message Object](https://abal.moe/Eris/docs/Message) | The message that triggered the command.
-`args` | Array<String> | An array of arguments passed to the command, obtained by removing the command name and prefix from the message, then splitting on spaces. To get the raw text that was passed to the command, use `args.join(' ')`.
+`args` | Array&lt;String&gt; | An array of arguments passed to the command, obtained by removing the command name and prefix from the message, then splitting on spaces. To get the raw text that was passed to the command, use `args.join(' ')`.
 `prefix` | String | The prefix used in the message.
 
 ## Properties
