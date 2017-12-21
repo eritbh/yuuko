@@ -10,7 +10,7 @@ Usage information for the bot (the usable commands, default configuration, and o
 
 Yuuko's core is available as [a module on npm](https://www.npmjs.com/package/yuuko). It extends [Eris](https://github.com/abalabahaha/eris) and is basically an alternative to its CommandClient class.
 
-```bash
+```
 $ npm i yuuko
 ```
 
@@ -29,7 +29,7 @@ const pingCommand = new Yuuko.Command('ping', function (msg) {
 mybot.addCommand(pingCommand).connect()
 ```
 
-```bash
+```
 $ node mybot.js
 Logged in as @MyBot#1234 - in 2 guilds
 ```
