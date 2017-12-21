@@ -21,14 +21,14 @@ $ npm install --save yuuko
 Use:
 
 ```js
-const Yuuko = require('yuuko')
+const {Client, Command} = require('yuuko')
 
-const mybot = new Yuuko({
+const mybot = new Client({
   token: 'your_bot_token',  // Token used to auth your bot account
   defaultPrefix: '.'        // Prefix used to trigger commands
 })
 
-const pingCommand = new Yuuko.Command('ping', function (msg) {
+const pingCommand = new Command('ping', function (msg) {
   msg.channel.createMessage('Pong!')
 })
 
@@ -48,11 +48,11 @@ For more examples, check out the Examples page.
 
 ---
 
-# Class: `Yuuko` <small>extends [`Eris.Client`](https://abal.moe/Eris/docs/Client)</small>
+# Class: `Client` <small>extends [`Eris.Client`](https://abal.moe/Eris/docs/Client)</small>
 
-The main client class. Connects to Discord through [Eris](https://npmjs.com/package/eris) and provides command handling.
+The main client class. Connects to Discord through [Eris](https://npmjs.com/package/eris) and provides command handling. Accessible via `require('yuuko')` or `require('yuuko').Client`.
 
-## Constructor: `new Yuuko(config)`
+## Constructor: `new Client(config)`
 
 The initializer is passed a config object which does things.
 
@@ -75,17 +75,17 @@ Name | Type | Description
 
 ## Methods
 
-### `addCommand(command)` &rsaquo; `Yuuko`
+### `addCommand(command)` &rsaquo; `Client`
 
-Register a command to the client. Returns the Yuuko instance, so this command is chainable.
+Register a command to the client. Returns the client instance, so this command is chainable.
 
 Name | Type | Description
 -----|------|------------
 `command` | Command | The command to add to the bot.
 
-### `addCommandFile` &rsaquo; `Yuuko`
+### `addCommandFile` &rsaquo; `Client`
 
-Load a JS file and try to add an exported command. Returns the Yuuko instance, so this command is chainable.
+Load a JS file and try to add an exported command. Returns the client instance, so this command is chainable.
 
 This method does not accept relative paths. `require('path')` and use `addCommandFile(path.join(__dirname, 'yourFile.js'))` instead.
 
@@ -93,9 +93,9 @@ Name | Type | Description
 -----|------|------------
 `filename` | String | The location of the file to load.
 
-### `addCommandDir(dirname)` &rsaquo; `Yuuko`
+### `addCommandDir(dirname)` &rsaquo; `Client`
 
-Load all the JS files in a directory and attempt to load them each as commands. Returns the Yuuko instance, so this command is chainable.
+Load all the JS files in a directory and attempt to load them each as commands. Returns the client instance, so this command is chainable.
 
 This method does not accept relative paths. `require('path')` and use `addCommandFile(path.join(__dirname, 'yourFile.js'))` instead.
 
@@ -103,11 +103,11 @@ Name | Type | Description
 -----|------|------------
 `dirname` | String | The location of the directory to load.
 
-## `reloadCommands()` &rsaquo; `Yuuko`
+## `reloadCommands()` &rsaquo; `Client`
 
-Reloads all commands that were loaded via `addCommandFile` and `addCommandDir`. Useful for development to hot-reload commands as you work on them. Returns the Yuuko instance, so this command is chainable.
+Reloads all commands that were loaded via `addCommandFile` and `addCommandDir`. Useful for development to hot-reload commands as you work on them. Returns the client instance, so this command is chainable.
 
-### `commandForName(name)` &rsaquo; `Command`
+### `commandForName(name)` &rsaquo; `Command|null`
 
 Checks the list of registered commands and returns one whch is known by a given name, either as the command's name or an alias of the command. If no match is found, returns `null`.
 
@@ -135,11 +135,11 @@ Name | Type | Description
 
 # Class: `Command`
 
-A command that can be executed by users of the bot.
+A command that can be executed by users of the bot. Accessible via `require('yuuko').Command`.
 
 ## Constructor: `new Command(name, process)`
 
-Creates a command. Note that a command must be registered to the Yuuko instance with `addCommand()` or another related method before being available to users of your bot.
+Creates a command. Note that a command must be registered to the client instance with `addCommand()` or another related method before being available to users of your bot.
 
 Name | Type | Description
 -----|------|------------
@@ -148,7 +148,7 @@ Name | Type | Description
 
 ### Command Process
 
-A function which is executed each time this command is triggered. The value of `this` inside the function is a reference to the Yuuko instance which picked up the command. Nothing is done with anything the function returns, and it takes up to 3 arguments:
+A function which is executed each time this command is triggered. The value of `this` inside the function is a reference to the client instance which picked up the command. Nothing is done with anything the function returns, and it takes up to 3 arguments:
 
 Name | Type | Description
 -----|------|------------
