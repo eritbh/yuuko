@@ -74,7 +74,7 @@ class Yuuko extends Eris.Client {
     const command = this.commandForName(commandName)
     if (!command) return
 
-    command.process.call(this, msg, args, prefix)
+    command.process.call(this, msg, args, prefix, commandName)
     u.info('did a thing:', commandName, args.join(' '))
   }
 
@@ -235,8 +235,8 @@ class Yuuko extends Eris.Client {
     let response
     let ___console = '' // trying really hard to make this not noticeable
     text = `console.log = function (...args) {
-            ___console += args.join(' ') + '\\n'
-        };` + text.toString()
+      ___console += args.join(' ') + '\\n'
+    };` + text.toString()
     try {
       response = eval(text) // eslint-disable-line no-eval
     } catch (e) {

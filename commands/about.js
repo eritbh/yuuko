@@ -30,7 +30,7 @@ Please report any bugs or feedback by creating an issue on the repository.`)
     })
   })
 })
-module.exports.help =  {
+module.exports.help = {
   desc: 'Displays information about the bot, including running version, time since last crash, and a link to its source code.',
   args: ''
 }
