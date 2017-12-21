@@ -28,6 +28,9 @@ class Yuuko extends Eris.Client {
      *     there is no other confguration.
      */
     this.defaultPrefix = options.defaultPrefix
+    if (this.defaultPrefix === '') {
+      u.warn('defaultPrefix is an empty string, bot will not require a prefix to run commands')
+    }
 
     /**
      * @prop {boolean} - Whether or not the bot can respond to messages starting
