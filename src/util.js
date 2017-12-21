@@ -1,5 +1,7 @@
 'use strict'
 
+module.exports = function (minLevel) {
+
 const util = require('util')
 let chalk
 try {
@@ -23,11 +25,11 @@ try {
 }
 
 const logs = {
-  debug: {text: 'dbug', style: chalk.white},
-  info: {text: 'info', style: chalk.cyan},
-  ok: {text: ' ok ', style: chalk.green},
-  warn: {text: 'warn', style: chalk.black.bgYellow},
-  error: {text: 'err!', style: chalk.white.bgRed}
+  debug: {level: 0, text: 'dbug', style: chalk.white},
+  info: {level: 1, text: 'info', style: chalk.cyan},
+  ok: {level: 2, text: ' ok ', style: chalk.green},
+  warn: {level: 3, text: 'warn', style: chalk.black.bgYellow},
+  error: {level: 4, text: 'err!', style: chalk.white.bgRed}
 }
 
 chalk._log = function (...things) {
@@ -47,10 +49,16 @@ chalk.timestamp = function (text) {
   return chalk.gray(`[${timestamp} ${text}]`)
 }
 for (let log of Object.keys(logs)) {
-  const {text, style} = logs[log]
-  chalk[log] = function (...things) {
-    this._log(this.timestamp(style(text)), ...things)
+  const {level, text, style} = logs[log]
+  if (minLevel > level) {
+    chalk[log] = function () {}
+  } else {
+    chalk[log] = function (...things) {
+      this._log(this.timestamp(style(text)), ...things)
+    }
   }
 }
 
-module.exports = chalk
+return chalk
+
+}

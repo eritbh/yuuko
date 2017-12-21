@@ -6,7 +6,8 @@ const util = require('util')
 const Command = require('./Command')
 const reload = require('require-reload')(require)
 
-const u = require('./util.js')
+const LoggerThing = require('./util.js')
+let u
 
 /** The client. */
 class Yuuko extends Eris.Client {
@@ -22,6 +23,8 @@ class Yuuko extends Eris.Client {
    */
   constructor (options = {}) {
     super(options.token, options) // TODO: Use the same help object for Eris and Yuuko options
+
+    u = LoggerThing(options.logLevel == null ? 2 : options.logLevel)
 
     /**
      * @prop {string} - The prefix the bot will respond to in guilds for which
@@ -51,7 +54,7 @@ class Yuuko extends Eris.Client {
        */
       this.mentionPrefixRegExp = new RegExp(`^<@!?${this.user.id}>\\s?`)
 
-      u.ok('Logged in as', u.underline(`@${this.user.username}#${this.user.discriminator}`), `- in ${this.guilds.size} guild${this.guilds.size === 1 ? '' : 's'}`)
+      u.ok('Logged in as', u.underline(`@${this.user.username}#${this.user.discriminator}`), `- in ${this.guilds.size} guild${this.guilds.size === 1 ? '' : 's'}, ${this.commands.length} command${this.commands.length === 1 ? '' : 's'} loaded`)
     }).on('error', err => {
       u.error('Error in client:\n', err)
     }).on('messageCreate', this.handleMessage)
@@ -108,7 +111,7 @@ class Yuuko extends Eris.Client {
       const command = reload(filename)
       command.filename = filename
       this.addCommand(command)
-      u.ok('Added command from', filename)
+      u.debug('Added command from', filename)
     } catch (e) {
       u.warn('Command from', filename, "couldn't be loaded.\n", e)
     }
