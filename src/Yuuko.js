@@ -248,6 +248,7 @@ class Yuuko extends Eris.Client {
   }
 }
 
+Yuuko.Client = Yuuko
 Yuuko.Command = Command
 
 module.exports = Yuuko
