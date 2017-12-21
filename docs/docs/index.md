@@ -58,13 +58,10 @@ The initializer is passed a config object which does things.
 
 Name | Type | Description
 -----|------|------------
-`config` | Object | An object with config options for the bot. All options except `config.token` are optional.
-`config.token` | String |
-`config.commandDir` | String |
-`config.defaultPrefix` | String |
-`config.allowMention` | Boolean |
-
-<!-- TODO: Document custom fields -->
+`config` | Object | An object with config options for the bot. In addition to these document fields, this object will be passed to the Eris constructor as the `options` object, so this can also contain any fields documented for the [Eris constructor](https://abal.moe/Eris/docs/Client) `options` parameter.
+`config.token` | String | The token used to log into the bot.
+`config.defaultPrefix` | String | Optional. The prefix the bot will respond to in guilds for which there is no other confguration. You can set this to an empty string to respond to all messages without a prefix, but this is **highly discouraged**.
+`config.allowMention` | Boolean | Optional, default `true`. Whether or not the bot can respond to messages starting with a mention of the bot. If this is falsy, and `config.defaultPrefix` is omitted, there will be no way to interact with the bot in guilds without a pre-set custom prefix.
 
 ## Properties
 

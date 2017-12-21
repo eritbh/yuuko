@@ -15,15 +15,17 @@ class Yuuko extends Eris.Client {
    * @param {Object} options - Options to start the client with. This object is
    *     also passed to Eris.
    * @param {string} options.token - The token used to log into the bot.
-   * @param {bool} [options.help=true] - Whether or not to enable the default
-   *     help command.
+   * @param {string} options.defaultPrefix - The prefix the bot will respond to
+   *     in guilds for which there is no other confguration.
+   * @param {boolean} options.allowMention - Whether or not the bot can respond
+   *     to messages starting with a mention of the bot.
    */
   constructor (options = {}) {
     super(options.token, options) // TODO: Use the same help object for Eris and Yuuko options
 
     /**
-     * @prop {string} - The default prefix the bot will respond to in guilds for
-     *     which there is no other confguration.
+     * @prop {string} - The prefix the bot will respond to in guilds for which
+     *     there is no other confguration.
      */
     this.defaultPrefix = options.defaultPrefix
 
