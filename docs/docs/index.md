@@ -136,7 +136,7 @@ Name | Type | Description
 
 A command that can be executed by users of the bot.
 
-## Constructor: `new Command(name, process, help)`
+## Constructor: `new Command(name, process)`
 
 Creates a command. Note that a command must be registered to the Yuuko instance with `addCommand()` or another related method before being available to users of your bot.
 
@@ -144,9 +144,6 @@ Name | Type | Description
 -----|------|------------
 `name` | String&#124;Array | The name of the command. Command names are case-insensitive. If a string is passed, that string simply becomes the command's name; if an array is passed, the first element becomes the command's name and the rest become aliases.
 `process` | Function | See below.
-`help` | Object | Optional; default: `{}`. Extra information stored with the command, used by the `helpText()` method.
-`help.desc` | String | A description of the command.
-`help.args` | String | A formatted overview of arguments the command accepts.
 
 ### Command Process
 
@@ -162,17 +159,6 @@ Name | Type | Description
 
 Name | Type | Description
 `name` | String | The name of the command.
-`aliases` | Array<String> | An array of aliases, or alternate names, the command can be called by.
-`names` | Array<String> | An array of names the command can be called by. Contains the command's name as the first item, and any aliases of the command as subsequent items.
+`aliases` | Array&lt;String&gt; | An array of aliases, or alternate names, the command can be called by.
+`names` | Array&lt;String&gt; | An array of names the command can be called by. Contains the command's name as the first item, and any aliases of the command as subsequent items.
 `process` | Function | See above.
-`help` | Object | See the description of `help` in the constructor.
-
-## Methods
-
-### `helpText(prefix)` &rsaquo; `String`
-
-Returns a string that is used as a help message for the command based on the command's `help` property.
-
-Name | Type | Description
------|------|------------
-`prefix` | String | Optional; default: `''`. The prefix to use for usage examples in the generated message.
