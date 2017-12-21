@@ -20,6 +20,8 @@ class Yuuko extends Eris.Client {
    *     in guilds for which there is no other confguration.
    * @param {boolean} options.allowMention - Whether or not the bot can respond
    *     to messages starting with a mention of the bot.
+   * @param {number} options.logLevel - The minimum message level for logged
+   *     events in the console.
    */
   constructor (options = {}) {
     super(options.token, options) // TODO: Use the same help object for Eris and Yuuko options

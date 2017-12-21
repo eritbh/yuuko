@@ -62,6 +62,7 @@ Name | Type | Description
 `config.token` | String | The token used to log into the bot.
 `config.defaultPrefix` | String | Optional. The prefix the bot will respond to in guilds for which there is no other confguration. You can set this to an empty string to respond to all messages without a prefix, but this is **highly discouraged**.
 `config.allowMention` | Boolean | Optional, default `true`. Whether or not the bot can respond to messages starting with a mention of the bot. If this is falsy, and `config.defaultPrefix` is omitted, there will be no way to interact with the bot in guilds without a pre-set custom prefix.
+`config.logLevel` | Number | Optional, default `2`. THe minimum message level for logged events in the console.
 
 ## Properties
 
