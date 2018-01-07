@@ -37,6 +37,8 @@ class Command {
    *     splitting on spaces. To get the raw text that was passed to the
    *     command, use `args.join(' ')`.
    * @param {string} prefix - The prefix used in the message.
+   * @param {string} commandName - The name or alias used to call the command in
+   *     the message. Will be one of the values of `this.names`.
    */
 
   /**
