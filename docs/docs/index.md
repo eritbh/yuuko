@@ -103,7 +103,7 @@ Name | Type | Description
 -----|------|------------
 `dirname` | String | The location of the directory to load.
 
-## `reloadCommands()` &rsaquo; `Client`
+### `reloadCommands()` &rsaquo; `Client`
 
 Reloads all commands that were loaded via `addCommandFile` and `addCommandDir`. Useful for development to hot-reload commands as you work on them. Returns the client instance, so this command is chainable.
 
