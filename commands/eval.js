@@ -1,6 +1,6 @@
 const Command = require('../src/Command')
 
-module.exports = new Command('eval', function (msg, args) {
+module.exports = new Command('eval', function (msg, args, prefix, commandName) {
   this.getOAuthApplication().then(app => {
     if (app.owner.id !== msg.author.id) {
       return msg.channel.createMessage("You're not my dad.")
@@ -13,7 +13,7 @@ module.exports = new Command('eval', function (msg, args) {
         args = args.substr(2)
       }
     }
-    const result = this.eval(args)
+    const result = this.eval(args, msg, prefix, commandName)
     msg.channel.createMessage(result).catch(err => {
       msg.channel.createMessage('Error sending message:\n```\n' + err + '\n```')
     })

@@ -226,11 +226,12 @@ class Client extends Eris.Client {
    * only here to make the eval command possible and should not be used in
    * other contexts.
    * @param {string} script - The script to run.
+   * @param {*} others - Context fariables passed from the command process.
    * @returns {string} - A Markdown-formatted message that represents the
    *     output of the command. Includes both console logs and the final
    *     evaluated expression's result.
    */
-  eval (text) {
+  eval (text, msg, prefix, commandName) {
     let og = console.log
     let response
     let ___console = '' // trying really hard to make this not noticeable
