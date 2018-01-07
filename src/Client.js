@@ -10,7 +10,7 @@ const LoggerThing = require('./util.js')
 let u
 
 /** The client. */
-class Yuuko extends Eris.Client {
+class Client extends Eris.Client {
   /**
    * Create a client instance.
    * @param {Object} options - Options to start the client with. This object is
@@ -248,7 +248,4 @@ class Yuuko extends Eris.Client {
   }
 }
 
-Yuuko.Client = Yuuko
-Yuuko.Command = Command
-
-module.exports = Yuuko
+module.exports = Client

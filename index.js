@@ -1,4 +1,4 @@
-const Yuuko = require('./src/Yuuko')
+const Client = require('./src/Client')
 const path = require('path')
 let config = require('./config')
 
