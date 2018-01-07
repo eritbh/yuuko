@@ -9,8 +9,6 @@ class Command {
    *     the items are set as aliases.
    * @param {Command~commandProcess} process - The function to be called when
    *     the command is executed.
-   * @param {Object} [help=] - The help information to use when a user targets
-   *     this command with the help command.
    */
   constructor (name, process) {
     if (Array.isArray(name)) {
