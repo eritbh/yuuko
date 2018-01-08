@@ -2,7 +2,6 @@
 
 const Eris = require('eris')
 const glob = require('glob')
-const util = require('util')
 const Command = require('./Command')
 const reload = require('require-reload')(require)
 
@@ -219,34 +218,6 @@ class Client extends Eris.Client {
   //     sendChunk(left.join(''), maxLength)
   //   }(content))
   // }
-
-  /**
-   * Evaluates a JavaScript string in the bot's scope and returns the result
-   * converted to a string and formatted for sending as a message. This is
-   * only here to make the eval command possible and should not be used in
-   * other contexts.
-   * @param {string} script - The script to run.
-   * @param {*} others - Context fariables passed from the command process.
-   * @returns {string} - A Markdown-formatted message that represents the
-   *     output of the command. Includes both console logs and the final
-   *     evaluated expression's result.
-   */
-  eval (text, msg, prefix, commandName) {
-    let og = console.log
-    let response
-    let ___console = '' // trying really hard to make this not noticeable
-    text = `console.log = function (...args) {
-      ___console += args.join(' ') + '\\n'
-    };` + text.toString()
-    try {
-      response = eval(text) // eslint-disable-line no-eval
-    } catch (e) {
-      response = e
-    }
-    console.log = og
-    ___console = ___console.split(/\n/g).map(line => line ? '//> ' + line : '').join('\n').replace(/\n+$/, '')
-    return '```js\n' + ___console + ((___console && response === undefined) ? '' : util.inspect(response)) + '\n```'
-  }
 }
 
 module.exports = Client
