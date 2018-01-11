@@ -1,4 +1,4 @@
-# Yuuko [![npm](https://img.shields.io/npm/v/yuuko.svg)](https://www.npmjs.com/package/yuuko) [![dependencies](https://img.shields.io/david/Geo1088/yuuko.svg)](https://david-dm.org/geo1088/yuuko) [![Code Climate](https://img.shields.io/codeclimate/github/geo1088/Yuuko.svg)](https://codeclimate.com/github/geo1088/Yuuko)
+# Yuuko [![npm](https://img.shields.io/npm/v/yuuko.svg)](https://www.npmjs.com/package/yuuko) [![dependencies](https://img.shields.io/david/Geo1088/yuuko.svg)](https://david-dm.org/geo1088/yuuko) [![Code Climate](https://img.shields.io/codeclimate/github/Geo1088/yuuko.svg)](https://codeclimate.com/github/Geo1088/yuuko)
 
 A Discord bot in Node that focuses on getting and manipulating information useful to developers and designers.
 
