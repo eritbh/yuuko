@@ -11,13 +11,13 @@ header: ['Documentation']
 - [Class: `Client`](#class-client-extends-erisclient)
   - [`new Client(config)`](#constructor-new-clientconfig)
   - [Properties](#properties)
-  - [`addCommand(command)` &rsaquo; `Client`](#addcommandcommand--client)
-  - [`addCommandFile` &rsaquo; `Client`](#addcommandfile--client)
-  - [`addCommandDir(dirname)` &rsaquo; `Client`](#addcommanddirdirname--client)
-  - [`reloadCommands()` &rsaquo; `Client`](#reloadcommands--client)
-  - [`commandForName(name)` &rsaquo; `Command|null`](#commandfornamename--commandnull)
-  - [`prefixForMessage(msg)` &rsaquo; `String`](#prefixformessagemsg--string)
-  - [`splitPrefixFromContent(msg)` &rsaquo; `Array<String|null>`](#splitprefixfromcontentmsg--arraystringnull)
+  - [`addCommand(command)`](#addcommandcommand--client)
+  - [`addCommandFile(filename)`](#addcommandfile--client)
+  - [`addCommandDir(dirname)`](#addcommanddirdirname--client)
+  - [`reloadCommands()`](#reloadcommands--client)
+  - [`commandForName(name)`](#commandfornamename--commandnull)
+  - [`prefixForMessage(msg)`](#prefixformessagemsg--string)
+  - [`splitPrefixFromContent(msg)`](#splitprefixfromcontentmsg--arraystringnull)
 - [Class: `Command`](#class-command)
   - [`new Command(name, process)`](#constructor-new-commandname-process)
   - [Process function](#process-function)
@@ -106,7 +106,7 @@ Name | Type | Description
 -----|------|------------
 `command` | Command | The command to add to the bot.
 
-### `addCommandFile` &rsaquo; `Client`
+### `addCommandFile(filename)` &rsaquo; `Client`
 
 Load a JS file and try to add an exported command. Returns the client instance, so this command is chainable.
 
