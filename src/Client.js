@@ -66,6 +66,8 @@ class Client extends Eris.Client {
    * @param {Object} msg - The message object recieved from Eris.
    */
   handleMessage (msg) {
+    if (msg.author.bot) return
+
     const [prefix, content] = this.splitPrefixFromContent(msg)
     if (!content) return
     let args = content.split(' ')

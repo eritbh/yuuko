@@ -1,10 +1,37 @@
 ---
-layout: md
+layout: docs
 group: nav
 title: API Docs
 order: 3
 header: ['Documentation']
 ---
+<aside class="toc" markdown="1">
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+
+
+- [Welcome!](#welcome)
+- [Quick Start](#quick-start)
+- [Class: `Client` extends `Eris.Client`](#class-client-extends-erisclient)
+  - [Constructor: `new Client(config)`](#constructor-new-clientconfig)
+  - [Properties](#properties)
+  - [Methods](#methods)
+    - [`addCommand(command)` &rsaquo; `Client`](#addcommandcommand-rsaquo-client)
+    - [`addCommandFile` &rsaquo; `Client`](#addcommandfile-rsaquo-client)
+    - [`addCommandDir(dirname)` &rsaquo; `Client`](#addcommanddirdirname-rsaquo-client)
+    - [`reloadCommands()` &rsaquo; `Client`](#reloadcommands-rsaquo-client)
+    - [`commandForName(name)` &rsaquo; `Command|null`](#commandfornamename-rsaquo-commandnull)
+    - [`prefixForMessage(msg)` &rsaquo; `String`](#prefixformessagemsg-rsaquo-string)
+    - [`splitPrefixFromContent(msg)` &rsaquo; `Array<String|null>`](#splitprefixfromcontentmsg-rsaquo-arraystringnull)
+- [Class: `Command`](#class-command)
+  - [Constructor: `new Command(name, process)`](#constructor-new-commandname-process)
+    - [Command Process](#command-process)
+  - [Properties](#properties-1)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+</aside>
+<main markdown="1">
+
 # Welcome!
 
 This is the documentation for Yuuko. If you want to create your own bot based on Yuuko's code, you're in the right place!
@@ -49,7 +76,7 @@ For more examples, check out the Examples page.
 
 ---
 
-# Class: `Client` <small>extends [`Eris.Client`](https://abal.moe/Eris/docs/Client)</small>
+# Class: `Client` extends [`Eris.Client`](https://abal.moe/Eris/docs/Client)
 
 The main client class. Connects to Discord through [Eris](https://npmjs.com/package/eris) and provides command handling. Accessible via `require('yuuko')` or `require('yuuko').Client`.
 
@@ -165,3 +192,5 @@ Name | Type | Description
 `aliases` | Array&lt;String&gt; | An array of aliases, or alternate names, the command can be called by.
 `names` | Array&lt;String&gt; | An array of names the command can be called by. Contains the command's name as the first item, and any aliases of the command as subsequent items.
 `process` | Function | See above.
+
+</main>
