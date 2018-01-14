@@ -1,90 +1,79 @@
-main {
-    margin: 0 auto;
-    padding: 0 20px;
-    max-width: 700px;
-    background: transparent;
-    box-shadow: none;
-}
-main .wrap {
-    padding: 20px;
-    background: #FFF;
-    box-shadow: 0 1px rgba(0,0,0,0.2);
-}
-
 nav {
-    background: none;
-    color: #FFF;
+    margin-bottom: 3px;
     box-shadow: none;
-    text-shadow: 0 1px rgba(0,0,0,0.2);
-}
-nav .title {
-    font-weight: normal;
-    color: inherit;
-}
-nav .title .link-main {
-    color: inherit;
-    font-weight: bold;
-}
-nav .title .link-docs {
-    color: inherit;
 }
 
-nav ul a, #nav-toggle + label {
-    color: inherit;
-    font-weight: 500;
-}
-nav ul .active a {
-    box-shadow:
-        inset 0 3px #FFF,
-        inset 0 4px rgba(0,0,0,0.2);
-}
-@media screen and (max-width: 600px) {
-    nav ul a {
-        color: #000;
-        text-shadow: none;
-    }
-    nav ul .active a { box-shadow: inset 3px 0 #85DA7E }
-    main { padding: 0 }
+.wrap {
+    max-width: none;
 }
 
-/* Code highlighting */
-main div.highlighter-rouge {
-    background: #EEE;
-    overflow: auto;
-    margin: 20px -20px;
-    padding: 0;
+.docs-root {
+    display: flex;
+    /*height: calc(100vh - 53px);*/
+    overflow: hidden;
 }
-main div.highlighter-rouge:last-child {
-    margin-bottom: -20px;
+
+.toc {
+    color: #333;
+    flex: 0 0 250px;
+    background: #FFF;
+    overflow-x: hidden;
+    overflow-y: auto;
+    font-size: large;
 }
-main div.highlight {
+.toc ul {
     margin: 0;
     padding: 0;
+    list-style: none;
 }
-main pre.highlight {
-    margin: 0;
-    padding: 20px;
+.toc li {
+    margin-top: 5px;
 }
-
-/* Tables */
-main table {
-    margin: 20px -20px 20px 0;
-    padding: 0 25px 0 5px;
-    border-left: 10px solid #EEE;
-    width: auto;
+.toc li a {
     display: block;
-    overflow: auto;
+    padding: 5px 10px;
+    text-decoration: none;
+    color: inherit;
 }
-main table td,
-main table th {
-    padding: 5px;
-    vertical-align: top;
-}
-main table th {
-    display: none;
+.toc li a:hover {
+    background: #EEE;
 }
 
-/* Because mobile sucks */
-main code {
-    word-wrap: break-word;
+/* Nested things */
+.toc li ul {
+    font-size: small;
+}
+.toc li li {
+    /*background: #DDD;*/
+    margin: 0 0 0 10px;
+    border-left: 5px solid #EEE;
+    /*border-top: 1px solid #FFF;*/
+}
+
+main {
+    box-sizing: border-box;
+    width: calc(100vw - 500px);
+    box-shadow: 250px 0 #FFF;
+    min-width: 600px;
+    padding: 20px;
+    overflow-x: hidden;
+}
+
+main h1, main h2, main h3 {
+    margin-top: -20px;
+    padding-top: 20px;
+}
+
+@media screen and (max-width: 850px) {
+    main {
+        width: auto;
+        min-width: 0;
+    }
+}
+
+/* Hide TOC on small screens */
+@media screen and (max-width: 800px) {
+    .toc {
+        display: none;
+    }
 }

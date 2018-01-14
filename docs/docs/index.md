@@ -3,7 +3,30 @@ layout: docs
 group: nav
 title: API Docs
 order: 3
+header: ['Documentation']
 ---
+<aside class="toc" markdown="1">
+
+- [Quick Start](#quick-start)
+- [Class: `Client`](#class-client-extends-erisclient)
+  - [`new Client(config)`](#constructor-new-clientconfig)
+  - [Properties](#properties)
+  - [`addCommand(command)`](#addcommandcommand--client)
+  - [`addCommandFile(filename)`](#addcommandfile--client)
+  - [`addCommandDir(dirname)`](#addcommanddirdirname--client)
+  - [`reloadCommands()`](#reloadcommands--client)
+  - [`commandForName(name)`](#commandfornamename--commandnull)
+  - [`prefixForMessage(msg)`](#prefixformessagemsg--string)
+  - [`splitPrefixFromContent(msg)`](#splitprefixfromcontentmsg--arraystringnull)
+- [Class: `Command`](#class-command)
+  - [`new Command(name, process)`](#constructor-new-commandname-process)
+  - [Process function](#process-function)
+  - [Properties](#properties-1)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+</aside>
+<main markdown="1">
+
 # Welcome!
 
 This is the documentation for Yuuko. If you want to create your own bot based on Yuuko's code, you're in the right place!
@@ -48,7 +71,7 @@ For more examples, check out the Examples page.
 
 ---
 
-# Class: `Client` <small>extends [`Eris.Client`](https://abal.moe/Eris/docs/Client)</small>
+# Class: `Client` extends [`Eris.Client`](https://abal.moe/Eris/docs/Client)
 
 The main client class. Connects to Discord through [Eris](https://npmjs.com/package/eris) and provides command handling. Accessible via `require('yuuko')` or `require('yuuko').Client`.
 
@@ -83,7 +106,7 @@ Name | Type | Description
 -----|------|------------
 `command` | Command | The command to add to the bot.
 
-### `addCommandFile` &rsaquo; `Client`
+### `addCommandFile(filename)` &rsaquo; `Client`
 
 Load a JS file and try to add an exported command. Returns the client instance, so this command is chainable.
 
@@ -146,7 +169,7 @@ Name | Type | Description
 `name` | String&#124;Array | The name of the command. Command names are case-insensitive. If a string is passed, that string simply becomes the command's name; if an array is passed, the first element becomes the command's name and the rest become aliases.
 `process` | Function | See below.
 
-### Command Process
+## Process function
 
 A function which is executed each time this command is triggered. The value of `this` inside the function is a reference to the client instance which picked up the command. Nothing is done with anything the function returns, and it takes up to 3 arguments:
 
@@ -164,3 +187,9 @@ Name | Type | Description
 `aliases` | Array&lt;String&gt; | An array of aliases, or alternate names, the command can be called by.
 `names` | Array&lt;String&gt; | An array of names the command can be called by. Contains the command's name as the first item, and any aliases of the command as subsequent items.
 `process` | Function | See above.
+
+---
+
+<small>Docs generated [by hand](https://github.com/Geo1088/yuuko/blob/master/docs/docs/index.md) because I'm an idiot.</small>
+
+</main>

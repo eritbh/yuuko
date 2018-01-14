@@ -35,7 +35,7 @@ a:hover { text-decoration: underline }
 
 .wrap {
     margin: 0 auto;
-    max-width: 700px;
+    max-width: 800px;
     width: calc(100% - 40px);
 }
 
@@ -112,17 +112,17 @@ main strong {
     font-weight: 600;
 }
 main hr {
-    display: none;
     height: 10px;
-    background: none;
+    background: #EEE;
     border: 0;
-    margin: 20px -20px;
+    margin: 20px 0;
 }
 main code {
     padding: 2px 5px;
     background: #EEE;
     border-radius: 5px;
     font-weight: 600;
+    word-wrap: break-word;
 }
 main pre code {
     padding: 0;
@@ -132,6 +132,23 @@ main pre code {
 main .wrap>:last-child {
     margin-bottom: 0;
 }
+main table {
+    margin: 20px -20px 20px 0;
+    padding: 0 25px 0 5px;
+    border-left: 10px solid #EEE;
+    width: auto;
+    display: block;
+    overflow: auto;
+}
+main table td,
+main table th {
+    padding: 5px;
+    vertical-align: top;
+}
+main table th {
+    display: none;
+}
+/* TODO: better mobile styles for tables */
 
 /* Global page footer, containing external links and stuff */
 footer {
@@ -168,15 +185,16 @@ footer .wrap > * {
     width: 100%;
 }
 footer .github-things {
-    margin: 10px 0;
     display: inline-flex;
     align-items: center;
     justify-content: center;
 }
 footer .github-things .badge {
     margin-right: 10px;
+    line-height: 0;
 }
 footer .github-things svg {
+    margin: 10px 0;
     filter: drop-shadow(0 1px 0 rgba(0,0,0,0.2));
 }
 
@@ -243,4 +261,20 @@ footer .github-things svg {
         max-width: 100%;
     }
     footer .github-things { margin: 10px 0 0;}
+}
+
+/* Code highlighting */
+main div.highlighter-rouge {
+    background: #EEE;
+    overflow: auto;
+    margin: 20px 0;
+    padding: 0;
+}
+main div.highlight {
+    margin: 0;
+    padding: 0;
+}
+main pre.highlight {
+    margin: 0;
+    padding: 20px;
 }
