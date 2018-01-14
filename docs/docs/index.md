@@ -6,26 +6,21 @@ order: 3
 header: ['Documentation']
 ---
 <aside class="toc" markdown="1">
-<!-- START doctoc generated TOC please keep comment here to allow auto update -->
-<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
-
-- [Welcome!](#welcome)
 - [Quick Start](#quick-start)
-- [Class: `Client` extends `Eris.Client`](#class-client-extends-erisclient)
-  - [Constructor: `new Client(config)`](#constructor-new-clientconfig)
+- [Class: `Client`](#class-client-extends-erisclient)
+  - [`new Client(config)`](#constructor-new-clientconfig)
   - [Properties](#properties)
-  - [Methods](#methods)
-    - [`addCommand(command)` &rsaquo; `Client`](#addcommandcommand-rsaquo-client)
-    - [`addCommandFile` &rsaquo; `Client`](#addcommandfile-rsaquo-client)
-    - [`addCommandDir(dirname)` &rsaquo; `Client`](#addcommanddirdirname-rsaquo-client)
-    - [`reloadCommands()` &rsaquo; `Client`](#reloadcommands-rsaquo-client)
-    - [`commandForName(name)` &rsaquo; `Command|null`](#commandfornamename-rsaquo-commandnull)
-    - [`prefixForMessage(msg)` &rsaquo; `String`](#prefixformessagemsg-rsaquo-string)
-    - [`splitPrefixFromContent(msg)` &rsaquo; `Array<String|null>`](#splitprefixfromcontentmsg-rsaquo-arraystringnull)
+  - [`addCommand(command)` &rsaquo; `Client`](#addcommandcommand--client)
+  - [`addCommandFile` &rsaquo; `Client`](#addcommandfile--client)
+  - [`addCommandDir(dirname)` &rsaquo; `Client`](#addcommanddirdirname--client)
+  - [`reloadCommands()` &rsaquo; `Client`](#reloadcommands--client)
+  - [`commandForName(name)` &rsaquo; `Command|null`](#commandfornamename--commandnull)
+  - [`prefixForMessage(msg)` &rsaquo; `String`](#prefixformessagemsg--string)
+  - [`splitPrefixFromContent(msg)` &rsaquo; `Array<String|null>`](#splitprefixfromcontentmsg--arraystringnull)
 - [Class: `Command`](#class-command)
-  - [Constructor: `new Command(name, process)`](#constructor-new-commandname-process)
-    - [Command Process](#command-process)
+  - [`new Command(name, process)`](#constructor-new-commandname-process)
+  - [Process function](#process-function)
   - [Properties](#properties-1)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
@@ -174,7 +169,7 @@ Name | Type | Description
 `name` | String&#124;Array | The name of the command. Command names are case-insensitive. If a string is passed, that string simply becomes the command's name; if an array is passed, the first element becomes the command's name and the rest become aliases.
 `process` | Function | See below.
 
-### Command Process
+## Process function
 
 A function which is executed each time this command is triggered. The value of `this` inside the function is a reference to the client instance which picked up the command. Nothing is done with anything the function returns, and it takes up to 3 arguments:
 
@@ -192,5 +187,9 @@ Name | Type | Description
 `aliases` | Array&lt;String&gt; | An array of aliases, or alternate names, the command can be called by.
 `names` | Array&lt;String&gt; | An array of names the command can be called by. Contains the command's name as the first item, and any aliases of the command as subsequent items.
 `process` | Function | See above.
+
+---
+
+<small>Docs generated [by hand](https://github.com/Geo1088/yuuko/blob/master/docs/docs/index.md) because I'm an idiot.</small>
 
 </main>
