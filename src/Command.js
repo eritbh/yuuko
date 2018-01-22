@@ -2,7 +2,7 @@
 
 /** Class representing a command. */
 class Command {
-  /**
+	/**
    * Create a command.
    * @param {string|Array} name - The name of the command. If passed as an
    *     array, the first item of the array is used as the name and the rest of
@@ -10,20 +10,20 @@ class Command {
    * @param {Command~commandProcess} process - The function to be called when
    *     the command is executed.
    */
-  constructor (name, process) {
-    if (Array.isArray(name)) {
-      this.name = name.splice(0, 1)[0]
-      this.aliases = name
-    } else {
-      this.name = name
-      this.aliases = []
-    }
-    if (!this.name) throw new TypeError('Name is required')
-    this.process = process
-    if (!this.process) throw new TypeError('Process is required')
-  }
+	constructor (name, process) {
+		if (Array.isArray(name)) {
+			this.name = name.splice(0, 1)[0]
+			this.aliases = name
+		} else {
+			this.name = name
+			this.aliases = []
+		}
+		if (!this.name) throw new TypeError('Name is required')
+		this.process = process
+		if (!this.process) throw new TypeError('Process is required')
+	}
 
-  /**
+	/**
    * @callback Command~commandProcess
    * A function to be called when a command is executed. Accepts information
    * about the message that triggered the command as arguments.
@@ -41,14 +41,14 @@ class Command {
    *     the message. Will be one of the values of `this.names`.
    */
 
-  /**
+	/**
    * All names that can be used to invoke the command - its primary name in
    * addition to its aliases.
    * @type {Array<string>}
    */
-  get names () {
-    return [this.name, ...this.aliases]
-  }
+	get names () {
+		return [this.name, ...this.aliases]
+	}
 }
 
 module.exports = Command
