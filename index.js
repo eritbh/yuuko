@@ -1,6 +1,6 @@
 const {Client} = require('./src/Yuuko')
 const path = require('path')
-let config = require('./config')
+const config = require('./config')
 
 const c = new Client(config)
 
