@@ -1,3 +1,5 @@
+'use strict'
+
 const Command = require('../src/Command')
 
 // Generates a random number between 2 values

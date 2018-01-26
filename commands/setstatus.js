@@ -1,3 +1,5 @@
+'use strict'
+
 const Command = require('../src/Command')
 
 module.exports = new Command(['setstatus', 'setgame'], function (msg, args) {

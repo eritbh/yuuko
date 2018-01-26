@@ -1,3 +1,5 @@
+'use strict'
+
 const Command = require('../src/Command')
 const color = require('color')
 

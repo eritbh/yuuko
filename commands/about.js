@@ -1,3 +1,5 @@
+'use strict'
+
 const Command = require('../src/Command')
 const moment = require('moment-timezone')
 const childProcess = require('child_process')
