@@ -1,5 +1,11 @@
+'use strict'
+
 const Command = require('../src/Command')
 const util = require('util')
+
+const inspectOptions = {
+	depth: 1
+}
 
 module.exports = new Command('eval', function (msg, args, prefix, commandName) {
 	this.getOAuthApplication().then(app => {
@@ -31,11 +37,11 @@ module.exports = new Command('eval', function (msg, args, prefix, commandName) {
 		// Do some weird shit here because why not
 		let result
 		try {
-			result = eval(args) // eslint-ignore-line no-eval
+			result = eval(args) // eslint-disable-line no-eval
 		} catch (e) {
 			result = e
 		}
-		const message = '```js\n' + c._formatLines() + util.inspect(result) + '\n```'
+		const message = '```js\n' + c._formatLines() + util.inspect(result, inspectOptions) + '\n```'
 
 		const messagePromise = msg.channel.createMessage(message).catch(err => {
 			msg.channel.createMessage('Error sending message:\n```\n' + err + '\n```')
@@ -43,17 +49,14 @@ module.exports = new Command('eval', function (msg, args, prefix, commandName) {
 
 		// We returned a promise?
 		if (result && typeof result.then === 'function') {
-			console.log('promise')
 			// Sweet. Wait for that to resolve and the message to send.
 			Promise.all([messagePromise, result]).then(([outputMsg, value]) => {
-				console.log('maybe?')
-				console.log(outputMsg, value)
 				// Now we can edit the message with the promise's resolved result(s).
-				value = util.inspect(value, {depth: 1})
+				value = util.inspect(value, inspectOptions)
 				const newContent = outputMsg.content.split('\n')
 				newContent.splice(newContent.length - 1, 0, `// Resolved to:`, value)
 				outputMsg.edit(newContent.join('\n'))
-			}, (err) => {
+			}, err => {
 				console.log(err)
 			})
 		}
