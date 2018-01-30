@@ -39,5 +39,5 @@ module.exports = new Command(['bash', 'sh', 'sys'], function (msg, args) {
 		function react (reaction) {
 			outputMsg.addReaction(reaction).catch(console.log)
 		}
-	})
+	}, console.log)
 })
