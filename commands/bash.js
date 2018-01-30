@@ -5,7 +5,9 @@ module.exports = new Command(['bash', 'sh', 'sys'], function (msg, args) {
 	this.getOAuthApplication().then(app => {
 		if (app.owner.id !== msg.author.id) {
 			return msg.channel.createMessage("You're not my dad.")
-		}	let content = ''
+		}
+
+		let content = ''
 		let activeMsg
 
 		msg.channel.createMessage('```\n```').then(outputMsg => {
