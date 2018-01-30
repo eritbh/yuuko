@@ -28,10 +28,12 @@ module.exports = new Command(['about', 'uptime', 'info'], function (msg, args, p
 	const uptimeDuration = moment.duration(this.uptime).humanize()
 	const uptimeStart = moment().subtract(this.uptime).tz('America/New_York').format('YYYY-DD-mm kk:mm z')
 	const link = packageJson.homepage
+	const owner = this.app && `\`\`${this.app.owner.username}#${this.app.owner.discriminator}\`\`` || `Owner information unavailable, try again in a bit`
 
 	const content = `**=== About Yuuko ===**
 *(Use \`${prefix}help\` to get help using the bot!)*
 **Project:** ${link}
+**Owner:** ${owner}
 **Version:** ${versionTag} (Commit: ${versionSha})
 **Uptime:** ${uptimeDuration} (since ${uptimeStart})
 **Ping:** Wait for it...
