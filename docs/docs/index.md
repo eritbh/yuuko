@@ -95,6 +95,7 @@ Name | Type | Description
 `commands` | Array&lt;Command&gt; | An array of commands which the bot looks for in messages.
 `allowMention` | Boolean | Whether or not the bot can respond to messages starting with a mention of the bot.
 `mentionPrefixRegExp` | RegExp | The RegExp used to tell whether or not a message starts with a mention of the bot. Only present after the 'ready' event.
+`app` | Object | The OAuth application information returned by Discord. Present some time after the ready event.
 
 ## Methods
 

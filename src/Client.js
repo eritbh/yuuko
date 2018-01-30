@@ -57,8 +57,8 @@ class Client extends Eris.Client {
 
 			this.getOAuthApplication().then(app => {
 				/**
-				 * @prop The OAuth application information returned by Discord. Present
-				 *     some time after the ready event.
+				 * @prop {object} - The OAuth application information returned by
+				 *     Discord. Present some time after the ready event.
 				 */
 				this.app = app
 			})
