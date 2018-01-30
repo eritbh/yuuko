@@ -55,6 +55,14 @@ class Client extends Eris.Client {
        */
 			this.mentionPrefixRegExp = new RegExp(`^<@!?${this.user.id}>\\s?`)
 
+			this.getOAuthApplication().then(app => {
+				/**
+				 * @prop The OAuth application information returned by Discord. Present
+				 *     some time after the ready event.
+				 */
+				this.app = app
+			})
+
 			u.ok('Logged in as', u.underline(`@${this.user.username}#${this.user.discriminator}`), `- in ${this.guilds.size} guild${this.guilds.size === 1 ? '' : 's'}, ${this.commands.length} command${this.commands.length === 1 ? '' : 's'} loaded`)
 		}).on('error', err => {
 			u.error('Error in client:\n', err)
