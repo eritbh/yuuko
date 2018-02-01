@@ -37,10 +37,16 @@ class Client extends Eris.Client {
 		}
 
 		/**
-     * @prop {boolean} - Whether or not the bot can respond to messages starting
-     *     with a mention of the bot.
-     */
+		 * @prop {boolean} - Whether or not the bot can respond to messages starting
+		 *     with a mention of the bot. Defaults to true.
+		 */
 		this.allowMention = options.allowMention == null ? true : options.allowMention
+
+		/**
+		 * @prop {boolean} - Whether or not the bot ignores messages sent from bot
+		 *     accounts. Defaults to true.
+		 */
+		this.ignoreBots = options.ignoreBots == null ? true : options.ignoreBots
 
 		/**
      * @prop {Array<Command>} - An array of commands the bot will respond to.
@@ -74,7 +80,7 @@ class Client extends Eris.Client {
    * @param {Object} msg - The message object recieved from Eris.
    */
 	handleMessage (msg) {
-		if (msg.author.bot) return
+		if (this.ignoreBots && msg.author.bot) return
 
 		const [prefix, content] = this.splitPrefixFromContent(msg)
 		if (!content) return
