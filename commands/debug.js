@@ -7,7 +7,7 @@ const inspectOptions = {
 	depth: 1
 }
 
-module.exports = new Command('eval', function (msg, args, prefix, commandName) {
+module.exports = new Command('debug', function (msg, args, prefix, commandName) {
 	this.getOAuthApplication().then(app => {
 		if (app.owner.id !== msg.author.id) {
 			return msg.channel.createMessage("You're not my dad.")
