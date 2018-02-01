@@ -48,7 +48,7 @@ const {Client, Command} = require('yuuko')
 
 const mybot = new Client({
   token: 'your_bot_token',  // Token used to auth your bot account
-  defaultPrefix: '.'        // Prefix used to trigger commands
+  prefix: '.'        // Prefix used to trigger commands
 })
 
 const pingCommand = new Command('ping', function (msg) {
@@ -91,7 +91,7 @@ Name | Type | Description
 
 Name | Type | Description
 -----|------|------------
-`defaultPrefix` | String | The default prefix the bot will respond to in guilds for which there is no other confguration.
+`prefix` | String | The default prefix the bot will respond to in guilds for which there is no other confguration. (Currently all of them)
 `commands` | Array&lt;Command&gt; | An array of commands which the bot looks for in messages.
 `allowMention` | Boolean | Whether or not the bot can respond to messages starting with a mention of the bot.
 `mentionPrefixRegExp` | RegExp | The RegExp used to tell whether or not a message starts with a mention of the bot. Only present after the 'ready' event.

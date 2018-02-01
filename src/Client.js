@@ -15,15 +15,15 @@ class Client extends Eris.Client {
    * @param {Object} options - Options to start the client with. This object is
    *     also passed to Eris.
    * @param {string} options.token - The token used to log into the bot.
-   * @param {string} options.defaultPrefix - The prefix the bot will respond to
-   *     in guilds for which there is no other confguration.
+   * @param {string} options.prefix - The prefix the bot will respond to in
+   *     guilds for which there is no other confguration. (Currently everywhere)
    * @param {boolean} options.allowMention - Whether or not the bot can respond
    *     to messages starting with a mention of the bot.
    * @param {number} options.logLevel - The minimum message level for logged
    *     events in the console.
    */
 	constructor (options = {}) {
-		super(options.token, options) // TODO: Use the same help object for Eris and Yuuko options
+		super(options.token, options)
 
 		u = LoggerThing(options.logLevel == null ? 2 : options.logLevel)
 
@@ -31,7 +31,7 @@ class Client extends Eris.Client {
      * @prop {string} - The prefix the bot will respond to in guilds for which
      *     there is no other confguration.
      */
-		this.defaultPrefix = options.defaultPrefix
+		this.defaultPrefix = options.prefix
 		if (this.defaultPrefix === '') {
 			u.warn('defaultPrefix is an empty string, bot will not require a prefix to run commands')
 		}
