@@ -16,7 +16,7 @@
   },
   "homepage": "https://geo1088.github.io/yuuko",
   "dependencies": {
-    "eris": "^0.8.1",
+    "eris": "^0.8.4",
     "glob": "^7.1.2",
     "require-reload": "^0.2.2"
   },
