@@ -20,6 +20,18 @@ module.exports = new Command(['bash', 'sh', 'sys'], function (msg, args) {
 				react('💣')
 			})
 
+			// Add a button to kill the process
+			const reactListener = (reactedMsg, emote, userId) => {
+				if (reactedMsg.id !== outputMsg.id) return
+				if (userId !== msg.author.id) return
+				console.log(emote)
+				// if (emote.)
+				// this.removeListener(reactListener)
+			}
+			react('⛔').then(() => {
+				this.on('reactionAdd', reactListener)
+			})
+
 			// When the process exits, react based on exit code
 			childProcess.on('exit', code => {
 				let reaction
@@ -28,6 +40,10 @@ module.exports = new Command(['bash', 'sh', 'sys'], function (msg, args) {
 				} else {
 					react('❎')
 				}
+				// clean things up
+				outputMsg.removeReaction('⛔').catch(console.log)
+				console.log(typeof reactListener)
+				this.removeListener(reactListener)
 			})
 
 			// Push stdout and stderr to the output message
@@ -38,11 +54,16 @@ module.exports = new Command(['bash', 'sh', 'sys'], function (msg, args) {
 			function pushData (data) {
 				data = data.replace(/`/g, '`\u200b')
 				allData += data
-				outputMsg.edit(`\`\`\`\n${allData}\`\`\``).catch(console.log)
+				while (allData.length > 1992) {
+					const index = allData.indexOf('\n')
+					if (index === -1) index = allData.length - 1992
+					allData = allData.slice(index + 1)
+				}
+				return outputMsg.edit(`\`\`\`\n${allData}\`\`\``).catch(console.log)
 			}
 
 			function react (reaction) {
-				outputMsg.addReaction(reaction).catch(console.log)
+				return outputMsg.addReaction(reaction).catch(console.log)
 			}
 		}, console.log)
 	})
