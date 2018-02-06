@@ -7,9 +7,6 @@ module.exports = new Command(['bash', 'sh', 'sys'], function (msg, args) {
 			return msg.channel.createMessage("You're not my dad.")
 		}
 
-		let content = ''
-		let activeMsg
-
 		msg.channel.createMessage('```\n```').then(outputMsg => {
 			// Start the process
 			const childProcess = exec(args.join(' '))
@@ -22,7 +19,6 @@ module.exports = new Command(['bash', 'sh', 'sys'], function (msg, args) {
 
 			// When the process exits, react based on exit code
 			childProcess.on('exit', code => {
-				let reaction
 				if (code === 0) {
 					react('✅')
 				} else {
