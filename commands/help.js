@@ -16,8 +16,9 @@ function helpText (command, prefix) {
 	return txt
 }
 
-module.exports = new Command(['help', 'man', 'h'], function (msg, args) {
-	const prefix = this.prefixForMessage(msg)
+module.exports = new Command(['help', 'man', 'h', null], function (msg, args, prefix) {
+	// If the prefix is a mention of the bot, use a blank string instead
+	if (prefix.match(this.mentionPrefixRegExp)) prefix = ''
 
 	// If we got nothing, command list
 	if (!args[0]) {
