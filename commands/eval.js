@@ -37,11 +37,12 @@ module.exports = new Command(['eval', 'javascript', 'js', 'ruby', 'rb'], functio
 
 	console.log(url)
 
+	msg.channel.sendTyping()
 	request(url, (err, res, body) => {
 		let response
 		if (err) response = '' + err
 		else response = body
-		msg.channel.createMessage(`\`\`\`\n${response}\n\`\`\``).catch(console.log)
+		msg.channel.createMessage(response).catch(console.log)
 	})
 })
 
