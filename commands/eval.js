@@ -1,7 +1,7 @@
 const {Command} = require('../src/Yuuko')
 const request = require('request')
 
-const codeBlockRegExp = /^[\s\n]*```((javascript|js|ruby|rb)?\n)?([\S\s]*)\n?```[\s\n]*$/
+const codeBlockRegExp = /^[\s\n]*```((javascript|js|ruby|rb|python|py)?\n)?([\S\s]*)\n?```[\s\n]*$/
 const inlineCodeRegExp = /^[\s\n]*(``?)(.*)\1[\s\n]*$/
 
 function urlPartForLang (lang) {
@@ -12,10 +12,18 @@ function urlPartForLang (lang) {
 		case 'ruby':
 		case 'rb':
 			return 'https://hook.io/geo1088/ruby-eval?code='
+		case 'python':
+		case 'py':
+			return 'https://hook.io/geo1088/py-exec-then-eval?code='
 	}
 }
 
-module.exports = new Command(['eval', 'javascript', 'js', 'ruby', 'rb'], function (msg, args, prefix, commandName) {
+module.exports = new Command([
+	'eval',
+	'javascript', 'js',
+	'ruby', 'rb',
+	'python', 'py'
+], function (msg, args, prefix, commandName) {
 	let code = args.join(' ')
 	let codeBlockLang
 	let match
