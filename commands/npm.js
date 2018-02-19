@@ -1,7 +1,7 @@
 'use strict'
 
 const Command = require('../src/Command')
-const request = require('request')
+const request = require('superagent')
 
 function describePackage (r) {
 	const author = r.package.publisher.name || r.package.publisher.username
@@ -45,16 +45,22 @@ function embedResults (results, search) {
 
 module.exports = new Command('npm', function (msg, args) {
 	args = args.join(' ').toLowerCase()
+	if (!args) {
+		msg.channel.createMessage('You need to provide something to search for!')
+		return
+	}
 	let safeArgs = encodeURIComponent(args)
+	const webLink = `<https://www.npmjs.com/search?q=${safeArgs}>`
 	msg.channel.sendTyping()
-	request(`https://api.npms.io/v2/search?q=${safeArgs}`, (err, res, body) => { // npms.io api <3
-		let result = JSON.parse(body)
-		const webLink = `<https://www.npmjs.com/search?q=${safeArgs}>`
-		if (err || res.statusCode !== 200) {
-			return msg.channel.createMessage(`Something went wrong while searching. Try again with a different query.\n${webLink}`)
+	request.get(`https://api.npms.io/v2/search?q=${safeArgs}`).then(res => { // npms.io api <3
+		let result = res.body
+		if (!res.ok) {
+			msg.channel.createMessage(`Got non-ok status (${res.statusCode}) while searching. Try again with a different query?\n${webLink}`)
+			return
 		}
 		if (result.total < 1) {
-			return msg.channel.createMessage(`No results! ${webLink}`)
+			msg.channel.createMessage(`No results! ${webLink}`)
+			return
 		}
 
 		let results = result.results.slice(0, 3)
@@ -68,11 +74,12 @@ module.exports = new Command('npm', function (msg, args) {
 		// Generate the message
 		msg.channel.createMessage({
 			content,
-			embed: embedResults(results, args)
-		}).catch(e => {
-			this.u.error(e)
-			msg.channel.createMessage('There was an error displaying the results.')
+			embed: embedResults(results, safeArgs)
+		}).catch(err => {
+			msg.channel.createMessage(`There was an error displaying the results.\n\`\`${err}\`\``)
 		})
+	}).catch(err => {
+		msg.channel.createMessage(`Got an error while searching. Try again with a different query?\n${webLink}\n\`\`${err}\`\``)
 	})
 })
 module.exports.help = {
