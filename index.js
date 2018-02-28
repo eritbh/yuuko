@@ -24,7 +24,7 @@ c.on('ready', () => {
 			.set('Authorization', config.dbotsToken)
 			.send({server_count: lastSize})
 			.end((err, res) => {
-				if (err) console.log(err)
+				if (err) console.error(err)
 				// console.log(res)
 				setTimeout(updateStats, delay)
 			})
