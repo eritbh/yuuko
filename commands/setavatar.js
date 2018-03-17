@@ -1,7 +1,7 @@
 'use strict'
 
 const Command = require('../src/Command')
-const request = require('superagent')
+const superagent = require('superagent')
 
 module.exports = new Command('setavatar', function (msg, args) {
 	this.getOAuthApplication().then(app => {
@@ -19,7 +19,7 @@ module.exports = new Command('setavatar', function (msg, args) {
 		}
 		// Get the image itself by requesting the URL
 		msg.channel.sendTyping()
-		request.get(url).then(res => {
+		superagent.get(url).then(res => {
 			// Handle possible errors
 			if (!res.ok) {
 				msg.channel.createMessage(`Got non-ok response (${res.statusCode}) while retrieving avatar`)

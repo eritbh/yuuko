@@ -1,7 +1,7 @@
 const {Client} = require('./src/Yuuko')
 const path = require('path')
 const config = require('./config')
-const request = require('superagent')
+const superagent = require('superagent')
 
 const c = new Client(config)
 
@@ -19,7 +19,7 @@ c.on('ready', () => {
 			return
 		}
 		lastSize = c.guilds.size
-		request
+		superagent
 			.post(`https://bots.discord.pw/api/bots/${config.dbotsId}/stats`)
 			.set('Authorization', config.dbotsToken)
 			.send({server_count: lastSize})

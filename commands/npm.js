@@ -1,7 +1,7 @@
 'use strict'
 
 const Command = require('../src/Command')
-const request = require('superagent')
+const superagent = require('superagent')
 
 function describePackage (r) {
 	const author = r.package.publisher.name || r.package.publisher.username
@@ -52,7 +52,7 @@ module.exports = new Command('npm', function (msg, args) {
 	let safeArgs = encodeURIComponent(args)
 	const webLink = `<https://www.npmjs.com/search?q=${safeArgs}>`
 	msg.channel.sendTyping()
-	request.get(`https://api.npms.io/v2/search?q=${safeArgs}`).then(res => { // npms.io api <3
+	superagent.get(`https://api.npms.io/v2/search?q=${safeArgs}`).then(res => { // npms.io api <3
 		let result = res.body
 		if (!res.ok) {
 			msg.channel.createMessage(`Got non-ok status (${res.statusCode}) while searching. Try again with a different query?\n${webLink}`)
