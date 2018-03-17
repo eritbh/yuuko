@@ -88,14 +88,14 @@ class Client extends Eris.Client {
 			// A lone mention triggers the default command with no arguments
 			const defaultCommand = this.commandForName(null)
 			if (!defaultCommand) return
-			defaultCommand.process.call(this, msg, [], prefix, null)
+			defaultCommand.execute(this, msg, [], prefix, null)
 		}
 		let args = content.split(' ')
 		const commandName = args.splice(0, 1)[0]
 		const command = this.commandForName(commandName)
 		if (!command) return
 
-		command.process.call(this, msg, args, prefix, commandName)
+		command.execute(this, msg, args, prefix, commandName)
 		u.info('did a thing:', commandName, args.join(' '))
 	}
 
