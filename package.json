@@ -32,6 +32,6 @@
     "eslint-plugin-promise": "^3.5.0",
     "eslint-plugin-standard": "^3.0.1",
     "moment-timezone": "^0.5.14",
-    "request": "^2.82.0"
+    "superagent": "^3.8.2"
   }
 }
