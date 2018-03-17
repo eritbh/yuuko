@@ -37,7 +37,8 @@ Use \`${prefix}help [command]\` to get more info on that command!`)
 		return
 	}
 	msg.channel.createMessage(`**=== Help: \`${prefix + command.name}\` ===**\n${helpText(command, prefix)}`)
-}, {
+})
+module.exports.help = {
 	desc: 'Get a list of commands. Pass a command name as an argument to get information about that command.',
 	args: '[command]'
-})
+}
