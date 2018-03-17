@@ -23,7 +23,7 @@ module.exports = new Command(['help', 'man', 'h', null], function (msg, args, pr
 
 	// If we got nothing, command list
 	if (!args[0]) {
-		const commandList = this.commands.filter(c => c.help).map(c => '`' + prefix + c.name + '`').join(', ')
+		const commandList = this.commands.filter(c => c.checkPermissions(this, msg)).map(c => '`' + prefix + c.name + '`').join(', ')
 		return msg.channel.createMessage(`**=== Help: Command List ===**
 You can use the following commands: ${commandList}
 Use \`${prefix}help [command]\` to get more info on that command!`)
