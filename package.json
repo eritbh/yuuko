@@ -1,6 +1,6 @@
 {
   "name": "yuuko",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "description": "A Discord bot base that I did for some reason.",
   "main": "src/Yuuko.js",
   "scripts": {
@@ -31,7 +31,7 @@
     "eslint-plugin-node": "^5.2.0",
     "eslint-plugin-promise": "^3.5.0",
     "eslint-plugin-standard": "^3.0.1",
-    "moment-timezone": "^0.5.13",
-    "request": "^2.82.0"
+    "moment-timezone": "^0.5.14",
+    "superagent": "^3.8.2"
   }
 }

@@ -3,7 +3,6 @@ layout: docs
 group: nav
 title: API Docs
 order: 3
-header: ['Documentation']
 ---
 <aside class="toc" markdown="1">
 
@@ -23,7 +22,6 @@ header: ['Documentation']
   - [Process function](#process-function)
   - [Properties](#properties-1)
 
-<!-- END doctoc generated TOC please keep comment here to allow auto update -->
 </aside>
 <main markdown="1">
 
@@ -48,7 +46,7 @@ const {Client, Command} = require('yuuko')
 
 const mybot = new Client({
   token: 'your_bot_token',  // Token used to auth your bot account
-  prefix: '.'        // Prefix used to trigger commands
+  prefix: '.'               // Prefix used to trigger commands
 })
 
 const pingCommand = new Command('ping', function (msg) {

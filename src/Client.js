@@ -83,15 +83,11 @@ class Client extends Eris.Client {
 		if (this.ignoreBots && msg.author.bot) return
 
 		const [prefix, content] = this.splitPrefixFromContent(msg)
-		console.log(prefix, '|', content)
 		if (!content) {
-			console.log('test')
 			if (!prefix || !prefix.match(this.mentionPrefixRegExp)) return
-			console.log('test 2')
 			// A lone mention triggers the default command with no arguments
 			const defaultCommand = this.commandForName(null)
 			if (!defaultCommand) return
-			console.log('test 3', defaultCommand.name)
 			defaultCommand.process.call(this, msg, [], prefix, null)
 		}
 		let args = content.split(' ')
