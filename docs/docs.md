@@ -46,7 +46,7 @@ const {Client, Command} = require('yuuko')
 
 const mybot = new Client({
   token: 'your_bot_token',  // Token used to auth your bot account
-  prefix: '.'        // Prefix used to trigger commands
+  prefix: '.'               // Prefix used to trigger commands
 })
 
 const pingCommand = new Command('ping', function (msg) {
