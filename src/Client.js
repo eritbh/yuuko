@@ -96,7 +96,7 @@ class Client extends Eris.Client {
 		if (!command) return
 
 		command.process.call(this, msg, args, prefix, commandName)
-		u.info('did a thing:', commandName, args.join(' '))
+		u.info(...(msg.channel.guild ? [msg.channel.guild.name, '>', msg.channel.name] : ['PM']), '>', msg.author.username, ':', commandName, args.join(' '))
 	}
 
 	/**
