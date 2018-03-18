@@ -1,5 +1,5 @@
 const {Command} = require('../src/Yuuko')
-const request = require('request')
+const superagent = require('superagent')
 
 const codeBlockRegExp = /^[\s\n]*```((javascript|js|ruby|rb|python|py)?\n)?([\S\s]*)\n?```[\s\n]*$/
 const inlineCodeRegExp = /^[\s\n]*(``?)(.*)\1[\s\n]*$/
@@ -46,14 +46,12 @@ module.exports = new Command([
 	console.log(url)
 
 	msg.channel.sendTyping()
-	request(url, (err, res, body) => {
-		let response
-		if (err) response = '' + err
-		else response = body
-		msg.channel.createMessage(response).catch(console.log)
+	superagent.get(url).then(res => {
+		msg.channel.createMessage(res.text).catch(console.log)
+	}).catch(err => {
+		msg.channel.createMessage('' + err).catch(console.log)
 	})
 })
-
 module.exports.help = {
 	desc: `Evaluates arbitrary code in a third-party sandbox. Supports multiple languages; to specify a language, use a language-specific alias or a code block tagged with the desired language.
 For example:
@@ -66,5 +64,5 @@ and
 \`\`\`
 rb puts "hello"
 \`\`\`
-are both valid and will evaluate as Ruby code. Supported languages are Ruby (\`ruby\`, \`rb\`) and Javascript (\`javascript\`, \`js\`).`
+are both valid and will evaluate as Ruby code. Supported languages are Ruby (\`ruby\`, \`rb\`), Python (\`python\`, \`py\`), and Javascript (\`javascript\`, \`js\`).`
 }
