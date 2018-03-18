@@ -22,6 +22,45 @@ Chooses a random option from a list of comma-separated options. If you want to i
 ## `~color <any valid CSS color>`
 Gets alternate writings of a CSS color, plus a preview.
 
+## `~eval` (`~rb`, `~py`, `~js`, and others)
+Evaluates arbitrary code in a sandbox. Supports Ruby, Python, and Javascript code in a variety of formats.
+
+Code can be passed to this command in several ways:
+
+- Passing code in a code block with a specified language
+
+	````
+	~eval ```rb
+	puts "hoi"
+	```
+	````
+
+	````
+	~eval ```py
+	print("hoi")
+	```
+	````
+
+- Using a language-specific alias, with or without a code block
+
+	````
+	~ruby puts "hoi"
+	````
+
+	````
+	~python ```py
+	print("hoi")
+	```
+	````
+
+	````
+	~js console.log('hoi')
+	````
+
+The output of this command reflects the result of the run script. Console messages (`puts`, `print()`, `console.log()`) are shown with comments, and the final output of the script will be shown with syntax highlighting.
+
+Due to limitations in the evaluation system, asynchronous scripts will likely not work.
+
 ## `~help [command]`
 Displays a list of commands. Include a command name to get information about that command.
 
