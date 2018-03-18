@@ -7,7 +7,7 @@ def exec_then_eval(code):
 	try:
 		block = ast.parse(code, mode='exec')
 	except Exception as e:
-		print(e)
+		print(repr(e))
 		return
 
 	try:
@@ -25,7 +25,6 @@ def exec_then_eval(code):
 		else:
 			print('<no returned value>')
 	except Exception as e:
-		print('hi')
 		print(repr(e))
 
 try:
