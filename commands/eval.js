@@ -33,7 +33,6 @@ module.exports = new Command([
 	} else if ((match = code.match(inlineCodeRegExp))) {
 		code = match[2]
 	}
-	console.log(codeBlockLang, code)
 
 	let url = urlPartForLang(commandName)
 	if (!url) url = urlPartForLang(codeBlockLang)
@@ -42,8 +41,6 @@ module.exports = new Command([
 		return
 	}
 	url += encodeURIComponent(code)
-
-	console.log(url)
 
 	msg.channel.sendTyping()
 	superagent.get(url).then(res => {
