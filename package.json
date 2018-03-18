@@ -25,6 +25,7 @@
   },
   "devDependencies": {
     "color": "^2.0.0",
+    "d20": "^1.4.1",
     "eslint": "^4.8.0",
     "eslint-config-standard": "^10.2.1",
     "eslint-plugin-import": "^2.7.0",
