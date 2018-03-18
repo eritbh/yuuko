@@ -32,4 +32,4 @@ Searches for, and get information on, npm packages.
 Pings the bot.
 
 ## `~roll <dice roll>`
-Rolls some dice. Supported roll formats are `AdX` for `A` rolls of an `X`-sided die. `A` can be omitted to mean 1 and `X` can be % (a percent sign) to mean 100. Multiple rolls can be separated by spaces.
+Roll some dice. Pass in a number or an `AdX` roll, with modifiers and `d%` format supported. Examples: `6`, `2d20`, `1d%`, `d4-2`. If no roll is specified, it will default to `1d6`. Pass in multiple rolls by separating them with spaces.
