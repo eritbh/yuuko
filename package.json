@@ -21,9 +21,6 @@
     "glob": "^7.1.2",
     "require-reload": "^0.2.2"
   },
-  "optionalDependencies": {
-    "chalk": "^2.1.0"
-  },
   "devDependencies": {
     "color": "^2.0.0",
     "d20": "^1.4.1",
