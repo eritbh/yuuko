@@ -13,7 +13,7 @@ class Client extends Eris.Client {
 	/**
 	 * Create a client instance.
 	 * @param {Object} options - Options to start the client with. This object is
-	 *     also passed to Eris.
+	 * also passed to Eris.
 	 * @param {string} options.token - The token used to log into the bot.
 	 * @param {string} options.prefix - The prefix the bot will respond to in
 	 * guilds for which there is no other confguration. (Currently everywhere)
@@ -34,7 +34,7 @@ class Client extends Eris.Client {
 
 		/**
 		 * @prop {string} - The prefix the bot will respond to in guilds for which
-		 *     there is no other confguration.
+		 * there is no other confguration.
 		 */
 		this.defaultPrefix = options.prefix
 		if (this.defaultPrefix === '') {
@@ -43,33 +43,33 @@ class Client extends Eris.Client {
 
 		/**
 		 * @prop {boolean} - Whether or not the bot can respond to messages starting
-		 *     with a mention of the bot. Defaults to true.
+		 * with a mention of the bot. Defaults to true.
 		 */
 		this.allowMention = options.allowMention == null ? true : options.allowMention
 
 		/**
 		 * @prop {boolean} - Whether or not the bot ignores messages sent from bot
-		 *     accounts. Defaults to true.
+		 * accounts. Defaults to true.
 		 */
 		this.ignoreBots = options.ignoreBots == null ? true : options.ignoreBots
 
 		/**
 		 * @prop {Array<Command>} - An array of commands the bot will respond to.
-		 *     respond to.
+		 * respond to.
 		 */
 		this.commands = []
 
 		this.on('ready', () => {
 			/**
 			 * @prop {RegExp} - The RegExp used to tell whether or not a message starts
-			 *     with a mention of the bot. Only present after the 'ready' event.
+			 * with a mention of the bot. Only present after the 'ready' event.
 			 */
 			this.mentionPrefixRegExp = new RegExp(`^<@!?${this.user.id}>\\s?`)
 
 			this.getOAuthApplication().then(app => {
 				/**
 				 * @prop {object} - The OAuth application information returned by
-				 *     Discord. Present some time after the ready event.
+				 * Discord. Present some time after the ready event.
 				 */
 				this.app = app
 			})
@@ -86,8 +86,8 @@ class Client extends Eris.Client {
 	 */
 	handleMessage (msg) {
 		if (!msg.author) {
-			console.log('=== AUTHORLESS MESSAGE ===')
-			console.log(msg)
+			u.warn('=== AUTHORLESS MESSAGE ===')
+			u.warn(msg)
 			return
 		}
 		if (this.ignoreBots && msg.author.bot) return
@@ -105,8 +105,8 @@ class Client extends Eris.Client {
 		const command = this.commandForName(commandName)
 		if (!command) return
 
-		command.process.call(this, msg, args, prefix, commandName)
 		u.info(...(msg.channel.guild ? [msg.channel.guild.name, '>', msg.channel.name] : ['PM']), '>', msg.author.username, ':', commandName, args.join(' '))
+		command.process.call(this, msg, args, prefix, commandName)
 	}
 
 	/**
@@ -229,25 +229,25 @@ class Client extends Eris.Client {
 	// _createMessageChunked (channelId, content, file, maxLength = 2000) {
 	//   let embed
 	//   if (typeof content === 'object') {
-	//     embed = content.embed
-	//     content = content.content
+	// embed = content.embed
+	// content = content.content
 	//   } else {
-	//     embed = null
+	// embed = null
 	//   }
 	//   let self = this
 	//   ;(function sendChunk (left) {
-	//     console.log(left.length)
-	//     if (left.length < maxLength) return self.createMessage(channelId, {content, embed}, file)
-	//     let newlineIndex = left.substr(0, maxLength).lastIndexOf('\n')
-	//     if (newlineIndex < 1) newlineIndex = maxLength - 1
-	//     console.log(newlineIndex)
-	//     left = left.split('')
-	//     const chunk = left.splice(0, newlineIndex)
-	//     if (!left.length) {
-	//       // Interesting, the message was exactly good. We'll put the embed and stuff in now.
-	//       return self.createMessage(channelId, {content: chunk, embed: embed}, file)
-	//     }
-	//     sendChunk(left.join(''), maxLength)
+	// console.log(left.length)
+	// if (left.length < maxLength) return self.createMessage(channelId, {content, embed}, file)
+	// let newlineIndex = left.substr(0, maxLength).lastIndexOf('\n')
+	// if (newlineIndex < 1) newlineIndex = maxLength - 1
+	// console.log(newlineIndex)
+	// left = left.split('')
+	// const chunk = left.splice(0, newlineIndex)
+	// if (!left.length) {
+	//   // Interesting, the message was exactly good. We'll put the embed and stuff in now.
+	//   return self.createMessage(channelId, {content: chunk, embed: embed}, file)
+	// }
+	// sendChunk(left.join(''), maxLength)
 	//   }(content))
 	// }
 }
