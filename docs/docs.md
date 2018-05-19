@@ -81,10 +81,10 @@ Name | Type | Description
 -----|------|------------
 `config` | Object | An object with config options for the bot. In addition to these document fields, this object will be passed to the Eris constructor as the `options` object, so this can also contain any fields documented for the [Eris constructor](https://abal.moe/Eris/docs/Client) `options` parameter.
 `config.token` | String | The token used to log into the bot.
-`config.prefix` | String | Optional. The prefix the bot will respond to in guilds for which there is no other confguration. You can set this to an empty string to respond to all messages without a prefix, but this is **highly discouraged**.
-`config.allowMention` | Boolean | Optional, default `true`. Whether or not the bot can respond to messages starting with a mention of the bot. If this is falsy, and `config.defaultPrefix` is omitted, there will be no way to interact with the bot in guilds without a pre-set custom prefix.
-`config.logLevel` | Number | Optional, default `2`. The minimum message level for logged events in the console.
-`config.timestamps` | Boolean | Optional, default `false`. Whether or not to display timestamps for logged events in the console.
+`config.prefix` | String | Optional. A string messages must be prefixed with in order to be recognized as commands. You can set this to an empty string to respond to all messages without a prefix, but this is **highly discouraged**. Note that commands sent as direct messages do not require a prefix.
+`config.allowMention` | Boolean | Optional, default `true`. Whether or not the bot can respond to messages starting with a mention of the bot. If this is `false`, and `config.prefix` is omitted, there will be no way to interact with the bot in guilds.
+`config.logLevel` | Number | Optional, default `2`. Console messages of a level less than this value will not be displayed.
+`config.timestamps` | Boolean | Optional, default `false`. Whether or not to display timestamps next to logged events in the console.
 
 ## Properties
 
