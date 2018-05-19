@@ -4,11 +4,6 @@ const Command = require('../src/Command')
 const superagent = require('superagent')
 
 module.exports = new Command('setavatar', async function (msg, args) {
-	if (this.app.owner.id !== msg.author.id) {
-		msg.channel.createMessage("You're not my dad.").catch(() => {})
-		return
-	}
-
 	// Get the URL of the image
 	let url = args[0] || '' // URL specified in chat, or an empty string so we can handle errors later
 	if (msg.attachments[0]) url = msg.attachments[0].url // URL specified by upload
@@ -39,4 +34,6 @@ module.exports = new Command('setavatar', async function (msg, args) {
 		msg.channel.createMessage('Error while retrieving avatar: ' + err).catch(() => {})
 	}
 	msg.channel.createMessage('Avatar updated!').catch(() => {})
+}, {
+	owner: true
 })
