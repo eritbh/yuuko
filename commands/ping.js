@@ -2,12 +2,13 @@
 
 const Command = require('../src/Command')
 
-module.exports = new Command('ping', function (msg) {
+module.exports = new Command('ping', async function (msg) {
 	const then = Date.now()
-	msg.channel.createMessage("I'm here.").then(newmsg => {
+	try {
+		const newmsg = await msg.channel.createMessage("I'm here.")
 		const diff = Date.now() - then
-		newmsg.edit(`${newmsg.content} (${diff}ms)`)
-	})
+		await newmsg.edit(`${newmsg.content} (${diff}ms)`)
+	} catch (_) {} // Missing permissions, we don't need to worry here
 })
 module.exports.help = {
 	desc: 'Pings the bot.',

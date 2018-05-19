@@ -18,7 +18,7 @@ childProcess.exec('git describe --abbrev=0 --tags && git rev-parse --short HEAD'
 	[versionTag, versionSHA] = stdout.split('\n')
 })
 
-module.exports = new Command(['about', 'uptime', 'info'], function (msg, args, prefix) {
+module.exports = new Command(['about', 'uptime', 'info'], async function (msg, args, prefix) {
 	const uptimeDuration = moment.duration(this.uptime).humanize()
 	const uptimeStart = moment().subtract(this.uptime).tz('America/New_York').format('YYYY-DD-mm kk:mm z')
 	const link = packageJson.homepage
@@ -34,10 +34,11 @@ module.exports = new Command(['about', 'uptime', 'info'], function (msg, args, p
 **Ping:** Wait for it...`
 
 	const then = Date.now()
-	msg.channel.createMessage(content).then(newmsg => {
+	try {
+		const newmsg = await msg.channel.createMessage(content)
 		const diff = Date.now() - then
-		newmsg.edit(newmsg.content.replace('Wait for it...', `${diff}ms`))
-	})
+		await newmsg.edit(newmsg.content.replace('Wait for it...', `${diff}ms`))
+	} catch (_) {}
 })
 module.exports.help = {
 	desc: 'Displays information about the bot, including running version, time since last crash, and a link to its source code.',

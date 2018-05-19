@@ -2,16 +2,16 @@
 
 const Command = require('../src/Command')
 
-module.exports = new Command('setname', function (msg, args) {
-	this.getOAuthApplication().then(app => {
-		if (app.owner.id !== msg.author.id) {
-			return msg.channel.createMessage("You're not my dad.")
-		}
+module.exports = new Command('setname', async function (msg, args) {
+	if (this.app.owner.id !== msg.author.id) {
+		msg.channel.createMessage("You're not my dad.").catch(() => {})
+		return
+	}
+	try {
 		msg.channel.sendTyping()
-		this.editSelf({username: args.join(' ')}).then(() => {
-			msg.channel.createMessage('Username updated!')
-		}).catch(e => {
-			msg.channel.createMessage('There was an error while changing username.\n```\n' + e.message + '\n```')
-		})
-	})
+		await this.editSelf({username: args.join(' ')})
+		await msg.channel.createMessage('Username updated!')
+	} catch (err) {
+		msg.channel.createMessage('There was an error while changing username.\n```\n' + err.message + '\n```').catch(() => {})
+	}
 })
