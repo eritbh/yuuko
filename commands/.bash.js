@@ -35,30 +35,11 @@ module.exports = new Command(['bash', 'sh', 'sys'], function (msg, args) {
 			} else {
 				react('❎')
 			}
-<<<<<<< HEAD:commands/bash.js
 			// clean things up
 			outputMsg.removeReaction('⛔').catch(console.log)
 			console.log(typeof reactListener)
 			this.removeListener(reactListener)
 		})
-=======
-			react('⛔').then(() => {
-				this.on('reactionAdd', reactListener)
-			})
-
-			// When the process exits, react based on exit code
-			childProcess.on('exit', code => {
-				if (code === 0) {
-					react('✅')
-				} else {
-					react('❎')
-				}
-				// clean things up
-				outputMsg.removeReaction('⛔').catch(console.log)
-				console.log(typeof reactListener)
-				this.removeListener(reactListener)
-			})
->>>>>>> master:commands/.bash.js
 
 		// Push stdout and stderr to the output message
 		childProcess.stdout.on('data', pushData)

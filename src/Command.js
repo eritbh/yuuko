@@ -52,11 +52,19 @@ class Command {
 	 * @returns {Promise<Boolean>} Whether or not the command can be executed.
 	 */
 	async checkPermissions (client, msg) {
-		return new Promise(resolve => {
+		return new Promise(async resolve => {
+			// Owner checking
 			if (this.requirements.owner !== undefined) {
+				if (!client.app) return resolve(false)
 				const isOwner = client.app.owner.id === msg.author.id
 				if (isOwner !== this.requirements.owner) return resolve(false)
 			}
+			// Custom requirements
+			const customRequirements = (typeof this.requirements.custom === 'function' ? [this.requirements.custom] : this.requirements.custom) || []
+			const vals = await Promise.all(customRequirements.map(f => f.call(client, msg)))
+			if (vals.some(val => !val)) return resolve(false)
+
+			// Nothing broke, must be good to go
 			resolve(true)
 		})
 	}
