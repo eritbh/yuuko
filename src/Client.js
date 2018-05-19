@@ -140,8 +140,8 @@ class Client extends Eris.Client {
 			command.filename = filename
 			this.addCommand(command)
 			u.debug('Added command from', filename)
-		} catch (e) {
-			u.warn('Command from', filename, "couldn't be loaded.\n", e)
+		} catch (err) {
+			u.warn('Command from', filename, "couldn't be loaded.\n", err)
 		}
 		return this
 	}
