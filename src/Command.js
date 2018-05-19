@@ -49,13 +49,16 @@ class Command {
 	 * @param {Object} msg - The Eris message object that triggered the command.
 	 * For more information, see the Eris documentation:
 	 * {@link https://abal.moe/Eris/docs/Message}
+	 * @returns {Promise<Boolean>} Whether or not the command can be executed.
 	 */
-	checkPermissions (client, msg) {
-		if (this.requirements.owner !== undefined) {
-			const isOwner = client.app.owner.id === msg.author.id
-			if (isOwner !== this.requirements.owner) return false
-		}
-		return true
+	async checkPermissions (client, msg) {
+		return new Promise(resolve => {
+			if (this.requirements.owner !== undefined) {
+				const isOwner = client.app.owner.id === msg.author.id
+				if (isOwner !== this.requirements.owner) return resolve(false)
+			}
+			resolve(true)
+		})
 	}
 
 	/**
@@ -73,8 +76,8 @@ class Command {
 	 * @param {string} commandName - The name or alias used to call the command in
 	 * the message. Will be one of the values of `this.names`.
 	 */
-	execute (client, msg, args, prefix, commandName) {
-		if (!this.checkPermissions(client, msg)) return
+	async execute (client, msg, args, prefix, commandName) {
+		if (!await this.checkPermissions(client, msg)) return
 		this.process.call(client, msg, args, prefix, commandName)
 	}
 
