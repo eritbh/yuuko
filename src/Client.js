@@ -80,6 +80,11 @@ class Client extends Eris.Client {
 	 * @param {Object} msg - The message object recieved from Eris.
 	 */
 	handleMessage (msg) {
+		if (!msg.author) {
+			console.log('=== AUTHORLESS MESSAGE ===')
+			console.log(msg)
+			return
+		}
 		if (this.ignoreBots && msg.author.bot) return
 
 		const [prefix, content] = this.splitPrefixFromContent(msg)
