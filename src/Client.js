@@ -2,10 +2,10 @@
 
 const Eris = require('eris')
 const glob = require('glob')
-const Command = require('./Command')
 const reload = require('require-reload')(require)
+const Logger = require('another-logger')
+const Command = require('./Command')
 
-const LoggerThing = require('./util.js')
 let u
 
 /** The client. */
@@ -16,16 +16,21 @@ class Client extends Eris.Client {
 	 *     also passed to Eris.
 	 * @param {string} options.token - The token used to log into the bot.
 	 * @param {string} options.prefix - The prefix the bot will respond to in
-	 *     guilds for which there is no other confguration. (Currently everywhere)
+	 * guilds for which there is no other confguration. (Currently everywhere)
 	 * @param {boolean} options.allowMention - Whether or not the bot can respond
-	 *     to messages starting with a mention of the bot.
+	 * to messages starting with a mention of the bot.
 	 * @param {number} options.logLevel - The minimum message level for logged
-	 *     events in the console.
+	 * events in the console.
+	 * @param {boolean} options.timestamps - Whether or not to include timestamps
+	 * in console log output.
 	 */
 	constructor (options = {}) {
 		super(options.token, options)
 
-		u = LoggerThing(options.logLevel == null ? 2 : options.logLevel)
+		u = new Logger({
+			minLevel: options.logLevel,
+			timestamp: options.timestamps
+		})
 
 		/**
 		 * @prop {string} - The prefix the bot will respond to in guilds for which
@@ -69,7 +74,7 @@ class Client extends Eris.Client {
 				this.app = app
 			})
 
-			u.ok('Logged in as', u.underline(`@${this.user.username}#${this.user.discriminator}`), `- in ${this.guilds.size} guild${this.guilds.size === 1 ? '' : 's'}, ${this.commands.length} command${this.commands.length === 1 ? '' : 's'} loaded`)
+			u.success(`Logged in as @${this.user.username}#${this.user.discriminator} - in ${this.guilds.size} guild${this.guilds.size === 1 ? '' : 's'}, ${this.commands.length} command${this.commands.length === 1 ? '' : 's'} loaded`)
 		}).on('error', err => {
 			u.error('Error in client:\n', err)
 		}).on('messageCreate', this.handleMessage)
@@ -140,8 +145,8 @@ class Client extends Eris.Client {
 			command.filename = filename
 			this.addCommand(command)
 			u.debug('Added command from', filename)
-		} catch (e) {
-			u.warn('Command from', filename, "couldn't be loaded.\n", e)
+		} catch (err) {
+			u.warn('Command from', filename, "couldn't be loaded.\n", err)
 		}
 		return this
 	}
