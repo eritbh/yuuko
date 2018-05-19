@@ -175,7 +175,7 @@ class Client extends Eris.Client {
 	 * @returns {Command|null}
 	 */
 	commandForName (name) {
-		return this.commands.find(c => [c.name, ...c.aliases].includes(name))
+		return this.commands.find(c => c.names.includes(name))
 	}
 
 	/**

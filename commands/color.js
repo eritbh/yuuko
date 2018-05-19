@@ -3,7 +3,7 @@
 const Command = require('../src/Command')
 const color = require('color')
 
-module.exports = new Command('color', function (msg, args) {
+module.exports = new Command('color', async function (msg, args) {
 	// Parse args as color
 	const joinedArgs = args.join(' ')
 	let col
@@ -13,7 +13,8 @@ module.exports = new Command('color', function (msg, args) {
 		try {
 			col = color('#' + joinedArgs)
 		} catch (e) {
-			return msg.channel.createMessage("Doesn't look like that's a valid CSS color.")
+			msg.channel.createMessage("Doesn't look like that's a valid CSS color.").catch(() => {})
+			return
 		}
 	}
 	const bareHex = col.hex().substr(1).toLowerCase()
@@ -33,7 +34,7 @@ ${col.keyword() ? `Keyword: \`${col.keyword()}\`` : ''}`,
 			},
 			color: col.rgbNumber()
 		}
-	})
+	}).catch(() => {})
 })
 module.exports.help = {
 	desc: 'Gets alternate writings of a CSS color, plus a preview.',

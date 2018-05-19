@@ -8,7 +8,9 @@ module.exports = new Command('reload', function (msg) {
 			return msg.channel.createMessage("You're not my dad.")
 		}
 		msg.channel.sendTyping()
-		this.reloadCommands()
-		msg.channel.createMessage('Reloaded commands.')
+		setTimeout(() => { // Delay by 100ms to make sure the sendTyping arrives first
+			this.reloadCommands()
+			msg.channel.createMessage('Reloaded commands.')
+		}, 100)
 	})
 })

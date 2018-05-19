@@ -23,7 +23,7 @@ module.exports = new Command([
 	'javascript', 'js',
 	'ruby', 'rb',
 	'python', 'py'
-], function (msg, args, prefix, commandName) {
+], async function (msg, args, prefix, commandName) {
 	let code = args.join(' ')
 	let codeBlockLang
 	let match
@@ -41,13 +41,13 @@ module.exports = new Command([
 		return
 	}
 	url += encodeURIComponent(code)
-
-	msg.channel.sendTyping()
-	superagent.get(url).then(res => {
+	try {
+		msg.channel.sendTyping()
+		const res = await superagent.get(url)
 		msg.channel.createMessage(res.text).catch(console.log)
-	}).catch(err => {
+	} catch (err) {
 		msg.channel.createMessage('' + err).catch(console.log)
-	})
+	}
 })
 module.exports.help = {
 	desc: `Evaluates arbitrary code in a third-party sandbox. Supports multiple languages; to specify a language, use a language-specific alias or a code block tagged with the desired language.
