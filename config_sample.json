@@ -3,5 +3,6 @@
     "prefix": "~",
     "allowMention": true,
     "ignoreBots": true,
-    "logLevel": 2
+    "logLevel": 1,
+    "timestamps": false
 }

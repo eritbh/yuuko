@@ -5,26 +5,20 @@ const moment = require('moment-timezone')
 const childProcess = require('child_process')
 const packageJson = require.main.require('./package.json')
 
+// Store the current tagged version and commit SHA
 let versionTag
-childProcess.exec('git describe --abbrev=0 --tags', (err, tag) => {
+let versionSHA
+childProcess.exec('git describe --abbrev=0 --tags && git rev-parse --short HEAD', (err, stdout) => {
 	if (err) {
 		versionTag = '???'
+		versionSHA = 'Unknown'
 		console.log(err)
-	} else {
-		versionTag = '``' + tag.replace('\n', '') + '``'
+		return
 	}
-})
-let versionSha
-childProcess.exec('git rev-parse --short HEAD', (err, sha) => {
-	if (err) {
-		versionSha = 'Unknown'
-		console.log(err)
-	} else {
-		versionSha = '`' + sha.replace('\n', '') + '`'
-	}
+	[versionTag, versionSHA] = stdout.split('\n')
 })
 
-module.exports = new Command(['about', 'uptime', 'info'], function (msg, args, prefix) {
+module.exports = new Command(['about', 'uptime', 'info'], async function (msg, args, prefix) {
 	const uptimeDuration = moment.duration(this.uptime).humanize()
 	const uptimeStart = moment().subtract(this.uptime).tz('America/New_York').format('YYYY-DD-mm kk:mm z')
 	const link = packageJson.homepage
@@ -35,15 +29,16 @@ module.exports = new Command(['about', 'uptime', 'info'], function (msg, args, p
 **Server:** https://discord.gg/a2N2YCx
 **Project:** ${link}
 **Owner:** ${owner}
-**Version:** ${versionTag} (Commit: ${versionSha})
+**Version:** ${versionTag} (Commit: ${versionSHA})
 **Uptime:** ${uptimeDuration} (since ${uptimeStart})
 **Ping:** Wait for it...`
 
 	const then = Date.now()
-	msg.channel.createMessage(content).then(newmsg => {
+	try {
+		const newmsg = await msg.channel.createMessage(content)
 		const diff = Date.now() - then
-		newmsg.edit(newmsg.content.replace('Wait for it...', `${diff}ms`))
-	})
+		await newmsg.edit(newmsg.content.replace('Wait for it...', `${diff}ms`))
+	} catch (_) {}
 })
 module.exports.help = {
 	desc: 'Displays information about the bot, including running version, time since last crash, and a link to its source code.',

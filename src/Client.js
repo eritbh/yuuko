@@ -2,10 +2,10 @@
 
 const Eris = require('eris')
 const glob = require('glob')
-const Command = require('./Command')
 const reload = require('require-reload')(require)
+const Logger = require('another-logger')
+const Command = require('./Command')
 
-const LoggerThing = require('./util.js')
 let u
 
 /** The client. */
@@ -13,23 +13,28 @@ class Client extends Eris.Client {
 	/**
 	 * Create a client instance.
 	 * @param {Object} options - Options to start the client with. This object is
-	 *     also passed to Eris.
+	 * also passed to Eris.
 	 * @param {string} options.token - The token used to log into the bot.
 	 * @param {string} options.prefix - The prefix the bot will respond to in
-	 *     guilds for which there is no other confguration. (Currently everywhere)
+	 * guilds for which there is no other confguration. (Currently everywhere)
 	 * @param {boolean} options.allowMention - Whether or not the bot can respond
-	 *     to messages starting with a mention of the bot.
+	 * to messages starting with a mention of the bot.
 	 * @param {number} options.logLevel - The minimum message level for logged
-	 *     events in the console.
+	 * events in the console.
+	 * @param {boolean} options.timestamps - Whether or not to include timestamps
+	 * in console log output.
 	 */
 	constructor (options = {}) {
 		super(options.token, options)
 
-		u = LoggerThing(options.logLevel == null ? 2 : options.logLevel)
+		u = new Logger({
+			minLevel: options.logLevel,
+			timestamp: options.timestamps
+		})
 
 		/**
 		 * @prop {string} - The prefix the bot will respond to in guilds for which
-		 *     there is no other confguration.
+		 * there is no other confguration.
 		 */
 		this.defaultPrefix = options.prefix
 		if (this.defaultPrefix === '') {
@@ -38,38 +43,38 @@ class Client extends Eris.Client {
 
 		/**
 		 * @prop {boolean} - Whether or not the bot can respond to messages starting
-		 *     with a mention of the bot. Defaults to true.
+		 * with a mention of the bot. Defaults to true.
 		 */
 		this.allowMention = options.allowMention == null ? true : options.allowMention
 
 		/**
 		 * @prop {boolean} - Whether or not the bot ignores messages sent from bot
-		 *     accounts. Defaults to true.
+		 * accounts. Defaults to true.
 		 */
 		this.ignoreBots = options.ignoreBots == null ? true : options.ignoreBots
 
 		/**
 		 * @prop {Array<Command>} - An array of commands the bot will respond to.
-		 *     respond to.
+		 * respond to.
 		 */
 		this.commands = []
 
 		this.on('ready', () => {
 			/**
 			 * @prop {RegExp} - The RegExp used to tell whether or not a message starts
-			 *     with a mention of the bot. Only present after the 'ready' event.
+			 * with a mention of the bot. Only present after the 'ready' event.
 			 */
 			this.mentionPrefixRegExp = new RegExp(`^<@!?${this.user.id}>\\s?`)
 
 			this.getOAuthApplication().then(app => {
 				/**
 				 * @prop {object} - The OAuth application information returned by
-				 *     Discord. Present some time after the ready event.
+				 * Discord. Present some time after the ready event.
 				 */
 				this.app = app
 			})
 
-			u.ok('Logged in as', u.underline(`@${this.user.username}#${this.user.discriminator}`), `- in ${this.guilds.size} guild${this.guilds.size === 1 ? '' : 's'}, ${this.commands.length} command${this.commands.length === 1 ? '' : 's'} loaded`)
+			u.success(`Logged in as @${this.user.username}#${this.user.discriminator} - in ${this.guilds.size} guild${this.guilds.size === 1 ? '' : 's'}, ${this.commands.length} command${this.commands.length === 1 ? '' : 's'} loaded`)
 		}).on('error', err => {
 			u.error('Error in client:\n', err)
 		}).on('messageCreate', this.handleMessage)
@@ -80,6 +85,11 @@ class Client extends Eris.Client {
 	 * @param {Object} msg - The message object recieved from Eris.
 	 */
 	handleMessage (msg) {
+		if (!msg.author) {
+			u.warn('=== AUTHORLESS MESSAGE ===')
+			u.warn(msg)
+			return
+		}
 		if (this.ignoreBots && msg.author.bot) return
 
 		const [prefix, content] = this.splitPrefixFromContent(msg)
@@ -95,8 +105,8 @@ class Client extends Eris.Client {
 		const command = this.commandForName(commandName)
 		if (!command) return
 
+		u.info(...(msg.channel.guild ? [msg.channel.guild.name, '>', msg.channel.name] : ['PM']), '>', msg.author.username, ':', commandName, args.join(' '))
 		command.execute(this, msg, args, prefix, commandName)
-		u.info('did a thing:', commandName, args.join(' '))
 	}
 
 	/**
@@ -135,8 +145,8 @@ class Client extends Eris.Client {
 			command.filename = filename
 			this.addCommand(command)
 			u.debug('Added command from', filename)
-		} catch (e) {
-			u.warn('Command from', filename, "couldn't be loaded.\n", e)
+		} catch (err) {
+			u.warn('Command from', filename, "couldn't be loaded.\n", err)
 		}
 		return this
 	}
@@ -165,7 +175,7 @@ class Client extends Eris.Client {
 	 * @returns {Command|null}
 	 */
 	commandForName (name) {
-		return this.commands.find(c => [c.name, ...c.aliases].includes(name))
+		return this.commands.find(c => c.names.includes(name))
 	}
 
 	/**
@@ -219,25 +229,25 @@ class Client extends Eris.Client {
 	// _createMessageChunked (channelId, content, file, maxLength = 2000) {
 	//   let embed
 	//   if (typeof content === 'object') {
-	//     embed = content.embed
-	//     content = content.content
+	// embed = content.embed
+	// content = content.content
 	//   } else {
-	//     embed = null
+	// embed = null
 	//   }
 	//   let self = this
 	//   ;(function sendChunk (left) {
-	//     console.log(left.length)
-	//     if (left.length < maxLength) return self.createMessage(channelId, {content, embed}, file)
-	//     let newlineIndex = left.substr(0, maxLength).lastIndexOf('\n')
-	//     if (newlineIndex < 1) newlineIndex = maxLength - 1
-	//     console.log(newlineIndex)
-	//     left = left.split('')
-	//     const chunk = left.splice(0, newlineIndex)
-	//     if (!left.length) {
-	//       // Interesting, the message was exactly good. We'll put the embed and stuff in now.
-	//       return self.createMessage(channelId, {content: chunk, embed: embed}, file)
-	//     }
-	//     sendChunk(left.join(''), maxLength)
+	// console.log(left.length)
+	// if (left.length < maxLength) return self.createMessage(channelId, {content, embed}, file)
+	// let newlineIndex = left.substr(0, maxLength).lastIndexOf('\n')
+	// if (newlineIndex < 1) newlineIndex = maxLength - 1
+	// console.log(newlineIndex)
+	// left = left.split('')
+	// const chunk = left.splice(0, newlineIndex)
+	// if (!left.length) {
+	//   // Interesting, the message was exactly good. We'll put the embed and stuff in now.
+	//   return self.createMessage(channelId, {content: chunk, embed: embed}, file)
+	// }
+	// sendChunk(left.join(''), maxLength)
 	//   }(content))
 	// }
 }

@@ -1,6 +1,6 @@
 {
   "name": "yuuko",
-  "version": "0.5.1",
+  "version": "0.5.3",
   "description": "A Discord bot base that I did for some reason.",
   "main": "src/Yuuko.js",
   "scripts": {
@@ -16,15 +16,14 @@
   },
   "homepage": "https://geo1088.github.io/yuuko",
   "dependencies": {
+    "another-logger": "^1.0.0",
     "eris": "^0.8.4",
     "glob": "^7.1.2",
     "require-reload": "^0.2.2"
   },
-  "optionalDependencies": {
-    "chalk": "^2.1.0"
-  },
   "devDependencies": {
     "color": "^2.0.0",
+    "d20": "^1.4.1",
     "eslint": "^4.8.0",
     "eslint-config-standard": "^10.2.1",
     "eslint-plugin-import": "^2.7.0",

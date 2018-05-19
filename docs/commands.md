@@ -22,6 +22,45 @@ Chooses a random option from a list of comma-separated options. If you want to i
 ## `~color <any valid CSS color>`
 Gets alternate writings of a CSS color, plus a preview.
 
+## `~eval` (`~rb`, `~py`, `~js`, and others)
+Evaluates arbitrary code in a sandbox. Supports Ruby, Python, and Javascript code in a variety of formats.
+
+Code can be passed to this command in several ways:
+
+- Passing code in a code block with a specified language
+
+	````
+	~eval ```rb
+	puts "hoi"
+	```
+	````
+
+	````
+	~eval ```py
+	print("hoi")
+	```
+	````
+
+- Using a language-specific alias, with or without a code block
+
+	````
+	~ruby puts "hoi"
+	````
+
+	````
+	~python ```py
+	print("hoi")
+	```
+	````
+
+	````
+	~js console.log('hoi')
+	````
+
+The output of this command reflects the result of the run script. Console messages (`puts`, `print()`, `console.log()`) are shown with comments, and the final output of the script will be shown with syntax highlighting.
+
+Due to limitations in the evaluation system, asynchronous scripts will likely not work.
+
 ## `~help [command]`
 Displays a list of commands. Include a command name to get information about that command.
 
@@ -32,4 +71,4 @@ Searches for, and get information on, npm packages.
 Pings the bot.
 
 ## `~roll <dice roll>`
-Rolls some dice. Supported roll formats are `AdX` for `A` rolls of an `X`-sided die. `A` can be omitted to mean 1 and `X` can be % (a percent sign) to mean 100. Multiple rolls can be separated by spaces.
+Roll some dice. Pass in a number or an `AdX` roll, with modifiers and `d%` format supported. Examples: `6`, `2d20`, `1d%`, `d4-2`. If no roll is specified, it will default to `1d6`. Pass in multiple rolls by separating them with spaces.

@@ -5,8 +5,8 @@ class Command {
 	/**
 	 * Create a command.
 	 * @param {string|Array} name - The name of the command. If passed as an
-	 * array, the first item of the array is used as the name and the rest of
-	 * the items are set as aliases.
+	 * array, the first item of the array is used as the name and the rest of the
+	 * items are set as aliases.
 	 * @param {Command~commandProcess} process - The function to be called when
 	 * the command is executed.
 	 */
@@ -35,8 +35,8 @@ class Command {
 	 * {@link https://abal.moe/Eris/docs/Message}
 	 * @param {Array<string>} args - An array of arguments passed to the command,
 	 * obtained by removing the command name and prefix from the message, then
-	 * splitting on spaces. To get the raw text that was passed to the
-	 * command, use `args.join(' ')`.
+	 * splitting on spaces. To get the raw text that was passed to the command,
+	 * use `args.join(' ')`.
 	 * @param {string} prefix - The prefix used in the message.
 	 * @param {string} commandName - The name or alias used to call the command in
 	 * the message. Will be one of the values of `this.names`.

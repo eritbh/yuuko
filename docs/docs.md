@@ -3,7 +3,6 @@ layout: docs
 group: nav
 title: API Docs
 order: 3
-header: ['Documentation']
 ---
 <aside class="toc" markdown="1">
 
@@ -23,7 +22,6 @@ header: ['Documentation']
   - [Process function](#process-function)
   - [Properties](#properties-1)
 
-<!-- END doctoc generated TOC please keep comment here to allow auto update -->
 </aside>
 <main markdown="1">
 
@@ -35,20 +33,21 @@ This is the documentation for Yuuko. If you want to create your own bot based on
 
 # Quick Start
 
-Install:
+## Installation
 
-```
-$ npm install --save yuuko
+```bash
+$ yarn add yuuko # yarn
+$ npm install --save yuuko # npm
 ```
 
-Use:
+## Usage
 
 ```js
 const {Client, Command} = require('yuuko')
 
 const mybot = new Client({
   token: 'your_bot_token',  // Token used to auth your bot account
-  prefix: '.'        // Prefix used to trigger commands
+  prefix: '.'               // Prefix used to trigger commands
 })
 
 const pingCommand = new Command('ping', function (msg) {
@@ -58,11 +57,10 @@ const pingCommand = new Command('ping', function (msg) {
 mybot.addCommand(pingCommand).connect()
 ```
 
-Run:
+## Run
 
-```
+```bash
 $ node index.js
-Logged in as @MyBot#1234 - in 2 guilds
 ```
 
 And just like that, you're up and running! To test the bot, add the bot to a server and say `.ping` to it.
@@ -83,9 +81,10 @@ Name | Type | Description
 -----|------|------------
 `config` | Object | An object with config options for the bot. In addition to these document fields, this object will be passed to the Eris constructor as the `options` object, so this can also contain any fields documented for the [Eris constructor](https://abal.moe/Eris/docs/Client) `options` parameter.
 `config.token` | String | The token used to log into the bot.
-`config.defaultPrefix` | String | Optional. The prefix the bot will respond to in guilds for which there is no other confguration. You can set this to an empty string to respond to all messages without a prefix, but this is **highly discouraged**.
+`config.prefix` | String | Optional. The prefix the bot will respond to in guilds for which there is no other confguration. You can set this to an empty string to respond to all messages without a prefix, but this is **highly discouraged**.
 `config.allowMention` | Boolean | Optional, default `true`. Whether or not the bot can respond to messages starting with a mention of the bot. If this is falsy, and `config.defaultPrefix` is omitted, there will be no way to interact with the bot in guilds without a pre-set custom prefix.
 `config.logLevel` | Number | Optional, default `2`. The minimum message level for logged events in the console.
+`config.timestamps` | Boolean | Optional, default `false`. Whether or not to display timestamps for logged events in the console.
 
 ## Properties
 
