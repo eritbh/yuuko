@@ -33,13 +33,14 @@ This is the documentation for Yuuko. If you want to create your own bot based on
 
 # Quick Start
 
-Install:
+## Installation
 
-```
-$ npm install --save yuuko
+```bash
+$ yarn add yuuko # yarn
+$ npm install --save yuuko # npm
 ```
 
-Use:
+## Usage
 
 ```js
 const {Client, Command} = require('yuuko')
@@ -56,11 +57,10 @@ const pingCommand = new Command('ping', function (msg) {
 mybot.addCommand(pingCommand).connect()
 ```
 
-Run:
+## Run
 
-```
+```bash
 $ node index.js
-Logged in as @MyBot#1234 - in 2 guilds
 ```
 
 And just like that, you're up and running! To test the bot, add the bot to a server and say `.ping` to it.
