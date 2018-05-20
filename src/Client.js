@@ -76,7 +76,7 @@ class Client extends Eris.Client {
 
 			u.success(`Logged in as @${this.user.username}#${this.user.discriminator} - in ${this.guilds.size} guild${this.guilds.size === 1 ? '' : 's'}, ${this.commands.length} command${this.commands.length === 1 ? '' : 's'} loaded`)
 		}).on('error', err => {
-			u.error('Error in client:\n', err)
+			u.error('Error in client:\n', err.stack)
 		}).on('messageCreate', this.handleMessage)
 	}
 
