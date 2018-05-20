@@ -16,21 +16,21 @@
   },
   "homepage": "https://geo1088.github.io/yuuko",
   "dependencies": {
-    "another-logger": "^1.0.0",
-    "eris": "^0.8.4",
+    "another-logger": "^1.1.0",
+    "eris": "^0.8.5",
     "glob": "^7.1.2",
     "require-reload": "^0.2.2"
   },
   "devDependencies": {
-    "color": "^2.0.0",
+    "color": "^3.0.0",
     "d20": "^1.4.1",
-    "eslint": "^4.8.0",
-    "eslint-config-standard": "^10.2.1",
-    "eslint-plugin-import": "^2.7.0",
-    "eslint-plugin-node": "^5.2.0",
-    "eslint-plugin-promise": "^3.5.0",
-    "eslint-plugin-standard": "^3.0.1",
-    "moment-timezone": "^0.5.14",
-    "superagent": "^3.8.2"
+    "eslint": "^4.19.1",
+    "eslint-config-standard": "^11.0.0",
+    "eslint-plugin-import": "^2.12.0",
+    "eslint-plugin-node": "^6.0.1",
+    "eslint-plugin-promise": "^3.7.0",
+    "eslint-plugin-standard": "^3.1.0",
+    "moment-timezone": "^0.5.17",
+    "superagent": "^3.8.3"
   }
 }
