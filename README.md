@@ -20,18 +20,18 @@ $ npm install --save yuuko # npm
 ### Usage
 
 ```js
-const {Client, Command} = require('yuuko')
+const {Client, Command} = require('yuuko');
 
 const mybot = new Client({
   token: 'your_bot_token',  // Token used to auth your bot account
   prefix: '.'               // Prefix used to trigger commands
-})
+});
 
 const pingCommand = new Command('ping', function (msg) {
   msg.channel.createMessage('Pong!')
-})
+});
 
-mybot.addCommand(pingCommand).connect()
+mybot.addCommand(pingCommand).connect();
 ```
 
 ```bash
