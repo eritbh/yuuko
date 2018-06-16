@@ -1,12 +1,12 @@
-'use strict'
+'use strict';
 
-const Eris = require('eris')
-const glob = require('glob')
-const reload = require('require-reload')(require)
-const Logger = require('another-logger')
-const Command = require('./Command')
+const Eris = require('eris');
+const glob = require('glob');
+const reload = require('require-reload')(require);
+const Logger = require('another-logger');
+const Command = require('./Command');
 
-let u
+let u;
 
 /** The client. */
 class Client extends Eris.Client {
@@ -25,59 +25,59 @@ class Client extends Eris.Client {
 	 * in console log output.
 	 */
 	constructor (options = {}) {
-		super(options.token, options)
+		super(options.token, options);
 
 		u = new Logger({
 			minLevel: options.logLevel,
 			timestamp: options.timestamps
-		})
+		});
 
 		/**
 		 * @prop {string} - The prefix the bot will respond to in guilds for which
 		 * there is no other confguration.
 		 */
-		this.defaultPrefix = options.prefix
+		this.defaultPrefix = options.prefix;
 		if (this.defaultPrefix === '') {
-			u.warn('defaultPrefix is an empty string, bot will not require a prefix to run commands')
+			u.warn('defaultPrefix is an empty string, bot will not require a prefix to run commands');
 		}
 
 		/**
 		 * @prop {boolean} - Whether or not the bot can respond to messages starting
 		 * with a mention of the bot. Defaults to true.
 		 */
-		this.allowMention = options.allowMention == null ? true : options.allowMention
+		this.allowMention = options.allowMention == null ? true : options.allowMention;
 
 		/**
 		 * @prop {boolean} - Whether or not the bot ignores messages sent from bot
 		 * accounts. Defaults to true.
 		 */
-		this.ignoreBots = options.ignoreBots == null ? true : options.ignoreBots
+		this.ignoreBots = options.ignoreBots == null ? true : options.ignoreBots;
 
 		/**
 		 * @prop {Array<Command>} - An array of commands the bot will respond to.
 		 * respond to.
 		 */
-		this.commands = []
+		this.commands = [];
 
 		this.on('ready', () => {
 			/**
 			 * @prop {RegExp} - The RegExp used to tell whether or not a message starts
 			 * with a mention of the bot. Only present after the 'ready' event.
 			 */
-			this.mentionPrefixRegExp = new RegExp(`^<@!?${this.user.id}>\\s?`)
+			this.mentionPrefixRegExp = new RegExp(`^<@!?${this.user.id}>\\s?`);
 
 			this.getOAuthApplication().then(app => {
 				/**
 				 * @prop {object} - The OAuth application information returned by
 				 * Discord. Present some time after the ready event.
 				 */
-				this.app = app
-			})
+				this.app = app;
+			});
 
-			u.success(`Logged in as @${this.user.username}#${this.user.discriminator} - in ${this.guilds.size} guild${this.guilds.size === 1 ? '' : 's'}, ${this.commands.length} command${this.commands.length === 1 ? '' : 's'} loaded`)
+			u.success(`Logged in as @${this.user.username}#${this.user.discriminator} - in ${this.guilds.size} guild${this.guilds.size === 1 ? '' : 's'}, ${this.commands.length} command${this.commands.length === 1 ? '' : 's'} loaded`);
 		}).on('error', err => {
-			u.error('Error in client:\n', err.stack)
-		}).on('messageCreate', this.handleMessage)
+			u.error('Error in client:\n', err.stack);
+		}).on('messageCreate', this.handleMessage);
 	}
 
 	/**
@@ -86,27 +86,27 @@ class Client extends Eris.Client {
 	 */
 	handleMessage (msg) {
 		if (!msg.author) {
-			u.warn('=== AUTHORLESS MESSAGE ===')
-			u.warn(msg)
-			return
+			u.warn('=== AUTHORLESS MESSAGE ===');
+			u.warn(msg);
+			return;
 		}
-		if (this.ignoreBots && msg.author.bot) return
+		if (this.ignoreBots && msg.author.bot) return;
 
-		const [prefix, content] = this.splitPrefixFromContent(msg)
+		const [prefix, content] = this.splitPrefixFromContent(msg);
 		if (!content) {
-			if (!prefix || !prefix.match(this.mentionPrefixRegExp)) return
+			if (!prefix || !prefix.match(this.mentionPrefixRegExp)) return;
 			// A lone mention triggers the default command with no arguments
-			const defaultCommand = this.commandForName(null)
-			if (!defaultCommand) return
-			defaultCommand.execute(this, msg, [], prefix, null)
+			const defaultCommand = this.commandForName(null);
+			if (!defaultCommand) return;
+			defaultCommand.execute(this, msg, [], prefix, null);
 		}
-		let args = content.split(' ')
-		const commandName = args.splice(0, 1)[0]
-		const command = this.commandForName(commandName)
-		if (!command) return
+		let args = content.split(' ');
+		const commandName = args.splice(0, 1)[0];
+		const command = this.commandForName(commandName);
+		if (!command) return;
 
-		u.info(...(msg.channel.guild ? [msg.channel.guild.name, '>', msg.channel.name] : ['PM']), '>', msg.author.username, ':', commandName, args.join(' '))
-		command.execute(this, msg, args, prefix, commandName)
+		u.info(...(msg.channel.guild ? [msg.channel.guild.name, '>', msg.channel.name] : ['PM']), '>', msg.author.username, ':', commandName, args.join(' '));
+		command.execute(this, msg, args, prefix, commandName);
 	}
 
 	/**
@@ -114,10 +114,10 @@ class Client extends Eris.Client {
 	 * @param {Command} command - The command to add to the bot.
 	 */
 	addCommand (command) {
-		if (!(command instanceof Command)) throw new TypeError('Not a command')
-		if (this.commandForName(command.name)) u.warn(`Duplicate command found (${command.name})`)
-		this.commands.push(command)
-		return this
+		if (!(command instanceof Command)) throw new TypeError('Not a command');
+		if (this.commandForName(command.name)) u.warn(`Duplicate command found (${command.name})`);
+		this.commands.push(command);
+		return this;
 	}
 
 	/**
@@ -126,13 +126,13 @@ class Client extends Eris.Client {
 	 * @param {string} dirname - The location of the directory.
 	 */
 	addCommandDir (dirname) {
-		if (!dirname.endsWith('/')) dirname += '/'
-		const pattern = dirname + '*.js'
-		const filenames = glob.sync(pattern)
+		if (!dirname.endsWith('/')) dirname += '/';
+		const pattern = dirname + '*.js';
+		const filenames = glob.sync(pattern);
 		for (let filename of filenames) {
-			this.addCommandFile(filename)
+			this.addCommandFile(filename);
 		}
-		return this
+		return this;
 	}
 
 	/**
@@ -141,14 +141,14 @@ class Client extends Eris.Client {
 	 */
 	addCommandFile (filename) {
 		try {
-			const command = reload(filename)
-			command.filename = filename
-			this.addCommand(command)
-			u.debug('Added command from', filename)
+			const command = reload(filename);
+			command.filename = filename;
+			this.addCommand(command);
+			u.debug('Added command from', filename);
 		} catch (err) {
-			u.warn('Command from', filename, "couldn't be loaded.\n", err)
+			u.warn('Command from', filename, "couldn't be loaded.\n", err);
 		}
-		return this
+		return this;
 	}
 
 	/**
@@ -157,15 +157,15 @@ class Client extends Eris.Client {
 	 * on them.
 	 */
 	reloadCommands () {
-		let i = this.commands.length
+		let i = this.commands.length;
 		while (i--) {
-			const command = this.commands[i]
+			const command = this.commands[i];
 			if (command.filename) {
-				this.commands.splice(i, 1)
-				this.addCommandFile(command.filename)
+				this.commands.splice(i, 1);
+				this.addCommandFile(command.filename);
 			}
 		}
-		return this
+		return this;
 	}
 
 	/**
@@ -175,7 +175,7 @@ class Client extends Eris.Client {
 	 * @returns {Command|null}
 	 */
 	commandForName (name) {
-		return this.commands.find(c => c.names.includes(name))
+		return this.commands.find(c => c.names.includes(name));
 	}
 
 	/**
@@ -186,8 +186,8 @@ class Client extends Eris.Client {
 	 */
 	prefixForMessage (msg) {
 		// TODO
-		if (msg.channel.guild) return this.defaultPrefix
-		return ''
+		if (msg.channel.guild) return this.defaultPrefix;
+		return '';
 	}
 
 	/**
@@ -199,21 +199,21 @@ class Client extends Eris.Client {
 	 **/
 	splitPrefixFromContent (msg) {
 		// Traditional prefix handling - if there is no prefix, skip this rule
-		const prefix = this.prefixForMessage(msg) // TODO: guild config
+		const prefix = this.prefixForMessage(msg); // TODO: guild config
 		if (prefix != null && msg.content.startsWith(prefix)) {
-			return [prefix, msg.content.substr(prefix.length)]
+			return [prefix, msg.content.substr(prefix.length)];
 		}
 		// Allow mentions to be used as prefixes according to config
-		const match = msg.content.match(this.mentionPrefixRegExp)
+		const match = msg.content.match(this.mentionPrefixRegExp);
 		if (this.allowMention && match) { // TODO: guild config
-			return [match[0], msg.content.substr(match[0].length)]
+			return [match[0], msg.content.substr(match[0].length)];
 		}
 		// Allow no prefix in direct message channels
 		if (!msg.channel.guild) {
-			return ['', msg.content]
+			return ['', msg.content];
 		}
 		// we got nothing
-		return [null, null]
+		return [null, null];
 	}
 
 	// /**
@@ -252,4 +252,4 @@ class Client extends Eris.Client {
 	// }
 }
 
-module.exports = Client
+module.exports = Client;

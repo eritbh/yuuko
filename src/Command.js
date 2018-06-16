@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 
 /** Class representing a command. */
 class Command {
@@ -12,16 +12,16 @@ class Command {
 	 */
 	constructor (name, process, requirements = {}) {
 		if (Array.isArray(name)) {
-			this.name = name.splice(0, 1)[0]
-			this.aliases = name
+			this.name = name.splice(0, 1)[0];
+			this.aliases = name;
 		} else {
-			this.name = name
-			this.aliases = []
+			this.name = name;
+			this.aliases = [];
 		}
-		if (!this.name) throw new TypeError('Name is required')
-		this.process = process
-		if (!this.process) throw new TypeError('Process is required')
-		this.requirements = requirements
+		if (!this.name) throw new TypeError('Name is required');
+		this.process = process;
+		if (!this.process) throw new TypeError('Process is required');
+		this.requirements = requirements;
 	}
 
 	/**
@@ -55,18 +55,18 @@ class Command {
 		return new Promise(async resolve => {
 			// Owner checking
 			if (this.requirements.owner !== undefined) {
-				if (!client.app) return resolve(false)
-				const isOwner = client.app.owner.id === msg.author.id
-				if (isOwner !== this.requirements.owner) return resolve(false)
+				if (!client.app) return resolve(false);
+				const isOwner = client.app.owner.id === msg.author.id;
+				if (isOwner !== this.requirements.owner) return resolve(false);
 			}
 			// Custom requirements
-			const customRequirements = (typeof this.requirements.custom === 'function' ? [this.requirements.custom] : this.requirements.custom) || []
-			const vals = await Promise.all(customRequirements.map(f => f.call(client, msg)))
-			if (vals.some(val => !val)) return resolve(false)
+			const customRequirements = (typeof this.requirements.custom === 'function' ? [this.requirements.custom] : this.requirements.custom) || [];
+			const vals = await Promise.all(customRequirements.map(f => f.call(client, msg)));
+			if (vals.some(val => !val)) return resolve(false);
 
 			// Nothing broke, must be good to go
-			resolve(true)
-		})
+			resolve(true);
+		});
 	}
 
 	/**
@@ -85,8 +85,8 @@ class Command {
 	 * the message. Will be one of the values of `this.names`.
 	 */
 	async execute (client, msg, args, prefix, commandName) {
-		if (!await this.checkPermissions(client, msg)) return
-		this.process.call(client, msg, args, prefix, commandName)
+		if (!await this.checkPermissions(client, msg)) return;
+		this.process.call(client, msg, args, prefix, commandName);
 	}
 
 	/**
@@ -95,8 +95,8 @@ class Command {
 	 * @type {Array<string>}
 	 */
 	get names () {
-		return [this.name, ...this.aliases]
+		return [this.name, ...this.aliases];
 	}
 }
 
-module.exports = Command
+module.exports = Command;

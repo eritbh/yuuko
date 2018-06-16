@@ -1,24 +1,24 @@
-'use strict'
+'use strict';
 
-const Command = require('../src/Command')
-const util = require('util')
+const Command = require('../src/Command');
+const util = require('util');
 
 const inspectOptions = {
 	depth: 1
-}
+};
 
 module.exports = new Command('debug', async function (msg, args, prefix, commandName) {
 	if (this.app.owner.id !== msg.author.id) {
-		msg.channel.createMessage("You're not my dad.")
-		return
+		msg.channel.createMessage("You're not my dad.");
+		return;
 	}
 
 	// Parse out code blocks
-	args = args.join(' ').replace(/^\s+/, '').replace(/\s*$/, '')
+	args = args.join(' ').replace(/^\s+/, '').replace(/\s*$/, '');
 	if (args.startsWith('```') && args.endsWith('```')) {
-		args = args.substring(3, args.length - 3)
+		args = args.substring(3, args.length - 3);
 		if (args.startsWith('js')) {
-			args = args.substr(2)
+			args = args.substr(2);
 		}
 	}
 
@@ -26,49 +26,49 @@ module.exports = new Command('debug', async function (msg, args, prefix, command
 	const c = {
 		_lines: [],
 		_logger (...things) {
-			this._lines.push(...things.join(' ').split('\n'))
+			this._lines.push(...things.join(' ').split('\n'));
 		},
 		_formatLines () {
-			return this._lines.map(line => line && `//> ${line}\n`).join('')
+			return this._lines.map(line => line && `//> ${line}\n`).join('');
 		}
-	}
-	c.log = c.error = c.warn = c.info = c._logger
+	};
+	c.log = c.error = c.warn = c.info = c._logger;
 
 	// Eval the things and send the results
-	let result
+	let result;
 	try {
-		result = eval(args) // eslint-disable-line no-eval
+		result = eval(args); // eslint-disable-line no-eval
 	} catch (e) {
-		result = e
+		result = e;
 	}
-	const message = '```js\n' + c._formatLines() + util.inspect(result, inspectOptions) + '\n```'
+	const message = '```js\n' + c._formatLines() + util.inspect(result, inspectOptions) + '\n```';
 
 	// Send the message
-	let outputMsg
+	let outputMsg;
 	try {
-		outputMsg = await msg.channel.createMessage(message)
+		outputMsg = await msg.channel.createMessage(message);
 	} catch (err) {
-		msg.channel.createMessage('Error sending message:\n```\n' + err + '\n```').catch(() => {})
-		return
+		msg.channel.createMessage('Error sending message:\n```\n' + err + '\n```').catch(() => {});
+		return;
 	}
 
 	// We returned a promise?
 	if (result && typeof result.then === 'function') {
 		// Sweet. Wait for that to resolve.
-		let value
+		let value;
 		try {
-			value = util.inspect(await result, inspectOptions)
+			value = util.inspect(await result, inspectOptions);
 		} catch (err) {
-			value = err
+			value = err;
 		}
 		// Now we can edit the message with the promise's resolved result(s).
-		const newContent = outputMsg.content.split('\n')
-		newContent.splice(-1, 0, `// Resolved to:`, value)
+		const newContent = outputMsg.content.split('\n');
+		newContent.splice(-1, 0, `// Resolved to:`, value);
 		try {
-			await outputMsg.edit(newContent.join('\n'))
+			await outputMsg.edit(newContent.join('\n'));
 		} catch (_) {
-			newContent.splice(-2, 1, '(content too long)')
-			outputMsg.edit(newContent.join('\n')).catch(() => {})
+			newContent.splice(-2, 1, '(content too long)');
+			outputMsg.edit(newContent.join('\n')).catch(() => {});
 		}
 	}
-})
+});

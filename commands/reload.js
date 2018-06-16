@@ -1,13 +1,13 @@
-'use strict'
+'use strict';
 
-const Command = require('../src/Command')
+const Command = require('../src/Command');
 
 module.exports = new Command('reload', function (msg) {
-	msg.channel.sendTyping()
+	msg.channel.sendTyping();
 	setTimeout(() => { // Delay by 100ms to make sure the sendTyping arrives first
-		this.reloadCommands()
-		msg.channel.createMessage('Reloaded commands.')
-	}, 100)
+		this.reloadCommands();
+		msg.channel.createMessage('Reloaded commands.');
+	}, 100);
 }, {
 	owner: true
-})
+});

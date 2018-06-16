@@ -1,23 +1,23 @@
-'use strict'
+'use strict';
 
-const Command = require('../src/Command')
-const color = require('color')
+const Command = require('../src/Command');
+const color = require('color');
 
 module.exports = new Command('color', async function (msg, args) {
 	// Parse args as color
-	const joinedArgs = args.join(' ')
-	let col
+	const joinedArgs = args.join(' ');
+	let col;
 	try {
-		col = color(joinedArgs)
+		col = color(joinedArgs);
 	} catch (e) {
 		try {
-			col = color('#' + joinedArgs)
+			col = color('#' + joinedArgs);
 		} catch (e) {
-			msg.channel.createMessage("Doesn't look like that's a valid CSS color.").catch(() => {})
-			return
+			msg.channel.createMessage("Doesn't look like that's a valid CSS color.").catch(() => {});
+			return;
 		}
 	}
-	const bareHex = col.hex().substr(1).toLowerCase()
+	const bareHex = col.hex().substr(1).toLowerCase();
 
 	// End with message and an embed with more color information
 	msg.channel.createMessage({
@@ -34,9 +34,9 @@ ${col.keyword() ? `Keyword: \`${col.keyword()}\`` : ''}`,
 			},
 			color: col.rgbNumber()
 		}
-	}).catch(() => {})
-})
+	}).catch(() => {});
+});
 module.exports.help = {
 	desc: 'Gets alternate writings of a CSS color, plus a preview.',
 	args: '<color>'
-}
+};

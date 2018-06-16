@@ -2,6 +2,8 @@
 	"extends": "standard",
 	"rules": {
 		"indent": ["error", "tab", {"SwitchCase": 1}],
-		"no-tabs": 0
+		"no-tabs": "off",
+		"semi": ["error", "always"],
+		"semi-style": ["error", "last"]
 	}
 }
