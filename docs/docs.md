@@ -11,6 +11,9 @@ order: 3
   - [`new Client(config)`](#constructor-new-clientconfig)
   - [Properties](#properties)
   - [Event: `ready`](#ready)
+  - [Event: `commandLoaded`](#commandloaded)
+  - [Event: `preCommand`](#precommand)
+  - [Event: `command`](#command)
   - [`addCommand(command)`](#addcommandcommand--client)
   - [`addCommandFile(filename)`](#addcommandfile--client)
   - [`addCommandDir(dirname)`](#addcommanddirdirname--client)
@@ -72,7 +75,7 @@ For more examples, check out the Examples page.
 
 # Class: `Client` extends [`Eris.Client`](https://abal.moe/Eris/docs/Client)
 
-The main client class. Connects to Discord through [Eris](https://npmjs.com/package/eris) and provides command handling. Accessible via `require('yuuko')` or `require('yuuko').Client`.
+The main client class. Connects to Discord through [Eris](https://npmjs.com/package/eris) and provides command handling. Accessible via `require('yuuko')` or `require('yuuko').Client`. Unless otherwise noted, all properties, events, and methods are carried over from the Eris client.
 
 ## Constructor: `new Client(config)`
 
@@ -104,6 +107,32 @@ Name | Type | Description
 Overridden from the [Eris `ready` event](https://abal.moe/Eris/docs/Client#event-ready). Functionally the same, but only emitted after internal setup of the `app` and `prefixMentionRegExp` properties.
 
 This event recieves no arguments.
+
+### `commandLoaded`
+
+Emitted when a command is loaded.
+
+Name | Type | Description
+-----|------|------------
+command | Command | The command that was loaded.
+
+### `preCommand`
+
+Emitted before a command will be executed.
+
+Name | Type | Description
+-----|------|------------
+command | Command | The command to be run.
+msg | Message | The message that triggered the command.
+
+### `command`
+
+Emitted after a command has been executed.
+
+Name | Type | Description
+-----|------|------------
+command | Command | The command that was run.
+msg | Message | The message that triggered the command.
 
 ## Methods
 

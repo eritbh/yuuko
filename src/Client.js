@@ -3,10 +3,7 @@
 const Eris = require('eris');
 const glob = require('glob');
 const reload = require('require-reload')(require);
-const Logger = require('another-logger');
 const Command = require('./Command');
-
-let u;
 
 /** The client. */
 class Client extends Eris.Client {
@@ -27,18 +24,13 @@ class Client extends Eris.Client {
 	constructor (options = {}) {
 		super(options.token, options);
 
-		u = new Logger({
-			minLevel: options.logLevel,
-			timestamp: options.timestamps
-		});
-
 		/**
 		 * @prop {string} - The prefix the bot will respond to in guilds for which
 		 * there is no other confguration.
 		 */
 		this.defaultPrefix = options.prefix;
 		if (this.defaultPrefix === '') {
-			u.warn('defaultPrefix is an empty string, bot will not require a prefix to run commands');
+			process.emitWarning('defaultPrefix is an empty string; bot will not require a prefix to run commands');
 		}
 
 		/**
@@ -70,10 +62,6 @@ class Client extends Eris.Client {
 		 * Discord. Only present after the 'ready' event.
 		 */
 		this.app = null;
-
-		this.on('error', err => {
-			u.error('Error in client:\n', err.stack);
-		});
 	}
 
 	// Override Eris's emit method so we can intercept the ready event
@@ -85,9 +73,6 @@ class Client extends Eris.Client {
 
 		this.getOAuthApplication().then(app => {
 			this.app = app;
-
-			// Log the things
-			u.success(`Logged in as @${this.user.username}#${this.user.discriminator} - in ${this.guilds.size} guild${this.guilds.size === 1 ? '' : 's'}, ${this.commands.length} command${this.commands.length === 1 ? '' : 's'} loaded`);
 
 			// Register the message event listener now that everything is ready
 			this.on('messageCreate', this.handleMessage);
@@ -106,10 +91,8 @@ class Client extends Eris.Client {
 	 * Given a message, see if there is a command and process it if so.
 	 * @param {Object} msg - The message object recieved from Eris.
 	 */
-	handleMessage (msg) {
+	async handleMessage (msg) {
 		if (!msg.author) {
-			u.warn('=== AUTHORLESS MESSAGE ===');
-			u.warn(msg);
 			return;
 		}
 		if (this.ignoreBots && msg.author.bot) return;
@@ -127,8 +110,9 @@ class Client extends Eris.Client {
 		const command = this.commandForName(commandName);
 		if (!command) return;
 
-		u.info(...(msg.channel.guild ? [msg.channel.guild.name, '>', msg.channel.name] : ['PM']), '>', msg.author.username, ':', commandName, args.join(' '));
-		command.execute(this, msg, args, prefix, commandName);
+		this.emit('preCommand', command, msg);
+		await command.execute(this, msg, args, prefix, commandName);
+		this.emit('command', command, msg);
 	}
 
 	/**
@@ -137,8 +121,9 @@ class Client extends Eris.Client {
 	 */
 	addCommand (command) {
 		if (!(command instanceof Command)) throw new TypeError('Not a command');
-		if (this.commandForName(command.name)) u.warn(`Duplicate command found (${command.name})`);
+		if (this.commandForName(command.name)) throw new Error(`Command ${command.name} already registered`);
 		this.commands.push(command);
+		this.emit('commandLoaded', command);
 		return this;
 	}
 
@@ -162,14 +147,9 @@ class Client extends Eris.Client {
 	 * @param {string} filename - The location of the file.
 	 */
 	addCommandFile (filename) {
-		try {
-			const command = reload(filename);
-			command.filename = filename;
-			this.addCommand(command);
-			u.debug('Added command from', filename);
-		} catch (err) {
-			u.warn('Command from', filename, "couldn't be loaded.\n", err);
-		}
+		const command = reload(filename);
+		command.filename = filename;
+		this.addCommand(command);
 		return this;
 	}
 
