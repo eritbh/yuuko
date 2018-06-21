@@ -10,6 +10,7 @@ order: 3
 - [Class: `Client`](#class-client-extends-erisclient)
   - [`new Client(config)`](#constructor-new-clientconfig)
   - [Properties](#properties)
+  - [Event: `ready`](#ready)
   - [`addCommand(command)`](#addcommandcommand--client)
   - [`addCommandFile(filename)`](#addcommandfile--client)
   - [`addCommandDir(dirname)`](#addcommanddirdirname--client)
@@ -95,6 +96,14 @@ Name | Type | Description
 `allowMention` | Boolean | Whether or not the bot can respond to messages starting with a mention of the bot.
 `mentionPrefixRegExp` | RegExp&#124;`null` | The RegExp used to tell whether or not a message starts with a mention of the bot. Only present after the 'ready' event.
 `app` | Object&#124;`null` | The OAuth application information returned by Discord. Only present after the 'ready' event.
+
+## Events
+
+### `ready`
+
+Overridden from the [Eris `ready` event](https://abal.moe/Eris/docs/Client#event-ready). Functionally the same, but only emitted after internal setup of the `app` and `prefixMentionRegExp` properties.
+
+This event recieves no arguments.
 
 ## Methods
 

@@ -92,8 +92,13 @@ class Client extends Eris.Client {
 			// Register the message event listener now that everything is ready
 			this.on('messageCreate', this.handleMessage);
 
-			// Emit back to consumers now that our setup is done
-			super.emit(name, ...args);
+			/**
+			 * @event Client#ready
+			 * Overridden from the Eris ready event. Functionally the same, but only
+			 * emitted after internal setup of the app and prefixMentionRegExp
+			 * properties.
+			 */
+			super.emit('ready', ...args);
 		});
 	}
 
