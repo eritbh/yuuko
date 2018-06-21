@@ -59,25 +59,42 @@ class Client extends Eris.Client {
 		 */
 		this.commands = [];
 
-		this.on('ready', () => {
-			/**
-			 * @prop {RegExp} - The RegExp used to tell whether or not a message starts
-			 * with a mention of the bot. Only present after the 'ready' event.
-			 */
-			this.mentionPrefixRegExp = new RegExp(`^<@!?${this.user.id}>\\s?`);
+		/**
+		 * @prop {RegExp|null} - The RegExp used to tell whether or not a message starts
+		 * with a mention of the bot. Only present after the 'ready' event.
+		 */
+		this.mentionPrefixRegExp = null;
 
-			this.getOAuthApplication().then(app => {
-				/**
-				 * @prop {object} - The OAuth application information returned by
-				 * Discord. Present some time after the ready event.
-				 */
-				this.app = app;
-			});
+		/**
+		 * @prop {object|null} - The OAuth application information returned by
+		 * Discord. Only present after the 'ready' event.
+		 */
+		this.app = null;
 
-			u.success(`Logged in as @${this.user.username}#${this.user.discriminator} - in ${this.guilds.size} guild${this.guilds.size === 1 ? '' : 's'}, ${this.commands.length} command${this.commands.length === 1 ? '' : 's'} loaded`);
-		}).on('error', err => {
+		this.on('error', err => {
 			u.error('Error in client:\n', err.stack);
-		}).on('messageCreate', this.handleMessage);
+		});
+	}
+
+	// Override Eris's emit method so we can intercept the ready event
+	emit (name, ...args) {
+		// We only want to customize the 'ready' event
+		if (name !== 'ready') return super.emit(name, ...args);
+
+		this.mentionPrefixRegExp = new RegExp(`^<@!?${this.user.id}>\\s?`);
+
+		this.getOAuthApplication().then(app => {
+			this.app = app;
+
+			// Log the things
+			u.success(`Logged in as @${this.user.username}#${this.user.discriminator} - in ${this.guilds.size} guild${this.guilds.size === 1 ? '' : 's'}, ${this.commands.length} command${this.commands.length === 1 ? '' : 's'} loaded`);
+
+			// Register the message event listener now that everything is ready
+			this.on('messageCreate', this.handleMessage);
+
+			// Emit back to consumers now that our setup is done
+			super.emit(name, ...args);
+		});
 	}
 
 	/**
