@@ -93,8 +93,8 @@ Name | Type | Description
 `prefix` | String | The default prefix the bot will respond to in guilds for which there is no other confguration. (Currently all of them)
 `commands` | Array&lt;Command&gt; | An array of commands which the bot looks for in messages.
 `allowMention` | Boolean | Whether or not the bot can respond to messages starting with a mention of the bot.
-`mentionPrefixRegExp` | RegExp | The RegExp used to tell whether or not a message starts with a mention of the bot. Only present after the 'ready' event.
-`app` | Object | The OAuth application information returned by Discord. Present some time after the ready event.
+`mentionPrefixRegExp` | RegExp&#124;`null` | The RegExp used to tell whether or not a message starts with a mention of the bot. Only present after the 'ready' event.
+`app` | Object&#124;`null` | The OAuth application information returned by Discord. Only present after the 'ready' event.
 
 ## Methods
 
@@ -183,6 +183,7 @@ Name | Type | Description
 ## Properties
 
 Name | Type | Description
+-----|------|------------
 `name` | String | The name of the command.
 `aliases` | Array&lt;String&gt; | An array of aliases, or alternate names, the command can be called by.
 `names` | Array&lt;String&gt; | An array of names the command can be called by. Contains the command's name as the first item, and any aliases of the command as subsequent items.
