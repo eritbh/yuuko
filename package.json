@@ -21,6 +21,7 @@
     "require-reload": "^0.2.2"
   },
   "devDependencies": {
+    "another-logger": "^2.0.0-pre2",
     "color": "^3.0.0",
     "d20": "^1.4.1",
     "eslint": "^4.19.1",
