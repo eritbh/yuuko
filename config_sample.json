@@ -2,7 +2,5 @@
     "token": "some_token",
     "prefix": "~",
     "allowMention": true,
-    "ignoreBots": true,
-    "logLevel": 1,
-    "timestamps": false
+    "ignoreBots": true
 }

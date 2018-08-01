@@ -1,16 +1,8 @@
 const {Client} = require('./src/Yuuko');
 const path = require('path');
-const Logger = require('another-logger');
+const log = require('another-logger');
 const config = require('./config');
 const superagent = require('superagent');
-
-const log = new Logger({
-	timestamp: config.timestamps,
-	minLevel: 0,
-	levels: {
-		command: {level: 1, style: 'blue'}
-	}
-});
 
 const c = new Client(config);
 

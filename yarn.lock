@@ -29,9 +29,9 @@ ajv@^5.2.3, ajv@^5.3.0:
     fast-json-stable-stringify "^2.0.0"
     json-schema-traverse "^0.3.0"
 
-another-logger@^2.0.0-pre2:
-  version "2.0.0-pre2"
-  resolved "https://registry.yarnpkg.com/another-logger/-/another-logger-2.0.0-pre2.tgz#00d4fd332cb05e0a703b89bc59f19baba9c629c5"
+another-logger@^2.0.0-pre3:
+  version "2.0.0-pre3"
+  resolved "https://registry.yarnpkg.com/another-logger/-/another-logger-2.0.0-pre3.tgz#9abda9c8d500015a28c6fc1a6a69010fbf9d3d02"
   dependencies:
     chalk "^2.4.1"
 
