@@ -16,10 +16,8 @@ class Client extends Eris.Client {
 	 * guilds for which there is no other confguration. (Currently everywhere)
 	 * @param {boolean} options.allowMention - Whether or not the bot can respond
 	 * to messages starting with a mention of the bot.
-	 * @param {number} options.logLevel - The minimum message level for logged
-	 * events in the console.
-	 * @param {boolean} options.timestamps - Whether or not to include timestamps
-	 * in console log output.
+	 * @param {Object} options.storage - A storage object to use for storing
+	 * persistent data the bot will use.
 	 */
 	constructor (options = {}) {
 		super(options.token, options);
@@ -44,6 +42,14 @@ class Client extends Eris.Client {
 		 * accounts. Defaults to true.
 		 */
 		this.ignoreBots = options.ignoreBots == null ? true : options.ignoreBots;
+
+		/**
+		 * @prop {Object} - The storage object for the client.
+		 */
+		this.storage = options.storage;
+		if (!this.storage) {
+			process.emitWarning('No storage source specified.');
+		}
 
 		/**
 		 * @prop {Array<Command>} - An array of commands the bot will respond to.
