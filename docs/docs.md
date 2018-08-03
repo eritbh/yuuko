@@ -25,6 +25,7 @@ order: 3
   - [`new Command(name, process)`](#constructor-new-commandname-process)
   - [Process function](#process-function)
   - [Properties](#properties-1)
+  - [`checkPermissions(client, msg)`](#checkpermissionsclient-msg)
 
 </aside>
 <main markdown="1">
@@ -224,6 +225,29 @@ Name | Type | Description
 `aliases` | Array&lt;String&gt; | An array of aliases, or alternate names, the command can be called by.
 `names` | Array&lt;String&gt; | An array of names the command can be called by. Contains the command's name as the first item, and any aliases of the command as subsequent items.
 `process` | Function | See above.
+
+## Methods
+
+### `checkPermissions(client, msg)` &raquo; `Promise<Boolean>`
+
+Checks whether or not a command can be executed.
+
+Name | Type | Description
+-----|------|------------
+`client` | Client | The client instance that recieved the message triggering the check.
+`msg` | [Message Object](https://abal.moe/Eris/docs/Message) | The message that triggered the check.
+
+### `execute(client, msg, args, prefix, commandName)`
+
+Executes the command process if the permission checks pass.
+
+Name | Type | Description
+-----|------|------------
+`client` | Client | The client instance that recieved the message triggering the command.
+`msg` | [Message Object](https://abal.moe/Eris/docs/Message) | The message that triggered the command.
+`args` | Array<String> | An array of arguments passed to the command, obtained by removing the command name and prefix from the message, then splitting on spaces. To get the raw text that was passed to the command, use `args.join(' ')`.
+`prefix` | String | The prefix used in the message.
+`commandName` | String | The name or alias used to call the command in the message. Will be one of the values of `this.names`.
 
 ---
 
