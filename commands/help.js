@@ -24,7 +24,17 @@ module.exports = new Command(['help', 'man', 'h', null], async function (msg, ar
 	let message;
 	// If we got nothing, command list
 	if (!args[0]) {
-		const commandList = this.commands.filter(c => c.checkPermissions(this, msg)).map(c => '`' + prefix + c.name + '`').join(', ');
+		// Generate a list of commands that the user can execute
+		let commandList = [];
+		for (let command of this.commands) {
+			if (await command.checkPermissions(this, msg)) {
+				commandList.push(command);
+			}
+		}
+		// Generate comma-separated list with command names in code sections
+		commandList = commandList
+			.map(c => '`' + prefix + c.name + '`')
+			.join(', ');
 		message = `**=== Help: Command List ===**
 You can use the following commands: ${commandList}
 Use \`${prefix}help [command]\` to get more info on that command!`;
