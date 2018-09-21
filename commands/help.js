@@ -16,6 +16,19 @@ function helpText (command, prefix) {
 	return txt;
 }
 
+/**
+ * Helper function to emulate the behavior of Array#filter with async functions.
+ * Reference: {@link https://stackoverflow.com/a/33401045}
+ * @param {Array<*>} array An array of values to filter.
+ * @param {*} filter The filter function. The same as a function passed to
+ * Array#filter, but resolves to true/false rather than returning true/false.
+ * @returns {Array<*>} The filtered array.
+ */
+async function filterAsync (array, filter) {
+	const bits = await Promise.all(array.map((el, i) => filter(el, i, array)));
+	return array.filter(() => bits.shift());
+}
+
 module.exports = new Command(['help', 'man', 'h', null], async function (msg, args, prefix) {
 	// If the prefix is a mention of the bot, use a blank string instead so our
 	// command list output is less terrible
@@ -24,7 +37,10 @@ module.exports = new Command(['help', 'man', 'h', null], async function (msg, ar
 	let message;
 	// If we got nothing, command list
 	if (!args[0]) {
-		const commandList = this.commands.filter(c => c.checkPermissions(this, msg)).map(c => '`' + prefix + c.name + '`').join(', ');
+		// Generate a list of commands that the user can execute
+		const commandList = (await filterAsync(this.commands, c => c.checkPermissions(this, msg)))
+			.map(c => `\`${prefix}${c.name}\``)
+			.join(', ');
 		message = `**=== Help: Command List ===**
 You can use the following commands: ${commandList}
 Use \`${prefix}help [command]\` to get more info on that command!`;

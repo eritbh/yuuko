@@ -1,10 +1,10 @@
 {
   "name": "yuuko",
-  "version": "0.7.0",
+  "version": "0.7.1",
   "description": "A Discord bot base that I did for some reason.",
   "main": "src/Yuuko.js",
   "scripts": {
-    "start": "node index.js",
+    "start": "node index.js --no-warnings",
     "test": "eslint index.js src/* commands/*",
     "test-fix": "eslint --fix index.js src/* commands/*"
   },
@@ -16,8 +16,8 @@
   },
   "homepage": "https://geo1088.github.io/yuuko",
   "dependencies": {
-    "eris": "^0.8.5",
-    "glob": "^7.1.2",
+    "eris": "^0.9.0",
+    "glob": "^7.1.3",
     "require-reload": "^0.2.2"
   },
   "devDependencies": {
