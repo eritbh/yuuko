@@ -55,7 +55,6 @@ class Command {
 		return new Promise(async resolve => {
 			// Owner checking
 			if (this.requirements.owner !== undefined) {
-				if (!client.app) return resolve(false);
 				const isOwner = client.app.owner.id === msg.author.id;
 				if (isOwner !== this.requirements.owner) return resolve(false);
 			}
