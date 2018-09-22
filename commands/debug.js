@@ -8,11 +8,6 @@ const inspectOptions = {
 };
 
 module.exports = new Command('debug', async function (msg, args, prefix, commandName) {
-	if (this.app.owner.id !== msg.author.id) {
-		msg.channel.createMessage("You're not my dad.");
-		return;
-	}
-
 	// Parse out code blocks
 	args = args.join(' ').replace(/^\s+/, '').replace(/\s*$/, '');
 	if (args.startsWith('```') && args.endsWith('```')) {
@@ -71,4 +66,6 @@ module.exports = new Command('debug', async function (msg, args, prefix, command
 			outputMsg.edit(newContent.join('\n')).catch(() => {});
 		}
 	}
+}, {
+	owner: true
 });
