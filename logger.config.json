@@ -1,0 +1,9 @@
+{
+	"levels": {
+		"command": {"style": "blue"},
+		"erisDebug": {"style": "cyan"}
+	},
+	"ignoredLevels": [
+		"erisDebug"
+	]
+}

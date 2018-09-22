@@ -22,9 +22,9 @@ c.on('error', (error, shard) => {
 c.on('warn', (warn, shard) => {
 	log.warn(`[shard ${shard}] ${warn}`);
 });
-// c.on('debug', (debug, shard) => {
-// 	log.debug(`[shard ${shard}] ${debug}`);
-// });
+c.on('debug', (debug, shard) => {
+	log.erisDebug(`[shard ${shard}] ${debug}`);
+});
 process.on('warning', warning => { // for best results, run with --no-warnings
 	log.warn(`${warning.name}: ${warning.message}`);
 });
