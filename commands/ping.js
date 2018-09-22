@@ -9,8 +9,6 @@ module.exports = new Command('ping', async function (msg) {
 		const diff = Date.now() - then;
 		await newmsg.edit(`${newmsg.content} (${diff}ms)`);
 	} catch (_) {} // Missing permissions, we don't need to worry here
-}, {
-	permissions: 'sendTTSMessages'
 });
 module.exports.help = {
 	desc: 'Pings the bot.',
