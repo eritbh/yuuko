@@ -41,8 +41,6 @@ class Command {
 		if (requirements.owner) this.requirements.owner = true;
 		if (requirements.permissions) this.requirements.permissions = makeArray(requirements.permissions);
 		if (requirements.custom) this.requirements.custom = makeArray(requirements.custom);
-
-		console.log(this);
 	}
 
 	/**
@@ -82,7 +80,6 @@ class Command {
 
 			// Permissions
 			if (permissions && permissions.length > 0) {
-				console.log(permissions)
 				// If we require permissions, the command can't be used in direct messages
 				if (!msg.channel.guild) {
 					return resolve(false);
