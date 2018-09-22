@@ -1,5 +1,21 @@
 'use strict';
 
+/**
+ * Takes an object and returns it inside an array, or unmodified if it is
+ * already an array. If undefined is passed, an empty array is returned.
+ * @param {*} thing The object.
+ * @returns {Array} The array-ified object.
+ */
+function makeArray (thing) {
+	if (Array.isArray(thing)) {
+		return thing;
+	} else if (thing === undefined) {
+		return [];
+	} else {
+		return [thing];
+	}
+}
+
 /** Class representing a command. */
 class Command {
 	/**
@@ -21,7 +37,12 @@ class Command {
 		if (!this.name) throw new TypeError('Name is required');
 		this.process = process;
 		if (!this.process) throw new TypeError('Process is required');
-		this.requirements = requirements;
+		this.requirements = {};
+		if (requirements.owner) this.requirements.owner = true;
+		if (requirements.permissions) this.requirements.permissions = makeArray(requirements.permissions);
+		if (requirements.custom) this.requirements.custom = makeArray(requirements.custom);
+
+		console.log(this);
 	}
 
 	/**
@@ -53,17 +74,35 @@ class Command {
 	 */
 	async checkPermissions (client, msg) {
 		return new Promise(async resolve => {
+			const {owner, permissions, custom} = this.requirements
 			// Owner checking
-			if (this.requirements.owner !== undefined) {
-				const isOwner = client.app.owner.id === msg.author.id;
-				if (isOwner !== this.requirements.owner) return resolve(false);
+			if (this.requirements.owner && client.app.owner.id === msg.author.id) {
+				return resolve(false);
 			}
-			// Custom requirements
-			const customRequirements = (typeof this.requirements.custom === 'function' ? [this.requirements.custom] : this.requirements.custom) || [];
-			const vals = await Promise.all(customRequirements.map(f => f.call(client, msg)));
-			if (vals.some(val => !val)) return resolve(false);
 
-			// Nothing broke, must be good to go
+			// Permissions
+			if (permissions && permissions.length > 0) {
+				console.log(permissions)
+				// If we require permissions, the command can't be used in direct messages
+				if (!msg.channel.guild) {
+					return resolve(false);
+				}
+				// Calculate permissions of the user and check all we need
+				const memberPerms = msg.channel.permissionsOf(msg.author.id);
+				for (let permission of permissions) {
+					if (!memberPerms.has(permission)) {
+						return resolve(false);
+					}
+				}
+			}
+
+			// Custom requirements
+			if (custom) {
+				const vals = await Promise.all(custom.map(f => f.call(client, msg)));
+				if (vals.some(val => !val)) return resolve(false);
+			}
+
+			// If we haven't returned yet, all requirements are met
 			resolve(true);
 		});
 	}
