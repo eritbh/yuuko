@@ -22,10 +22,12 @@ order: 3
   - [`prefixForMessage(msg)`](#prefixformessagemsg--string)
   - [`splitPrefixFromContent(msg)`](#splitprefixfromcontentmsg--arraystringnull)
 - [Class: `Command`](#class-command)
-  - [`new Command(name, process)`](#constructor-new-commandname-process)
+  - [`new Command(name, process, requirements)`](#constructor-new-commandname-process-requirements)
   - [Process function](#process-function)
+  - [Custom requirement function](#custom-requirement-function)
   - [Properties](#properties-1)
   - [`checkPermissions(client, msg)`](#checkpermissionsclient-msg)
+  - [`execute(client, msg, args, prefix, commandName)`](#executeclient-msg-args-prefix-commandname)
 
 </aside>
 <main markdown="1">
@@ -197,7 +199,7 @@ Name | Type | Description
 
 A command that can be executed by users of the bot. Accessible via `require('yuuko').Command`.
 
-## Constructor: `new Command(name, process)`
+## Constructor: `new Command(name, process, requirements)`
 
 Creates a command. Note that a command must be registered to the client instance with `addCommand()` or another related method before being available to users of your bot.
 
@@ -205,6 +207,10 @@ Name | Type | Description
 -----|------|------------
 `name` | String&#124;Array | The name of the command. Command names are case-insensitive. If a string is passed, that string simply becomes the command's name; if an array is passed, the first element becomes the command's name and the rest become aliases.
 `process` | Function | See below.
+`requirements` | Object? | An object of requirements that must be met for a user to be allowed to run the command. If omitted, all users will be able to run it.
+`requirements.owner` | Boolean? | If `true`, only the owner of the bot's OAuth application can use the command.
+`requirements.permissions` | String&#124;Array&lt;String&gt;? | A permission name or array of permission names that the user running the command must have. If specifying a list, the user must have *all* of the permissions listed.
+`requirements.custom` | Function&#124;Array&lt;Function&gt;? | A function or array of functions whose return values determine whether or not the command can be run. If every function specified here returns `true` (or any truthy value), the user can run the command.
 
 ## Process function
 
@@ -217,6 +223,15 @@ Name | Type | Description
 `prefix` | String | The prefix used in the message.
 `commandName` | String | The name or alias used to call the command in the message. Will be one of the values of `this.names`.
 
+## Custom requirement function
+
+A function that returns `true` if the given message should trigger the command, and `false` if it should not.
+
+Name | Type | Description
+-----|------|------------
+`msg` | [Message Object](https://abal.moe/Eris/docs/Message) | The message that triggered the check.
+`client` | Client | The client instance that recieved the message triggering the check.
+
 ## Properties
 
 Name | Type | Description
@@ -225,12 +240,13 @@ Name | Type | Description
 `aliases` | Array&lt;String&gt; | An array of aliases, or alternate names, the command can be called by.
 `names` | Array&lt;String&gt; | An array of names the command can be called by. Contains the command's name as the first item, and any aliases of the command as subsequent items.
 `process` | Function | See above.
+`requirements` | Object | An object of requirements that must be met for a user to be allowed to run the command.
 
 ## Methods
 
 ### `checkPermissions(client, msg)` &raquo; `Promise<Boolean>`
 
-Checks whether or not a command can be executed.
+Checks whether or not a command can be executed based on the command's requirements (set in the constructor's `requirements` argument).
 
 Name | Type | Description
 -----|------|------------
@@ -245,7 +261,7 @@ Name | Type | Description
 -----|------|------------
 `client` | Client | The client instance that recieved the message triggering the command.
 `msg` | [Message Object](https://abal.moe/Eris/docs/Message) | The message that triggered the command.
-`args` | Array<String> | An array of arguments passed to the command, obtained by removing the command name and prefix from the message, then splitting on spaces. To get the raw text that was passed to the command, use `args.join(' ')`.
+`args` | Array&lt;String&gt; | An array of arguments passed to the command, obtained by removing the command name and prefix from the message, then splitting on spaces. To get the raw text that was passed to the command, use `args.join(' ')`.
 `prefix` | String | The prefix used in the message.
 `commandName` | String | The name or alias used to call the command in the message. Will be one of the values of `this.names`.
 
