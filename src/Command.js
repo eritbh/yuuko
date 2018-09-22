@@ -72,7 +72,7 @@ class Command {
 	 */
 	async checkPermissions (client, msg) {
 		return new Promise(async resolve => {
-			const {owner, permissions, custom} = this.requirements
+			const {owner, permissions, custom} = this.requirements;
 			// Owner checking
 			if (owner && client.app.owner.id !== msg.author.id) {
 				return resolve(false);

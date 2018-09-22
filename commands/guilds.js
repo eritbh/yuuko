@@ -11,7 +11,7 @@ module.exports = new Command('guilds', function (msg) {
 			.map((g, i) => {
 				const number = `${i + 1}.`.padStart(4);
 				const users = `${g.members.size}`.padStart(6);
-				return `${number} ${users}  ${g.name}`
+				return `${number} ${users}  ${g.name}`;
 			})
 			// Join lines
 			.join('\n')
