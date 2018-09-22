@@ -13,7 +13,7 @@ c.on('commandLoaded', command => {
 c.on('ready', () => {
 	log.success(`Logged in as @${c.user.username}#${c.user.discriminator} in ${c.guilds.size} guild${c.guilds.size === 1 ? '' : 's'}, ${c.commands.length} command${c.commands.length === 1 ? '' : 's'}`);
 });
-c.on('preCommand', (command, msg) => {
+c.on('command', (command, msg) => {
 	log.command(`${command.name} from user ${msg.author.id} in channel ${msg.channel.id}`);
 });
 c.on('error', (error, shard) => {
