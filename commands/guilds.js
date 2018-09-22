@@ -1,6 +1,6 @@
 const Command = require('../src/Command');
 
-module.exports = new Command('usage', function (msg) {
+module.exports = new Command('guilds', function (msg) {
 	const guilds = `\`\`\`\n${
 		Array.from(this.guilds.values())
 			// Descending sort
@@ -16,7 +16,7 @@ module.exports = new Command('usage', function (msg) {
 			// Join lines
 			.join('\n')
 	}\n\`\`\``;
-	msg.channel.createMessage(`**=== Largest Guilds ===**\n${guilds}`);
+	msg.channel.createMessage(`**=== Guilds ===**\nTotal: ${this.guilds.size}\n${guilds}`);
 }, {
 	owner: true
 });
