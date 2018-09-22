@@ -95,7 +95,7 @@ class Command {
 
 			// Custom requirements
 			if (custom) {
-				const vals = await Promise.all(custom.map(f => f.call(client, msg)));
+				const vals = await Promise.all(custom.map(f => f.call(this, msg, client)));
 				if (vals.some(val => !val)) return resolve(false);
 			}
 
