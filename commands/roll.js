@@ -3,12 +3,12 @@
 const Command = require('../src/Command');
 const d20 = require('d20');
 
-module.exports = new Command(['roll', 'r'], async function (msg, args) {
+module.exports = new Command(['roll', 'r'], (msg, args) => {
 	if (!args.length) {
 		args[0] = '1d6';
 	}
 	const response = args.map(roll => {
-		if (!roll) return;
+		if (!roll) return null;
 		roll = roll
 			.replace(/^(\d+)(?!d)/, 'd$1')
 			.replace(/^d/, '1d')

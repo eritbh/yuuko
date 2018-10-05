@@ -43,13 +43,13 @@ function embedResults (results, search) {
 	};
 }
 
-module.exports = new Command('npm', async function (msg, args) {
+module.exports = new Command('npm', async (msg, args) => {
 	args = args.join(' ').toLowerCase();
 	if (!args) {
 		msg.channel.createMessage('You need to provide something to search for!');
 		return;
 	}
-	let safeArgs = encodeURIComponent(args);
+	const safeArgs = encodeURIComponent(args);
 	const webLink = `<https://www.npmjs.com/search?q=${safeArgs}>`;
 	try {
 		msg.channel.sendTyping();
@@ -63,7 +63,7 @@ module.exports = new Command('npm', async function (msg, args) {
 			return;
 		}
 
-		let results = res.body.results.slice(0, 3);
+		const results = res.body.results.slice(0, 3);
 		let content = `Top results from ${webLink}`;
 
 		// Handle a perfect match

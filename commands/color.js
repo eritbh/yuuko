@@ -3,7 +3,7 @@
 const Command = require('../src/Command');
 const color = require('color');
 
-module.exports = new Command('color', async function (msg, args) {
+module.exports = new Command('color', (msg, args) => {
 	// Parse args as color
 	const joinedArgs = args.join(' ');
 	let col;
@@ -11,7 +11,7 @@ module.exports = new Command('color', async function (msg, args) {
 		col = color(joinedArgs);
 	} catch (e) {
 		try {
-			col = color('#' + joinedArgs);
+			col = color(`#${joinedArgs}`);
 		} catch (e) {
 			msg.channel.createMessage("Doesn't look like that's a valid CSS color.").catch(() => {});
 			return;

@@ -2,7 +2,7 @@
 
 const Command = require('../src/Command');
 
-module.exports = new Command(['setstatus', 'setgame'], async function (msg, args) {
+module.exports = new Command(['setstatus', 'setgame'], function (msg, args) {
 	let status = args.splice(0, 1)[0];
 	switch (status) {
 		case 'dnd':

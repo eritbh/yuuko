@@ -7,7 +7,9 @@ const inspectOptions = {
 	depth: 1
 };
 
-module.exports = new Command('debug', async function (msg, args, prefix, commandName) {
+// We give the prefix and commandName args for debugging purposes
+// eslint-disable-next-line no-unused-vars
+module.exports = new Command('debug', (async (msg, args, prefix, commandName) => {
 	// Parse out code blocks
 	args = args.join(' ').replace(/^\s+/, '').replace(/\s*$/, '');
 	if (args.startsWith('```') && args.endsWith('```')) {
@@ -36,14 +38,14 @@ module.exports = new Command('debug', async function (msg, args, prefix, command
 	} catch (e) {
 		result = e;
 	}
-	const message = '```js\n' + c._formatLines() + util.inspect(result, inspectOptions) + '\n```';
+	const message = `\`\`\`js\n${c._formatLines()}${util.inspect(result, inspectOptions)}\n\`\`\``;
 
 	// Send the message
 	let outputMsg;
 	try {
 		outputMsg = await msg.channel.createMessage(message);
 	} catch (err) {
-		msg.channel.createMessage('Error sending message:\n```\n' + err + '\n```').catch(() => {});
+		msg.channel.createMessage(`Error sending message:\n\`\`\`\n${err}\n\`\`\``).catch(() => {});
 		return;
 	}
 
@@ -58,7 +60,7 @@ module.exports = new Command('debug', async function (msg, args, prefix, command
 		}
 		// Now we can edit the message with the promise's resolved result(s).
 		const newContent = outputMsg.content.split('\n');
-		newContent.splice(-1, 0, `// Resolved to:`, value);
+		newContent.splice(-1, 0, '// Resolved to:', value);
 		try {
 			await outputMsg.edit(newContent.join('\n'));
 		} catch (_) {
@@ -66,6 +68,6 @@ module.exports = new Command('debug', async function (msg, args, prefix, command
 			outputMsg.edit(newContent.join('\n')).catch(() => {});
 		}
 	}
-}, {
+}), {
 	owner: true
 });

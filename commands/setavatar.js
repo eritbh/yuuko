@@ -31,7 +31,7 @@ module.exports = new Command('setavatar', async function (msg, args) {
 			msg.channel.createMessage('There was an error while uploading the new avatar.').catch(() => {});
 		}
 	} catch (err) {
-		msg.channel.createMessage('Error while retrieving avatar: ' + err).catch(() => {});
+		msg.channel.createMessage(`Error while retrieving avatar: ${err}`).catch(() => {});
 	}
 	msg.channel.createMessage('Avatar updated!').catch(() => {});
 }, {

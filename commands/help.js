@@ -4,15 +4,16 @@ const Command = require('../src/Command');
 
 /**
  * Returns the help text for a command.
- * @param {string} prefix - The prefix to use when generating the text. Used
+ * @param {Command} command The command to get the help text for.
+ * @param {string} prefix The prefix to use when generating the text. Used
  * in usage examples within the returned text.
- * @returns {string}
+ * @returns {string} The help text.
  */
 function helpText (command, prefix) {
 	let txt = '';
 	if (command.help.desc) txt += `**Description:** ${command.help.desc}\n`;
 	if (command.help.args) txt += `**Usage:** \`${prefix}${command.name} ${command.help.args}\`\n`;
-	if (command.aliases.length) txt += `**Aliases:** ${command.aliases.map(p => '`' + prefix + p + '`').join(', ')}\n`;
+	if (command.aliases.length) txt += `**Aliases:** ${command.aliases.map(p => `\`${prefix}${p}\``).join(', ')}\n`;
 	return txt;
 }
 
@@ -46,7 +47,7 @@ You can use the following commands: ${commandList}
 Use \`${prefix}help [command]\` to get more info on that command!`;
 	} else {
 		// Find the command we're talking about
-		let command = this.commandForName(args[0]);
+		const command = this.commandForName(args[0]);
 		// If this command doesn't exist or isn't documented, tell the user
 		if (!command || !command.help) {
 			message = `**=== Help: Unknown Command ===**
@@ -62,8 +63,10 @@ Make sure you spelled the command name right, and that this bot has it. Do \`${p
 	} catch (_) {
 		try {
 			const channel = await this.getDMChannel(msg.author.id);
-			await channel.createMessage(message + "\n---\n*It appears I can't send messages in the channel you sent that command in, so I've sent my response here instead. Double-check my permissions if this isn't intentional.*");
-		} catch (_) {} // Blocked DMs or something, don't worry about it
+			await channel.createMessage(`${message}\n---\n*It appears I can't send messages in the channel you sent that command in, so I've sent my response here instead. Double-check my permissions if this isn't intentional.*`);
+		} catch (_) {
+			// Blocked DMs or something, don't worry about it
+		}
 	}
 });
 module.exports.help = {

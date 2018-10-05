@@ -8,7 +8,7 @@ module.exports = new Command('setname', async function (msg, args) {
 		await this.editSelf({username: args.join(' ')});
 		await msg.channel.createMessage('Username updated!');
 	} catch (err) {
-		msg.channel.createMessage('There was an error while changing username.\n```\n' + err.message + '\n```').catch(() => {});
+		msg.channel.createMessage(`There was an error while changing username.\n\`\`\`\n${err.message}\n\`\`\``).catch(() => {});
 	}
 }, {
 	owner: true

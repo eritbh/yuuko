@@ -22,7 +22,7 @@ module.exports = new Command(['about', 'uptime', 'info'], async function (msg, a
 	const uptimeDuration = moment.duration(this.uptime).humanize();
 	const uptimeStart = moment().subtract(this.uptime).tz('America/New_York').format('YYYY-DD-mm kk:mm z');
 	const link = packageJson.homepage;
-	const owner = this.app ? `\`\`${this.app.owner.username}#${this.app.owner.discriminator}\`\`` : `Owner information unavailable, try again in a bit`;
+	const owner = this.app ? `\`\`${this.app.owner.username}#${this.app.owner.discriminator}\`\`` : 'Owner information unavailable, try again in a bit';
 
 	const content = `**=== About Yuuko ===**
 *Use \`${prefix}help\` to get help using the bot.*
@@ -38,7 +38,9 @@ module.exports = new Command(['about', 'uptime', 'info'], async function (msg, a
 		const newmsg = await msg.channel.createMessage(content);
 		const diff = Date.now() - then;
 		await newmsg.edit(newmsg.content.replace('Wait for it...', `${diff}ms`));
-	} catch (_) {}
+	} catch (_) {
+		// pass
+	}
 });
 module.exports.help = {
 	desc: 'Displays information about the bot, including running version, time since last crash, and a link to its source code.',
