@@ -1,5 +1,3 @@
-'use strict';
-
 const Eris = require('eris');
 const glob = require('glob');
 const reload = require('require-reload')(require);
@@ -105,7 +103,7 @@ class Client extends Eris.Client {
 			if (!defaultCommand) return;
 			defaultCommand.execute(this, msg, [], prefix, null);
 		}
-		let args = content.split(' ');
+		const args = content.split(' ');
 		const commandName = args.splice(0, 1)[0];
 		const command = this.commandForName(commandName);
 		if (!command) return;
@@ -118,6 +116,7 @@ class Client extends Eris.Client {
 	/**
 	 * Register a command to the client.
 	 * @param {Command} command - The command to add to the bot.
+	 * @returns {Client} The client object for chaining operations.
 	 */
 	addCommand (command) {
 		if (!(command instanceof Command)) throw new TypeError('Not a command');
@@ -131,12 +130,13 @@ class Client extends Eris.Client {
 	 * Load all the JS files in a directory and attempt to load them each as
 	 * commands.
 	 * @param {string} dirname - The location of the directory.
+	 * @returns {Client} The client object for chaining operations.
 	 */
 	addCommandDir (dirname) {
 		if (!dirname.endsWith('/')) dirname += '/';
-		const pattern = dirname + '*.js';
+		const pattern = `${dirname}*.js`;
 		const filenames = glob.sync(pattern);
-		for (let filename of filenames) {
+		for (const filename of filenames) {
 			this.addCommandFile(filename);
 		}
 		return this;
@@ -145,6 +145,7 @@ class Client extends Eris.Client {
 	/**
 	 * Load a command exported from a file.
 	 * @param {string} filename - The location of the file.
+	 * @returns {Client} The client object for chaining operations.
 	 */
 	addCommandFile (filename) {
 		const command = reload(filename);
@@ -157,6 +158,7 @@ class Client extends Eris.Client {
 	 * Reloads all commands that were loaded via `addCommandFile` and
 	 * `addCommandDir`. Useful for development to hot-reload commands as you work
 	 * on them.
+	 * @returns {Client} The client object for chaining operations.
 	 */
 	reloadCommands () {
 		let i = this.commands.length;
@@ -175,6 +177,7 @@ class Client extends Eris.Client {
 	 * given name, either as the command's name or an alias of the command.
 	 * @param {string} name - The name of the command to look for.
 	 * @returns {Command|null}
+	 * @returns {Client} The client object for chaining operations.
 	 */
 	commandForName (name) {
 		return this.commands.find(c => c.names.includes(name));
@@ -185,6 +188,7 @@ class Client extends Eris.Client {
 	 * certain message.
 	 * @param {Object} msg - The message to check the prefix of.
 	 * @returns {string}
+	 * @returns {Client} The client object for chaining operations.
 	 */
 	prefixForMessage (msg) {
 		// TODO

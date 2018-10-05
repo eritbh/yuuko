@@ -1,5 +1,3 @@
-'use strict';
-
 /**
  * Takes an object and returns it inside an array, or unmodified if it is
  * already an array. If undefined is passed, an empty array is returned.
@@ -11,20 +9,22 @@ function makeArray (thing) {
 		return thing;
 	} else if (thing === undefined) {
 		return [];
-	} else {
-		return [thing];
 	}
+	return [thing];
 }
 
 /** Class representing a command. */
 class Command {
 	/**
 	 * Create a command.
-	 * @param {string|Array} name - The name of the command. If passed as an
-	 * array, the first item of the array is used as the name and the rest of the
-	 * items are set as aliases.
-	 * @param {Command~commandProcess} process - The function to be called when
-	 * the command is executed.
+	 * @param {string|Array} name The name of the command. If passed as an
+	 * array, the first item of the array is used as the name and the rest of
+	 * the items are set as aliases
+	 * @param {Command~commandProcess} process The function to be called when
+	 * the command is executed
+	 * @param {object} requirements A set of requirements for the command to be
+	 * executed
+	 * @todo Further document the requirements object
 	 */
 	constructor (name, process, requirements = {}) {
 		if (Array.isArray(name)) {
@@ -71,37 +71,35 @@ class Command {
 	 * @returns {Promise<Boolean>} Whether or not the command can be executed.
 	 */
 	async checkPermissions (client, msg) {
-		return new Promise(async resolve => {
-			const {owner, permissions, custom} = this.requirements;
-			// Owner checking
-			if (owner && client.app.owner.id !== msg.author.id) {
-				return resolve(false);
-			}
+		const {owner, permissions, custom} = this.requirements;
+		// Owner checking
+		if (owner && client.app.owner.id !== msg.author.id) {
+			return false;
+		}
 
-			// Permissions
-			if (permissions && permissions.length > 0) {
-				// If we require permissions, the command can't be used in direct messages
-				if (!msg.channel.guild) {
-					return resolve(false);
-				}
-				// Calculate permissions of the user and check all we need
-				const memberPerms = msg.channel.permissionsOf(msg.author.id);
-				for (let permission of permissions) {
-					if (!memberPerms.has(permission)) {
-						return resolve(false);
-					}
+		// Permissions
+		if (permissions && permissions.length > 0) {
+			// If we require permissions, the command can't be used in direct messages
+			if (!msg.channel.guild) {
+				return false;
+			}
+			// Calculate permissions of the user and check all we need
+			const memberPerms = msg.channel.permissionsOf(msg.author.id);
+			for (const permission of permissions) {
+				if (!memberPerms.has(permission)) {
+					return false;
 				}
 			}
+		}
 
-			// Custom requirements
-			if (custom) {
-				const vals = await Promise.all(custom.map(f => f.call(this, msg, client)));
-				if (vals.some(val => !val)) return resolve(false);
-			}
+		// Custom requirements
+		if (custom) {
+			const vals = await Promise.all(custom.map(f => f.call(this, msg, client)));
+			if (vals.some(val => !val)) return false;
+		}
 
-			// If we haven't returned yet, all requirements are met
-			resolve(true);
-		});
+		// If we haven't returned yet, all requirements are met
+		return true;
 	}
 
 	/**
