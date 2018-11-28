@@ -12,6 +12,8 @@ class Client extends Eris.Client {
 	 * @param {string} options.token - The token used to log into the bot.
 	 * @param {string} options.prefix - The prefix the bot will respond to in
 	 * guilds for which there is no other confguration. (Currently everywhere)
+	 * @param {boolean} options.caseSensitivePrefix - If false, uses
+	 * case-insensitive matching for the bot's prefix.
 	 * @param {boolean} options.allowMention - Whether or not the bot can respond
 	 * to messages starting with a mention of the bot.
 	 * @param {number} options.logLevel - The minimum message level for logged
@@ -26,10 +28,21 @@ class Client extends Eris.Client {
 		 * @prop {string} - The prefix the bot will respond to in guilds for which
 		 * there is no other confguration.
 		 */
-		this.defaultPrefix = options.prefix;
-		if (this.defaultPrefix === '') {
+		this.prefix = options.prefix;
+		if (this.prefix === '') {
 			process.emitWarning('defaultPrefix is an empty string; bot will not require a prefix to run commands');
 		}
+
+		/**
+		 * @deprecated Synonym for prefix
+		 */
+		this.defaultPrefix = this.prefix;
+
+		/**
+		 * @prop {boolean} - Whether or not the bot uses case-sensitive prefix
+		 * matching. Defaults to false.
+		 */
+		this.caseSensitivePrefix = options.caseSensitivePrefix || false;
 
 		/**
 		 * @prop {boolean} - Whether or not the bot can respond to messages starting
@@ -186,14 +199,28 @@ class Client extends Eris.Client {
 	/**
 	 * Returns the appropriate prefix string to use for commands based on a
 	 * certain message.
+	 * @deprecated
 	 * @param {Object} msg - The message to check the prefix of.
 	 * @returns {string}
 	 * @returns {Client} The client object for chaining operations.
 	 */
 	prefixForMessage (msg) {
-		// TODO
-		if (msg.channel.guild) return this.defaultPrefix;
-		return '';
+		return this.prefix;
+	}
+
+	/**
+	 * Takes a message and checks whether or not it
+	 * @param {Object} msg - The message to process.
+	 * @returns {string|null}
+	 */
+	matchesTextPrefix (msg) {
+		const prefix = this.prefixForMessage(msg);
+		if (prefix == null) return false;
+		if (this.caseSensitivePrefix) {
+			return msg.content.startsWith(prefix);
+		} else {
+			return msg.content.toLowerCase().startsWith(prefix.toLowerCase());
+		}
 	}
 
 	/**
@@ -205,9 +232,8 @@ class Client extends Eris.Client {
 	 **/
 	splitPrefixFromContent (msg) {
 		// Traditional prefix handling - if there is no prefix, skip this rule
-		const prefix = this.prefixForMessage(msg); // TODO: guild config
-		if (prefix != null && msg.content.startsWith(prefix)) {
-			return [prefix, msg.content.substr(prefix.length)];
+		if (this.matchesTextPrefix(msg)) {
+			return [this.prefix, msg.content.substr(this.prefix.length)];
 		}
 		// Allow mentions to be used as prefixes according to config
 		const match = msg.content.match(this.mentionPrefixRegExp);
