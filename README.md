@@ -10,6 +10,8 @@ Usage information for the bot (the usable commands, default configuration, and o
 
 Yuuko's core is available as [a module on npm](https://www.npmjs.com/package/yuuko). It extends [Eris](https://github.com/abalabahaha/eris) and is basically an alternative to its CommandClient class.
 
+The goal of this module is to provide me a base I can use to make basic, single-server bots. As a result, it doesn't include any faculties for things like per-guild prefixes or configuration.
+
 ### Installation
 
 ```bash

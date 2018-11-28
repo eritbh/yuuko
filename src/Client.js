@@ -7,70 +7,55 @@ const Command = require('./Command');
 class Client extends Eris.Client {
 	/**
 	 * Create a client instance.
-	 * @param {Object} options - Options to start the client with. This object is
+	 * @param {Object} options Options to start the client with. This object is
 	 * also passed to Eris.
-	 * @param {string} options.token - The token used to log into the bot.
-	 * @param {string} options.prefix - The prefix the bot will respond to in
-	 * guilds for which there is no other confguration. (Currently everywhere)
-	 * @param {boolean} options.caseSensitivePrefix - If false, uses
-	 * case-insensitive matching for the bot's prefix.
-	 * @param {boolean} options.allowMention - Whether or not the bot can respond
-	 * to messages starting with a mention of the bot.
-	 * @param {number} options.logLevel - The minimum message level for logged
-	 * events in the console.
-	 * @param {boolean} options.timestamps - Whether or not to include timestamps
-	 * in console log output.
+	 * @param {string} options.token The token used to log into the bot.
+	 * @param {string} options.prefix A prefix for incoming messages. Only
+	 * messages starting with this prefix will be treated as commands.
+	 * @param {boolean} [options.caseSensitivePrefix = true] Whether the bot can
+	 * treat the prefix as case-insensitive
+	 * @param {boolean} [options.allowMention = true] Whether the bot can
+	 * respond to messages starting with a mention of the bot instead of a
+	 * prefix
 	 */
 	constructor (options = {}) {
 		super(options.token, options);
 
-		/**
-		 * @prop {string} - The prefix the bot will respond to in guilds for which
-		 * there is no other confguration.
-		 */
+		/** @prop {string} prefix Identical to config option */
 		this.prefix = options.prefix;
 		if (this.prefix === '') {
 			process.emitWarning('defaultPrefix is an empty string; bot will not require a prefix to run commands');
 		}
 
-		/**
-		 * @deprecated Synonym for prefix
-		 */
+		/** @prop @deprecated Synonym for `prefix` */
 		this.defaultPrefix = this.prefix;
 
-		/**
-		 * @prop {boolean} - Whether or not the bot uses case-sensitive prefix
-		 * matching. Defaults to false.
-		 */
+		/** @prop {boolean} caseSensitivePrefix Identical to config option */
 		this.caseSensitivePrefix = options.caseSensitivePrefix == null ? true : options.caseSensitivePrefix;
 
-		/**
-		 * @prop {boolean} - Whether or not the bot can respond to messages starting
-		 * with a mention of the bot. Defaults to true.
-		 */
+		/** @prop {boolean} allowMention Identical to config option */
 		this.allowMention = options.allowMention == null ? true : options.allowMention;
 
-		/**
-		 * @prop {boolean} - Whether or not the bot ignores messages sent from bot
-		 * accounts. Defaults to true.
-		 */
+		/** @prop {boolean} ignoreBots Identical to config option */
 		this.ignoreBots = options.ignoreBots == null ? true : options.ignoreBots;
 
 		/**
-		 * @prop {Array<Command>} - An array of commands the bot will respond to.
-		 * respond to.
+		 * @prop {Array<Command>} commands
+		 * An array of commands the bot will respond to
 		 */
 		this.commands = [];
 
 		/**
-		 * @prop {RegExp|null} - The RegExp used to tell whether or not a message starts
-		 * with a mention of the bot. Only present after the 'ready' event.
+		 * @prop {RegExp|null} mentionPrefixRegExp
+		 * The RegExp used to tell whether or not a message starts with a
+		 * mention of the bot. Null until the 'ready' event
 		 */
 		this.mentionPrefixRegExp = null;
 
 		/**
-		 * @prop {object|null} - The OAuth application information returned by
-		 * Discord. Only present after the 'ready' event.
+		 * @prop {Object|null} app
+		 * The OAuth application information returned by Discord. Null until the
+		 * 'ready' event
 		 */
 		this.app = null;
 
@@ -100,7 +85,7 @@ class Client extends Eris.Client {
 
 	/**
 	 * Given a message, see if there is a command and process it if so.
-	 * @param {Object} msg - The message object recieved from Eris.
+	 * @param {Eris.Message} msg The message object recieved from Eris
 	 */
 	async handleMessage (msg) {
 		if (!msg.author) {
@@ -128,8 +113,8 @@ class Client extends Eris.Client {
 
 	/**
 	 * Register a command to the client.
-	 * @param {Command} command - The command to add to the bot.
-	 * @returns {Client} The client object for chaining operations.
+	 * @param {Command} command The command to add to the bot
+	 * @returns {Client} The client object for chaining operations
 	 */
 	addCommand (command) {
 		if (!(command instanceof Command)) throw new TypeError('Not a command');
@@ -142,8 +127,8 @@ class Client extends Eris.Client {
 	/**
 	 * Load all the JS files in a directory and attempt to load them each as
 	 * commands.
-	 * @param {string} dirname - The location of the directory.
-	 * @returns {Client} The client object for chaining operations.
+	 * @param {string} dirname The absolute location of the directory
+	 * @returns {Client} The client object for chaining operations
 	 */
 	addCommandDir (dirname) {
 		if (!dirname.endsWith('/')) dirname += '/';
@@ -157,8 +142,8 @@ class Client extends Eris.Client {
 
 	/**
 	 * Load a command exported from a file.
-	 * @param {string} filename - The location of the file.
-	 * @returns {Client} The client object for chaining operations.
+	 * @param {string} filename The absolute location of the file
+	 * @returns {Client} The client object for chaining operations
 	 */
 	addCommandFile (filename) {
 		const command = reload(filename);
@@ -169,9 +154,9 @@ class Client extends Eris.Client {
 
 	/**
 	 * Reloads all commands that were loaded via `addCommandFile` and
-	 * `addCommandDir`. Useful for development to hot-reload commands as you work
-	 * on them.
-	 * @returns {Client} The client object for chaining operations.
+	 * `addCommandDir`. Useful for development to hot-reload commands as you
+	 * work on them.
+	 * @returns {Client} The client object for chaining operations
 	 */
 	reloadCommands () {
 		let i = this.commands.length;
@@ -188,9 +173,8 @@ class Client extends Eris.Client {
 	/**
 	 * Checks the list of registered commands and returns one whch is known by a
 	 * given name, either as the command's name or an alias of the command.
-	 * @param {string} name - The name of the command to look for.
-	 * @returns {Command|null}
-	 * @returns {Client} The client object for chaining operations.
+	 * @param {string} name The name of the command to look for
+	 * @returns {Command|null} The correct command, or `null` if there is none
 	 */
 	commandForName (name) {
 		return this.commands.find(c => c.names.includes(name));
@@ -200,18 +184,18 @@ class Client extends Eris.Client {
 	 * Returns the appropriate prefix string to use for commands based on a
 	 * certain message.
 	 * @deprecated
-	 * @param {Object} msg - The message to check the prefix of.
-	 * @returns {string}
-	 * @returns {Client} The client object for chaining operations.
+	 * @param {Object} msg The message to check the prefix of
+	 * @returns {string} The prefix to use
 	 */
 	prefixForMessage (msg) {
 		return this.prefix;
 	}
 
 	/**
-	 * Takes a message and checks whether or not it
-	 * @param {Object} msg - The message to process.
-	 * @returns {string|null}
+	 * Takes a message and checks whether or not it starts with the set prefix,
+	 * taling into account the case-sensitivity option.
+	 * @param {Eris.Message} msg The message to process
+	 * @returns {boolean} Whether or not the message matches the prefix
 	 */
 	matchesTextPrefix (msg) {
 		const prefix = this.prefixForMessage(msg);
@@ -227,8 +211,9 @@ class Client extends Eris.Client {
 	 * Takes a message, gets the prefix based on the config of any guild it was
 	 * sent in, and returns the message's content without the prefix if the
 	 * prefix matches, and `null` if it doesn't.
-	 * @param {Object} msg - The message to process
-	 * @returns {Array<String|null>}
+	 * @param {Eris.Message} msg The message to process
+	 * @returns {Array<String|null>} An array `[prefix, rest]` if the message
+	 * matches the prefix, or `[null, null]` if not
 	 **/
 	splitPrefixFromContent (msg) {
 		// Traditional prefix handling - if there is no prefix, skip this rule
@@ -247,41 +232,6 @@ class Client extends Eris.Client {
 		// we got nothing
 		return [null, null];
 	}
-
-	// /**
-	//  * Creates a message. If the specified message content is longer than 2000
-	//  * characters, splits the message intelligently into chunks until each chunk
-	//  * is less than 2000 characters, then sends each chunk as its own message.
-	//  * Embeds and files are sent with the last message and are otherwise
-	//  * unaffected.
-	//  * @param content
-	//  * @param
-	//  * @TODO everything
-	//  */
-	// _createMessageChunked (channelId, content, file, maxLength = 2000) {
-	//   let embed
-	//   if (typeof content === 'object') {
-	// embed = content.embed
-	// content = content.content
-	//   } else {
-	// embed = null
-	//   }
-	//   let self = this
-	//   ;(function sendChunk (left) {
-	// console.log(left.length)
-	// if (left.length < maxLength) return self.createMessage(channelId, {content, embed}, file)
-	// let newlineIndex = left.substr(0, maxLength).lastIndexOf('\n')
-	// if (newlineIndex < 1) newlineIndex = maxLength - 1
-	// console.log(newlineIndex)
-	// left = left.split('')
-	// const chunk = left.splice(0, newlineIndex)
-	// if (!left.length) {
-	//   // Interesting, the message was exactly good. We'll put the embed and stuff in now.
-	//   return self.createMessage(channelId, {content: chunk, embed: embed}, file)
-	// }
-	// sendChunk(left.join(''), maxLength)
-	//   }(content))
-	// }
 }
 
 module.exports = Client;
