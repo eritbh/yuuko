@@ -20,11 +20,19 @@ class Command {
 	 * @param {string|Array} name The name of the command. If passed as an
 	 * array, the first item of the array is used as the name and the rest of
 	 * the items are set as aliases
-	 * @param {Command~commandProcess} process The function to be called when
+	 * @param {Command~process} process The function to be called when
 	 * the command is executed
-	 * @param {object} requirements A set of requirements for the command to be
+	 * @param {Object} requirements A set of requirements for the command to be
 	 * executed
-	 * @todo Further document the requirements object
+	 * @param {boolean} requirements.owner Whether to restrict the command's
+	 * use to the bot's OAuth app owner
+	 * @param {string|Array<string>} requirements.permissions One or more
+	 * permission names that a person must have in order to use the command. The
+	 * list of permission names can be found in the Eris documentation, under
+	 * the "Eris.Constants.Permissions" section:
+	 * {@link https://abal.moe/Eris/docs/reference}
+	 * @param {Command~customRequirement} requirements.custom A function which
+	 * must return a truthy value to let a user use the command
 	 */
 	constructor (name, process, requirements = {}) {
 		if (Array.isArray(name)) {
@@ -40,35 +48,37 @@ class Command {
 		this.requirements = {};
 		if (requirements.owner) this.requirements.owner = true;
 		if (requirements.permissions) this.requirements.permissions = makeArray(requirements.permissions);
-		if (requirements.custom) this.requirements.custom = makeArray(requirements.custom);
+		if (requirements.custom) this.requirements.custom = requirements.custom;
 	}
 
 	/**
-	 * @callback Command~commandProcess
+	 * @callback Command~process
 	 * A function to be called when a command is executed. Accepts information
-	 * about the message that triggered the command as arguments.
-	 * @this {Yuuko} The client instance that recieved the message triggering the
-	 * command.
-	 * @param {Object} msg - The Eris message object that triggered the command.
-	 * For more information, see the Eris documentation:
-	 * {@link https://abal.moe/Eris/docs/Message}
-	 * @param {Array<string>} args - An array of arguments passed to the command,
-	 * obtained by removing the command name and prefix from the message, then
-	 * splitting on spaces. To get the raw text that was passed to the command,
-	 * use `args.join(' ')`.
-	 * @param {string} prefix - The prefix used in the message.
-	 * @param {string} commandName - The name or alias used to call the command in
-	 * the message. Will be one of the values of `this.names`.
+	 * about the message that triggered the command as arguments
+	 * @this {Client} The client that received the command message
+	 * @param {Eris.Message} msg The message triggering the command
+	 * @param {Array<string>} args - An array of arguments passed to the
+	 * command, obtained by removing the command name and prefix from the
+	 * message, then splitting on spaces
+	 * @param {string} prefix - The prefix used in the message
+	 * @param {string} commandName - The name or alias used to call the command
+	 * in the message
 	 */
+
+	 /**
+	  * @callback Command~customRequirement
+	  * A function called when checking whether a user has permission to use a
+	  * command or not. Return truthy if the user should be allowed to use it,
+	  * falsy if they should not.
+	  * @this {Client} The client that received the command message
+	  * @param {Eris.Message} msg The message triggering the command
+	  */
 
 	/**
 	 * Checks whether or not a command can be executed.
-	 * @param {Yuuko} client - The client instance that recieved the message
-	 * triggering the command.
-	 * @param {Object} msg - The Eris message object that triggered the command.
-	 * For more information, see the Eris documentation:
-	 * {@link https://abal.moe/Eris/docs/Message}
-	 * @returns {Promise<Boolean>} Whether or not the command can be executed.
+	 * @param {Client} client The client that received the command message
+	 * @param {Eris.Message} msg The message triggering the command
+	 * @returns {Promise<Boolean>} Whether or not the command can be executed
 	 */
 	async checkPermissions (client, msg) {
 		const {owner, permissions, custom} = this.requirements;
@@ -76,7 +86,6 @@ class Command {
 		if (owner && client.app.owner.id !== msg.author.id) {
 			return false;
 		}
-
 		// Permissions
 		if (permissions && permissions.length > 0) {
 			// If we require permissions, the command can't be used in direct messages
@@ -91,42 +100,31 @@ class Command {
 				}
 			}
 		}
-
-		// Custom requirements
-		if (custom) {
-			const vals = await Promise.all(custom.map(f => f.call(this, msg, client)));
-			if (vals.some(val => !val)) return false;
+		// Custom requirement function
+		if (custom && !await custom.call(client, msg)) {
+			return false;
 		}
-
 		// If we haven't returned yet, all requirements are met
 		return true;
 	}
 
 	/**
 	 * Executes the command process if the permission checks pass.
-	 * @param {Yuuko} client - The client instance that recieved the message
-	 * triggering the command.
-	 * @param {Object} msg - The Eris message object that triggered the command.
-	 * For more information, see the Eris documentation:
-	 * {@link https://abal.moe/Eris/docs/Message}
-	 * @param {Array<string>} args - An array of arguments passed to the command,
-	 * obtained by removing the command name and prefix from the message, then
-	 * splitting on spaces. To get the raw text that was passed to the
-	 * command, use `args.join(' ')`.
-	 * @param {string} prefix - The prefix used in the message.
-	 * @param {string} commandName - The name or alias used to call the command in
-	 * the message. Will be one of the values of `this.names`.
+	 * @param {Client} client The client that received the command message
+	 * @param {Eris.Message} msg The message triggering the command
+	 * @param {Array<string>} args - An array of arguments passed to the
+	 * command, obtained by removing the command name and prefix from the
+	 * message, then splitting on spaces
+	 * @param {string} prefix - The prefix used in the message
+	 * @param {string} commandName - The name or alias used to call the command
+	 * in the message
 	 */
 	async execute (client, msg, args, prefix, commandName) {
 		if (!await this.checkPermissions(client, msg)) return;
 		this.process.call(client, msg, args, prefix, commandName);
 	}
 
-	/**
-	 * All names that can be used to invoke the command - its primary name in
-	 * addition to its aliases.
-	 * @type {Array<string>}
-	 */
+	/** @prop {Array<string>} names All names the command is callable by */
 	get names () {
 		return [this.name, ...this.aliases];
 	}
