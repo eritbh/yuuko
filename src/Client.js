@@ -42,7 +42,7 @@ class Client extends Eris.Client {
 		 * @prop {boolean} - Whether or not the bot uses case-sensitive prefix
 		 * matching. Defaults to false.
 		 */
-		this.caseSensitivePrefix = options.caseSensitivePrefix || false;
+		this.caseSensitivePrefix = options.caseSensitivePrefix == null ? true : options.caseSensitivePrefix;
 
 		/**
 		 * @prop {boolean} - Whether or not the bot can respond to messages starting
@@ -73,6 +73,9 @@ class Client extends Eris.Client {
 		 * Discord. Only present after the 'ready' event.
 		 */
 		this.app = null;
+
+		// Register the message event listener
+		this.on('messageCreate', this.handleMessage);
 	}
 
 	// Override Eris's emit method so we can intercept the ready event
@@ -84,9 +87,6 @@ class Client extends Eris.Client {
 
 		this.getOAuthApplication().then(app => {
 			this.app = app;
-
-			// Register the message event listener now that everything is ready
-			this.on('messageCreate', this.handleMessage);
 
 			/**
 			 * @event Client#ready
