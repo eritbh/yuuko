@@ -25,6 +25,8 @@
     "another-logger": "^2.0.0-pre3",
     "color": "^3.0.0",
     "d20": "^1.4.1",
-    "eslint": "^5.6.1"
+    "eslint": "^5.6.1",
+    "node-timezone": "^0.0.5",
+    "superagent": "^4.0.0"
   }
 }
