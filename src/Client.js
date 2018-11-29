@@ -65,19 +65,17 @@ class Client extends Eris.Client {
 
 	// Override Eris's emit method so we can intercept the ready event
 	emit (name, ...args) {
-		// We only want to customize the 'ready' event
-		if (name !== 'ready') return super.emit(name, ...args);
-
+		// We only want to customize the 'ready' event the first time
+		if (name !== 'ready' || this._gotReady) return super.emit(name, ...args);
+		this._gotReady = true;
 		this.mentionPrefixRegExp = new RegExp(`^<@!?${this.user.id}>\\s?`);
-
 		this.getOAuthApplication().then(app => {
 			this.app = app;
-
 			/**
 			 * @event Client#ready
-			 * Overridden from the Eris ready event. Functionally the same, but only
-			 * emitted after internal setup of the app and prefixMentionRegExp
-			 * properties.
+			 * Overridden from the Eris ready event. Functionally the same, but
+			 * only emitted after internal setup of the app and
+			 * prefixMentionRegExp properties.
 			 */
 			super.emit('ready', ...args);
 		});
