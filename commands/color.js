@@ -9,10 +9,10 @@ module.exports = new Command('color', (msg, args) => {
 	let col;
 	try {
 		col = color(joinedArgs);
-	} catch (e) {
+	} catch (_) {
 		try {
 			col = color(`#${joinedArgs}`);
-		} catch (e) {
+		} catch (__) {
 			msg.channel.createMessage("Doesn't look like that's a valid CSS color.").catch(() => {});
 			return;
 		}
@@ -30,13 +30,13 @@ RGB: \`${col.rgb().string()}\` or \`${col.percentString()}\`
 HSL: \`${col.hsl().round().string()}\`
 ${col.keyword() ? `Keyword: \`${col.keyword()}\`` : ''}`,
 			image: {
-				url: `https://dummyimage.com/240x50/${bareHex}.png?text=+`
+				url: `https://dummyimage.com/240x50/${bareHex}.png?text=+`,
 			},
-			color: col.rgbNumber()
-		}
+			color: col.rgbNumber(),
+		},
 	}).catch(() => {});
 });
 module.exports.help = {
 	desc: 'Gets alternate writings of a CSS color, plus a preview.',
-	args: '<color>'
+	args: '<color>',
 };

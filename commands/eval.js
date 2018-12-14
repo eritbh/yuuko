@@ -1,3 +1,5 @@
+'use strict';
+
 const {Command} = require('../src/Yuuko');
 const superagent = require('superagent');
 
@@ -15,15 +17,20 @@ function urlPartForLang (lang) {
 		case 'python':
 		case 'py':
 			return 'https://hook.io/geo1088/py-exec-then-eval?code=';
+		default:
+			return null;
 	}
 }
 
 module.exports = new Command([
 	'eval',
-	'javascript', 'js',
-	'ruby', 'rb',
-	'python', 'py'
-], (async (msg, args, prefix, commandName) => {
+	'javascript',
+	'js',
+	'ruby',
+	'rb',
+	'python',
+	'py',
+], async (msg, args, prefix, commandName) => {
 	let code = args.join(' ');
 	let codeBlockLang;
 	let match;
@@ -44,11 +51,11 @@ module.exports = new Command([
 	try {
 		msg.channel.sendTyping();
 		const res = await superagent.get(url);
-		msg.channel.createMessage(res.text).catch(console.log);
+		msg.channel.createMessage(res.text).catch(() => {});
 	} catch (err) {
-		msg.channel.createMessage(`${err}`).catch(console.log);
+		msg.channel.createMessage(`${err}`).catch(() => {});
 	}
-}));
+});
 module.exports.help = {
 	desc: `Evaluates arbitrary code in a third-party sandbox. Supports multiple languages; to specify a language, use a language-specific alias or a code block tagged with the desired language.
 For example:
@@ -61,5 +68,5 @@ and
 \`\`\`
 rb puts "hello"
 \`\`\`
-are both valid and will evaluate as Ruby code. Supported languages are Ruby (\`ruby\`, \`rb\`), Python (\`python\`, \`py\`), and Javascript (\`javascript\`, \`js\`).`
+are both valid and will evaluate as Ruby code. Supported languages are Ruby (\`ruby\`, \`rb\`), Python (\`python\`, \`py\`), and Javascript (\`javascript\`, \`js\`).`,
 };

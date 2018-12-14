@@ -2,7 +2,7 @@
 
 const Command = require('../src/Command');
 
-module.exports = new Command(['setstatus', 'setgame'], function (msg, args) {
+module.exports = new Command(['setstatus', 'setgame'], function setstatus (msg, args) {
 	let status = args.splice(0, 1)[0];
 	switch (status) {
 		case 'dnd':
@@ -30,5 +30,5 @@ module.exports = new Command(['setstatus', 'setgame'], function (msg, args) {
 	const game = args.join(' ');
 	this.editStatus(status, game ? {name: game} : undefined).catch(() => {});
 }, {
-	owner: true
+	owner: true,
 });

@@ -2,7 +2,7 @@
 
 const Command = require('../src/Command');
 
-module.exports = new Command(['choose', 'c'], (async (msg, args) => {
+module.exports = new Command(['choose', 'c'], async (msg, args) => {
 	const options = args.join(' ') // Add spaces back into the string
 		.split('').reverse().join('') // Reverse the string
 		.split(/\s*,(?!\\)\s*/g) // Split on non-escaped commas, and consume any whitespace before or after
@@ -15,8 +15,8 @@ module.exports = new Command(['choose', 'c'], (async (msg, args) => {
 	} catch (_) {
 		// blocked message things, w/e
 	}
-}));
+});
 module.exports.help = {
 	desc: 'Choose a random option from a list. If you want to include a comma in an option, escape it with a backslash.',
-	args: '<option>, <option>, [options ...]'
+	args: '<option>, <option>, [options ...]',
 };

@@ -4,12 +4,12 @@ const Command = require('../src/Command');
 const util = require('util');
 
 const inspectOptions = {
-	depth: 1
+	depth: 1,
 };
 
 // We give the prefix and commandName args for debugging purposes
 // eslint-disable-next-line no-unused-vars
-module.exports = new Command('debug', (async (msg, args, prefix, commandName) => {
+module.exports = new Command('debug', async (msg, args, prefix, commandName) => {
 	// Parse out code blocks
 	args = args.join(' ').replace(/^\s+/, '').replace(/\s*$/, '');
 	if (args.startsWith('```') && args.endsWith('```')) {
@@ -27,8 +27,9 @@ module.exports = new Command('debug', (async (msg, args, prefix, commandName) =>
 		},
 		_formatLines () {
 			return this._lines.map(line => line && `//> ${line}\n`).join('');
-		}
+		},
 	};
+	// eslint-disable-next-line no-multi-assign
 	c.log = c.error = c.warn = c.info = c._logger;
 
 	// Eval the things and send the results
@@ -68,6 +69,6 @@ module.exports = new Command('debug', (async (msg, args, prefix, commandName) =>
 			outputMsg.edit(newContent.join('\n')).catch(() => {});
 		}
 	}
-}), {
-	owner: true
+}, {
+	owner: true,
 });

@@ -21,7 +21,7 @@ function describePackage (r) {
 	const links = [
 		`[npm](${npm})`,
 		repo ? `[repo](${repo})` : '',
-		home ? `[homepage](${home})` : ''
+		home ? `[homepage](${home})` : '',
 	].filter(l => l).join(', ');
 
 	// \u2013: en-dash
@@ -34,12 +34,10 @@ function embedResults (results, search) {
 		color: 0xC12127, // npm brand color
 		title: `Packages for "${search}"`,
 		url: `https://www.npmjs.com/search?q=${search}`,
-		fields: results.map(r => {
-			return {
-				name: `**${r.package.name}**`,
-				value: describePackage(r)
-			};
-		})
+		fields: results.map(r => ({
+			name: `**${r.package.name}**`,
+			value: describePackage(r),
+		})),
 	};
 }
 
@@ -83,5 +81,5 @@ module.exports = new Command('npm', async (msg, args) => {
 });
 module.exports.help = {
 	desc: 'Search for, and get information on, npm packages.',
-	args: '<search>'
+	args: '<search>',
 };

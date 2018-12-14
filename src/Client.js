@@ -1,3 +1,5 @@
+'use strict';
+
 const Eris = require('eris');
 const glob = require('glob');
 const reload = require('require-reload')(require);
@@ -79,6 +81,7 @@ class Client extends Eris.Client {
 			 */
 			super.emit('ready', ...args);
 		});
+		return !!this.listeners(name).length;
 	}
 
 	/**
@@ -182,10 +185,10 @@ class Client extends Eris.Client {
 	 * Returns the appropriate prefix string to use for commands based on a
 	 * certain message.
 	 * @deprecated
-	 * @param {Object} msg The message to check the prefix of
+	 * @param {Object} _msg The message to check the prefix of
 	 * @returns {string} The prefix to use
 	 */
-	prefixForMessage (msg) {
+	prefixForMessage (_msg) {
 		return this.prefix;
 	}
 
@@ -200,19 +203,16 @@ class Client extends Eris.Client {
 		if (prefix == null) return false;
 		if (this.caseSensitivePrefix) {
 			return msg.content.startsWith(prefix);
-		} else {
-			return msg.content.toLowerCase().startsWith(prefix.toLowerCase());
 		}
+		return msg.content.toLowerCase().startsWith(prefix.toLowerCase());
 	}
 
-	/**
-	 * Takes a message, gets the prefix based on the config of any guild it was
-	 * sent in, and returns the message's content without the prefix if the
-	 * prefix matches, and `null` if it doesn't.
-	 * @param {Eris.Message} msg The message to process
-	 * @returns {Array<String|null>} An array `[prefix, rest]` if the message
-	 * matches the prefix, or `[null, null]` if not
-	 **/
+	// Takes a message, gets the prefix based on the config of any guild it was
+	// sent in, and returns the message's content without the prefix if the
+	// prefix matches, and `null` if it doesn't.
+	// @param {Eris.Message} msg The message to process
+	// @returns {Array<String|null>} An array `[prefix, rest]` if the message
+	// matches the prefix, or `[null, null]` if not
 	splitPrefixFromContent (msg) {
 		// Traditional prefix handling - if there is no prefix, skip this rule
 		if (this.matchesTextPrefix(msg)) {

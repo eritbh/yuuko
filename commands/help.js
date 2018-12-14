@@ -30,14 +30,24 @@ async function filterAsync (array, filter) {
 	return array.filter(() => bits.shift());
 }
 
-module.exports = new Command(['help', 'man', 'h', null], async function (msg, args, prefix) {
+module.exports = new Command(['help', 'man', 'h', null], async function help (msg, args, prefix) {
 	// If the prefix is a mention of the bot, use a blank string instead so our
 	// command list output is less terrible
 	if (prefix.match(this.mentionPrefixRegExp)) prefix = '';
 
 	let message;
 	// If we got nothing, command list
-	if (!args[0]) {
+	if (args[0]) {
+		// Find the command we're talking about
+		const command = this.commandForName(args[0]);
+		// If this command doesn't exist or isn't documented, tell the user
+		if (!command || !command.help) {
+			message = `**=== Help: Unknown Command ===**
+		Make sure you spelled the command name right, and that this bot has it. Do \`${prefix}help\` with no arguments to see a list of commands.`;
+		} else {
+			message = `**=== Help: \`${prefix + command.name}\` ===**\n${helpText(command, prefix)}`;
+		}
+	} else {
 		// Generate a list of commands that the user can execute
 		const commandList = (await filterAsync(this.commands, c => c.checkPermissions(this, msg)))
 			.map(c => `\`${prefix}${c.name}\``)
@@ -45,16 +55,6 @@ module.exports = new Command(['help', 'man', 'h', null], async function (msg, ar
 		message = `**=== Help: Command List ===**
 You can use the following commands: ${commandList}
 Use \`${prefix}help [command]\` to get more info on that command!`;
-	} else {
-		// Find the command we're talking about
-		const command = this.commandForName(args[0]);
-		// If this command doesn't exist or isn't documented, tell the user
-		if (!command || !command.help) {
-			message = `**=== Help: Unknown Command ===**
-Make sure you spelled the command name right, and that this bot has it. Do \`${prefix}help\` with no arguments to see a list of commands.`;
-		} else {
-			message = `**=== Help: \`${prefix + command.name}\` ===**\n${helpText(command, prefix)}`;
-		}
 	}
 
 	// Catch failed message sends - try to send to DMs if the channel is borked
@@ -64,12 +64,12 @@ Make sure you spelled the command name right, and that this bot has it. Do \`${p
 		try {
 			const channel = await this.getDMChannel(msg.author.id);
 			await channel.createMessage(`${message}\n---\n*It appears I can't send messages in the channel you sent that command in, so I've sent my response here instead. Double-check my permissions if this isn't intentional.*`);
-		} catch (_) {
+		} catch (__) {
 			// Blocked DMs or something, don't worry about it
 		}
 	}
 });
 module.exports.help = {
 	desc: 'Get a list of commands. Pass a command name as an argument to get information about that command.',
-	args: '[command]'
+	args: '[command]',
 };

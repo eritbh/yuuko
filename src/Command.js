@@ -1,3 +1,5 @@
+'use strict';
+
 /**
  * Takes an object and returns it inside an array, or unmodified if it is
  * already an array. If undefined is passed, an empty array is returned.
@@ -65,14 +67,14 @@ class Command {
 	 * in the message
 	 */
 
-	 /**
-	  * @callback Command~customRequirement
-	  * A function called when checking whether a user has permission to use a
-	  * command or not. Return truthy if the user should be allowed to use it,
-	  * falsy if they should not.
-	  * @this {Client} The client that received the command message
-	  * @param {Eris.Message} msg The message triggering the command
-	  */
+	/**
+	 * @callback Command~customRequirement
+	 * A function called when checking whether a user has permission to use a
+	 * command or not. Return truthy if the user should be allowed to use it,
+	 * falsy if they should not.
+	 * @this {Client} The client that received the command message
+	 * @param {Eris.Message} msg The message triggering the command
+	 */
 
 	/**
 	 * Checks whether or not a command can be executed.

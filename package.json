@@ -5,8 +5,8 @@
   "main": "src/Yuuko.js",
   "scripts": {
     "start": "node index.js --no-warnings",
-    "test": "eslint index.js src/* commands/*",
-    "test-fix": "eslint --fix index.js src/* commands/*"
+    "lint": "eslint index.js src/* commands/*",
+    "lint-fix": "eslint --fix index.js src/* commands/*"
   },
   "repository": "Geo1088/yuuko",
   "author": "Geo1088 <georgej1088@gmail.com>",

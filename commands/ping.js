@@ -2,7 +2,7 @@
 
 const Command = require('../src/Command');
 
-module.exports = new Command('ping', async (msg) => {
+module.exports = new Command('ping', async msg => {
 	const then = Date.now();
 	try {
 		const newmsg = await msg.channel.createMessage("I'm here.");
@@ -14,5 +14,5 @@ module.exports = new Command('ping', async (msg) => {
 });
 module.exports.help = {
 	desc: 'Pings the bot.',
-	args: ''
+	args: '',
 };

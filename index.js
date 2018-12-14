@@ -1,3 +1,5 @@
+'use strict';
+
 const {Client} = require('./src/Yuuko');
 const path = require('path');
 const log = require('another-logger');
@@ -44,7 +46,7 @@ c.once('ready', () => {
 			.post(`https://bots.discord.pw/api/bots/${config.dbotsId}/stats`)
 			.set('Authorization', config.dbotsToken)
 			.send({server_count: lastSize})
-			.end((err, res) => {
+			.end((err, _res) => {
 				if (err) {
 					log.error(`Error posting guild data: ${err.toString()}`);
 				} else {

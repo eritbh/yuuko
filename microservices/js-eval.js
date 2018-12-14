@@ -1,17 +1,22 @@
+
+'use strict';
+// eslint-disable no-console
+
 const util = require('util');
 const inspectOptions = {depth: 1};
 
-module.exports = function (hook) {
+module.exports = hook => {
 	// Override console object for logging stuff
-	console = { // eslint-disable-line no-global-assign
+	const console = {
 		_lines: [],
 		_logger (...things) {
 			this._lines.push(...things.join(' ').split('\n'));
 		},
 		_formatLines () {
 			return this._lines.map(line => line && `//> ${line}\n`).join('');
-		}
+		},
 	};
+	// eslint-disable-next-line no-multi-assign
 	console.log = console.error = console.warn = console.info = console._logger;
 
 	// Get the eval result
@@ -23,6 +28,6 @@ module.exports = function (hook) {
 	}
 
 	// Format the result
-	const message = '```js\n' + console._formatLines() + util.inspect(result, inspectOptions) + '\n```';
+	const message = `\`\`\`js\n${console._formatLines()}${util.inspect(result, inspectOptions)}\n\`\`\``;
 	hook.res.end(message);
 };

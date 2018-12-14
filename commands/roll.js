@@ -25,5 +25,5 @@ module.exports = new Command(['roll', 'r'], (msg, args) => {
 });
 module.exports.help = {
 	desc: 'Roll some dice. Pass in a number or an `AdX` roll, with modifiers and `d%` format supported. Examples: `6`, `2d20`, `1d%`, `d4-2`. If no roll is specified, it will default to `1d6`. Pass in multiple rolls by separating them with spaces.',
-	args: '<rolls>'
+	args: '<rolls>',
 };
