@@ -30,7 +30,7 @@ module.exports = new Command('debug', async (msg, args, prefix, commandName) => 
 		},
 	};
 	// eslint-disable-next-line no-multi-assign
-	c.log = c.error = c.warn = c.info = c._logger;
+	c.log = c.error = c.warn = c.info = c._logger.bind(c);
 
 	// Eval the things and send the results
 	let result;
