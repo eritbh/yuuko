@@ -20,7 +20,7 @@ module.exports = new Command('debug', async (msg, args, prefix, commandName) => 
 	}
 
 	// Create a dummy console object
-	const c = {
+	const console = {
 		_lines: [],
 		_logger (...things) {
 			this._lines.push(...things.join(' ').split('\n'));
@@ -30,7 +30,9 @@ module.exports = new Command('debug', async (msg, args, prefix, commandName) => 
 		},
 	};
 	// eslint-disable-next-line no-multi-assign
-	c.log = c.error = c.warn = c.info = c._logger.bind(c);
+	console.log = console.error = console.warn = console.info = console._logger.bind(console);
+	// eslint-disable-next-line no-unused-vars
+	const c = console; // Convenience
 
 	// Eval the things and send the results
 	let result;
@@ -39,7 +41,7 @@ module.exports = new Command('debug', async (msg, args, prefix, commandName) => 
 	} catch (e) {
 		result = e;
 	}
-	const message = `\`\`\`js\n${c._formatLines()}${util.inspect(result, inspectOptions)}\n\`\`\``;
+	const message = `\`\`\`js\n${console._formatLines()}${util.inspect(result, inspectOptions)}\n\`\`\``;
 
 	// Send the message
 	let outputMsg;
