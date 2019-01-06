@@ -31,31 +31,5 @@ process.on('warning', warning => { // for best results, run with --no-warnings
 	log.warn(`${warning.name}: ${warning.message}`);
 });
 
-// Handle pushing bot stats to bots.discord.pw
-c.once('ready', () => {
-	if (!config.dbotsId) return; // debug config doesn't include this
-	log.debug('Detected bots.discord.pw config');
-	let lastSize = 0;
-	(function updateStats (delay = 3600000) {
-		if (lastSize === c.guilds.size) {
-			setTimeout(updateStats, delay);
-			return;
-		}
-		lastSize = c.guilds.size;
-		superagent
-			.post(`https://bots.discord.pw/api/bots/${config.dbotsId}/stats`)
-			.set('Authorization', config.dbotsToken)
-			.send({server_count: lastSize})
-			.end((err, _res) => {
-				if (err) {
-					log.error(`Error posting guild data: ${err.toString()}`);
-				} else {
-					log.info(`Guild count updated to ${lastSize}`);
-				}
-				setTimeout(updateStats, delay);
-			});
-	})();
-});
-
 // Add commands and connect
 c.addCommandDir(path.join(__dirname, 'commands')).connect();
