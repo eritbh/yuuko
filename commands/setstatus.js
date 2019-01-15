@@ -3,7 +3,7 @@
 const Command = require('../src/Command');
 
 module.exports = new Command(['setstatus', 'setgame'], function setstatus (msg, args) {
-	let status = args.splice(0, 1)[0];
+	let status = args.shift();
 	switch (status) {
 		case 'dnd':
 		case 'red':
@@ -24,7 +24,7 @@ module.exports = new Command(['setstatus', 'setgame'], function setstatus (msg, 
 			status = 'online';
 			break;
 		default:
-			args.splice(0, 0, status);
+			args.unshift(status);
 			status = 'online';
 	}
 	const game = args.join(' ');
