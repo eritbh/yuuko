@@ -8,8 +8,8 @@ const inspectOptions = {
 };
 
 // We give the prefix and commandName args for debugging purposes
-// eslint-disable-next-line no-unused-vars
-module.exports = new Command('debug', async (msg, args, prefix, commandName) => {
+// eslint-disable-next-line
+module.exports = new Command('debug', async function debug (msg, args, prefix, commandName) {
 	// Parse out code blocks
 	args = args.join(' ').replace(/^\s+/, '').replace(/\s*$/, '');
 	if (args.startsWith('```') && args.endsWith('```')) {
