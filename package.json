@@ -21,7 +21,7 @@
     "require-reload": "^0.2.2"
   },
   "devDependencies": {
-    "@geo1088/eslint-config": "^1.5.0",
+    "@geo1088/eslint-config": "^3.0.8",
     "another-logger": "^2.0.0-pre3",
     "color": "^3.0.0",
     "d20": "^1.4.1",
