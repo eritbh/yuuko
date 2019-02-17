@@ -90,6 +90,7 @@ Name | Type | Description
 `config.token` | String | The token used to log into the bot.
 `config.prefix` | String | Optional. A string messages must be prefixed with in order to be recognized as commands. You can set this to an empty string to respond to all messages without a prefix, but this is **highly discouraged**. Note that commands sent as direct messages do not require a prefix.
 `config.allowMention` | Boolean | Optional, default `true`. Whether or not the bot can respond to messages starting with a mention of the bot. If this is `false`, and `config.prefix` is omitted, there will be no way to interact with the bot in guilds.
+`config.ignoreBots` | Boolean | Optional, default `true`. Whether or not the bot should ignore messages from other bots. Prevents malicious bots from starting feedback loops and other mischief.
 
 ## Properties
 
@@ -171,7 +172,7 @@ Reloads all commands that were loaded via `addCommandFile` and `addCommandDir`. 
 
 ### `commandForName(name)` &rsaquo; `Command|null`
 
-Checks the list of registered commands and returns one whch is known by a given name, either as the command's name or an alias of the command. If no match is found, returns `null`.
+Checks the list of registered commands and returns one which is known by a given name, either as the command's name or an alias of the command. If no match is found, returns `null`.
 
 Name | Type | Description
 -----|------|------------
