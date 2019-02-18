@@ -3,6 +3,9 @@
   "version": "0.8.2",
   "description": "A Discord bot base that I did for some reason.",
   "main": "src/Yuuko.js",
+  "files": [
+    "/src/*"
+  ],
   "scripts": {
     "start": "node index.js --no-warnings",
     "lint": "eslint index.js src/* commands/*",
