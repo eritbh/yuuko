@@ -1,5 +1,3 @@
-'use strict';
-
 /**
  * Takes an object and returns it inside an array, or unmodified if it is
  * already an array. If undefined is passed, an empty array is returned.
@@ -15,8 +13,22 @@ function makeArray (thing) {
 	return [thing];
 }
 
+interface CommandRequirements {
+	owner?: boolean;
+	permissions?: string | string[];
+	custom?: (this: object, msg: object) => boolean;
+}
+
+interface CommandProcess {
+	(this: object, msg: object, args: string[], prefix: string, commandName: string): any;
+}
+
 /** Class representing a command. */
-class Command {
+export default class Command {
+	name: string;
+	aliases: string[];
+	process: CommandProcess;
+	requirements: CommandRequirements;
 	/**
 	 * Create a command.
 	 * @param {string|Array} name The name of the command. If passed as an
@@ -36,7 +48,7 @@ class Command {
 	 * @param {Command~customRequirement} requirements.custom A function which
 	 * must return a truthy value to let a user use the command
 	 */
-	constructor (name, process, requirements = {}) {
+	constructor (name: string | string[], process: CommandProcess, requirements: CommandRequirements) {
 		if (Array.isArray(name)) {
 			this.name = name.splice(0, 1)[0];
 			this.aliases = name;
