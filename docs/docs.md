@@ -126,6 +126,7 @@ Name | Type | Description
 -----|------|------------
 command | Command | The command to be run.
 msg | Message | The message that triggered the command.
+args | Array<String> | The arguments passed to the command.
 
 ### `command`
 
@@ -135,6 +136,7 @@ Name | Type | Description
 -----|------|------------
 command | Command | The command that was run.
 msg | Message | The message that triggered the command.
+args | Array<String> | The arguments passed to the command.
 
 ## Methods
 
