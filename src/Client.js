@@ -109,7 +109,7 @@ class Client extends Eris.Client {
 
 		this.emit('preCommand', command, msg);
 		await command.execute(this, msg, args, prefix, commandName);
-		this.emit('command', command, msg);
+		this.emit('command', command, msg, args);
 	}
 
 	/**
