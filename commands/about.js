@@ -1,6 +1,6 @@
 'use strict';
 
-const Command = require('../src/Command');
+const {Command} = require('../src/Command');
 const moment = require('moment-timezone');
 const childProcess = require('child_process');
 const packageJson = require.main.require('./package.json');

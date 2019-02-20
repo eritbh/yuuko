@@ -1,15 +1,11 @@
-'use strict';
-
-const Command = require('../src/Command');
+const {Command} = require('../src/Command');
 const util = require('util');
 
 const inspectOptions = {
 	depth: 1,
 };
 
-// We give the prefix and commandName args for debugging purposes
-// eslint-disable-next-line
-module.exports = new Command('debug', async function debug (msg, args, prefix, commandName) {
+module.exports = new Command('debug', async function debug (msg, args, ctx) {
 	// Parse out code blocks
 	args = args.join(' ').replace(/^\s+/, '').replace(/\s*$/, '');
 	if (args.startsWith('```') && args.endsWith('```')) {

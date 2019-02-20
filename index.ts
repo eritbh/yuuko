@@ -1,11 +1,7 @@
-'use strict';
-
-const {Client} = require('./src/Yuuko');
-const path = require('path');
-const log = require('another-logger');
+import {Client} from './src/Yuuko';
+import * as path from 'path';
+import * as log from 'another-logger';
 const config = require('./config');
-const superagent = require('superagent');
-
 const c = new Client(config);
 
 // Event logging

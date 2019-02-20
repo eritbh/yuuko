@@ -1,10 +1,12 @@
+import * as Eris from 'eris';
+import {Client} from './Yuuko';
+
 /**
+ * @skip
  * Takes an object and returns it inside an array, or unmodified if it is
  * already an array. If undefined is passed, an empty array is returned.
- * @param {*} thing The object.
- * @returns {Array} The array-ified object.
  */
-function makeArray (thing) {
+function makeArray (thing: any): any[] {
 	if (Array.isArray(thing)) {
 		return thing;
 	} else if (thing === undefined) {
@@ -13,44 +15,60 @@ function makeArray (thing) {
 	return [thing];
 }
 
-interface CommandRequirements {
+/** An object of requirements a user must meet to use the command. */
+export interface CommandRequirements {
+	/** If true, the user must be the bot's owner. */
 	owner?: boolean;
+	/** A list of permission strings the user must have. */
+	// TODO: use a union of all the string literals we could possibly put here
 	permissions?: string | string[];
-	custom?: (this: object, msg: object) => boolean;
+	/** A custom function that must return true to enable the command. */
+	custom?(msg: object, args: string[], ctx: CommandContext): boolean;
 }
 
-interface CommandProcess {
-	(this: object, msg: object, args: string[], prefix: string, commandName: string): any;
+/** An object containing context information for a command's execution. */
+export interface CommandContext {
+	/** The client that received the message. */
+	client: Client;
+	/** The prefix used to call the command. */
+	prefix: string;
+	/** The name or alias used to call the command. */
+	commandName: string | null;
 }
+
+/** The function to be called when a command is executed. */
+export interface CommandProcess {
+	(
+		/** The message object from Eris. */
+		msg: Eris.Message,
+		/** A space-separated list of arguments to the command. */
+		args: string[],
+		/** An object containing additional context information. */
+		ctx: CommandContext,
+	): void;
+}
+
+export type CommandName = string | null;
 
 /** Class representing a command. */
-export default class Command {
-	name: string;
-	aliases: string[];
-	process: CommandProcess;
-	requirements: CommandRequirements;
+export class Command {
+	/** The command's name. */
+	name: CommandName;
 	/**
-	 * Create a command.
-	 * @param {string|Array} name The name of the command. If passed as an
-	 * array, the first item of the array is used as the name and the rest of
-	 * the items are set as aliases
-	 * @param {Command~process} process The function to be called when
-	 * the command is executed
-	 * @param {Object} requirements A set of requirements for the command to be
-	 * executed
-	 * @param {boolean} requirements.owner Whether to restrict the command's
-	 * use to the bot's OAuth app owner
-	 * @param {string|Array<string>} requirements.permissions One or more
-	 * permission names that a person must have in order to use the command. The
-	 * list of permission names can be found in the Eris documentation, under
-	 * the "Eris.Constants.Permissions" section:
-	 * {@link https://abal.moe/Eris/docs/reference}
-	 * @param {Command~customRequirement} requirements.custom A function which
-	 * must return a truthy value to let a user use the command
+	 * A list of aliases that can be used to call the command in addition to
+	 * its name.
 	 */
-	constructor (name: string | string[], process: CommandProcess, requirements: CommandRequirements) {
+	aliases: CommandName[];
+	/** The function executed when the command is triggered. */
+	process: CommandProcess;
+	/** The requirements for the command being triggered. */
+	requirements: CommandRequirements;
+	/** The name of the file the command was loaded from, if any. */
+	filename?: string;
+
+	constructor (name: CommandName | CommandName[], process: CommandProcess, requirements?: CommandRequirements) {
 		if (Array.isArray(name)) {
-			this.name = name.splice(0, 1)[0];
+			this.name = <CommandName>name.shift();
 			this.aliases = name;
 		} else {
 			this.name = name;
@@ -60,50 +78,32 @@ export default class Command {
 		this.process = process;
 		if (!this.process) throw new TypeError('Process is required');
 		this.requirements = {};
-		if (requirements.owner) this.requirements.owner = true;
-		if (requirements.permissions) this.requirements.permissions = makeArray(requirements.permissions);
-		if (requirements.custom) this.requirements.custom = requirements.custom;
+		if (requirements) {
+			if (requirements.owner) {
+				this.requirements.owner = true;
+			}
+			if (requirements.permissions) {
+				this.requirements.permissions = makeArray(requirements.permissions);
+			}
+			if (requirements.custom) {
+				this.requirements.custom = requirements.custom;
+			}
+		}
 	}
 
-	/**
-	 * @callback Command~process
-	 * A function to be called when a command is executed. Accepts information
-	 * about the message that triggered the command as arguments
-	 * @this {Client} The client that received the command message
-	 * @param {Eris.Message} msg The message triggering the command
-	 * @param {Array<string>} args - An array of arguments passed to the
-	 * command, obtained by removing the command name and prefix from the
-	 * message, then splitting on spaces
-	 * @param {string} prefix - The prefix used in the message
-	 * @param {string} commandName - The name or alias used to call the command
-	 * in the message
-	 */
-
-	/**
-	 * @callback Command~customRequirement
-	 * A function called when checking whether a user has permission to use a
-	 * command or not. Return truthy if the user should be allowed to use it,
-	 * falsy if they should not.
-	 * @this {Client} The client that received the command message
-	 * @param {Eris.Message} msg The message triggering the command
-	 */
-
-	/**
-	 * Checks whether or not a command can be executed.
-	 * @param {Client} client The client that received the command message
-	 * @param {Eris.Message} msg The message triggering the command
-	 * @returns {Promise<Boolean>} Whether or not the command can be executed
-	 */
-	async checkPermissions (client, msg) {
+	/** Checks whether or not a command can be executed. */
+	async checkPermissions (msg: Eris.Message, args: string[], ctx: CommandContext): Promise<boolean> {
+		const {client} = ctx;
 		const {owner, permissions, custom} = this.requirements;
 		// Owner checking
-		if (owner && client.app.owner.id !== msg.author.id) {
+		if (owner && client.app && client.app.owner.id !== msg.author.id) {
 			return false;
 		}
 		// Permissions
 		if (permissions && permissions.length > 0) {
-			// If we require permissions, the command can't be used in direct messages
-			if (!msg.channel.guild) {
+			// If we require permissions, the command can't be used in direct
+			// messages
+			if (!(msg.channel instanceof Eris.GuildChannel)) {
 				return false;
 			}
 			// Calculate permissions of the user and check all we need
@@ -115,33 +115,21 @@ export default class Command {
 			}
 		}
 		// Custom requirement function
-		if (custom && !await custom.call(client, msg)) {
+		if (custom && !await custom(msg, args, ctx)) {
 			return false;
 		}
 		// If we haven't returned yet, all requirements are met
 		return true;
 	}
 
-	/**
-	 * Executes the command process if the permission checks pass.
-	 * @param {Client} client The client that received the command message
-	 * @param {Eris.Message} msg The message triggering the command
-	 * @param {Array<string>} args - An array of arguments passed to the
-	 * command, obtained by removing the command name and prefix from the
-	 * message, then splitting on spaces
-	 * @param {string} prefix - The prefix used in the message
-	 * @param {string} commandName - The name or alias used to call the command
-	 * in the message
-	 */
-	async execute (client, msg, args, prefix, commandName) {
-		if (!await this.checkPermissions(client, msg)) return;
-		this.process.call(client, msg, args, prefix, commandName);
+	/** Executes the command process if the permission checks pass. */
+	async execute (msg: Eris.Message, args: string[], ctx: CommandContext): Promise<void> {
+		if (!await this.checkPermissions(msg, args, ctx)) return;
+		this.process(msg, args, ctx);
 	}
 
-	/** @prop {Array<string>} names All names the command is callable by */
-	get names () {
+	/** All names the command is callable by. */
+	get names (): CommandName[] {
 		return [this.name, ...this.aliases];
 	}
 }
-
-module.exports = Command;

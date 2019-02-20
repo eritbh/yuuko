@@ -1,9 +1,15 @@
 {
 	"compilerOptions": {
-		"module": "es6",
-		"noImplicitAny": false,
 		"target": "es6",
-		"outDir": "lib"
+		"module": "commonjs",
+		"moduleResolution": "node",
+		"resolveJsonModule": true,
+		"esModuleInterop": true,
+		"outDir": "./dist",
+		"declaration": true,
+		"noImplicitAny": false,
+		"strictNullChecks": true,
+		"strict": true
 	},
 	"include": [
 		"src/**/*"

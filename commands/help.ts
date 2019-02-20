@@ -1,6 +1,6 @@
-'use strict';
+import {Command} from '../src/Yuuko';
 
-const Command = require('../src/Command');
+type CommandWithHelp = Command & {help: any};
 
 /**
  * Returns the help text for a command.
@@ -9,7 +9,7 @@ const Command = require('../src/Command');
  * in usage examples within the returned text.
  * @returns {string} The help text.
  */
-function helpText (command, prefix) {
+function helpText (command: CommandWithHelp, prefix: string) {
 	let txt = '';
 	if (command.help.desc) txt += `**Description:** ${command.help.desc}\n`;
 	if (command.help.args) txt += `**Usage:** \`${prefix}${command.name} ${command.help.args}\`\n`;
@@ -25,21 +25,27 @@ function helpText (command, prefix) {
  * Array#filter, but resolves to true/false rather than returning true/false.
  * @returns {Array<*>} The filtered array.
  */
-async function filterAsync (array, filter) {
+async function filterAsync<T> (array: T[], filter: (el: T, i: number, array: T[]) => Promise<boolean>): Promise<T[]> {
 	const bits = await Promise.all(array.map((el, i) => filter(el, i, array)));
 	return array.filter(() => bits.shift());
 }
 
-module.exports = new Command(['help', 'man', 'h', null], async function help (msg, args, prefix) {
+export default new Command([
+	'help',
+	'man',
+	'h',
+	null
+], async function help (msg, args, ctx) {
+	let {prefix, client} = ctx;
 	// If the prefix is a mention of the bot, use a blank string instead so our
 	// command list output is less terrible
-	if (prefix.match(this.mentionPrefixRegExp)) prefix = '';
+	if (prefix.match(client.mentionPrefixRegExp!)) prefix = '';
 
 	let message;
 	// If we got nothing, command list
 	if (args[0]) {
 		// Find the command we're talking about
-		const command = this.commandForName(args[0]);
+		const command = <CommandWithHelp>client.commandForName(args[0]);
 		// If this command doesn't exist or isn't documented, tell the user
 		if (!command || !command.help) {
 			message = `**=== Help: Unknown Command ===**
@@ -49,7 +55,7 @@ module.exports = new Command(['help', 'man', 'h', null], async function help (ms
 		}
 	} else {
 		// Generate a list of commands that the user can execute
-		const commandList = (await filterAsync(this.commands, c => c.checkPermissions(this, msg)))
+		const commandList = (await filterAsync(client.commands, c => c.checkPermissions(msg, args, ctx)))
 			.map(c => `\`${prefix}${c.name}\``)
 			.join(', ');
 		message = `**=== Help: Command List ===**
@@ -62,14 +68,14 @@ Use \`${prefix}help [command]\` to get more info on that command!`;
 		await msg.channel.createMessage(message);
 	} catch (_) {
 		try {
-			const channel = await this.getDMChannel(msg.author.id);
+			const channel = await client.getDMChannel(msg.author.id);
 			await channel.createMessage(`${message}\n---\n*It appears I can't send messages in the channel you sent that command in, so I've sent my response here instead. Double-check my permissions if this isn't intentional.*`);
 		} catch (__) {
 			// Blocked DMs or something, don't worry about it
 		}
 	}
 });
-module.exports.help = {
+export const help = {
 	desc: 'Get a list of commands. Pass a command name as an argument to get information about that command.',
 	args: '[command]',
 };

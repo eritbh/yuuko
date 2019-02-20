@@ -1,4 +1,4 @@
-const {Command} = require('../src/Yuuko.js')
+const {Command} = require('../src/Command')
 const {exec} = require('child_process')
 
 module.exports = new Command(['bash', 'sh', 'sys'], function (msg, args) {

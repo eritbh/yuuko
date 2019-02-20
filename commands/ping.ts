@@ -1,8 +1,6 @@
-'use strict';
+import {Command} from '../src/Yuuko';
 
-const Command = require('../src/Command');
-
-module.exports = new Command('ping', async msg => {
+export default new Command('ping', async msg => {
 	const then = Date.now();
 	try {
 		const newmsg = await msg.channel.createMessage("I'm here.");
@@ -12,7 +10,7 @@ module.exports = new Command('ping', async msg => {
 		// Missing permissions, we don't need to worry here
 	}
 });
-module.exports.help = {
+export const help = {
 	desc: 'Pings the bot.',
 	args: '',
 };

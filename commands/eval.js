@@ -1,6 +1,6 @@
 'use strict';
 
-const {Command} = require('../src/Yuuko');
+const {Command} = require('../src/Command');
 const superagent = require('superagent');
 
 const codeBlockRegExp = /^[\s\n]*```((javascript|js|ruby|rb|python|py)?\n)?([\S\s]*)\n?```[\s\n]*$/;
@@ -30,7 +30,7 @@ module.exports = new Command([
 	'rb',
 	'python',
 	'py',
-], async (msg, args, prefix, commandName) => {
+], async (msg, args, {commandName}) => {
 	let code = args.join(' ');
 	let codeBlockLang;
 	let match;

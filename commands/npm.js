@@ -1,6 +1,6 @@
 'use strict';
 
-const Command = require('../src/Command');
+const {Command} = require('../src/Command');
 const superagent = require('superagent');
 
 function describePackage (r) {

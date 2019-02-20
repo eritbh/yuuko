@@ -1,9 +1,9 @@
 'use strict';
 
-const Command = require('../src/Command');
+const {Command} = require('../src/Command');
 const superagent = require('superagent');
 
-module.exports = new Command('setavatar', async function setavatar (msg, args) {
+module.exports = new Command('setavatar', async (msg, args, {client}) => {
 	// Get the URL of the image
 	let url = args[0] || ''; // URL specified in chat, or an empty string so we can handle errors later
 	if (msg.attachments[0]) url = msg.attachments[0].url; // URL specified by upload
@@ -24,7 +24,7 @@ module.exports = new Command('setavatar', async function setavatar (msg, args) {
 		}
 		// Edit the avatar
 		try {
-			await this.editSelf({
+			await client.editSelf({
 				avatar: `data:${res.headers['content-type']};base64,${res.body.toString('base64')}`,
 			});
 		} catch (_) {

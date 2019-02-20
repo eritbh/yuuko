@@ -2,7 +2,7 @@
 
 'use strict'
 
-const Command = require('../src/Command')
+const {Command} = require('../src/Command')
 const moment = require('moment')
 
 module.exports = new Command(['timestamp', 'ts'], function (msg, args) {

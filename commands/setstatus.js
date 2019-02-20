@@ -1,8 +1,8 @@
 'use strict';
 
-const Command = require('../src/Command');
+const {Command} = require('../src/Command');
 
-module.exports = new Command(['setstatus', 'setgame'], function setstatus (msg, args) {
+module.exports = new Command(['setstatus', 'setgame'], (msg, args, {client}) => {
 	let status = args.shift();
 	switch (status) {
 		case 'dnd':
@@ -28,7 +28,7 @@ module.exports = new Command(['setstatus', 'setgame'], function setstatus (msg, 
 			status = 'online';
 	}
 	const game = args.join(' ');
-	this.editStatus(status, game ? {name: game} : undefined).catch(() => {});
+	client.editStatus(status, game ? {name: game} : undefined);
 }, {
 	owner: true,
 });

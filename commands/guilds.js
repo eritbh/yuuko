@@ -1,10 +1,10 @@
 'use strict';
 
-const Command = require('../src/Command');
+const {Command} = require('../src/Command');
 
-module.exports = new Command('guilds', function guilds (msg) {
+module.exports = new Command('guilds', function guilds (msg, args, {client}) {
 	const guildList = `\`\`\`\n${
-		Array.from(this.guilds.values())
+		Array.from(client.guilds.values())
 			// Descending sort
 			.sort((a, b) => b.members.size - a.members.size)
 			// Take top 10 entries
@@ -18,7 +18,7 @@ module.exports = new Command('guilds', function guilds (msg) {
 			// Join lines
 			.join('\n')
 	}\n\`\`\``;
-	msg.channel.createMessage(`**=== Guilds ===**\nTotal: ${this.guilds.size}\n${guildList}`);
+	msg.channel.createMessage(`**=== Guilds ===**\nTotal: ${client.guilds.size}\n${guildList}`);
 }, {
 	owner: true,
 });

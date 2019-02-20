@@ -1,11 +1,11 @@
 'use strict';
 
-const Command = require('../src/Command');
+const {Command} = require('../src/Command');
 
-module.exports = new Command('reload', function reload (msg) {
+module.exports = new Command('reload', (msg, {client}) => {
 	msg.channel.sendTyping();
 	setTimeout(() => { // Delay by 100ms to make sure the sendTyping arrives first
-		this.reloadCommands();
+		client.reloadCommands();
 		msg.channel.createMessage('Reloaded commands.');
 	}, 100);
 }, {
