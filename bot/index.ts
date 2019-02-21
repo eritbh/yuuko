@@ -28,9 +28,5 @@ process.on('warning', warning => { // for best results, run with --no-warnings
 	log.warn(`${warning.name}: ${warning.message}`);
 });
 
-c.setGlobalRequirements({
-	custom: () => Math.random() < 0.5
-});
-
 // Add commands and connect
 c.addCommandDir(path.join(__dirname, 'commands')).connect();

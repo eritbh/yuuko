@@ -58,7 +58,7 @@ export interface CommandRequirements {
 	// TODO: use a union of all the string literals we could possibly put here
 	permissions?: string | string[];
 	/** A custom function that must return true to enable the command. */
-	custom?(msg: object, args: string[], ctx: CommandContext): boolean;
+	custom?(msg: object, args: string[], ctx: CommandContext): boolean | Promise<boolean>;
 }
 
 /** An object containing context information for a command's execution. */
