@@ -7,7 +7,7 @@ export interface CommandRequirements {
     /** A list of permission strings the user must have. */
     permissions?: string | string[];
     /** A custom function that must return true to enable the command. */
-    custom?(msg: object, args: string[], ctx: CommandContext): boolean;
+    custom?(msg: object, args: string[], ctx: CommandContext): boolean | Promise<boolean>;
 }
 /** An object containing context information for a command's execution. */
 export interface CommandContext {
