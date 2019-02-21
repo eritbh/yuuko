@@ -2,6 +2,7 @@ import * as Eris from 'eris';
 import * as glob from 'glob';
 import {oneLine} from 'common-tags';
 import {Command, CommandName} from './Yuuko'
+// import {CommandContext} from './Command';
 
 /** Helper to get the resolved type of a Promise */
 type Resolved<T> = T extends Promise<infer U> ? U : T;
@@ -46,6 +47,8 @@ export class Client extends Eris.Client implements ClientOptions {
 	mentionPrefixRegExp: RegExp | null = null;
 	/** Information about the bot's OAuth application. */
 	app: ClientOAuthApplication | null = null;
+	/** An object of stuff to add to the context object for command functions */
+	contextAdditions: object = {};
 
 	private _gotReady: boolean = false;
 
@@ -109,11 +112,11 @@ export class Client extends Eris.Client implements ClientOptions {
 			// A lone mention triggers the default command with no arguments
 			const defaultCommand = this.commandForName(null);
 			if (!defaultCommand) return;
-			defaultCommand.execute(msg, [], {
+			defaultCommand.execute(msg, [], Object.assign({
 				client: this,
 				prefix,
 				commandName: null,
-			});
+			}, this.contextAdditions));
 			return;
 		}
 		const args = content.split(' ');
@@ -122,14 +125,20 @@ export class Client extends Eris.Client implements ClientOptions {
 		const command = this.commandForName(commandName);
 		if (!command) return;
 
-		const ctx = {
+		const ctx = Object.assign({
 			client: this,
 			prefix,
 			commandName,
-		};
+		}, this.contextAdditions);
 		this.emit('preCommand', command, msg, args, ctx);
 		await command.execute(msg, args, ctx);
 		this.emit('command', command, msg, args, ctx);
+	}
+
+	/** Adds things to the context objects the client sends. */
+	addContext(options: object): this {
+		Object.assign(this.contextAdditions, options);
+		return this;
 	}
 
 	/** Register a command to the client. */
@@ -198,8 +207,8 @@ export class Client extends Eris.Client implements ClientOptions {
 		return this.commands.find(c => c.names.includes(name)) || null;
 	}
 
-	/** @deprecated Always returns the prefix specified in config. */
-	prefixForMessage (_msg: Eris.Message): string {
+	/** Specifies the prefix to look for when trying to match a message. */
+	prefixForMessage (_msg: Eris.Message, ctx: object): string {
 		return this.prefix;
 	}
 
@@ -208,7 +217,9 @@ export class Client extends Eris.Client implements ClientOptions {
 	 * taking into account the case-sensitivity option.
 	 */
 	matchesTextPrefix (msg: Eris.Message): boolean {
-		const prefix = this.prefixForMessage(msg);
+		const prefix = this.prefixForMessage(msg, Object.assign({
+			client: this,
+		}, this.contextAdditions));
 		if (prefix == null) return false;
 		if (this.caseSensitivePrefix) {
 			return msg.content.startsWith(prefix);
@@ -248,3 +259,15 @@ export class Client extends Eris.Client implements ClientOptions {
 		this.prefix = val;
 	}
 }
+
+// Added event definitions
+// export declare interface Client extends Eris.Client {
+// 	on(event: string, listener: Function): this;
+// 	on(event: 'preCommand' | 'command', listener: (
+// 		command: Command,
+// 		msg: Eris.Message,
+// 		args: string[],
+// 		ctx: CommandContext,
+// 	) => void): this;
+// 	on(event: 'commandLoaded', listener: (command: Command) => void): this;
+// }

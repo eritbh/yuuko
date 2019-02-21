@@ -38,6 +38,8 @@ class Client extends Eris.Client {
         this.mentionPrefixRegExp = null;
         /** Information about the bot's OAuth application. */
         this.app = null;
+        /** An object of stuff to add to the context object for command functions */
+        this.contextAdditions = {};
         this._gotReady = false;
         // HACK: Technically this is already set by the super constructor, but
         //       Eris defines token as an optional property even though it's not
@@ -100,11 +102,11 @@ class Client extends Eris.Client {
                 const defaultCommand = this.commandForName(null);
                 if (!defaultCommand)
                     return;
-                defaultCommand.execute(msg, [], {
+                defaultCommand.execute(msg, [], Object.assign({
                     client: this,
                     prefix,
                     commandName: null,
-                });
+                }, this.contextAdditions));
                 return;
             }
             const args = content.split(' ');
@@ -114,15 +116,20 @@ class Client extends Eris.Client {
             const command = this.commandForName(commandName);
             if (!command)
                 return;
-            const ctx = {
+            const ctx = Object.assign({
                 client: this,
                 prefix,
                 commandName,
-            };
+            }, this.contextAdditions);
             this.emit('preCommand', command, msg, args, ctx);
             yield command.execute(msg, args, ctx);
             this.emit('command', command, msg, args, ctx);
         });
+    }
+    /** Adds things to the context objects the client sends. */
+    addContext(options) {
+        Object.assign(this.contextAdditions, options);
+        return this;
     }
     /** Register a command to the client. */
     addCommand(command) {
@@ -189,8 +196,8 @@ class Client extends Eris.Client {
     commandForName(name) {
         return this.commands.find(c => c.names.includes(name)) || null;
     }
-    /** @deprecated Always returns the prefix specified in config. */
-    prefixForMessage(_msg) {
+    /** Specifies the prefix to look for when trying to match a message. */
+    prefixForMessage(_msg, ctx) {
         return this.prefix;
     }
     /**
@@ -198,7 +205,9 @@ class Client extends Eris.Client {
      * taking into account the case-sensitivity option.
      */
     matchesTextPrefix(msg) {
-        const prefix = this.prefixForMessage(msg);
+        const prefix = this.prefixForMessage(msg, Object.assign({
+            client: this,
+        }, this.contextAdditions));
         if (prefix == null)
             return false;
         if (this.caseSensitivePrefix) {
