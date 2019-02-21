@@ -2,8 +2,8 @@
   "name": "yuuko",
   "version": "0.8.2",
   "description": "A Discord bot base that I did for some reason.",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "main": "dist/Yuuko.js",
+  "types": "dist/Yuuko.d.ts",
   "files": [
     "dist/*"
   ],
