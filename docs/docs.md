@@ -60,8 +60,10 @@ import {Client, Command} from 'yuuko';
 
 // Create a client instance
 const mybot = new Client({
-  token: 'your_bot_token',  // Token used to auth your bot account
-  prefix: '.',              // Prefix used to trigger commands
+  // Token used to auth your bot account
+  token: 'your_bot_token',
+  // Prefix used to trigger commands
+  prefix: '.',
 });
 
 // Create a command
