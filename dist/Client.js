@@ -114,13 +114,14 @@ class Client extends Eris.Client {
             const command = this.commandForName(commandName);
             if (!command)
                 return;
-            this.emit('preCommand', command, msg, args);
-            yield command.execute(msg, args, {
+            const ctx = {
                 client: this,
                 prefix,
                 commandName,
-            });
-            this.emit('command', command, msg, args);
+            };
+            this.emit('preCommand', command, msg, args, ctx);
+            yield command.execute(msg, args, ctx);
+            this.emit('command', command, msg, args, ctx);
         });
     }
     /** Register a command to the client. */
