@@ -1,6 +1,5 @@
 import * as Eris from 'eris';
 import { Command, CommandName } from './Yuuko';
-import { CommandContext } from './Command';
 /** Helper to get the resolved type of a Promise */
 declare type Resolved<T> = T extends Promise<infer U> ? U : T;
 /** The options passed to the client constructor. Includes Eris options. */
@@ -76,10 +75,5 @@ export declare class Client extends Eris.Client implements ClientOptions {
     splitPrefixFromContent(msg: Eris.Message): [string, string] | null;
     /** @deprecated Alias of `prefix` */
     defaultPrefix: string;
-}
-export declare interface Client extends Eris.Client {
-    on(event: string, listener: Function): this;
-    on(event: 'preCommand' | 'command', listener: (command: Command, msg: Eris.Message, args: string[], ctx: CommandContext) => void): this;
-    on(event: 'commandLoaded', listener: (command: Command) => void): this;
 }
 export {};
