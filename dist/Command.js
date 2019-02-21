@@ -98,7 +98,7 @@ class Command {
     /** Checks whether or not a command can be executed. */
     checkPermissions(msg, args, ctx) {
         return __awaiter(this, void 0, void 0, function* () {
-            return (yield fulfillsRequirements(ctx.client.globalCommandRequirements, msg, args, ctx)) && (yield fulfillsRequirements(this.requirements, msg, args, ctx));
+            return (ctx.client.ignoreGlobalRequirements || (yield fulfillsRequirements(ctx.client.globalCommandRequirements, msg, args, ctx))) && (yield fulfillsRequirements(this.requirements, msg, args, ctx));
         });
     }
     /** Executes the command process if the permission checks pass. */

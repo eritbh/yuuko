@@ -15,6 +15,8 @@ export interface ClientOptions extends Eris.ClientOptions {
     allowMention?: boolean;
     /** If true, messages from other bot accounts will not trigger commands. */
     ignoreBots?: boolean;
+    /** If true, requirements set via setGlobalRequirements will be ignored. */
+    ignoreGlobalRequirements?: boolean;
 }
 /** Information returned from the API about the bot's OAuth application. */
 export declare type ClientOAuthApplication = Resolved<ReturnType<Client["getOAuthApplication"]>>;
@@ -30,6 +32,8 @@ export declare class Client extends Eris.Client implements ClientOptions {
     allowMention: boolean;
     /** If true, messages from other bot accounts will not trigger commands. */
     ignoreBots: boolean;
+    /** If true, requirements set via setGlobalRequirements will be ignored. */
+    ignoreGlobalRequirements: boolean;
     /** A list of all loaded commands. */
     commands: Command[];
     /**

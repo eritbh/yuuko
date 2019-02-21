@@ -29,6 +29,8 @@ class Client extends Eris.Client {
         this.allowMention = true;
         /** If true, messages from other bot accounts will not trigger commands. */
         this.ignoreBots = true;
+        /** If true, requirements set via setGlobalRequirements will be ignored. */
+        this.ignoreGlobalRequirements = false;
         /** A list of all loaded commands. */
         this.commands = [];
         /**
@@ -55,8 +57,10 @@ class Client extends Eris.Client {
             this.allowMention = options.allowMention;
         if (options.ignoreBots !== undefined)
             this.ignoreBots = options.ignoreBots;
+        if (options.ignoreGlobalRequirements !== undefined)
+            this.ignoreGlobalRequirements = options.ignoreGlobalRequirements;
         // Warn if we're using an empty prefix
-        if (options.prefix === '') {
+        if (this.prefix === '') {
             process.emitWarning(common_tags_1.oneLine `
 				defaultPrefix is an empty string; bot will not require a prefix
 				to run commands
