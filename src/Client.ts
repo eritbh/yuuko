@@ -122,13 +122,14 @@ export class Client extends Eris.Client implements ClientOptions {
 		const command = this.commandForName(commandName);
 		if (!command) return;
 
-		this.emit('preCommand', command, msg, args);
-		await command.execute(msg, args, {
+		const ctx = {
 			client: this,
 			prefix,
 			commandName,
-		});
-		this.emit('command', command, msg, args);
+		};
+		this.emit('preCommand', command, msg, args, ctx);
+		await command.execute(msg, args, ctx);
+		this.emit('command', command, msg, args, ctx);
 	}
 
 	/** Register a command to the client. */

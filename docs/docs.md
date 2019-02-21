@@ -27,7 +27,8 @@ order: 3
   - [Custom requirement function](#custom-requirement-function)
   - [Properties](#properties-1)
   - [`checkPermissions(client, msg)`](#checkpermissionsclient-msg)
-  - [`execute(client, msg, args, prefix, commandName)`](#executeclient-msg-args-prefix-commandname)
+  - [`execute(msg, args, ctx)`](#executeclient-msg-args-prefix-commandname)
+- [Context Objects](#context-objects)
 
 </aside>
 <main markdown="1">
@@ -43,31 +44,42 @@ This is the documentation for Yuuko. If you want to create your own bot based on
 ## Installation
 
 ```bash
-$ yarn add yuuko # yarn
-$ npm install --save yuuko # npm
+# With yarn:
+$ yarn add yuuko
+# With npm:
+$ npm install --save yuuko
 ```
 
 ## Usage
 
 ```js
+// Import in plain Javascript:
 const {Client, Command} = require('yuuko');
+// Import in Typescript:
+import {Client, Command} from 'yuuko';
 
+// Create a client instance
 const mybot = new Client({
   token: 'your_bot_token',  // Token used to auth your bot account
-  prefix: '.'               // Prefix used to trigger commands
+  prefix: '.',              // Prefix used to trigger commands
 });
 
-const pingCommand = new Command('ping', function (msg) {
-  msg.channel.createMessage('Pong!')
+// Create a command
+const pingCommand = new Command('ping', msg => {
+  msg.channel.createMessage('Pong!');
 });
 
+// Register the command and connect to Discord
 mybot.addCommand(pingCommand).connect();
 ```
 
 ## Run
 
 ```bash
-$ node index.js
+# Plain Javascript:
+$ node myfile.js
+# Typescript:
+$ npx ts-node myfile.ts
 ```
 
 And just like that, you're up and running! To test the bot, add the bot to a server and say `.ping` to it.
@@ -88,7 +100,8 @@ Name | Type | Description
 -----|------|------------
 `config` | Object | An object with config options for the bot. In addition to these document fields, this object will be passed to the Eris constructor as the `options` object, so this can also contain any fields documented for the [Eris constructor](https://abal.moe/Eris/docs/Client) `options` parameter.
 `config.token` | String | The token used to log into the bot.
-`config.prefix` | String | Optional. A string messages must be prefixed with in order to be recognized as commands. You can set this to an empty string to respond to all messages without a prefix, but this is **highly discouraged**. Note that commands sent as direct messages do not require a prefix.
+`config.prefix` | String | A string messages must be prefixed with in order to be recognized as commands. You can set this to an empty string to respond to all messages without a prefix, but this is **highly discouraged**. Note that commands sent as direct messages do not require a prefix.
+`config.caseSensitivePrefix` | Boolean | Optional, default `true`. Whether or not prefix matching should be case-sensitive.
 `config.allowMention` | Boolean | Optional, default `true`. Whether or not the bot can respond to messages starting with a mention of the bot. If this is `false`, and `config.prefix` is omitted, there will be no way to interact with the bot in guilds.
 `config.ignoreBots` | Boolean | Optional, default `true`. Whether or not the bot should ignore messages from other bots. Prevents malicious bots from starting feedback loops and other mischief.
 
@@ -96,11 +109,14 @@ Name | Type | Description
 
 Name | Type | Description
 -----|------|------------
-`prefix` | String | The default prefix the bot will respond to in guilds for which there is no other confguration. (Currently all of them)
+`token` | String | Identical to the constructor option.
+`prefix` | String | Identical to the constructor option.
+`caseSensitivePrefix` | Boolean | Identical to the constructor option.
+`allowMention` | Boolean | Identical to the constructor option.
+`ignoreBots` | Boolean | Identical to the constructor option.
 `commands` | Array&lt;Command&gt; | An array of commands which the bot looks for in messages.
-`allowMention` | Boolean | Whether or not the bot can respond to messages starting with a mention of the bot.
-`mentionPrefixRegExp` | RegExp&#124;`null` | The RegExp used to tell whether or not a message starts with a mention of the bot. Only present after the 'ready' event.
-`app` | Object&#124;`null` | The OAuth application information returned by Discord. Only present after the 'ready' event.
+`mentionPrefixRegExp` | RegExp &#124; `null` | The RegExp used to tell whether or not a message starts with a mention of the bot. Only present after the 'ready' event.
+`app` | Object &#124; `null` | The OAuth application information returned by Discord. Only present after the 'ready' event.
 
 ## Events
 
@@ -116,7 +132,7 @@ Emitted when a command is loaded.
 
 Name | Type | Description
 -----|------|------------
-command | Command | The command that was loaded.
+`command` | Command | The command that was loaded.
 
 ### `preCommand`
 
@@ -124,9 +140,10 @@ Emitted before a command will be executed.
 
 Name | Type | Description
 -----|------|------------
-command | Command | The command to be run.
-msg | Message | The message that triggered the command.
-args | Array<String> | The arguments passed to the command.
+`command` | Command | The command to be run.
+`msg` | Message | The message that triggered the command.
+`args` | Array<String> | The arguments passed to the command.
+`ctx` | Object | The context object. See [Context Objects](#context-objects) for more information.
 
 ### `command`
 
@@ -134,9 +151,10 @@ Emitted after a command has been executed.
 
 Name | Type | Description
 -----|------|------------
-command | Command | The command that was run.
-msg | Message | The message that triggered the command.
-args | Array<String> | The arguments passed to the command.
+`command` | Command | The command that was run.
+`msg` | Message | The message that triggered the command.
+`args` | Array<String> | The arguments passed to the command.
+`ctx` | Object | The context object. See [Context Objects](#context-objects) for more information.
 
 ## Methods
 
@@ -208,12 +226,12 @@ Creates a command. Note that a command must be registered to the client instance
 
 Name | Type | Description
 -----|------|------------
-`name` | String&#124;Array | The name of the command. Command names are case-insensitive. If a string is passed, that string simply becomes the command's name; if an array is passed, the first element becomes the command's name and the rest become aliases.
+`name` | String &#124; Array | The name of the command. Command names are case-insensitive. If a string is passed, that string simply becomes the command's name; if an array is passed, the first element becomes the command's name and the rest become aliases.
 `process` | Function | See below.
 `requirements` | Object? | An object of requirements that must be met for a user to be allowed to run the command. If omitted, all users will be able to run it.
 `requirements.owner` | Boolean? | If `true`, only the owner of the bot's OAuth application can use the command.
-`requirements.permissions` | String&#124;Array&lt;String&gt;? | A permission name or array of permission names that the user running the command must have. If specifying a list, the user must have *all* of the permissions listed.
-`requirements.custom` | Function&#124;Array&lt;Function&gt;? | A function or array of functions whose return values determine whether or not the command can be run. If every function specified here returns `true` (or any truthy value), the user can run the command.
+`requirements.permissions` | String &#124; Array&lt;String&gt;? | A permission name or array of permission names that the user running the command must have. If specifying a list, the user must have *all* of the permissions listed.
+`requirements.custom` | Function &#124; Array&lt;Function&gt;? | A function or array of functions whose return values determine whether or not the command can be run. If every function specified here returns `true` (or any truthy value), the user can run the command.
 
 ## Process function
 
@@ -221,10 +239,9 @@ A function which is executed each time this command is triggered. The value of `
 
 Name | Type | Description
 -----|------|------------
-`msg` | [Message Object](https://abal.moe/Eris/docs/Message) | The message that triggered the command.
-`args` | Array&lt;String&gt; | An array of arguments passed to the command, obtained by removing the command name and prefix from the message, then splitting on spaces. To get the raw text that was passed to the command, use `args.join(' ')`.
-`prefix` | String | The prefix used in the message.
-`commandName` | String | The name or alias used to call the command in the message. Will be one of the values of `this.names`.
+`msg` | Message | The message that triggered the command.
+`args` | Array<String> | The arguments passed to the command.
+`ctx` | Object | The context object. See [Context Objects](#context-objects) for more information.
 
 ## Custom requirement function
 
@@ -232,8 +249,9 @@ A function that returns `true` if the given message should trigger the command, 
 
 Name | Type | Description
 -----|------|------------
-`msg` | [Message Object](https://abal.moe/Eris/docs/Message) | The message that triggered the check.
-`client` | Client | The client instance that recieved the message triggering the check.
+`msg` | Message | The message that triggered the command.
+`args` | Array<String> | The arguments passed to the command.
+`ctx` | Object | The context object. See [Context Objects](#context-objects) for more information.
 
 ## Properties
 
@@ -253,20 +271,29 @@ Checks whether or not a command can be executed based on the command's requireme
 
 Name | Type | Description
 -----|------|------------
-`client` | Client | The client instance that recieved the message triggering the check.
-`msg` | [Message Object](https://abal.moe/Eris/docs/Message) | The message that triggered the check.
+`msg` | Message | The message that triggered the command.
+`args` | Array<String> | The arguments passed to the command.
+`ctx` | Object | The context object. See [Context Objects](#context-objects) for more information.
 
-### `execute(client, msg, args, prefix, commandName)`
+### `execute(msg, args, ctx)`
 
 Executes the command process if the permission checks pass.
 
 Name | Type | Description
 -----|------|------------
+`msg` | Message | The message that triggered the command.
+`args` | Array<String> | The arguments passed to the command.
+`ctx` | Object | The context object. See [Context Objects](#context-objects) for more information.
+
+# Context Objects
+
+These are objects which contain lesser-referenced but still useful information about the context in which a command was run. It contains the following properties:
+
+Name | Type | Description
+-----|------|------------
 `client` | Client | The client instance that recieved the message triggering the command.
-`msg` | [Message Object](https://abal.moe/Eris/docs/Message) | The message that triggered the command.
-`args` | Array&lt;String&gt; | An array of arguments passed to the command, obtained by removing the command name and prefix from the message, then splitting on spaces. To get the raw text that was passed to the command, use `args.join(' ')`.
-`prefix` | String | The prefix used in the message.
-`commandName` | String | The name or alias used to call the command in the message. Will be one of the values of `this.names`.
+`prefix` | String | The prefix used to trigger the command.
+`commandName` | String | The name of the command being executed.
 
 ---
 
