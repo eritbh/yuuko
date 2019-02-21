@@ -30,6 +30,42 @@ function makeArray(thing) {
     }
     return [thing];
 }
+/**
+ * @skip
+ * Check if requirements are met.
+ */
+// TODO this interface is ugly
+function fulfillsRequirements(requirements, msg, args, ctx) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const { owner, permissions, custom } = requirements;
+        const { client } = ctx;
+        // Owner checking
+        if (owner && client.app && client.app.owner.id !== msg.author.id) {
+            return false;
+        }
+        // Permissions
+        if (permissions && permissions.length > 0) {
+            // If we require permissions, the command can't be used in direct
+            // messages
+            if (!(msg.channel instanceof Eris.GuildChannel)) {
+                return false;
+            }
+            // Calculate permissions of the user and check all we need
+            const memberPerms = msg.channel.permissionsOf(msg.author.id);
+            for (const permission of permissions) {
+                if (!memberPerms.has(permission)) {
+                    return false;
+                }
+            }
+        }
+        // Custom requirement function
+        if (custom && !(yield custom(msg, args, ctx))) {
+            return false;
+        }
+        // If we haven't returned yet, all requirements are met
+        return true;
+    });
+}
 /** Class representing a command. */
 class Command {
     constructor(name, process, requirements) {
@@ -62,41 +98,16 @@ class Command {
     /** Checks whether or not a command can be executed. */
     checkPermissions(msg, args, ctx) {
         return __awaiter(this, void 0, void 0, function* () {
-            const { client } = ctx;
-            const { owner, permissions, custom } = this.requirements;
-            // Owner checking
-            if (owner && client.app && client.app.owner.id !== msg.author.id) {
-                return false;
-            }
-            // Permissions
-            if (permissions && permissions.length > 0) {
-                // If we require permissions, the command can't be used in direct
-                // messages
-                if (!(msg.channel instanceof Eris.GuildChannel)) {
-                    return false;
-                }
-                // Calculate permissions of the user and check all we need
-                const memberPerms = msg.channel.permissionsOf(msg.author.id);
-                for (const permission of permissions) {
-                    if (!memberPerms.has(permission)) {
-                        return false;
-                    }
-                }
-            }
-            // Custom requirement function
-            if (custom && !(yield custom(msg, args, ctx))) {
-                return false;
-            }
-            // If we haven't returned yet, all requirements are met
-            return true;
+            return (yield fulfillsRequirements(ctx.client.globalCommandRequirements, msg, args, ctx)) && (yield fulfillsRequirements(this.requirements, msg, args, ctx));
         });
     }
     /** Executes the command process if the permission checks pass. */
     execute(msg, args, ctx) {
         return __awaiter(this, void 0, void 0, function* () {
             if (!(yield this.checkPermissions(msg, args, ctx)))
-                return;
+                return false;
             this.process(msg, args, ctx);
+            return true;
         });
     }
     /** All names the command is callable by. */

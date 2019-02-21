@@ -11,6 +11,9 @@ c.on('commandLoaded', command => {
 c.on('ready', () => {
 	log.success(`Logged in as @${c.user.username}#${c.user.discriminator} in ${c.guilds.size} guild${c.guilds.size === 1 ? '' : 's'}, ${c.commands.length} command${c.commands.length === 1 ? '' : 's'}`);
 });
+c.on('preCommand', (command, msg) => {
+	log.preCommand(`${command.name} from user ${msg.author.id} in channel ${msg.channel.id}`);
+});
 c.on('command', (command, msg) => {
 	log.command(`${command.name} from user ${msg.author.id} in channel ${msg.channel.id}`);
 });
@@ -23,6 +26,10 @@ c.on('debug', autolog('erisDebug'));
 
 process.on('warning', warning => { // for best results, run with --no-warnings
 	log.warn(`${warning.name}: ${warning.message}`);
+});
+
+c.setGlobalRequirements({
+	custom: () => Math.random() < 0.5
 });
 
 // Add commands and connect

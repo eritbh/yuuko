@@ -48,7 +48,7 @@ export declare class Command {
     /** Checks whether or not a command can be executed. */
     checkPermissions(msg: Eris.Message, args: string[], ctx: CommandContext): Promise<boolean>;
     /** Executes the command process if the permission checks pass. */
-    execute(msg: Eris.Message, args: string[], ctx: CommandContext): Promise<void>;
+    execute(msg: Eris.Message, args: string[], ctx: CommandContext): Promise<boolean>;
     /** All names the command is callable by. */
     readonly names: CommandName[];
 }

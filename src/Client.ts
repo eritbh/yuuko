@@ -2,6 +2,7 @@ import * as Eris from 'eris';
 import * as glob from 'glob';
 import {oneLine} from 'common-tags';
 import {Command, CommandName} from './Yuuko'
+import { CommandRequirements } from './Command';
 // import {CommandContext} from './Command';
 
 /** Helper to get the resolved type of a Promise */
@@ -49,6 +50,8 @@ export class Client extends Eris.Client implements ClientOptions {
 	app: ClientOAuthApplication | null = null;
 	/** An object of stuff to add to the context object for command functions */
 	contextAdditions: object = {};
+	/** A requirements object that is applied to all commands */
+	globalCommandRequirements: CommandRequirements = {};
 
 	private _gotReady: boolean = false;
 
@@ -131,13 +134,21 @@ export class Client extends Eris.Client implements ClientOptions {
 			commandName,
 		}, this.contextAdditions);
 		this.emit('preCommand', command, msg, args, ctx);
-		await command.execute(msg, args, ctx);
-		this.emit('command', command, msg, args, ctx);
+		const executed = await command.execute(msg, args, ctx);
+		if (executed) {
+			this.emit('command', command, msg, args, ctx);
+		}
 	}
 
 	/** Adds things to the context objects the client sends. */
 	addContext(options: object): this {
 		Object.assign(this.contextAdditions, options);
+		return this;
+	}
+
+	/** Set requirements for all commands at once */
+	setGlobalRequirements(requirements: CommandRequirements) {
+		Object.assign(this.globalCommandRequirements, requirements);
 		return this;
 	}
 

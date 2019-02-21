@@ -15,6 +15,41 @@ function makeArray (thing: any): any[] {
 	return [thing];
 }
 
+/**
+ * @skip
+ * Check if requirements are met.
+ */
+// TODO this interface is ugly
+async function fulfillsRequirements (requirements: CommandRequirements, msg: Eris.Message, args: string[], ctx: CommandContext) {
+	const {owner, permissions, custom} = requirements;
+	const {client} = ctx;
+	// Owner checking
+	if (owner && client.app && client.app.owner.id !== msg.author.id) {
+		return false;
+	}
+	// Permissions
+	if (permissions && permissions.length > 0) {
+		// If we require permissions, the command can't be used in direct
+		// messages
+		if (!(msg.channel instanceof Eris.GuildChannel)) {
+			return false;
+		}
+		// Calculate permissions of the user and check all we need
+		const memberPerms = msg.channel.permissionsOf(msg.author.id);
+		for (const permission of permissions) {
+			if (!memberPerms.has(permission)) {
+				return false;
+			}
+		}
+	}
+	// Custom requirement function
+	if (custom && !await custom(msg, args, ctx)) {
+		return false;
+	}
+	// If we haven't returned yet, all requirements are met
+	return true;
+}
+
 /** An object of requirements a user must meet to use the command. */
 export interface CommandRequirements {
 	/** If true, the user must be the bot's owner. */
@@ -93,39 +128,14 @@ export class Command {
 
 	/** Checks whether or not a command can be executed. */
 	async checkPermissions (msg: Eris.Message, args: string[], ctx: CommandContext): Promise<boolean> {
-		const {client} = ctx;
-		const {owner, permissions, custom} = this.requirements;
-		// Owner checking
-		if (owner && client.app && client.app.owner.id !== msg.author.id) {
-			return false;
-		}
-		// Permissions
-		if (permissions && permissions.length > 0) {
-			// If we require permissions, the command can't be used in direct
-			// messages
-			if (!(msg.channel instanceof Eris.GuildChannel)) {
-				return false;
-			}
-			// Calculate permissions of the user and check all we need
-			const memberPerms = msg.channel.permissionsOf(msg.author.id);
-			for (const permission of permissions) {
-				if (!memberPerms.has(permission)) {
-					return false;
-				}
-			}
-		}
-		// Custom requirement function
-		if (custom && !await custom(msg, args, ctx)) {
-			return false;
-		}
-		// If we haven't returned yet, all requirements are met
-		return true;
+		return await fulfillsRequirements(ctx.client.globalCommandRequirements, msg, args, ctx) && await fulfillsRequirements(this.requirements, msg, args, ctx);
 	}
 
 	/** Executes the command process if the permission checks pass. */
-	async execute (msg: Eris.Message, args: string[], ctx: CommandContext): Promise<void> {
-		if (!await this.checkPermissions(msg, args, ctx)) return;
+	async execute (msg: Eris.Message, args: string[], ctx: CommandContext): Promise<boolean> {
+		if (!await this.checkPermissions(msg, args, ctx)) return false;
 		this.process(msg, args, ctx);
+		return true;
 	}
 
 	/** All names the command is callable by. */

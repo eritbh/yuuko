@@ -1,5 +1,6 @@
 import * as Eris from 'eris';
 import { Command, CommandName } from './Yuuko';
+import { CommandRequirements } from './Command';
 /** Helper to get the resolved type of a Promise */
 declare type Resolved<T> = T extends Promise<infer U> ? U : T;
 /** The options passed to the client constructor. Includes Eris options. */
@@ -40,6 +41,8 @@ export declare class Client extends Eris.Client implements ClientOptions {
     app: ClientOAuthApplication | null;
     /** An object of stuff to add to the context object for command functions */
     contextAdditions: object;
+    /** A requirements object that is applied to all commands */
+    globalCommandRequirements: CommandRequirements;
     private _gotReady;
     constructor(options: ClientOptions);
     /** @override Hijacks the `'ready'` event so we can do custom setup. */
@@ -48,6 +51,8 @@ export declare class Client extends Eris.Client implements ClientOptions {
     private handleMessage;
     /** Adds things to the context objects the client sends. */
     addContext(options: object): this;
+    /** Set requirements for all commands at once */
+    setGlobalRequirements(requirements: CommandRequirements): this;
     /** Register a command to the client. */
     addCommand(command: Command): this;
     /** Load the files in a directory and attempt to add a command from each. */

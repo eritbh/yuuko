@@ -40,6 +40,8 @@ class Client extends Eris.Client {
         this.app = null;
         /** An object of stuff to add to the context object for command functions */
         this.contextAdditions = {};
+        /** A requirements object that is applied to all commands */
+        this.globalCommandRequirements = {};
         this._gotReady = false;
         // HACK: Technically this is already set by the super constructor, but
         //       Eris defines token as an optional property even though it's not
@@ -122,13 +124,20 @@ class Client extends Eris.Client {
                 commandName,
             }, this.contextAdditions);
             this.emit('preCommand', command, msg, args, ctx);
-            yield command.execute(msg, args, ctx);
-            this.emit('command', command, msg, args, ctx);
+            const executed = yield command.execute(msg, args, ctx);
+            if (executed) {
+                this.emit('command', command, msg, args, ctx);
+            }
         });
     }
     /** Adds things to the context objects the client sends. */
     addContext(options) {
         Object.assign(this.contextAdditions, options);
+        return this;
+    }
+    /** Set requirements for all commands at once */
+    setGlobalRequirements(requirements) {
+        Object.assign(this.globalCommandRequirements, requirements);
         return this;
     }
     /** Register a command to the client. */
