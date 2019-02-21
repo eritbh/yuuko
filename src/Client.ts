@@ -11,15 +11,17 @@ type Resolved<T> = T extends Promise<infer U> ? U : T;
 /** The options passed to the client constructor. Includes Eris options. */
 export interface ClientOptions extends Eris.ClientOptions {
 	/** The bot's token. */
-	token: string,
+	token: string;
 	/** The prefix used to trigger commands. */
-	prefix: string,
+	prefix: string;
 	/** If true, prefix matching is case-sensitive. */
-	caseSensitivePrefix?: boolean,
+	caseSensitivePrefix?: boolean;
 	/** If true, the bot's mention can be used as an additional prefix. */
-	allowMention?: boolean,
+	allowMention?: boolean;
 	/** If true, messages from other bot accounts will not trigger commands. */
-	ignoreBots?: boolean,
+	ignoreBots?: boolean;
+	/** If true, requirements set via setGlobalRequirements will be ignored. */
+	ignoreGlobalRequirements?: boolean;
 }
 
 /** Information returned from the API about the bot's OAuth application. */
@@ -39,6 +41,8 @@ export class Client extends Eris.Client implements ClientOptions {
 	allowMention: boolean = true;
 	/** If true, messages from other bot accounts will not trigger commands. */
 	ignoreBots: boolean = true;
+	/** If true, requirements set via setGlobalRequirements will be ignored. */
+	ignoreGlobalRequirements: boolean = false;
 	/** A list of all loaded commands. */
 	commands: Command[] = [];
 	/**
@@ -67,10 +71,10 @@ export class Client extends Eris.Client implements ClientOptions {
 		if (options.caseSensitivePrefix !== undefined) this.caseSensitivePrefix = options.caseSensitivePrefix;
 		if (options.allowMention !== undefined) this.allowMention = options.allowMention;
 		if (options.ignoreBots !== undefined) this.ignoreBots = options.ignoreBots;
-
+		if (options.ignoreGlobalRequirements !== undefined) this.ignoreGlobalRequirements = options.ignoreGlobalRequirements;
 
 		// Warn if we're using an empty prefix
-		if (options.prefix === '') {
+		if (this.prefix === '') {
 			process.emitWarning(oneLine`
 				defaultPrefix is an empty string; bot will not require a prefix
 				to run commands

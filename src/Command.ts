@@ -128,7 +128,7 @@ export class Command {
 
 	/** Checks whether or not a command can be executed. */
 	async checkPermissions (msg: Eris.Message, args: string[], ctx: CommandContext): Promise<boolean> {
-		return await fulfillsRequirements(ctx.client.globalCommandRequirements, msg, args, ctx) && await fulfillsRequirements(this.requirements, msg, args, ctx);
+		return (ctx.client.ignoreGlobalRequirements || await fulfillsRequirements(ctx.client.globalCommandRequirements, msg, args, ctx)) && await fulfillsRequirements(this.requirements, msg, args, ctx);
 	}
 
 	/** Executes the command process if the permission checks pass. */
