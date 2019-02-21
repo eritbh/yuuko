@@ -1,6 +1,6 @@
 'use strict';
 
-const {Command} = require('../src/Command');
+const {Command} = require('../../src/Command');
 
 module.exports = new Command('guilds', function guilds (msg, args, {client}) {
 	const guildList = `\`\`\`\n${

@@ -1,6 +1,6 @@
 'use strict';
 
-const {Command} = require('../src/Command');
+const {Command} = require('../../src/Command');
 const d20 = require('d20');
 
 module.exports = new Command(['roll', 'r'], (msg, args) => {

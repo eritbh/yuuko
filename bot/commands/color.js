@@ -1,6 +1,6 @@
 'use strict';
 
-const {Command} = require('../src/Command');
+const {Command} = require('../../src/Command');
 const color = require('color');
 
 module.exports = new Command('color', (msg, args) => {

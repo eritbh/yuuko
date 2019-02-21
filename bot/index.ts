@@ -1,4 +1,4 @@
-import {Client} from './src/Yuuko';
+import {Client} from '../src/Yuuko';
 import * as path from 'path';
 import * as log from 'another-logger';
 const config = require('./config');
@@ -14,15 +14,13 @@ c.on('ready', () => {
 c.on('command', (command, msg) => {
 	log.command(`${command.name} from user ${msg.author.id} in channel ${msg.channel.id}`);
 });
-c.on('error', (error, shard) => {
-	log.error(`[shard ${shard}] ${error}`);
-});
-c.on('warn', (warn, shard) => {
-	log.warn(`[shard ${shard}] ${warn}`);
-});
-c.on('debug', (debug, shard) => {
-	log.erisDebug(`[shard ${shard}] ${debug}`);
-});
+
+// Eris event things
+const autolog = name => (shard, thing) => log[name](...(shard == null ? [thing] : [`[shard ${shard}]`, thing]))
+c.on('error', autolog('error'));
+c.on('warn', autolog('warn'));
+c.on('debug', autolog('erisDebug'));
+
 process.on('warning', warning => { // for best results, run with --no-warnings
 	log.warn(`${warning.name}: ${warning.message}`);
 });

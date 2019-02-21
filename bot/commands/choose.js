@@ -1,6 +1,6 @@
 'use strict';
 
-const {Command} = require('../src/Command');
+const {Command} = require('../../src/Command');
 
 module.exports = new Command(['choose', 'c'], async (msg, args) => {
 	const options = args.join(' ') // Add spaces back into the string

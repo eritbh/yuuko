@@ -1,6 +1,6 @@
 'use strict';
 
-const {Command} = require('../src/Command');
+const {Command} = require('../../src/Command');
 const superagent = require('superagent');
 
 module.exports = new Command('setavatar', async (msg, args, {client}) => {

@@ -1,6 +1,6 @@
 'use strict';
 
-const {Command} = require('../src/Command');
+const {Command} = require('../../src/Command');
 const superagent = require('superagent');
 
 const codeBlockRegExp = /^[\s\n]*```((javascript|js|ruby|rb|python|py)?\n)?([\S\s]*)\n?```[\s\n]*$/;

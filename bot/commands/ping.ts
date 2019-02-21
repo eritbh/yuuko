@@ -1,4 +1,4 @@
-import {Command} from '../src/Yuuko';
+import {Command} from '../../src/Yuuko';
 
 export default new Command('ping', async msg => {
 	const then = Date.now();

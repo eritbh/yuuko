@@ -1,4 +1,4 @@
-const {Command} = require('../src/Command');
+const {Command} = require('../../src/Command');
 const util = require('util');
 
 const inspectOptions = {

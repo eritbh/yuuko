@@ -1,6 +1,6 @@
 'use strict';
 
-const {Command} = require('../src/Command');
+const {Command} = require('../../src/Command');
 
 module.exports = new Command('setname', async (msg, args, {client}) => {
 	try {

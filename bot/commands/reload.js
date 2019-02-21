@@ -1,6 +1,6 @@
 'use strict';
 
-const {Command} = require('../src/Command');
+const {Command} = require('../../src/Command');
 
 module.exports = new Command('reload', (msg, {client}) => {
 	msg.channel.sendTyping();
