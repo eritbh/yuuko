@@ -1,3 +1,4 @@
+/** @module Yuuko */
 import * as Eris from 'eris';
 import { Command, CommandName } from './Yuuko';
 import { CommandRequirements, PartialCommandContext } from './Command';

@@ -1,3 +1,4 @@
+/** @module Yuuko */
 import * as Eris from 'eris';
 import { Client } from './Yuuko';
 /** An object of requirements a user must meet to use the command. */

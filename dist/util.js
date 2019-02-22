@@ -1,4 +1,5 @@
 "use strict";
+/** @module Yuuko */
 Object.defineProperty(exports, "__esModule", { value: true });
 function makeArray(thing) {
     if (Array.isArray(thing)) {

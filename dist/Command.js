@@ -1,4 +1,5 @@
 "use strict";
+/** @module Yuuko */
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     return new (P || (P = Promise))(function (resolve, reject) {
         function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
@@ -17,10 +18,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const Eris = __importStar(require("eris"));
 const util_1 = require("./util");
-/**
- * @skip
- * Check if requirements are met.
- */
+/** Check if requirements are met. */
 // TODO this interface is ugly
 function fulfillsRequirements(requirements, msg, args, ctx) {
     return __awaiter(this, void 0, void 0, function* () {
