@@ -19,6 +19,7 @@ const Eris = __importStar(require("eris"));
 const glob = __importStar(require("glob"));
 const common_tags_1 = require("common-tags");
 const Yuuko_1 = require("./Yuuko");
+const util_1 = require("./util");
 /** The client. */
 class Client extends Eris.Client {
     constructor(options) {
@@ -209,24 +210,14 @@ class Client extends Eris.Client {
     commandForName(name) {
         return this.commands.find(c => c.names.includes(name)) || null;
     }
-    /** Specifies the prefix to look for when trying to match a message. */
-    prefixForMessage(_msg, ctx) {
-        return this.prefix;
-    }
     /**
-     * Takes a message and checks whether or not it starts with the set prefix,
-     * taking into account the case-sensitivity option.
+     * Overridable method for specifying the prefix or prefixes to check a
+     * message for. By default, the prefix passed in the constructor is
+     * returned.
      */
-    matchesTextPrefix(msg) {
-        const prefix = this.prefixForMessage(msg, Object.assign({
-            client: this,
-        }, this.contextAdditions));
-        if (prefix == null)
-            return false;
-        if (this.caseSensitivePrefix) {
-            return msg.content.startsWith(prefix);
-        }
-        return msg.content.toLowerCase().startsWith(prefix.toLowerCase());
+    prefixes(msg, ctx) {
+        // No custom behavior by default
+        return undefined;
     }
     // Takes a message, gets the prefix based on the config of any guild it was
     // sent in, and returns the message's content without the prefix if the
@@ -235,14 +226,27 @@ class Client extends Eris.Client {
     // @returns {Array<String|null>} An array `[prefix, rest]` if the message
     // matches the prefix, or `[null, null]` if not
     splitPrefixFromContent(msg) {
-        // Traditional prefix handling - if there is no prefix, skip this rule
-        if (this.matchesTextPrefix(msg)) {
-            return [this.prefix, msg.content.substr(this.prefix.length)];
+        let prefixes = this.prefixes(msg, Object.assign({
+            client: this,
+        }, this.contextAdditions));
+        if (prefixes === undefined) {
+            prefixes = [this.prefix];
+        }
+        else {
+            prefixes = util_1.makeArray(prefixes);
+        }
+        // Traditional prefix checking
+        for (const prefix of prefixes) {
+            if (this.caseSensitivePrefix ? msg.content.startsWith(prefix) : msg.content.toLowerCase().startsWith(prefix.toLowerCase())) {
+                return [prefix, msg.content.substr(prefix.length)];
+            }
         }
         // Allow mentions to be used as prefixes according to config
-        const match = msg.content.match(this.mentionPrefixRegExp);
-        if (this.allowMention && match) { // TODO: guild config
-            return [match[0], msg.content.substr(match[0].length)];
+        if (this.allowMention) {
+            const match = msg.content.match(this.mentionPrefixRegExp);
+            if (match) { // TODO: guild config
+                return [match[0], msg.content.substr(match[0].length)];
+            }
         }
         // Allow no prefix in direct message channels
         if (!(msg.channel instanceof Eris.GuildChannel)) {

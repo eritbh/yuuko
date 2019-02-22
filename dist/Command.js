@@ -16,20 +16,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const Eris = __importStar(require("eris"));
-/**
- * @skip
- * Takes an object and returns it inside an array, or unmodified if it is
- * already an array. If undefined is passed, an empty array is returned.
- */
-function makeArray(thing) {
-    if (Array.isArray(thing)) {
-        return thing;
-    }
-    else if (thing === undefined) {
-        return [];
-    }
-    return [thing];
-}
+const util_1 = require("./util");
 /**
  * @skip
  * Check if requirements are met.
@@ -88,7 +75,7 @@ class Command {
                 this.requirements.owner = true;
             }
             if (requirements.permissions) {
-                this.requirements.permissions = makeArray(requirements.permissions);
+                this.requirements.permissions = util_1.makeArray(requirements.permissions);
             }
             if (requirements.custom) {
                 this.requirements.custom = requirements.custom;

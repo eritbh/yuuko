@@ -1,6 +1,6 @@
 import * as Eris from 'eris';
 import { Command, CommandName } from './Yuuko';
-import { CommandRequirements } from './Command';
+import { CommandRequirements, PartialCommandContext } from './Command';
 /** Helper to get the resolved type of a Promise */
 declare type Resolved<T> = T extends Promise<infer U> ? U : T;
 /** The options passed to the client constructor. Includes Eris options. */
@@ -74,13 +74,12 @@ export declare class Client extends Eris.Client implements ClientOptions {
      * given name, either as the command's name or an alias of the command.
      */
     commandForName(name: CommandName): Command | null;
-    /** Specifies the prefix to look for when trying to match a message. */
-    prefixForMessage(_msg: Eris.Message, ctx: object): string;
     /**
-     * Takes a message and checks whether or not it starts with the set prefix,
-     * taking into account the case-sensitivity option.
+     * Overridable method for specifying the prefix or prefixes to check a
+     * message for. By default, the prefix passed in the constructor is
+     * returned.
      */
-    matchesTextPrefix(msg: Eris.Message): boolean;
+    prefixes(msg: Eris.Message, ctx: PartialCommandContext): string | string[] | undefined;
     splitPrefixFromContent(msg: Eris.Message): [string, string] | null;
     /** @deprecated Alias of `prefix` */
     defaultPrefix: string;

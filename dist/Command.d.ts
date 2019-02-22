@@ -9,10 +9,13 @@ export interface CommandRequirements {
     /** A custom function that must return true to enable the command. */
     custom?(msg: object, args: string[], ctx: CommandContext): boolean | Promise<boolean>;
 }
-/** An object containing context information for a command's execution. */
-export interface CommandContext {
+/** An object containing context information for processing a command. */
+export interface PartialCommandContext {
     /** The client that received the message. */
     client: Client;
+}
+/** An object containing context information for a command's execution. */
+export interface CommandContext extends PartialCommandContext {
     /** The prefix used to call the command. */
     prefix: string;
     /** The name or alias used to call the command. */
