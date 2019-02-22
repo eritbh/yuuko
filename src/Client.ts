@@ -1,3 +1,5 @@
+/** @module Yuuko */
+
 import * as Eris from 'eris';
 import * as glob from 'glob';
 import {oneLine} from 'common-tags';

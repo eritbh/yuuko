@@ -1,3 +1,5 @@
+/** @module Yuuko */
+
 export function makeArray<T> (thing: T | T[]): T[] {
 	if (Array.isArray(thing)) {
 		return thing;

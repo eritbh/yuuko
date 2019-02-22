@@ -1,11 +1,10 @@
+/** @module Yuuko */
+
 import * as Eris from 'eris';
 import {Client} from './Yuuko';
 import {makeArray} from './util';
 
-/**
- * @skip
- * Check if requirements are met.
- */
+/** Check if requirements are met. */
 // TODO this interface is ugly
 async function fulfillsRequirements (requirements: CommandRequirements, msg: Eris.Message, args: string[], ctx: CommandContext) {
 	const {owner, permissions, custom} = requirements;
