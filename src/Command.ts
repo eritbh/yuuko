@@ -1,19 +1,6 @@
 import * as Eris from 'eris';
 import {Client} from './Yuuko';
-
-/**
- * @skip
- * Takes an object and returns it inside an array, or unmodified if it is
- * already an array. If undefined is passed, an empty array is returned.
- */
-function makeArray (thing: any): any[] {
-	if (Array.isArray(thing)) {
-		return thing;
-	} else if (thing === undefined) {
-		return [];
-	}
-	return [thing];
-}
+import {makeArray} from './util';
 
 /**
  * @skip
@@ -61,10 +48,13 @@ export interface CommandRequirements {
 	custom?(msg: object, args: string[], ctx: CommandContext): boolean | Promise<boolean>;
 }
 
-/** An object containing context information for a command's execution. */
-export interface CommandContext {
+/** An object containing context information for processing a command. */
+export interface PartialCommandContext {
 	/** The client that received the message. */
 	client: Client;
+}
+/** An object containing context information for a command's execution. */
+export interface CommandContext extends PartialCommandContext {
 	/** The prefix used to call the command. */
 	prefix: string;
 	/** The name or alias used to call the command. */
