@@ -4,9 +4,9 @@ import * as Eris from 'eris';
 import * as glob from 'glob';
 import {oneLine} from 'common-tags';
 import {Command, CommandName} from './Yuuko'
+// TODO: PartialCommandContext is only used in this file, should be defined here
 import {CommandRequirements, PartialCommandContext} from './Command';
 import {makeArray} from './util';
-// import {CommandContext} from './Command';
 
 /** Helper to get the resolved type of a Promise */
 type Resolved<T> = T extends Promise<infer U> ? U : T;
