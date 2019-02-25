@@ -2,14 +2,17 @@
   "name": "yuuko",
   "version": "0.8.2",
   "description": "A Discord bot base that I did for some reason.",
-  "main": "src/Yuuko.js",
+  "main": "dist/Yuuko.js",
+  "types": "dist/Yuuko.d.ts",
   "files": [
-    "/src/*"
+    "dist/*"
   ],
   "scripts": {
-    "start": "node index.js --no-warnings",
-    "lint": "eslint index.js src/* commands/*",
-    "lint-fix": "eslint --fix index.js src/* commands/*"
+    "build": "tsc",
+    "docs": "typedoc src --out docs/docs --theme minimal",
+    "start": "ts-node index.ts --no-warnings",
+    "lint": "echo tell geo to set up tslint plz",
+    "lint-fix": "echo tell geo to set up tslint plz"
   },
   "repository": "Geo1088/yuuko",
   "author": "Geo1088 <georgej1088@gmail.com>",
@@ -19,9 +22,11 @@
   },
   "homepage": "https://geo1088.github.io/yuuko",
   "dependencies": {
+    "@types/glob": "^7.1.1",
+    "@types/node": "^11.9.4",
+    "common-tags": "^1.8.0",
     "eris": "^0.9.0",
-    "glob": "^7.1.3",
-    "require-reload": "^0.2.2"
+    "glob": "^7.1.3"
   },
   "devDependencies": {
     "@geo1088/eslint-config": "^3.0.8",
@@ -30,6 +35,9 @@
     "d20": "^1.4.1",
     "eslint": "^5.6.1",
     "node-timezone": "^0.0.5",
-    "superagent": "^4.0.0"
+    "superagent": "^4.0.0",
+    "typedoc": "^0.14.2",
+    "typedoc-plugin-external-module-name": "^2.0.0",
+    "typescript": "^3.3.3"
   }
 }

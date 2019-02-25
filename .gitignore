@@ -1,5 +1,7 @@
 node_modules
 _site
 yarn-error.log
+.DS_STORE
+.vscode
 
 config.json
