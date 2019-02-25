@@ -9,6 +9,7 @@
   ],
   "scripts": {
     "build": "tsc",
+    "docs": "typedoc src --out docs/docs --theme minimal",
     "start": "ts-node index.ts --no-warnings",
     "lint": "echo tell geo to set up tslint plz",
     "lint-fix": "echo tell geo to set up tslint plz"

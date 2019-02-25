@@ -30,7 +30,7 @@ export interface ClientOptions extends Eris.ClientOptions {
 /** Information returned from the API about the bot's OAuth application. */
 // TODO: obviated by https://github.com/abalabahaha/eris/pull/467
 export type ClientOAuthApplication =
-	Resolved<ReturnType<Client["getOAuthApplication"]>>
+	Resolved<ReturnType<Client["getOAuthApplication"]>>;
 
 /** The client. */
 export class Client extends Eris.Client implements ClientOptions {

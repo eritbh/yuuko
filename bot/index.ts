@@ -1,7 +1,9 @@
 import {Client} from '../src/Yuuko';
 import * as path from 'path';
 import * as log from 'another-logger';
+
 const config = require('./config');
+
 const c = new Client(config);
 
 // Event logging
