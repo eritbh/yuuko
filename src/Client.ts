@@ -2,7 +2,6 @@
 
 import * as Eris from 'eris';
 import * as glob from 'glob';
-import {oneLine} from 'common-tags';
 import {Command, CommandName} from './Yuuko'
 // TODO: PartialCommandContext is only used in this file, should be defined here
 import {CommandRequirements, PartialCommandContext} from './Command';
@@ -78,10 +77,7 @@ export class Client extends Eris.Client implements ClientOptions {
 
 		// Warn if we're using an empty prefix
 		if (this.prefix === '') {
-			process.emitWarning(oneLine`
-				defaultPrefix is an empty string; bot will not require a prefix
-				to run commands
-			`);
+			process.emitWarning('prefx is an empty string; bot will not require a prefix to run commands');
 		}
 
 		// Register the message event listener

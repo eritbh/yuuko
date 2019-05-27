@@ -24,7 +24,6 @@
   "dependencies": {
     "@types/glob": "^7.1.1",
     "@types/node": "^11.9.4",
-    "common-tags": "^1.8.0",
     "eris": "^0.9.0",
     "glob": "^7.1.3"
   },
