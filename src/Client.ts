@@ -5,10 +5,7 @@ import * as glob from 'glob';
 import {Command, CommandName} from './Yuuko'
 // TODO: PartialCommandContext is only used in this file, should be defined here
 import {CommandRequirements, PartialCommandContext} from './Command';
-import {makeArray} from './util';
-
-/** Helper to get the resolved type of a Promise */
-type Resolved<T> = T extends Promise<infer U> ? U : T;
+import {makeArray, Resolved} from './util';
 
 /** The options passed to the client constructor. Includes Eris options. */
 export interface ClientOptions extends Eris.ClientOptions {
