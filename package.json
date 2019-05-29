@@ -11,8 +11,8 @@
     "build": "tsc",
     "docs": "typedoc src --out docs/docs --theme minimal",
     "start": "ts-node index.ts --no-warnings",
-    "lint": "echo tell geo to set up tslint plz",
-    "lint-fix": "echo tell geo to set up tslint plz"
+    "lint": "eslint src/**",
+    "lint-fix": "eslint --fix src/**"
   },
   "repository": "Geo1088/yuuko",
   "author": "Geo1088 <georgej1088@gmail.com>",
