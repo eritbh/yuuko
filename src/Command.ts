@@ -78,15 +78,19 @@ export type CommandName = string | null;
 export class Command {
 	/** The command's name. */
 	name: CommandName;
+
 	/**
 	 * A list of aliases that can be used to call the command in addition to
 	 * its name.
 	 */
 	aliases: CommandName[];
+
 	/** The function executed when the command is triggered. */
 	process: CommandProcess;
+
 	/** The requirements for the command being triggered. */
 	requirements: CommandRequirements;
+
 	/** The name of the file the command was loaded from, if any. */
 	filename?: string;
 
@@ -117,7 +121,12 @@ export class Command {
 
 	/** Checks whether or not a command can be executed. */
 	async checkPermissions (msg: Eris.Message, args: string[], ctx: CommandContext): Promise<boolean> {
-		return (ctx.client.ignoreGlobalRequirements || await fulfillsRequirements(ctx.client.globalCommandRequirements, msg, args, ctx)) && await fulfillsRequirements(this.requirements, msg, args, ctx);
+		if (!ctx.client.ignoreGlobalRequirements) {
+			if (!await fulfillsRequirements(ctx.client.globalCommandRequirements, msg, args, ctx)) {
+				return false;
+			}
+		}
+		return fulfillsRequirements(this.requirements, msg, args, ctx);
 	}
 
 	/** Executes the command process if the permission checks pass. */

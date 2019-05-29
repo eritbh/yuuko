@@ -2,7 +2,7 @@
 
 import * as Eris from 'eris';
 import * as glob from 'glob';
-import {Command, CommandName} from './Yuuko'
+import {Command, CommandName} from './Yuuko';
 // TODO: PartialCommandContext is only used in this file, should be defined here
 import {CommandRequirements, PartialCommandContext} from './Command';
 import {makeArray, Resolved} from './util';
@@ -19,40 +19,56 @@ export interface ClientOptions extends Eris.ClientOptions {
 	allowMention?: boolean;
 	/** If true, messages from other bot accounts will not trigger commands. */
 	ignoreBots?: boolean;
-	/** If true, requirements set via setGlobalRequirements will be ignored. */
+	/**
+	 * If true, requirements set via setGlobalRequirements will be ignored. Used
+	 * for debugging, probably shouldn't be used in production.
+	*/
 	ignoreGlobalRequirements?: boolean;
 }
 
 /** Information returned from the API about the bot's OAuth application. */
 // TODO: obviated by https://github.com/abalabahaha/eris/pull/467
 export type ClientOAuthApplication =
-	Resolved<ReturnType<Client["getOAuthApplication"]>>;
+	Resolved<ReturnType<Client['getOAuthApplication']>>;
 
 /** The client. */
 export class Client extends Eris.Client implements ClientOptions {
 	/** The token of the bot. */
 	token: string;
+
 	/** The prefix used to trigger commands. */
 	prefix: string;
+
 	/** If true, prefix matching is case-sensitive. */
 	caseSensitivePrefix: boolean = true;
+
 	/** If true, the bot's mention can be used as an additional prefix. */
 	allowMention: boolean = true;
+
 	/** If true, messages from other bot accounts will not trigger commands. */
 	ignoreBots: boolean = true;
-	/** If true, requirements set via setGlobalRequirements will be ignored. */
+
+	/**
+	 * If true, requirements set via setGlobalRequirements will be ignored. Used
+	 * for debugging, probably shouldn't be used in production.
+	 */
 	ignoreGlobalRequirements: boolean = false;
+
 	/** A list of all loaded commands. */
 	commands: Command[] = [];
+
 	/**
 	 * A regular expression which matches mention prefixes. Present after the
 	 * first `'ready'` event is sent.
 	*/
 	mentionPrefixRegExp: RegExp | null = null;
+
 	/** Information about the bot's OAuth application. */
 	app: ClientOAuthApplication | null = null;
+
 	/** An object of stuff to add to the context object for command functions */
 	contextAdditions: object = {};
+
 	/** A requirements object that is applied to all commands */
 	globalCommandRequirements: CommandRequirements = {};
 
@@ -141,13 +157,13 @@ export class Client extends Eris.Client implements ClientOptions {
 	}
 
 	/** Adds things to the context objects the client sends. */
-	addContext(options: object): this {
+	addContext (options: object): this {
 		Object.assign(this.contextAdditions, options);
 		return this;
 	}
 
 	/** Set requirements for all commands at once */
-	setGlobalRequirements(requirements: CommandRequirements) {
+	setGlobalRequirements (requirements: CommandRequirements) {
 		Object.assign(this.globalCommandRequirements, requirements);
 		return this;
 	}
@@ -176,8 +192,9 @@ export class Client extends Eris.Client implements ClientOptions {
 	// TODO: support exporting multiple commands?
 	addCommandFile (filename: string): this {
 		delete require.cache[filename];
-		// js files are expected to use module.exports = new Command(...);
-		// ts files are expected to use export default new Command(...);
+		// JS files are expected to use `module.exports = new Command(...);`
+		// TS files are expected to use `export default new Command(...);`
+		// eslint-disable-next-line global-require
 		let command = require(filename);
 		if (command.default instanceof Command) {
 			// Use object.assign to preserve other exports
@@ -198,7 +215,8 @@ export class Client extends Eris.Client implements ClientOptions {
 	 * work on them.
 	 */
 	reloadCommands (): this {
-		// Iterates over the list backwards to avoid overwriting indexes
+		// Iterates over the list backwards to avoid overwriting indexes (this
+		// rewrites the list in reverse order, but we don't care)
 		let i = this.commands.length;
 		while (i--) {
 			const command = this.commands[i];
@@ -223,7 +241,9 @@ export class Client extends Eris.Client implements ClientOptions {
 	 * message for. By default, the prefix passed in the constructor is
 	 * returned.
 	 */
-	prefixes (msg: Eris.Message, ctx: PartialCommandContext): string | string[] | undefined {
+	// eslint disabled since an overrideable method gives lots of lint errors
+	// eslint-disable-next-line
+	prefixes (_msg: Eris.Message, _ctx: PartialCommandContext): string | string[] | undefined {
 		// No custom behavior by default
 		return undefined;
 	}
@@ -269,7 +289,8 @@ export class Client extends Eris.Client implements ClientOptions {
 	get defaultPrefix () {
 		return this.prefix;
 	}
-	set defaultPrefix(val: string) {
+
+	set defaultPrefix (val: string) {
 		this.prefix = val;
 	}
 }
