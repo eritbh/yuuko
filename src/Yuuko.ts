@@ -9,10 +9,17 @@ import * as Eris from 'eris';
 export {Eris};
 
 // Export a namespace for default commands as well
-import helpCommand from './commands/help';
 import debugCommand from './commands/debug';
-namespace defaultCommands {
-	export const help = helpCommand;
+import helpCommand from './commands/help';
+import reloadCommand from './commands/reload';
+import setavatarCommand from './commands/setavatar';
+import setnameCommand from './commands/setname';
+import setstatusCommand from './commands/setstatus';
+export namespace defaultCommands {
 	export const debug = debugCommand;
+	export const help = helpCommand;
+	export const reload = reloadCommand;
+	export const setavatar = setavatarCommand;
+	export const setname = setnameCommand;
+	export const setstatus = setstatusCommand;
 }
-export {defaultCommands};
