@@ -1,0 +1,18 @@
+<head>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="{{ page.excerpt | default: site.description | strip_html | normalize_whitespace | truncate: 160 | escape }}">
+
+<title>{% if page.title %}{{ page.title | escape }} &laquo; {% endif %}{{ site.title | escape }}</title>
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,600|Source+Code+Pro:400,600">
+<link rel="stylesheet" href="{{ site.baseurl }}/css/base.css">
+{% if page.layout == "page" or page.layout == "md" %}<link rel="stylesheet" href="{{ site.baseurl }}/css/page.css">{% endif %}
+{% if page.layout == "post" %}<link rel="stylesheet" href="{{ site.baseurl }}/css/post.css">{% endif %}
+{% if page.layout == "docs" %}<link rel="stylesheet" href="{{ site.baseurl }}/css/docs.css">{% endif %}
+<link rel="stylesheet" href="{{ site.baseurl }}/css/highlight.css">
+
+<link rel="canonical" href="{{ page.url | replace:"index.html", "" }}">
+
+</head>
