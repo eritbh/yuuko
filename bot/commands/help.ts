@@ -34,9 +34,10 @@ export default new Command([
 	'help',
 	'man',
 	'h',
-	null
+	null,
 ], async function help (msg, args, ctx) {
-	let {prefix, client} = ctx;
+	let prefix = ctx.prefix;
+	const client = ctx.client;
 	// If the prefix is a mention of the bot, use a blank string instead so our
 	// command list output is less terrible
 	if (prefix.match(client.mentionPrefixRegExp!)) prefix = '';
@@ -58,8 +59,17 @@ export default new Command([
 		const commandList = (await filterAsync(client.commands, c => c.checkPermissions(msg, args, ctx)))
 			.map(c => `\`${prefix}${c.name}\``)
 			.join(', ');
+		const prefixes = (await client.getPrefixesForMessage(msg, ctx))
+			.filter(p => p !== prefix && client.mentionPrefixRegExp && !client.mentionPrefixRegExp.test(p))
+			.map(p => `\`${p}\``);
+		if (client.allowMention) {
+			prefixes.push(client.user.mention);
+		}
+		const prefixesList = prefixes.join(', ');
+
 		message = `**=== Help: Command List ===**
 You can use the following commands: ${commandList}
+Other valid prefixes are: ${prefixesList}
 Use \`${prefix}help [command]\` to get more info on that command!`;
 	}
 
