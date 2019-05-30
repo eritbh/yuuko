@@ -157,7 +157,7 @@ export class Client extends Eris.Client implements ClientOptions {
 	}
 
 	/** Adds things to the context objects the client sends. */
-	addContext (options: object): this {
+	extendContext (options: object): this {
 		Object.assign(this.contextAdditions, options);
 		return this;
 	}
