@@ -1,23 +1,25 @@
-const {Command} = require('../Command');
-const util = require('util');
+/** @module Yuuko */
+
+import {Command} from '../Yuuko';
+import * as util from 'util';
 
 const inspectOptions = {
 	depth: 1,
 };
 
 // eslint-disable-next-line
-module.exports = new Command('debug', async function debug (msg, args, ctx) {
+export default new Command('debug', async function debug (msg, args, ctx) {
 	// Parse out code blocks
-	args = args.join(' ').replace(/^\s+/, '').replace(/\s*$/, '');
-	if (args.startsWith('```') && args.endsWith('```')) {
-		args = args.substring(3, args.length - 3);
-		if (args.startsWith('js')) {
-			args = args.substr(2);
+	let string = args.join(' ').replace(/^\s+/, '').replace(/\s*$/, '');
+	if (string.startsWith('```') && string.endsWith('```')) {
+		string = string.substring(3, string.length - 3);
+		if (string.startsWith('js')) {
+			string = string.substr(2);
 		}
 	}
 
 	// Create a dummy console object
-	const console = {
+	const console: any = { // dynamic assignment wooooo
 		_lines: [],
 		_logger (...things) {
 			this._lines.push(...things.join(' ').split('\n'));
@@ -34,7 +36,7 @@ module.exports = new Command('debug', async function debug (msg, args, ctx) {
 	// Eval the things and send the results
 	let result;
 	try {
-		result = eval(args); // eslint-disable-line no-eval
+		result = eval(string); // eslint-disable-line no-eval
 	} catch (e) {
 		result = e;
 	}

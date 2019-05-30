@@ -1,6 +1,8 @@
-const {Command} = require('../../src/Command');
+/** @module Yuuko */
 
-module.exports = new Command(['setstatus', 'setgame'], (msg, args, {client}) => {
+import {Command} from '../Yuuko';
+
+export default new Command(['setstatus', 'setgame'], (msg, args, {client}) => {
 	let status = args.shift();
 	switch (status) {
 		case 'dnd':
@@ -22,7 +24,9 @@ module.exports = new Command(['setstatus', 'setgame'], (msg, args, {client}) => 
 			status = 'online';
 			break;
 		default:
-			args.unshift(status);
+			if (status) {
+				args.unshift(status);
+			}
 			status = 'online';
 	}
 	const game = args.join(' ');

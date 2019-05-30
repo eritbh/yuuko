@@ -1,7 +1,9 @@
-const {Command} = require('../../src/Command');
-const superagent = require('superagent');
+/** @module Yuuko */
 
-module.exports = new Command('setavatar', async (msg, args, {client}) => {
+import {Command} from '../Yuuko';
+import * as superagent from 'superagent';
+
+export default new Command('setavatar', async (msg, args, {client}) => {
 	// Get the URL of the image
 	let url = args[0] || ''; // URL specified in chat, or an empty string so we can handle errors later
 	if (msg.attachments[0]) url = msg.attachments[0].url; // URL specified by upload

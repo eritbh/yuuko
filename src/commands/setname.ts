@@ -1,6 +1,8 @@
-const {Command} = require('../../src/Command');
+/** @module Yuuko */
 
-module.exports = new Command('setname', async (msg, args, {client}) => {
+import {Command} from '../Yuuko';
+
+export default new Command('setname', async (msg, args, {client}) => {
 	try {
 		msg.channel.sendTyping();
 		await client.editSelf({username: args.join(' ')});
