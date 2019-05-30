@@ -10,7 +10,6 @@
   "scripts": {
     "build": "tsc",
     "docs": "typedoc src --out docs/docs --theme minimal",
-    "start": "ts-node index.ts --no-warnings",
     "lint": "eslint src/**",
     "lint-fix": "eslint --fix src/**"
   },
