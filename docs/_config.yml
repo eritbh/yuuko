@@ -14,9 +14,7 @@
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
 title: Yuuko
-description: A Discord bot made for developers.
-
-permalink: /posts/:title/
+description: A Discord command framework based on Eris.
 
 # Build settings
 markdown: kramdown
