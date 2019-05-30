@@ -1,10 +1,11 @@
-const {Command} = require('../../src/Command');
+const {Command} = require('../Command');
 const util = require('util');
 
 const inspectOptions = {
 	depth: 1,
 };
 
+// eslint-disable-next-line
 module.exports = new Command('debug', async function debug (msg, args, ctx) {
 	// Parse out code blocks
 	args = args.join(' ').replace(/^\s+/, '').replace(/\s*$/, '');

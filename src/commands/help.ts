@@ -1,4 +1,4 @@
-import {Command} from '../../src/Yuuko';
+import {Command} from '../Yuuko';
 
 type CommandWithHelp = Command & {help: any};
 
