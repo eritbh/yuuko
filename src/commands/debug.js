@@ -28,7 +28,7 @@ module.exports = new Command('debug', async function debug (msg, args, ctx) {
 	};
 	// eslint-disable-next-line no-multi-assign
 	console.log = console.error = console.warn = console.info = console._logger.bind(console);
-	// eslint-disable-next-line no-unused-vars
+	// eslint-disable-next-line
 	const c = console; // Convenience
 
 	// Eval the things and send the results
