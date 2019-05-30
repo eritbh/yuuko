@@ -4,8 +4,8 @@ import * as Eris from 'eris';
 import * as glob from 'glob';
 import {Command, CommandName} from './Yuuko';
 // TODO: PartialCommandContext is only used in this file, should be defined here
-import {CommandRequirements, PartialCommandContext} from './Command';
-import {makeArray, Resolved} from './util';
+import {CommandRequirements, PartialCommandContext, CommandContext} from './Command';
+import {Resolved, Resolves, makeArray} from './util';
 
 /** The options passed to the client constructor. Includes Eris options. */
 export interface ClientOptions extends Eris.ClientOptions {
@@ -30,6 +30,9 @@ export interface ClientOptions extends Eris.ClientOptions {
 // TODO: obviated by https://github.com/abalabahaha/eris/pull/467
 export type ClientOAuthApplication =
 	Resolved<ReturnType<Client['getOAuthApplication']>>;
+
+export type PrefixFunction =
+	(msg: Eris.Message, ctx: PartialCommandContext) => Resolves<string | string[] | null | undefined>;
 
 /** The client. */
 export class Client extends Eris.Client implements ClientOptions {
@@ -56,6 +59,9 @@ export class Client extends Eris.Client implements ClientOptions {
 
 	/** A list of all loaded commands. */
 	commands: Command[] = [];
+
+	/** A custom function that determines the command prefix per message. */
+	prefixFunction?: PrefixFunction;
 
 	/**
 	 * A regular expression which matches mention prefixes. Present after the
@@ -121,14 +127,19 @@ export class Client extends Eris.Client implements ClientOptions {
 		if (!msg.author) return; // this is a bug and shouldn't really happen
 		if (this.ignoreBots && msg.author.bot) return;
 
-		const matchResult = this.splitPrefixFromContent(msg);
+		// Construct a partial context (without prefix or command name)
+		const partialContext: PartialCommandContext = Object.assign({
+			client: this,
+		}, this.contextAdditions);
+		// Is the message properly prefixed? If not, we can ignore it
+		const matchResult = await this.splitPrefixFromContent(msg, partialContext);
 		if (!matchResult) return;
+		// It is! We can
 		const [prefix, content] = matchResult;
 		// If there is no content past the prefix, we don't have a command
 		if (!content) {
-			// If we don't have the bot's prefix either, do nothing
+			// But a lone mention will trigger the default command instead
 			if (!prefix || !prefix.match(this.mentionPrefixRegExp!)) return;
-			// A lone mention triggers the default command with no arguments
 			const defaultCommand = this.commandForName(null);
 			if (!defaultCommand) return;
 			defaultCommand.execute(msg, [], Object.assign({
@@ -138,21 +149,22 @@ export class Client extends Eris.Client implements ClientOptions {
 			}, this.contextAdditions));
 			return;
 		}
+		// Separate command name from arguments and find command object
 		const args = content.split(' ');
 		const commandName = args.shift();
 		if (commandName === undefined) return;
 		const command = this.commandForName(commandName);
 		if (!command) return;
-
-		const ctx = Object.assign({
-			client: this,
+		// Construct a full context object now that we have all the info
+		const fullContext: CommandContext = Object.assign({
 			prefix,
 			commandName,
-		}, this.contextAdditions);
-		this.emit('preCommand', command, msg, args, ctx);
-		const executed = await command.execute(msg, args, ctx);
+		}, partialContext);
+		// Do the things
+		this.emit('preCommand', command, msg, args, fullContext);
+		const executed = await command.execute(msg, args, fullContext);
 		if (executed) {
-			this.emit('command', command, msg, args, ctx);
+			this.emit('command', command, msg, args, fullContext);
 		}
 	}
 
@@ -237,15 +249,29 @@ export class Client extends Eris.Client implements ClientOptions {
 	}
 
 	/**
-	 * Overridable method for specifying the prefix or prefixes to check a
-	 * message for. By default, the prefix passed in the constructor is
-	 * returned.
+	 * Registers a function used to determine what prefixes to use on a
+	 * per-message basis. Returns a string or an array of strings that should be
+	 * recognized as prefixes for the message, or `undefined` to specify that
+	 * the default prefix should be used. If the `allowMention` client option is
+	 * set, mentions will work regardless of the return value of your custom
+	 * function. The empty prefix also always works in private channels.
 	 */
-	// eslint disabled since an overrideable method gives lots of lint errors
-	// eslint-disable-next-line
-	prefixes (_msg: Eris.Message, _ctx: PartialCommandContext): string | string[] | undefined {
-		// No custom behavior by default
-		return undefined;
+	prefixes (func: PrefixFunction): this {
+		if (this.prefixFunction) {
+			process.emitWarning('Client.prefixes called multiple times');
+		}
+		this.prefixFunction = func;
+		return this;
+	}
+
+	async getPrefixesForMessage (msg, ctx) {
+		const prefixes = this.prefixFunction && await this.prefixFunction(msg, ctx);
+		if (prefixes == null) {
+			// If we have no custom function or it returned nothing, use default
+			return [this.prefix];
+		}
+		// Always return as an array, even if we got a single result back
+		return makeArray(prefixes);
 	}
 
 	// Takes a message, gets the prefix based on the config of any guild it was
@@ -254,15 +280,8 @@ export class Client extends Eris.Client implements ClientOptions {
 	// @param {Eris.Message} msg The message to process
 	// @returns {Array<String|null>} An array `[prefix, rest]` if the message
 	// matches the prefix, or `[null, null]` if not
-	splitPrefixFromContent (msg: Eris.Message): [string, string] | null {
-		let prefixes = this.prefixes(msg, Object.assign({
-			client: this,
-		}, this.contextAdditions));
-		if (prefixes === undefined) {
-			prefixes = [this.prefix];
-		} else {
-			prefixes = makeArray(prefixes);
-		}
+	async splitPrefixFromContent (msg: Eris.Message, ctx: PartialCommandContext): Promise<[string, string] | null> {
+		const prefixes = await this.getPrefixesForMessage(msg, ctx);
 
 		// Traditional prefix checking
 		for (const prefix of prefixes) {

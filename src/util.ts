@@ -14,4 +14,6 @@ export function makeArray<T> (thing: T | T[]): T[] {
 }
 
 /** The resolved type of a Promise */
-export type Resolved<T> = T extends Promise<infer U> ? U : T;
+export type Resolved<T> = T extends Promise<infer U> ? U : T
+/** A type, or a Promise that resolves to that type */
+export type Resolves<T> = T | Promise<T>

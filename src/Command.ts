@@ -51,6 +51,8 @@ export interface CommandRequirements {
 export interface PartialCommandContext {
 	/** The client that received the message. */
 	client: Client;
+	/** Other keys can be added as necessary by Client#extendContext. */
+	[key: string]: any;
 }
 /** An object containing context information for a command's execution. */
 export interface CommandContext extends PartialCommandContext {
