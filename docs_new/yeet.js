@@ -1,4 +1,4 @@
-/* globals Vue, fetch */
+/* globals Vue, fetch, window, document */
 
 // TOC components
 
@@ -242,4 +242,16 @@ new Vue({ // eslint-disable-line no-new
 		</div>
 	`,
 	el: '#app',
+	mounted () {
+		// wack
+		setTimeout(() => {
+			if (window.location.hash) {
+				const id = window.location.hash.substring(1);
+				const el = document.getElementById(id);
+				if (el) {
+					el.scrollIntoView();
+				}
+			}
+		}, 500);
+	},
 });
