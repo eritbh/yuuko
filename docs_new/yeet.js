@@ -41,7 +41,7 @@ Vue.component('toc-entry', {
 			<a :href="$root.hrefForThing(data)">
 				{{data.kindString}}: <code>{{data.name}}</code>
 			</a>
-			<ul v-if="data.children.length">
+			<ul v-if="data.children && data.children.length">
 				<toc-class-member
 					v-for="member in filteredChildren"
 					:key="'toc' + member.id"
@@ -131,7 +131,7 @@ Vue.component('thing-display', {
 					</template>
 				</small>
 			</h1>
-			<p>{{data.comment.shortText}}</p>
+			<p>{{data.comment ? data.comment.shortText : 'No comment :('}}</p>
 			<template v-for="child in this.filteredChildren">
 				<template v-if="child.kindString === 'Property'">
 					<h2 :id="$root.idForThingProperties(data)">
