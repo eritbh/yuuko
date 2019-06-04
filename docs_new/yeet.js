@@ -8,7 +8,7 @@ Vue.component('toc-class-member', {
 		parent: Object,
 	},
 	template: `
-		<div class="constructor-signatures" v-if="data.kindString === 'Constructor'">
+		<div class="constructor-signatures" v-if="data.kindString === 'Constructor' || data.kindString === 'Method'">
 			<!-- div inside ul? why i never -->
 			<li
 				v-for="signature in data.signatures"
@@ -77,6 +77,9 @@ Vue.component('type-render', {
 	props: {
 		type: Object,
 	},
+	methods: {
+		stringify: JSON.stringify,
+	},
 	template: `
 		<span v-if="type.type === 'union'">
 			<template v-for="(childType, i) in type.types">
@@ -93,8 +96,11 @@ Vue.component('type-render', {
 			</template>
 		</span>
 		<code v-else-if="type.type === 'intrinsic'">{{type.name}}</code>
+		<span v-else-if="type.type === 'array'">
+			Array: <type-render :type="type.elementType"/>
+		</span>
 		<span v-else>
-			sad
+			{{stringify(type)}}
 		</span>
 	`,
 });
@@ -110,8 +116,8 @@ Vue.component('thing-display', {
 		allProperties () {
 			return this.data.children.filter(child => {
 				if (child.kindString !== 'Property') return false;
-				if (child.flags.isPrivate) return false;
-				if (child.inheritedFrom) return false;
+				if (child.flags && child.flags.isPrivate) return false;
+				if (child.inheritedFrom) return this.$root.showInherited;
 				return true;
 			});
 		},
@@ -156,11 +162,30 @@ Vue.component('thing-display', {
 						</tr>
 					</table>
 				</template>
-				<template v-if="child.kindString === 'Constructor'">
+				<template v-if="child.kindString === 'Constructor' || child.kindString === 'Method'">
 					<template v-for="signature in child.signatures">
 						<h2 :id="$root.idForThing(signature)">
 							{{child.kindString}}: <code>{{signature.name}}({{$root.paramList(signature.parameters)}})</code>
 						</h2>
+						<p>
+							{{signature.comment ? signature.comment.shortText : 'No description :('}}
+						</p>
+						<table>
+							<tr>
+								<th>Name</th>
+								<th>Type</th>
+								<th>Description</th>
+							</tr>
+							<tr v-for="param in signature.parameters">
+								<td>
+									<code>{{param.name}}</code>
+								</td>
+								<td>
+									<type-render :type="param.type"/>
+								</td>
+								<td></td>
+							</tr>
+						</table>
 					</template>
 				</template>
 			</template>
@@ -189,6 +214,7 @@ new Vue({ // eslint-disable-line no-new
 	data () {
 		return {
 			data: null,
+			showInherited: false,
 		};
 	},
 	created () {
@@ -210,16 +236,19 @@ new Vue({ // eslint-disable-line no-new
 			return `${this.hrefForThing(thing)}-properties`;
 		},
 		paramList (parameters) {
-			return parameters.map(param => param.name).join(', ');
+			return parameters ? parameters.map(param => param.name).join(', ') : '';
 		},
 		filterChildren (children) {
 			let hasProperties = false;
 			return children.filter(thing => {
 				if (thing.kindString === 'Property') {
+					// just trust me on this one
 					// eslint-disable-next-line no-return-assign
 					return hasProperties ? false : hasProperties = true;
 				}
-				return thing && (!thing.flags || !thing.flags.isPrivate);
+				if (thing.flags && thing.flags.isPrivate) return false;
+				if (thing.inheritedFrom) return this.showInherited;
+				return true;
 			});
 		},
 	},
@@ -228,11 +257,7 @@ new Vue({ // eslint-disable-line no-new
 			return this.data && this.data.children[0];
 		},
 		classes () {
-			return this.module && this.module.children.filter(thing => {
-				// if (thing.kindString !== 'Class') return false;
-				if (!thing.flags.isExported) return false;
-				return true;
-			});
+			return this.module && this.filterChildren(this.module.children);
 		},
 	},
 	template: `
