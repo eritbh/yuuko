@@ -103,7 +103,11 @@ export class Client extends Eris.Client implements ClientOptions {
 		this.on('messageCreate', this.handleMessage);
 	}
 
-	/** @override Hijacks the `'ready'` event so we can do custom setup. */
+	/**
+	 * @override
+	 * @hidden
+	 * Hijacks the `'ready'` event so we can do custom setup.
+	 */
 	emit (name: string, ...args: any[]): boolean {
 		// We only want to customize the 'ready' event the first time
 		if (name !== 'ready' || this._gotReady) return super.emit(name, ...args);
@@ -312,6 +316,35 @@ export class Client extends Eris.Client implements ClientOptions {
 	set defaultPrefix (val: string) {
 		this.prefix = val;
 	}
+}
+
+export declare interface Client extends Eris.Client {
+	on(event: string, listener: Function): this;
+	/**
+	 * @event
+	 * Fired when a command is loaded.
+	 * @param command The command that was loaded
+	 */
+	on(event: 'commandLoaded', listener: (cmd: Command) => void): this;
+	/**
+	 * @event
+	 * Fired just before a command has its requirements evaluated on an
+	 * incoming message.
+	 * @param command The command that will be executed
+	 * @param message The message that triggered the command
+	 * @param args The arguments passed to the command handler
+	 * @param context The context object for the command
+	 */
+	on(event: 'preCommand', listener: (cmd: Command, msg: Eris.Message, args: string[], ctx: CommandContext) => void): this;
+	/**
+	 * @event
+	 * Fired after a command is executed.
+	 * @param command The command that will be executed
+	 * @param message The message that triggered the command
+	 * @param args The arguments passed to the command handler
+	 * @param context The context object for the command
+	 */
+	on(event: 'preCommand', listener: (cmd: Command, msg: Eris.Message, args: string[], ctx: CommandContext) => void): this;
 }
 
 // Added event definitions
