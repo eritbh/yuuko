@@ -1,4 +1,4 @@
-/* globals Vue, fetch, window, document */
+/* globals Vue, marked, fetch, window, document */
 
 // TOC components
 
@@ -91,11 +91,9 @@ Vue.component('type-render', {
 			<a v-if="type.id" :href="$root.hrefForThing(type)">
 				{{type.name}}
 			</a>
-			<template v-else>
-				{{type.name}}
-			</template>
+			<span v-else>{{type.name}}</span>
 		</span>
-		<code v-else-if="type.type === 'intrinsic'">{{type.name}}</code>
+		<span v-else-if="type.type === 'intrinsic'">{{type.name}}</span>
 		<span v-else-if="type.type === 'array'">
 			Array: <type-render :type="type.elementType"/>
 		</span>
@@ -122,6 +120,9 @@ Vue.component('thing-display', {
 			});
 		},
 	},
+	methods: {
+		marked,
+	},
 	template: `
 		<div :id="$root.idForThing(data)">
 			<h1>
@@ -137,7 +138,7 @@ Vue.component('thing-display', {
 					</template>
 				</small>
 			</h1>
-			<p>{{data.comment ? data.comment.shortText : 'No comment :('}}</p>
+			<p v-html="$root.renderComment(data.comment)" />
 			<template v-for="child in this.filteredChildren">
 				<template v-if="child.kindString === 'Property'">
 					<h2 :id="$root.idForThingProperties(data)">
@@ -156,9 +157,7 @@ Vue.component('thing-display', {
 							<td>
 								<type-render :type="property.type"/>
 							</td>
-							<td>
-								{{property.comment ? property.comment.shortText : 'No description :('}}
-							</td>
+							<td v-html="$root.renderComment(property.comment)" />
 						</tr>
 					</table>
 				</template>
@@ -167,9 +166,7 @@ Vue.component('thing-display', {
 						<h2 :id="$root.idForThing(signature)">
 							{{child.kindString}}: <code>{{signature.name}}({{$root.paramList(signature.parameters)}})</code>
 						</h2>
-						<p>
-							{{signature.comment ? signature.comment.shortText : 'No description :('}}
-						</p>
+						<p v-html="$root.renderComment(signature.comment)" />
 						<table>
 							<tr>
 								<th>Name</th>
@@ -239,6 +236,7 @@ new Vue({ // eslint-disable-line no-new
 			return parameters ? parameters.map(param => param.name).join(', ') : '';
 		},
 		filterChildren (children) {
+			if (!children) return [];
 			let hasProperties = false;
 			return children.filter(thing => {
 				if (thing.kindString === 'Property') {
@@ -250,6 +248,11 @@ new Vue({ // eslint-disable-line no-new
 				if (thing.inheritedFrom) return this.showInherited;
 				return true;
 			});
+		},
+		renderComment (comment) {
+			if (!comment) return '';
+			if (!comment.shortText) return '';
+			return marked(comment.shortText);
 		},
 	},
 	computed: {
