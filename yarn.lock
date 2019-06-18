@@ -359,10 +359,10 @@ doctrine@^2.1.0:
   dependencies:
     esutils "^2.0.2"
 
-eris@^0.9.0:
-  version "0.9.0"
-  resolved "https://registry.yarnpkg.com/eris/-/eris-0.9.0.tgz#a2796839f7768cd40645c2c6b1bf0c86ba3147f3"
-  integrity sha512-U3/fv/wF2nA7Pc003v2cMXfTXvz8OySZYE21Zpx3ipm5sKbHWjcwDGdNXbp2Nb7fUip/IIjA/5540YDcqyQSvQ==
+eris@^0.10.0:
+  version "0.10.0"
+  resolved "https://registry.yarnpkg.com/eris/-/eris-0.10.0.tgz#cfc3ba5721fe3c116e4f3dac5a2bb07b00ff7558"
+  integrity sha512-xAvmD4wsE5mwuiP+wy8RiarjiuwCylSsglKqru4J4sk0/WGOnSOfEZf43YLx/TcF4J1D4B2VMTq38446Bk1x1Q==
   dependencies:
     ws "^6.0.0"
   optionalDependencies:
