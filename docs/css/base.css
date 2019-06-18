@@ -13,6 +13,8 @@ body {
 
 pre, code {
     font-family: "Source Code Pro", monospace;
+    tab-size: 4;
+    -moz-tab-size: 4;
 }
 
 a {

@@ -9,66 +9,42 @@ header: ["Command List"]
 
 # Commands
 
-A list of commands that can be used on this bot. `<angle brackets>` denote options you have to pass to the command for it to work, and `[square brackets]` denote optional parts that can be omitted.
+Yuuko comes with some commands built-in to make your life easier when building and your bot. They can be used like so:
 
-**Note:** This list uses the prefix `~` (a tilde), which is the bot's default prefix but may not be the same as the prefix set for any given server. When in doubt, mention the bot at the beginning of your message instead of using a prefix - this is valid in any server.
+```js
+const debug = require('yuuko/dist/commands/debug');
+mybot.addCommand(debugCommand);
+```
 
-## `~about`
-Displays information about the bot, including running version, time since last crash, and a link to its source code.
+## `debug`
 
-## `~choose <option>, <option>, [more options...]`
-Chooses a random option from a list of comma-separated options. If you want to include a comma in an option, escape it with a backslash.
+Evaluates Javascript. Lets you manually inspect properties of the client, awaits promises, and also mocks out the `console` so you can perform `console.log`s and have them displayed in Discord.
 
-## `~color <any valid CSS color>`
-Gets alternate writings of a CSS color, plus a preview.
+## `help`
 
-## `~eval` (`~rb`, `~py`, `~js`, and others)
-Evaluates arbitrary code in a sandbox. Supports Ruby, Python, and Javascript code in a variety of formats.
+A default help command. Add a `help` property to your command like so:
 
-Code can be passed to this command in several ways:
+```js
+const someCommand = new Command(...);
+someCommand.help = {
+	desc: 'Does some things',
+	args: '<anything that you pass to the command>',
+};
+```
+This default help command will pick up the help information from that property and automatically show it when people do `~help <commandname>`.
 
-- Passing code in a code block with a specified language
+## `reload`
 
-	````
-	~eval ```rb
-	puts "hoi"
-	```
-	````
+Reloads any commands that were loaded from files. Useful if you need to test a new change to a command without restarting the whole bot.
 
-	````
-	~eval ```py
-	print("hoi")
-	```
-	````
+## `setavatar`
 
-- Using a language-specific alias, with or without a code block
+Sets the bot user's avatar. Feed the command an image URL or upload an attachment with your message.
 
-	````
-	~ruby puts "hoi"
-	````
+## `setname`
 
-	````
-	~python ```py
-	print("hoi")
-	```
-	````
+Sets the bot user's username. Send the new username as the only argument to the command.
 
-	````
-	~js console.log('hoi')
-	````
+## `setstatus`
 
-The output of this command reflects the result of the run script. Console messages (`puts`, `print()`, `console.log()`) are shown with comments, and the final output of the script will be shown with syntax highlighting.
-
-Due to limitations in the evaluation system, asynchronous scripts will likely not work.
-
-## `~help [command]`
-Displays a list of commands. Include a command name to get information about that command.
-
-## `~npm [search]`
-Searches for, and get information on, npm packages.
-
-## `~ping`
-Pings the bot.
-
-## `~roll <dice roll>`
-Roll some dice. Pass in a number or an `AdX` roll, with modifiers and `d%` format supported. Examples: `6`, `2d20`, `1d%`, `d4-2`. If no roll is specified, it will default to `1d6`. Pass in multiple rolls by separating them with spaces.
+Sets the bot user's status. To change the bot's status icon, pass `online`, `offline`, `idle`, or `dnd`. To change the bot's status text, pass the new text. You can also pass both at once - put the icon name first.

@@ -1,10 +1,10 @@
 ---
 layout: md
-title: Quick Start
+title: Usage Examples
 group: nav
 order: 1
-permalink: /quick-start/
-header: ["Quick Start", "Get your first Yuuko bot up and running."]
+permalink: /usage/
+header: ["Using Yuuko", "A quick start and overview of how to use Yuuko's features"]
 ---
 # Prerequisites and installation
 
@@ -105,6 +105,18 @@ const addCommand = new Command('add', (message, args) => {
 	msg.channel.createMessage(`The sum is ${sum}!`);
 });
 ```
+```ts
+const addCommand = new Command('add', (message, args) => {
+	// Convert the arguments to numbers
+	args = args.map(number => parseInt(number, 10));
+	// Add them all up!
+	let sum = 0;
+	for (const number of args) {
+		sum += number;
+	}
+	msg.channel.createMessage(`The sum is ${sum}!`);
+});
+```
 
 # The context argument
 
@@ -127,6 +139,23 @@ module.exports = new Command('test', (message, args, context) => {
 	context.myCustomThing // The string 'This is neat!' that was set above
 });
 ```
+```ts
+// index.ts
+import {Client} from 'yuuko';
+const mybot = new CLient({...});
+mybot.extendContext({
+	myCustomThing: 'This is neat!',
+});
+mybot.addCommandDir(path.join(__dirname, 'commands')).run();
+
+// commands/test.ts
+import {Command} from 'yuuko';
+export default new Command('test', (message, args, context) => {
+	context.client // The same as mybot in the first file
+	context.commandName // The name or alias used to call the command
+	context.myCustomThing // The string 'This is neat!' that was set above
+});
+```
 
 # Custom prefixes
 
@@ -140,18 +169,60 @@ mybot.prefixes(message => {
 	return ['! ', '!!'];
 });
 ```
+```ts
+mybot.prefixes(message => {
+	// If we're not in a guild, just use the default
+	if (!message.channel instanceof Eris.GuildChannel) return;
+	// In guilds, allow two prefixes, "!" and "!!"
+	return ['! ', '!!'];
+});
+```
 
 # Everything Eris
 
 Yuuko's client class extends Eris's, so you can use all the client methods directly.
 
 ```js
-console.log(mybot.user.username);
+mybot.once('ready', () => {
+	console.log('Ready! Logged in as', mybot.user.username);
+})
+```
+```ts
+mybot.once('ready', () => {
+	console.log('Ready! Logged in as', mybot.user.username);
+})
 ```
 
+# More information
 
+For more info about the methods you can use with Yuuko, check out the [full API documentation](/docs).
+
+<button id="language-toggle" onclick="toggleLanguage()">Show Typescript examples</button>
+<style>
+#language-toggle {
+	position: fixed;
+	bottom: 5px;
+	right: 5px;
+	padding: 10px;
+	background: #3cc76d;
+	color: white;
+	border: 0;
+	border-radius: 5px;
+	text-shadow: 0 1px rgba(0,0,0,0.2);
+	font-size: 1.6rem;
+}
+</style>
 <script>
-document.querySelectorAll('.language-ts').forEach(element => {
-	element.parentElement.removeChild(element);
-})
+let ts = true;
+function toggleLanguage () {
+	ts = !ts;
+	document.getElementById('language-toggle').textContent = ts ? 'Show Javascript examples' : 'Show Typescript examples';
+	document.querySelectorAll('.language-js').forEach(element => {
+		element.style.display = ts ? 'none' : 'block';
+	});
+	document.querySelectorAll('.language-ts').forEach(element => {
+		element.style.display = ts ? 'block' : 'none';
+	});
+}
+toggleLanguage();
 </script>
