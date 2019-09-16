@@ -1,6 +1,6 @@
 {
   "name": "yuuko",
-  "version": "1.0.0-repub",
+  "version": "1.0.1",
   "description": "A Discord bot base that I did for some reason.",
   "main": "dist/Yuuko.js",
   "types": "dist/Yuuko.d.ts",
