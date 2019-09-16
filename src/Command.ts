@@ -59,7 +59,7 @@ export interface CommandContext extends PartialCommandContext {
 	/** The prefix used to call the command. */
 	prefix: string;
 	/** The name or alias used to call the command. */
-	commandName: string | null;
+	commandName?: string;
 }
 
 /** The function to be called when a command is executed. */
@@ -74,18 +74,16 @@ export interface CommandProcess {
 	): void;
 }
 
-export type CommandName = string | null;
-
 /** Class representing a command. */
 export class Command {
 	/** The command's name. */
-	name: CommandName;
+	name: string;
 
 	/**
 	 * A list of aliases that can be used to call the command in addition to
 	 * its name.
 	 */
-	aliases: CommandName[];
+	aliases: string[];
 
 	/** The function executed when the command is triggered. */
 	process: CommandProcess;
@@ -96,9 +94,11 @@ export class Command {
 	/** The name of the file the command was loaded from, if any. */
 	filename?: string;
 
-	constructor (name: CommandName | CommandName[], process: CommandProcess, requirements?: CommandRequirements) {
+	constructor (name: string | string[], process: CommandProcess, requirements?: CommandRequirements) {
 		if (Array.isArray(name)) {
-			this.name = <CommandName>name.shift();
+			const firstName = name.shift();
+			if (firstName === undefined) throw new TypeError('At least one name is required');
+			this.name = firstName;
 			this.aliases = name;
 		} else {
 			this.name = name;
@@ -139,7 +139,7 @@ export class Command {
 	}
 
 	/** All names the command is callable by. */
-	get names (): CommandName[] {
+	get names (): string[] {
 		return [this.name, ...this.aliases];
 	}
 }

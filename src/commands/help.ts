@@ -36,7 +36,6 @@ export default new Command([
 	'help',
 	'man',
 	'h',
-	null,
 ], async function help (msg, args, ctx) {
 	let prefix = ctx.prefix;
 	const client = ctx.client;

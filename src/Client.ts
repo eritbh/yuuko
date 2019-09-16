@@ -2,7 +2,7 @@
 
 import * as Eris from 'eris';
 import * as glob from 'glob';
-import {Command, CommandName} from './Yuuko';
+import {Command} from './Yuuko';
 // TODO: PartialCommandContext is only used in this file, should be defined here
 import {CommandRequirements, PartialCommandContext, CommandContext} from './Command';
 import {Resolved, Resolves, makeArray} from './util';
@@ -60,6 +60,12 @@ export class Client extends Eris.Client implements ClientOptions {
 	/** A list of all loaded commands. */
 	commands: Command[] = [];
 
+	/**
+	 * The default command, executed if `allowMention` is true and the bot is
+	 * pinged without a command
+	 */
+	defaultCommand: Command | null = null;
+
 	/** A custom function that determines the command prefix per message. */
 	prefixFunction?: PrefixFunction;
 
@@ -78,6 +84,7 @@ export class Client extends Eris.Client implements ClientOptions {
 	/** A requirements object that is applied to all commands */
 	globalCommandRequirements: CommandRequirements = {};
 
+	/** @hidden Whether or not the ready event has been emitted at least once */
 	private _gotReady: boolean = false;
 
 	constructor (options: ClientOptions) {
@@ -144,12 +151,11 @@ export class Client extends Eris.Client implements ClientOptions {
 		if (!content) {
 			// But a lone mention will trigger the default command instead
 			if (!prefix || !prefix.match(this.mentionPrefixRegExp!)) return;
-			const defaultCommand = this.commandForName(null);
+			const defaultCommand = this.defaultCommand;
 			if (!defaultCommand) return;
 			defaultCommand.execute(msg, [], Object.assign({
 				client: this,
 				prefix,
-				commandName: null,
 			}, this.contextAdditions));
 			return;
 		}
@@ -226,6 +232,17 @@ export class Client extends Eris.Client implements ClientOptions {
 	}
 
 	/**
+	 * Set the default command. This command is executed when `allowMention` is
+	 * true and the bot is pinged with no command.
+	 */
+	setDefaultCommand (commandName: string): this {
+		const command = this.commandForName(commandName);
+		if (!command) throw new TypeError(`No known command matches ${commandName}`);
+		this.defaultCommand = command;
+		return this;
+	}
+
+	/**
 	 * Reloads all commands that were loaded via `addCommandFile` and
 	 * `addCommandDir`. Useful for development to hot-reload commands as you
 	 * work on them.
@@ -248,7 +265,7 @@ export class Client extends Eris.Client implements ClientOptions {
 	 * Checks the list of registered commands and returns one whch is known by a
 	 * given name, either as the command's name or an alias of the command.
 	 */
-	commandForName (name: CommandName): Command | null {
+	commandForName (name: string): Command | null {
 		return this.commands.find(c => c.names.includes(name)) || null;
 	}
 
