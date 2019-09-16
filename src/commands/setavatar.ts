@@ -1,7 +1,15 @@
 /** @module Yuuko */
 
 import {Command} from '../Yuuko';
-import * as superagent from 'superagent';
+
+// TODO - remove dependence on superagent for this command
+let superagent;
+try {
+	// eslint-disable-next-line global-require
+	superagent = require('superagent');
+} catch (error) {
+	throw new Error('The superagent package is required as a peer dependency for the built-in setavatar command.');
+}
 
 export default new Command('setavatar', async (msg, args, {client}) => {
 	// Get the URL of the image
@@ -19,7 +27,7 @@ export default new Command('setavatar', async (msg, args, {client}) => {
 		const res = superagent.get(url);
 		// Handle possible errors
 		if (!res.ok) {
-			msg.channel.createMessage(`Got non-ok response (${res.statusCode}) while retrieving avatar`);
+			msg.channel.createMessage(`Got non-ok response (${res.statusCode}) while retrieving avatar`).catch(() => {});
 			return;
 		}
 		// Edit the avatar
