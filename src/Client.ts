@@ -28,11 +28,15 @@ export interface ClientOptions extends Eris.ClientOptions {
 
 /** Information returned from the API about the bot's OAuth application. */
 // TODO: obviated by https://github.com/abalabahaha/eris/pull/467
-export type ClientOAuthApplication =
-	Resolved<ReturnType<Client['getOAuthApplication']>>;
+export interface ClientOAuthApplication extends Resolved<ReturnType<Client['getOAuthApplication']>> {
+	// nothing else added
+}
 
-export type PrefixFunction =
-	(msg: Eris.Message, ctx: PartialCommandContext) => Resolves<string | string[] | null | undefined>;
+/** A function that takes a message and a context argument and returns a prefix,
+ * an array of prefixes, or void. */
+export interface PrefixFunction {
+	(msg: Eris.Message, ctx: PartialCommandContext): Resolves<string | string[] | null | undefined>;
+}
 
 /** The client. */
 export class Client extends Eris.Client implements ClientOptions {
