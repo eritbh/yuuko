@@ -349,6 +349,15 @@ export declare interface Client extends Eris.Client {
 	 * @param context The context object for the command
 	 */
 	on(event: 'preCommand', listener: (cmd: Command, msg: Eris.Message, args: string[], ctx: CommandContext) => void): this;
+	/**
+	 * @event
+	 * Fired if a message starts with a command but no valid command is found
+	 * @param command The command that will be executed
+	 * @param message The message that triggered the command
+	 * @param args The arguments passed to the command handler
+	 * @param context The context object for the command
+	 */
+	on(event: 'invalidCommand', listener: (msg: Eris.Message, args: string[], ctx: CommandContext) => void): this;
 }
 
 // Added event definitions
