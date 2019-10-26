@@ -168,18 +168,20 @@ export class Client extends Eris.Client implements ClientOptions {
 		const commandName = args.shift();
 		if (commandName === undefined) return;
 		const command = this.commandForName(commandName);
-		if (!command) return;
 		// Construct a full context object now that we have all the info
 		const fullContext: CommandContext = Object.assign({
 			prefix,
 			commandName,
 		}, partialContext);
+		// If the message has command but that command is not found
+		if (!command) {
+			this.emit('invalidCommand', msg, args, fullContext);
+			return;
+		}
 		// Do the things
 		this.emit('preCommand', command, msg, args, fullContext);
 		const executed = await command.execute(msg, args, fullContext);
-		if (executed) {
-			this.emit('command', command, msg, args, fullContext);
-		}
+		if (executed) this.emit('postCommand', command, msg, args, fullContext);
 	}
 
 	/** Adds things to the context objects the client sends. */
@@ -371,7 +373,16 @@ export declare interface Client extends Eris.Client {
 	 * @param args The arguments passed to the command handler
 	 * @param context The context object for the command
 	 */
-	on(event: 'preCommand', listener: (cmd: Command, msg: Eris.Message, args: string[], ctx: CommandContext) => void): this;
+	on(event: 'postCommand', listener: (cmd: Command, msg: Eris.Message, args: string[], ctx: CommandContext) => void): this;
+	/**
+	 * @event
+	 * Fired if a message starts with a command but no valid command is found
+	 * @param command The command that will be executed
+	 * @param message The message that triggered the command
+	 * @param args The arguments passed to the command handler
+	 * @param context The context object for the command
+	 */
+	on(event: 'invalidCommand', listener: (msg: Eris.Message, args: string[], ctx: CommandContext) => void): this;
 }
 
 // Added event definitions
