@@ -18,6 +18,11 @@
     esutils "^2.0.2"
     js-tokens "^4.0.0"
 
+"@geo1088/eslint-config-ts@^1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@geo1088/eslint-config-ts/-/eslint-config-ts-1.0.0.tgz#30c9ea5187813fe5b2d23d8ffdbad2de3454fce0"
+  integrity sha512-Fv2PXiv5KOfUh9+qjw1Ri+it4xpRX5N66q4TZuQZeA+JPsmtPaI3MKEfoJ8FulY0UF5Q1XIDWPh8a245mbQs1A==
+
 "@geo1088/eslint-config@^3.0.8":
   version "3.0.10"
   resolved "https://registry.yarnpkg.com/@geo1088/eslint-config/-/eslint-config-3.0.10.tgz#98c39c9656b0eb88d1bf47229dce4a5fdda34d04"
