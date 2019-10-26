@@ -32,8 +32,8 @@ export interface ClientOAuthApplication extends Resolved<ReturnType<Client['getO
 	// nothing else added
 }
 
-/** A function that takes a message and a context argument and returns a prefix,
- * an array of prefixes, or void. */
+// A function that takes a message and a context argument and returns a prefix,
+// an array of prefixes, or void.
 export interface PrefixFunction {
 	(msg: Eris.Message, ctx: PartialCommandContext): Resolves<string | string[] | null | undefined>;
 }
@@ -197,7 +197,13 @@ export class Client extends Eris.Client implements ClientOptions {
 	/** Register a command to the client. */
 	addCommand (command: Command): this {
 		if (!(command instanceof Command)) throw new TypeError('Not a command');
-		if (this.commandForName(command.name)) throw new Error(`Command ${command.name} already registered`);
+		for (const name of command.names) {
+			for (const otherCommand of this.commands) {
+				if (otherCommand.names.includes(name)) {
+					throw new TypeError(`Two commands have the same name: ${name}`);
+				}
+			}
+		}
 		this.commands.push(command);
 		this.emit('commandLoaded', command);
 		return this;
@@ -267,7 +273,7 @@ export class Client extends Eris.Client implements ClientOptions {
 
 	/**
 	 * Checks the list of registered commands and returns one whch is known by a
-	 * given name, either as the command's name or an alias of the command.
+	 * given name.
 	 */
 	commandForName (name: string): Command | null {
 		return this.commands.find(c => c.names.includes(name)) || null;
