@@ -35,8 +35,5 @@
     "typedoc": "^0.15.0",
     "typedoc-plugin-external-module-name": "^2.1.0",
     "typescript": "^3.6.3"
-  },
-  "peerDependencies": {
-    "superagent": "^5.1.0"
   }
 }
