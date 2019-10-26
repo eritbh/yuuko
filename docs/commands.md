@@ -37,10 +37,6 @@ This default help command will pick up the help information from that property a
 
 Reloads any commands that were loaded from files. Useful if you need to test a new change to a command without restarting the whole bot.
 
-## `setavatar`
-
-Sets the bot user's avatar. Feed the command an image URL or upload an attachment with your message.
-
 ## `setname`
 
 Sets the bot user's username. Send the new username as the only argument to the command.
