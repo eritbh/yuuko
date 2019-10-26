@@ -177,9 +177,7 @@ export class Client extends Eris.Client implements ClientOptions {
 		// Do the things
 		this.emit('preCommand', command, msg, args, fullContext);
 		const executed = await command.execute(msg, args, fullContext);
-		if (executed) {
-			this.emit('command', command, msg, args, fullContext);
-		}
+		if (executed) this.emit('postCommand', command, msg, args, fullContext);
 	}
 
 	/** Adds things to the context objects the client sends. */
@@ -371,7 +369,7 @@ export declare interface Client extends Eris.Client {
 	 * @param args The arguments passed to the command handler
 	 * @param context The context object for the command
 	 */
-	on(event: 'preCommand', listener: (cmd: Command, msg: Eris.Message, args: string[], ctx: CommandContext) => void): this;
+	on(event: 'postCommand', listener: (cmd: Command, msg: Eris.Message, args: string[], ctx: CommandContext) => void): this;
 }
 
 // Added event definitions
