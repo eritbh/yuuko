@@ -59,7 +59,7 @@ export interface CommandContext extends PartialCommandContext {
 	/** The prefix used to call the command. */
 	prefix: string;
 	/** The name or alias used to call the command. */
-	commandName: string | null;
+	commandName?: string;
 }
 
 /** The function to be called when a command is executed. */
@@ -74,18 +74,13 @@ export interface CommandProcess {
 	): void;
 }
 
-export type CommandName = string | null;
-
 /** Class representing a command. */
 export class Command {
-	/** The command's name. */
-	name: CommandName;
-
 	/**
-	 * A list of aliases that can be used to call the command in addition to
-	 * its name.
+	 * A list of the command's names. The first should be considered the
+	 * command's canonical or display name.
 	 */
-	aliases: CommandName[];
+	names: string[];
 
 	/** The function executed when the command is triggered. */
 	process: CommandProcess;
@@ -96,15 +91,13 @@ export class Command {
 	/** The name of the file the command was loaded from, if any. */
 	filename?: string;
 
-	constructor (name: CommandName | CommandName[], process: CommandProcess, requirements?: CommandRequirements) {
-		if (Array.isArray(name)) {
-			this.name = <CommandName>name.shift();
-			this.aliases = name;
+	constructor (names: string | string[], process: CommandProcess, requirements?: CommandRequirements) {
+		if (Array.isArray(names)) {
+			this.names = names;
 		} else {
-			this.name = name;
-			this.aliases = [];
+			this.names = [names];
 		}
-		if (!this.name) throw new TypeError('Name is required');
+		if (!this.names[0]) throw new TypeError('At least one name is required');
 		this.process = process;
 		if (!this.process) throw new TypeError('Process is required');
 		this.requirements = {};
@@ -136,10 +129,5 @@ export class Command {
 		if (!await this.checkPermissions(msg, args, ctx)) return false;
 		this.process(msg, args, ctx);
 		return true;
-	}
-
-	/** All names the command is callable by. */
-	get names (): CommandName[] {
-		return [this.name, ...this.aliases];
 	}
 }

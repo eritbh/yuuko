@@ -14,8 +14,9 @@ type CommandWithHelp = Command & {help: any};
 function helpText (command: CommandWithHelp, prefix: string) {
 	let txt = '';
 	if (command.help.desc) txt += `**Description:** ${command.help.desc}\n`;
-	if (command.help.args) txt += `**Usage:** \`${prefix}${command.name} ${command.help.args}\`\n`;
-	if (command.aliases.length) txt += `**Aliases:** ${command.aliases.map(p => `\`${prefix}${p}\``).join(', ')}\n`;
+	if (command.help.args) txt += `**Usage:** \`${prefix}${command.names[0]} ${command.help.args}\`\n`;
+	const otherNames = command.names.slice(1);
+	if (otherNames.length) txt += `**Other names:** ${otherNames.map(p => `\`${prefix}${p}\``).join(', ')}\n`;
 	return txt;
 }
 
@@ -36,7 +37,6 @@ export default new Command([
 	'help',
 	'man',
 	'h',
-	null,
 ], async function help (msg, args, ctx) {
 	let prefix = ctx.prefix;
 	const client = ctx.client;
@@ -45,7 +45,7 @@ export default new Command([
 	if (prefix.match(client.mentionPrefixRegExp!)) prefix = '';
 
 	let message;
-	// If we got nothing, command list
+	// Are we provided any arguments?
 	if (args[0]) {
 		// Find the command we're talking about
 		const command = <CommandWithHelp>client.commandForName(args[0]);
@@ -54,12 +54,12 @@ export default new Command([
 			message = `**=== Help: Unknown Command ===**
 		Make sure you spelled the command name right, and that this bot has it. Do \`${prefix}help\` with no arguments to see a list of commands.`;
 		} else {
-			message = `**=== Help: \`${prefix + command.name}\` ===**\n${helpText(command, prefix)}`;
+			message = `**=== Help: \`${prefix + command.names[0]}\` ===**\n${helpText(command, prefix)}`;
 		}
 	} else {
 		// Generate a list of commands that the user can execute
 		const commandList = (await filterAsync(client.commands, c => c.checkPermissions(msg, args, ctx)))
-			.map(c => `\`${prefix}${c.name}\``)
+			.map(c => `\`${prefix}${c.names[0]}\``)
 			.join(', ');
 		const prefixes = (await client.getPrefixesForMessage(msg, ctx))
 			.filter(p => p !== prefix && client.mentionPrefixRegExp && !client.mentionPrefixRegExp.test(p))

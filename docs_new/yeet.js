@@ -60,6 +60,9 @@ Vue.component('toc-sidebar', {
 	},
 	template: `
 		<aside class="toc">
+			<div class="version-select">
+				Docs for v1.0.1
+			</div>
 			<ul>
 				<toc-entry
 					v-for="data in things"
@@ -95,7 +98,7 @@ Vue.component('type-render', {
 		</span>
 		<span v-else-if="type.type === 'intrinsic'">{{type.name}}</span>
 		<span v-else-if="type.type === 'array'">
-			Array: <type-render :type="type.elementType"/>
+			<type-render :type="type.elementType"/>[]
 		</span>
 		<span v-else>
 			{{stringify(type)}}
@@ -126,7 +129,7 @@ Vue.component('thing-display', {
 	template: `
 		<div :id="$root.idForThing(data)">
 			<h1>
-				{{data.kindString}}: <code>{{data.name}}</code>
+				{{data.kindString}} <code>{{data.name}}</code>
 				<small v-if="data.extendedTypes && data.extendedTypes.length">
 					extends
 					<template v-for="(type, i) in data.extendedTypes">
@@ -163,6 +166,7 @@ Vue.component('thing-display', {
 				</template>
 				<template v-if="child.kindString === 'Constructor' || child.kindString === 'Method'">
 					<template v-for="signature in child.signatures">
+						<!-- TODO: duplicate signature handling code needs to be broken out -->
 						<h2 :id="$root.idForThing(signature)">
 							{{child.kindString}}: <code>{{signature.name}}({{$root.paramList(signature.parameters)}})</code>
 						</h2>
@@ -185,6 +189,30 @@ Vue.component('thing-display', {
 						</table>
 					</template>
 				</template>
+			</template>
+			<template v-if="data.signatures" v-for="signature in data.signatures">
+				test
+				<!-- TODO: duplicate signature handling code needs to be broken out -->
+				<h2 :id="$root.idForThing(signature)">
+					{{signature.kindString}}: <code>({{$root.paramList(signature.parameters)}})</code>
+				</h2>
+				<p v-html="$root.renderComment(signature.comment)" />
+				<table>
+					<tr>
+						<th>Name</th>
+						<th>Type</th>
+						<th>Description</th>
+					</tr>
+					<tr v-for="param in signature.parameters">
+						<td>
+							<code>{{param.name}}</code>
+						</td>
+						<td>
+							<type-render :type="param.type"/>
+						</td>
+						<td></td>
+					</tr>
+				</table>
 			</template>
 		</div>
 	`,
@@ -257,7 +285,7 @@ new Vue({ // eslint-disable-line no-new
 	},
 	computed: {
 		module () {
-			return this.data && this.data.children[0];
+			return this.data && this.data.children.find(thing => thing.name === 'Yuuko');
 		},
 		classes () {
 			return this.module && this.filterChildren(this.module.children);

@@ -1,5 +1,6 @@
 node_modules
 _site
+.jekyll-cache
 yarn-error.log
 .DS_STORE
 .vscode
