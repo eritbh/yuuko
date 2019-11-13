@@ -21,7 +21,6 @@
   },
   "homepage": "https://geo1088.github.io/yuuko",
   "dependencies": {
-    "eris": "^0.10.0",
     "glob": "^7.1.3"
   },
   "devDependencies": {
@@ -36,6 +35,7 @@
     "typescript": "^3.3.3"
   },
   "peerDependencies": {
+    "eris": "^0.11.0",
     "superagent": "^5.1.0"
   }
 }
