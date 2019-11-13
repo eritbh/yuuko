@@ -8,13 +8,15 @@ header: ["Using Yuuko", "A quick start and overview of how to use Yuuko's featur
 ---
 # Prerequisites and installation
 
-Yuuko requires Node version 8 or higher. You can install `yuuko` with your package manager of choice:
+Yuuko requires Node version 8 or higher. It also requires the `eris` package to be installed as a peer dependency, giving you flexibility in which Eris version you want to install.
+
+You can install both `yuuko` and `eris` with your package manager of choice:
 
 ```bash
 # If you're using yarn:
-yarn add yuuko
+yarn add yuuko eris
 # If you're using npm:
-npm install yuuko
+npm install --save yuuko eris
 ```
 
 # The bare minimum
