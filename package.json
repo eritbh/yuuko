@@ -36,7 +36,6 @@
     "typescript": "^3.6.3"
   },
   "peerDependencies": {
-    "eris": "^0.11.0",
-    "superagent": "^5.1.0"
+    "eris": "^0.11.0"
   }
 }
