@@ -12,7 +12,8 @@
     "docs": "typedoc src --out docs/docs --theme minimal",
     "lint": "eslint src/**/*.ts",
     "lint-fix": "eslint --fix src/**/*.ts",
-    "prepublishOnly": "eslint src/**/*.ts && tsc"
+    "prepublishOnly": "eslint src/**/*.ts && tsc",
+    "prepack": "tsc"
   },
   "repository": "Geo1088/yuuko",
   "author": "Geo1088 <georgej1088@gmail.com>",
