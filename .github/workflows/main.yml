@@ -42,8 +42,8 @@ jobs:
         
         # Move build artifacts into this new directory
         cp -r ../dist .
-        # Add files to git
-        git add -f dist/**
+        # Add files to git, including files always included in npm packages per https://docs.npmjs.com/files/package.json#files
+        git add -f dist/** package.json LICENSE README.md
 
         # Commit
         git config user.name "Build Bot"
