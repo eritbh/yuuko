@@ -58,5 +58,5 @@ jobs:
         echo "$DEPLOY_KEY" | ssh-add -
         mkdir -p ~/.ssh/
         ssh-keyscan github.com >> ~/.ssh/known_hosts
-        git push
+        git push || git push --set-upstream origin "$BUILDS_BRANCH_NAME"
         ssh-agent -k
