@@ -35,8 +35,8 @@ jobs:
         git clone "$(git remote get-url origin)" .temp
         cd .temp
         
-        # Create a new builds branch, or chekout the existing one
-        git checkout --orphan "$BUILDS_BRANCH_NAME" || git checkout "$BUILDS_BRANCH_NAME"
+        # Checkout the builds branch, or create one if it doesn't exist yet
+        git checkout "$BUILDS_BRANCH_NAME" || git checkout --orphan "$BUILDS_BRANCH_NAME"
         # When creating a new branch, the whole working directory is added by default, but we don't want that
         git reset
         # We also have to pull changes from the remote if possible
