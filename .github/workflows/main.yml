@@ -43,7 +43,7 @@ jobs:
         # Move build artifacts into this new directory
         cp -r ../dist .
         # Add files to git
-        git add dist/**
+        git add -f dist/**
 
         # Commit
         git config user.name "Build Bot"
