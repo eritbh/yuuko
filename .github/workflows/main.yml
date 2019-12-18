@@ -47,6 +47,12 @@ jobs:
         cp ../package.json .
         cp ../LICENSE .
         cp ../README.md .
+
+        # Check for working directory changes; if there's nothing, exit early
+        if git diff-index --quiet HEAD --; then
+          exit 0
+        fi
+
         # Add files to git
         git add -f dist/** package.json LICENSE README.md
 
