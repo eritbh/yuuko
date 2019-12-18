@@ -19,6 +19,10 @@ $ yarn add yuuko eris # yarn
 $ npm install --save yuuko eris # npm
 ```
 
+#### Development builds
+
+All commits to Yuuko are automatically built to a separate branch to make installing development builds from Github easy. If you want to get builds from the `dev` branch, install Yuuko via `github:Geo1088/yuuko#builds/dev`. Remember to grab your Eris version of choice as well.
+
 ### Ping-pong example
 
 ```js
