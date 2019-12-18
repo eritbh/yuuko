@@ -39,6 +39,8 @@ jobs:
         git checkout --orphan "$BUILDS_BRANCH_NAME" || git checkout "$BUILDS_BRANCH_NAME"
         # When creating a new branch, the whole working directory is added by default, but we don't want that
         git reset
+        # We also have to pull changes from the remote if possible
+        git pull || true
         
         # Move build artifacts into this new directory
         cp -r ../dist .
