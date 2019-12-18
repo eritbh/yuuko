@@ -42,9 +42,12 @@ jobs:
         # We also have to pull changes from the remote if possible
         git pull || true
         
-        # Move build artifacts into this new directory
+        # Move build artifacts and metadata into this new directory, including files always included in npm packages per https://docs.npmjs.com/files/package.json#files
         cp -r ../dist .
-        # Add files to git, including files always included in npm packages per https://docs.npmjs.com/files/package.json#files
+        cp ../package.json .
+        cp ../LICENSE .
+        cp ../README.md .
+        # Add files to git
         git add -f dist/** package.json LICENSE README.md
 
         # Commit
