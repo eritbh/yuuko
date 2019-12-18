@@ -1,0 +1,62 @@
+name: Generate development build
+
+# Don't generate builds for other builds!
+on:
+  push:
+    branches-ignore:
+      - "builds/**"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+
+    - name: Install dependencies
+      run: |
+        # Direct dependencies
+        yarn install
+        # Peer dependencies
+        npm i --no-save eris
+
+    - name: Build Typescript
+      run: |
+        yarn run build
+    
+    - name: Push build artifacts
+      env:
+        DEPLOY_KEY: ${{ secrets.DEPLOY_KEY }}
+      run: |
+        # Find current branch name from GITHUB_REF and prepend builds/ for new name
+        BUILDS_BRANCH_NAME="builds/${GITHUB_REF#refs/heads/}"
+        echo "Pushing artifacts to branch $BUILDS_BRANCH_NAME"
+
+        # Create another clone of the repository in a temporary directory
+        git clone "$(git remote get-url origin)" .temp
+        cd .temp
+        
+        # Create a new builds branch, or chekout the existing one
+        git checkout --orphan "$BUILDS_BRANCH_NAME" || git checkout "$BUILDS_BRANCH_NAME"
+        # When creating a new branch, the whole working directory is added by default, but we don't want that
+        git reset
+        
+        # Move build artifacts into this new directory
+        cp -r ../dist .
+        # Add files to git
+        git add dist/**
+
+        # Commit
+        git config user.name "Build Bot"
+        git config user.email "bot@github-actions"
+        git commit -m "Build of ${GITHUB_SHA:0:7}"
+        
+        # Convert remote URL from HTTPS to SSH format so we can use our deploy key
+        git remote set-url origin "$(git remote get-url origin | sed 's#http.*com/#git@github.com:#g')"
+        
+        # Push the commit to the origin
+        eval `ssh-agent -t 60 -s`
+        echo "$DEPLOY_KEY" | ssh-add -
+        mkdir -p ~/.ssh/
+        ssh-keyscan github.com >> ~/.ssh/known_hosts
+        git push
+        ssh-agent -k
