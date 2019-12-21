@@ -16,7 +16,7 @@ export interface ClientOptions extends Eris.ClientOptions {
 	/** If true, prefix matching is case-sensitive. */
 	caseSensitivePrefix?: boolean;
 	
-	// Whether or not, the command can be ran using case-sensivity. For example: !ping and !Ping
+	/** Whether or not, the command can be ran using case-sensivity. For example: !ping and !Ping */
 	caseSensitiveCommand?: boolean;
 	
 	/** If true, the bot's mention can be used as an additional prefix. */
