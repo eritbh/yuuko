@@ -4,3 +4,5 @@ _site
 yarn-error.log
 .DS_STORE
 .vscode
+
+dist
