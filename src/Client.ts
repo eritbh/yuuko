@@ -15,6 +15,10 @@ export interface ClientOptions extends Eris.ClientOptions {
 	prefix: string;
 	/** If true, prefix matching is case-sensitive. */
 	caseSensitivePrefix?: boolean;
+	
+	// Whether or not, the command can be ran using case-sensivity. For example: !ping and !Ping
+	caseSensitiveCommand?: boolean;
+	
 	/** If true, the bot's mention can be used as an additional prefix. */
 	allowMention?: boolean;
 	/** If true, messages from other bot accounts will not trigger commands. */
@@ -48,6 +52,8 @@ export class Client extends Eris.Client implements ClientOptions {
 
 	/** If true, prefix matching is case-sensitive. */
 	caseSensitivePrefix: boolean = true;
+	
+	caseSensitiveCommand: boolean = false;
 
 	/** If true, the bot's mention can be used as an additional prefix. */
 	allowMention: boolean = true;
@@ -101,6 +107,7 @@ export class Client extends Eris.Client implements ClientOptions {
 		// Object.assign(this, options); // eventually maybe we can just do this
 		this.prefix = options.prefix;
 		if (options.caseSensitivePrefix !== undefined) this.caseSensitivePrefix = options.caseSensitivePrefix;
+		if (options.caseSensitiveCommand !== undefined) this.caseSensitiveCommand = options.caseSensitiveCommand;
 		if (options.allowMention !== undefined) this.allowMention = options.allowMention;
 		if (options.ignoreBots !== undefined) this.ignoreBots = options.ignoreBots;
 		if (options.ignoreGlobalRequirements !== undefined) this.ignoreGlobalRequirements = options.ignoreGlobalRequirements;
@@ -165,7 +172,7 @@ export class Client extends Eris.Client implements ClientOptions {
 		}
 		// Separate command name from arguments and find command object
 		const args = content.split(' ');
-		const commandName = args.shift();
+		const commandName = this.caseSensitiveCommand ? args.shift() : args.shift().toLowerCase();
 		if (commandName === undefined) return;
 		const command = this.commandForName(commandName);
 		// Construct a full context object now that we have all the info
