@@ -15,7 +15,7 @@ Vue.component('toc-class-member', {
 				:key="'toc' + signature.id"
 			>
 				<a :href="$root.hrefForThing(signature)">
-					<code>{{signature.name}}({{$root.paramList(signature.parameters)}})</code>
+					{{signature.name}}({{$root.paramList(signature.parameters)}})
 				</a>
 			</li>
 		</div>
@@ -57,11 +57,25 @@ Vue.component('toc-sidebar', {
 	props: {
 		things: Array,
 		sections: Array,
+		versions: Array,
+		selectedVersion: String,
 	},
 	template: `
 		<aside class="toc">
 			<div class="version-select">
-				Docs for v1.0.1
+				Docs version:
+				<select
+					:value="selectedVersion"
+					@input="$emit('change', $event.target.value)"
+				>
+					<option
+						v-for="version in versions"
+						:key="version"
+						:value="version"
+					>
+						{{$root.nameForVersion(version)}}
+					</option>
+				</select>
 			</div>
 			<ul>
 				<toc-entry
@@ -240,11 +254,21 @@ new Vue({ // eslint-disable-line no-new
 		return {
 			data: null,
 			showInherited: false,
+			versions: [],
+			selectedVersion: null
 		};
 	},
 	created () {
-		fetch('/data.json').then(response => response.json()).then(data => {
-			this.data = data;
+		fetch('/versions.txt').then(response => response.text()).then(data => {
+			this.versions = data.split('\n').filter(s => s);
+			if (window.location.search) {
+				// debugger;
+				const version = this.versionForName(window.location.search.substring(1))
+				if (version) this.selectedVersion = version;
+			}
+			if (!this.versions.includes(this.selectedVersion)) {
+				this.selectedVersion = this.versions[this.versions.length - 1];
+			}
 		});
 	},
 	methods: {
@@ -255,10 +279,10 @@ new Vue({ // eslint-disable-line no-new
 			return `${this.idForThing(thing)}-properties`;
 		},
 		hrefForThing (thing) {
-			return `#${this.idForThing(thing)}`;
+			return `?${this.$root.nameForVersion(this.$root.selectedVersion)}#${this.idForThing(thing)}`;
 		},
 		hrefForThingProperties (thing) {
-			return `${this.hrefForThing(thing)}-properties`;
+			return `?${this.$root.nameForVersion(this.$root.selectedVersion)}${this.hrefForThing(thing)}-properties`;
 		},
 		paramList (parameters) {
 			return parameters ? parameters.map(param => param.name).join(', ') : '';
@@ -282,6 +306,14 @@ new Vue({ // eslint-disable-line no-new
 			if (!comment.shortText) return '';
 			return marked(comment.shortText);
 		},
+		versionForName (name) {
+			const version = `/versions/${name}.json`;
+			return version;
+		},
+		nameForVersion (version) {
+			if (!version) return '<unknown>';
+			return version.replace(/^\/versions\/|\.json$/g, '');
+		},
 	},
 	computed: {
 		module () {
@@ -291,10 +323,25 @@ new Vue({ // eslint-disable-line no-new
 			return this.module && this.filterChildren(this.module.children);
 		},
 	},
+	watch: {
+		selectedVersion (version) {
+			fetch(version).then(response => response.json()).then(data => {
+				this.data = data;
+			});
+		}
+	},
 	template: `
 		<div class="docs-root">
-			<toc-sidebar :things="classes"/>
-			<docs-main :things="classes"/>
+			<div v-if="!data">Loading...</div>
+			<template v-else>
+				<toc-sidebar
+					:things="classes"
+					:versions="versions"
+					:selectedVersion="selectedVersion"
+					@change="selectedVersion = $event"
+				/>
+				<docs-main :things="classes"/>
+			</template>
 		</div>
 	`,
 	el: '#app',
