@@ -15,10 +15,12 @@ export interface ClientOptions extends Eris.ClientOptions {
 	prefix: string;
 	/** If true, prefix matching is case-sensitive. */
 	caseSensitivePrefix?: boolean;
-
-	/** Whether or not, the command can be ran using case-sensivity. For example: !ping and !Ping */
+	/**
+	 * If true, command names are case-sensitive. For example, users may use
+	 * !ping and !PING interchangeably (assuming ! is a valid prefix). If false,
+	 * command names in code must be all lowercase.
+	 */
 	caseSensitiveCommands?: boolean;
-
 	/** If true, the bot's mention can be used as an additional prefix. */
 	allowMention?: boolean;
 	/** If true, messages from other bot accounts will not trigger commands. */
@@ -53,6 +55,11 @@ export class Client extends Eris.Client implements ClientOptions {
 	/** If true, prefix matching is case-sensitive. */
 	caseSensitivePrefix: boolean = true;
 
+	/**
+	 * If true, command names are case-sensitive. For example, users may use
+	 * !ping and !PING interchangeably (assuming ! is a valid prefix). If false,
+	 * command names in code must be all lowercase.
+	 */
 	caseSensitiveCommands: boolean = false;
 
 	/** If true, the bot's mention can be used as an additional prefix. */
@@ -208,7 +215,7 @@ export class Client extends Eris.Client implements ClientOptions {
 	/** Register a command to the client. */
 	addCommand(command: Command): this {
 		if (!(command instanceof Command)) throw new TypeError('Not a command');
-		for (const name of command.names) {
+		for (let name of command.names) {
 			for (const otherCommand of this.commands) {
 				if (otherCommand.names.includes(name)) {
 					throw new TypeError(`Two commands have the same name: ${name}`);
