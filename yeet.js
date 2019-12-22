@@ -259,7 +259,7 @@ new Vue({ // eslint-disable-line no-new
 		};
 	},
 	created () {
-		fetch('/versions.txt').then(response => response.text()).then(data => {
+		fetch('../versions.txt').then(response => response.text()).then(data => {
 			this.versions = data.split('\n').filter(s => s);
 			if (window.location.search) {
 				// debugger;
@@ -325,7 +325,7 @@ new Vue({ // eslint-disable-line no-new
 	},
 	watch: {
 		selectedVersion (version) {
-			fetch(version).then(response => response.json()).then(data => {
+			fetch('..' + version).then(response => response.json()).then(data => {
 				this.data = data;
 			});
 		}
