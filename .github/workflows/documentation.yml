@@ -1,4 +1,4 @@
-name: Generate documentation for releases
+name: Release documentation
 
 # Generate docs on 
 on:
@@ -27,7 +27,7 @@ jobs:
           git pull || true
 
           # Generate documentation file and add file to list of versions
-          yarn install typedoc
+          yarn add typedoc
           yarn run typedoc ../src --json "$DOCUMENTATION_FILE"
           echo "$DOCUMENTATION_FILE" >> versions.txt
 
