@@ -20,6 +20,8 @@ jobs:
           npm i --no-save eris
 
       - name: Generate and push documentation
+        env:
+          DEPLOY_KEY: ${{ secrets.DEPLOY_KEY }}
         run: |
           # Find the tag name
           TAG_NAME="${GITHUB_REF#refs/tags/}"
