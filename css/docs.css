@@ -1,0 +1,86 @@
+nav {
+    margin-bottom: 3px;
+    box-shadow: none;
+}
+
+.wrap {
+    max-width: none;
+}
+
+.docs-root {
+    display: flex;
+    /*height: calc(100vh - 53px);*/
+    overflow: hidden;
+}
+
+.version-select {
+    margin-top: 5px;
+    padding: 5px 10px;
+    font-weight: bold;
+}
+
+.toc {
+    color: #333;
+    flex: 0 0 250px;
+    background: #FFF;
+    overflow-x: hidden;
+    overflow-y: auto;
+    font-size: large;
+    padding-bottom: 5px;
+}
+.toc ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+.toc li {
+    margin-top: 5px;
+}
+.toc li a {
+    display: block;
+    padding: 5px 10px;
+    text-decoration: none;
+    color: inherit;
+}
+.toc li a:hover {
+    background: #EEE;
+}
+
+/* Nested things */
+.toc li ul {
+    font-size: small;
+}
+.toc li li {
+    /*background: #DDD;*/
+    margin: 0 0 0 10px;
+    border-left: 5px solid #EEE;
+    /*border-top: 1px solid #FFF;*/
+}
+
+main {
+    box-sizing: border-box;
+    width: calc(100vw - 500px);
+    box-shadow: 250px 0 #FFF;
+    min-width: 600px;
+    padding: 20px;
+    overflow-x: hidden;
+}
+
+main h1, main h2, main h3 {
+    margin-top: -20px;
+    padding-top: 20px;
+}
+
+@media screen and (max-width: 850px) {
+    main {
+        width: auto;
+        min-width: 0;
+    }
+}
+
+/* Hide TOC on small screens */
+@media screen and (max-width: 800px) {
+    .toc {
+        display: none;
+    }
+}
