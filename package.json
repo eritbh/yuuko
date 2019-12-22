@@ -25,11 +25,9 @@
     "glob": "^7.1.3"
   },
   "devDependencies": {
-    "@geo1088/eslint-config-ts": "^1.0.0",
+    "@geo1088/eslint-config-ts": "^2.0.0",
     "@types/glob": "^7.1.1",
     "@types/node": "^12.7.5",
-    "@typescript-eslint/eslint-plugin": "^2.2.0",
-    "@typescript-eslint/parser": "^2.2.0",
     "eslint": "^6.4.0",
     "typedoc": "^0.15.0",
     "typedoc-plugin-external-module-name": "^2.1.0",

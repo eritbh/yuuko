@@ -1,14 +1,14 @@
 /** @module Yuuko */
 
 import * as Eris from 'eris';
-import { Client } from './Yuuko';
-import { makeArray } from './util';
+import {Client} from './Yuuko';
+import {makeArray} from './util';
 
 /** Check if requirements are met. */
 // TODO this interface is ugly
-async function fulfillsRequirements(requirements: CommandRequirements, msg: Eris.Message, args: string[], ctx: CommandContext) {
-	const { owner, permissions, custom } = requirements;
-	const { client } = ctx;
+async function fulfillsRequirements (requirements: CommandRequirements, msg: Eris.Message, args: string[], ctx: CommandContext) {
+	const {owner, permissions, custom} = requirements;
+	const {client} = ctx;
 	// Owner checking
 	if (owner && client.app && client.app.owner.id !== msg.author.id) {
 		return false;
@@ -92,7 +92,7 @@ export class Command {
 	/** The name of the file the command was loaded from, if any. */
 	filename?: string;
 
-	constructor(names: string | string[], process: CommandProcess, requirements?: CommandRequirements) {
+	constructor (names: string | string[], process: CommandProcess, requirements?: CommandRequirements) {
 		if (Array.isArray(names)) {
 			this.names = names;
 		} else {
@@ -116,7 +116,7 @@ export class Command {
 	}
 
 	/** Checks whether or not a command can be executed. */
-	async checkPermissions(msg: Eris.Message, args: string[], ctx: CommandContext): Promise<boolean> {
+	async checkPermissions (msg: Eris.Message, args: string[], ctx: CommandContext): Promise<boolean> {
 		if (!ctx.client.ignoreGlobalRequirements) {
 			if (!await fulfillsRequirements(ctx.client.globalCommandRequirements, msg, args, ctx)) {
 				return false;
@@ -126,7 +126,7 @@ export class Command {
 	}
 
 	/** Executes the command process if the permission checks pass. */
-	async execute(msg: Eris.Message, args: string[], ctx: CommandContext): Promise<boolean> {
+	async execute (msg: Eris.Message, args: string[], ctx: CommandContext): Promise<boolean> {
 		if (!await this.checkPermissions(msg, args, ctx)) return false;
 		this.process(msg, args, ctx);
 		return true;
