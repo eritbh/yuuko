@@ -37,6 +37,7 @@ jobs:
           # Generate documentation file and add file to list of versions
           # these paths are wach because running typedoc through yarn run breaks cwd somehow
           yarn run typedoc src --json ".temp/$DOCUMENTATION_FILE"
+          touch versions.txt
           echo "/$DOCUMENTATION_FILE" >> versions.txt
 
           # Commit
