@@ -1,1 +1,2 @@
 /versions/test2.json
+/versions/test3.json
