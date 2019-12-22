@@ -44,7 +44,7 @@ jobs:
           # Commit
           git config user.name "Build Bot"
           git config user.email "bot@github-actions"
-          git add "$DOCUMENTATION_FILE"
+          git add "$DOCUMENTATION_FILE" versions.txt
           git commit -m "Documentation for tag ${TAG_NAME}" -m "Generated from commit ${GITHUB_SHA:0:7}"
 
           # Convert remote URL from HTTPS to SSH format so we can use our deploy key
