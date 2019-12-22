@@ -37,14 +37,13 @@ jobs:
           # Generate documentation file and add file to list of versions
           # these paths are wach because running typedoc through yarn run breaks cwd somehow
           yarn run typedoc src --json ".temp/$DOCUMENTATION_FILE"
-          touch versions.txt
           echo "/$DOCUMENTATION_FILE" >> versions.txt
 
           # Commit
           git config user.name "Build Bot"
           git config user.email "bot@github-actions"
           git add "$DOCUMENTATION_FILE"
-          git commit -m "Documentation for tag ${TAG_NAME}" -m "Generated from commit ${GITHUB_SHA:0:7}
+          git commit -m "Documentation for tag ${TAG_NAME}" -m "Generated from commit ${GITHUB_SHA:0:7}"
 
           # Convert remote URL from HTTPS to SSH format so we can use our deploy key
           git remote set-url origin "$(git remote get-url origin | sed 's#http.*com/#git@github.com:#g')"
