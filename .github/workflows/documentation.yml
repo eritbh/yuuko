@@ -12,7 +12,15 @@ jobs:
     steps:
       - uses: actions/checkout@v1
 
-      - run: |
+      - name: Install dependencies
+        run: |
+          # Direct dependencies
+          yarn install
+          # Peer dependencies
+          npm i --no-save eris
+
+      - name: Generate and push documentation
+        run: |
           # Find the tag name
           TAG_NAME="${GITHUB_REF#refs/tags/}"
           # The documentation JSON will be written to this file on the gh-pages branch
@@ -27,7 +35,6 @@ jobs:
           git pull || true
 
           # Generate documentation file and add file to list of versions
-          yarn
           # these paths are wach because running typedoc through yarn run breaks cwd somehow
           yarn run typedoc src --json ".temp/$DOCUMENTATION_FILE"
           echo "$DOCUMENTATION_FILE" >> versions.txt
