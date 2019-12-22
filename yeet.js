@@ -316,11 +316,18 @@ new Vue({ // eslint-disable-line no-new
 		},
 	},
 	computed: {
-		module () {
-			return this.data && this.data.children.find(thing => thing.name === 'Yuuko');
+		modules () {
+			return this.data && this.data.children;
 		},
 		classes () {
-			return this.module && this.filterChildren(this.module.children);
+			if (!this.modules) return undefined;
+			let children = [];
+			this.modules.forEach(m => {
+				m.children && m.children.forEach(child => {
+					if (!['Type alias', 'Object literal', 'Function'].includes(child.kindString)) children.push(child);
+				});
+			});
+			return children;
 		},
 	},
 	watch: {
