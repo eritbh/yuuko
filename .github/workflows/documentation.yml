@@ -4,7 +4,7 @@ name: Release documentation
 on:
   create:
     tags:
-      - "**"
+      - v1.0.1
 
 jobs:
   build:
