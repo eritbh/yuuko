@@ -2,7 +2,7 @@ name: Release documentation
 
 # Generate docs on tagged releases
 on:
-  create:
+  push:
     tags:
       - v1.0.1
 
