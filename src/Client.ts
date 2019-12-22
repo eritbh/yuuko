@@ -2,10 +2,10 @@
 
 import * as Eris from 'eris';
 import * as glob from 'glob';
-import {Command} from './Yuuko';
+import { Command } from './Yuuko';
 // TODO: PartialCommandContext is only used in this file, should be defined here
-import {CommandRequirements, PartialCommandContext, CommandContext} from './Command';
-import {Resolved, Resolves, makeArray} from './util';
+import { CommandRequirements, PartialCommandContext, CommandContext } from './Command';
+import { Resolved, Resolves, makeArray } from './util';
 
 /** The options passed to the client constructor. Includes Eris options. */
 export interface ClientOptions extends Eris.ClientOptions {
@@ -15,10 +15,10 @@ export interface ClientOptions extends Eris.ClientOptions {
 	prefix: string;
 	/** If true, prefix matching is case-sensitive. */
 	caseSensitivePrefix?: boolean;
-	
+
 	/** Whether or not, the command can be ran using case-sensivity. For example: !ping and !Ping */
 	caseSensitiveCommand?: boolean;
-	
+
 	/** If true, the bot's mention can be used as an additional prefix. */
 	allowMention?: boolean;
 	/** If true, messages from other bot accounts will not trigger commands. */
@@ -52,7 +52,7 @@ export class Client extends Eris.Client implements ClientOptions {
 
 	/** If true, prefix matching is case-sensitive. */
 	caseSensitivePrefix: boolean = true;
-	
+
 	caseSensitiveCommand: boolean = false;
 
 	/** If true, the bot's mention can be used as an additional prefix. */
@@ -97,7 +97,7 @@ export class Client extends Eris.Client implements ClientOptions {
 	/** @hidden Whether or not the ready event has been emitted at least once */
 	private _gotReady: boolean = false;
 
-	constructor (options: ClientOptions) {
+	constructor(options: ClientOptions) {
 		super(options.token, options); // Do Eris client constructor stuff
 		// HACK: Technically this is already set by the super constructor, but
 		//       Eris defines token as an optional property even though it's not
@@ -126,7 +126,7 @@ export class Client extends Eris.Client implements ClientOptions {
 	 * @hidden
 	 * Hijacks the `'ready'` event so we can do custom setup.
 	 */
-	emit (name: string, ...args: any[]): boolean {
+	emit(name: string, ...args: any[]): boolean {
 		// We only want to customize the 'ready' event the first time
 		if (name !== 'ready' || this._gotReady) return super.emit(name, ...args);
 		this._gotReady = true;
@@ -145,7 +145,7 @@ export class Client extends Eris.Client implements ClientOptions {
 	}
 
 	/** Given a message, see if there is a command and process it if so. */
-	private async handleMessage (msg: Eris.Message): Promise<void> {
+	private async handleMessage(msg: Eris.Message): Promise<void> {
 		if (!msg.author) return; // this is a bug and shouldn't really happen
 		if (this.ignoreBots && msg.author.bot) return;
 
@@ -172,8 +172,10 @@ export class Client extends Eris.Client implements ClientOptions {
 		}
 		// Separate command name from arguments and find command object
 		const args = content.split(' ');
-		const commandName = this.caseSensitiveCommand ? args.shift() : args.shift().toLowerCase();
+		let commandName = args.shift();
 		if (commandName === undefined) return;
+		if (!this.caseSensitiveCommand) commandName = commandName.toLowerCase();
+
 		const command = this.commandForName(commandName);
 		// Construct a full context object now that we have all the info
 		const fullContext: CommandContext = Object.assign({
@@ -192,19 +194,19 @@ export class Client extends Eris.Client implements ClientOptions {
 	}
 
 	/** Adds things to the context objects the client sends. */
-	extendContext (options: object): this {
+	extendContext(options: object): this {
 		Object.assign(this.contextAdditions, options);
 		return this;
 	}
 
 	/** Set requirements for all commands at once */
-	setGlobalRequirements (requirements: CommandRequirements) {
+	setGlobalRequirements(requirements: CommandRequirements) {
 		Object.assign(this.globalCommandRequirements, requirements);
 		return this;
 	}
 
 	/** Register a command to the client. */
-	addCommand (command: Command): this {
+	addCommand(command: Command): this {
 		if (!(command instanceof Command)) throw new TypeError('Not a command');
 		for (const name of command.names) {
 			for (const otherCommand of this.commands) {
@@ -219,7 +221,7 @@ export class Client extends Eris.Client implements ClientOptions {
 	}
 
 	/** Load the files in a directory and attempt to add a command from each. */
-	addCommandDir (dirname: string): this {
+	addCommandDir(dirname: string): this {
 		if (!dirname.endsWith('/')) dirname += '/';
 		const pattern = `${dirname}*.[tj]s`;
 		const filenames = glob.sync(pattern);
@@ -231,7 +233,7 @@ export class Client extends Eris.Client implements ClientOptions {
 
 	/** Add a command exported from a file. */
 	// TODO: support exporting multiple commands?
-	addCommandFile (filename: string): this {
+	addCommandFile(filename: string): this {
 		delete require.cache[filename];
 		// JS files are expected to use `module.exports = new Command(...);`
 		// TS files are expected to use `export default new Command(...);`
@@ -254,7 +256,7 @@ export class Client extends Eris.Client implements ClientOptions {
 	 * Set the default command. This command is executed when `allowMention` is
 	 * true and the bot is pinged with no command.
 	 */
-	setDefaultCommand (commandName: string): this {
+	setDefaultCommand(commandName: string): this {
 		const command = this.commandForName(commandName);
 		if (!command) throw new TypeError(`No known command matches ${commandName}`);
 		this.defaultCommand = command;
@@ -266,7 +268,7 @@ export class Client extends Eris.Client implements ClientOptions {
 	 * `addCommandDir`. Useful for development to hot-reload commands as you
 	 * work on them.
 	 */
-	reloadCommands (): this {
+	reloadCommands(): this {
 		// Iterates over the list backwards to avoid overwriting indexes (this
 		// rewrites the list in reverse order, but we don't care)
 		let i = this.commands.length;
@@ -284,7 +286,7 @@ export class Client extends Eris.Client implements ClientOptions {
 	 * Checks the list of registered commands and returns one whch is known by a
 	 * given name.
 	 */
-	commandForName (name: string): Command | null {
+	commandForName(name: string): Command | null {
 		return this.commands.find(c => c.names.includes(name)) || null;
 	}
 
@@ -296,7 +298,7 @@ export class Client extends Eris.Client implements ClientOptions {
 	 * set, mentions will work regardless of the return value of your custom
 	 * function. The empty prefix also always works in private channels.
 	 */
-	prefixes (func: PrefixFunction): this {
+	prefixes(func: PrefixFunction): this {
 		if (this.prefixFunction) {
 			process.emitWarning('Client.prefixes called multiple times');
 		}
@@ -304,7 +306,7 @@ export class Client extends Eris.Client implements ClientOptions {
 		return this;
 	}
 
-	async getPrefixesForMessage (msg, ctx) {
+	async getPrefixesForMessage(msg, ctx) {
 		const prefixes = this.prefixFunction && await this.prefixFunction(msg, ctx);
 		if (prefixes == null) {
 			// If we have no custom function or it returned nothing, use default
@@ -320,7 +322,7 @@ export class Client extends Eris.Client implements ClientOptions {
 	// @param {Eris.Message} msg The message to process
 	// @returns {Array<String|null>} An array `[prefix, rest]` if the message
 	// matches the prefix, or `[null, null]` if not
-	async splitPrefixFromContent (msg: Eris.Message, ctx: PartialCommandContext): Promise<[string, string] | null> {
+	async splitPrefixFromContent(msg: Eris.Message, ctx: PartialCommandContext): Promise<[string, string] | null> {
 		const prefixes = await this.getPrefixesForMessage(msg, ctx);
 
 		// Traditional prefix checking
@@ -345,11 +347,11 @@ export class Client extends Eris.Client implements ClientOptions {
 	}
 
 	/** @deprecated Alias of `prefix` */
-	get defaultPrefix () {
+	get defaultPrefix() {
 		return this.prefix;
 	}
 
-	set defaultPrefix (val: string) {
+	set defaultPrefix(val: string) {
 		this.prefix = val;
 	}
 }
