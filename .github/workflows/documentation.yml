@@ -27,11 +27,9 @@ jobs:
           git pull || true
 
           # Generate documentation file and add file to list of versions
-          echo "Sanity check time"
-          pwd
-          ls
-          yarn add typedoc
-          yarn run typedoc ../src --json "$DOCUMENTATION_FILE"
+          yarn
+          # these paths are wach because running typedoc through yarn run breaks cwd somehow
+          yarn run typedoc src --json ".temp/$DOCUMENTATION_FILE"
           echo "$DOCUMENTATION_FILE" >> versions.txt
 
           # Commit
