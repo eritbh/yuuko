@@ -24,7 +24,7 @@ jobs:
           # Find the tag name
           TAG_NAME="${GITHUB_REF#refs/tags/}"
           # The documentation JSON will be written to this file on the gh-pages branch
-          DOCUMENTATION_FILE="/versions/$TAG_NAME.json"
+          DOCUMENTATION_FILE="versions/$TAG_NAME.json"
 
           echo "Generating documentation data for tag $TAG_NAME"
 
@@ -37,7 +37,7 @@ jobs:
           # Generate documentation file and add file to list of versions
           # these paths are wach because running typedoc through yarn run breaks cwd somehow
           yarn run typedoc src --json ".temp/$DOCUMENTATION_FILE"
-          echo "$DOCUMENTATION_FILE" >> versions.txt
+          echo "/$DOCUMENTATION_FILE" >> versions.txt
 
           # Commit
           git config user.name "Build Bot"
