@@ -27,8 +27,8 @@ jobs:
           git pull || true
 
           # Generate documentation file and add file to list of versions
-          yarn global add typedoc
-          typedoc ../src --json "$DOCUMENTATION_FILE"
+          yarn install typedoc
+          yarn run typedoc ../src --json "$DOCUMENTATION_FILE"
           echo "$DOCUMENTATION_FILE" >> versions.txt
 
           # Commit
