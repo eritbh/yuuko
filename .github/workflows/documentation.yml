@@ -1,0 +1,49 @@
+name: Generate documentation for releases
+
+# Generate docs on 
+on:
+  push:
+    tags:
+      - "**"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+
+      - run: |
+          # Find the tag name
+          TAG_NAME="${GITHUB_REF#refs/tags/}"
+          # The documentation JSON will be written to this file on the gh-pages branch
+          DOCUMENTATION_FILE="/versions/$TAG_NAME.json"
+
+          echo "Generating documentation data for tag $TAG_NAME"
+
+          # Checkout the gh-pages branch in a temporary folder
+          git clone "$(git remote get-url origin)" .temp
+          cd .temp
+          git checkout gh-pages
+          git pull || true
+
+          # Generate documentation file and add file to list of versions
+          yarn global add typedoc
+          typedoc ../src --json "$DOCUMENTATION_FILE"
+          echo "$DOCUMENTATION_FILE" >> versions.txt
+
+          # Commit
+          git config user.name "Build Bot"
+          git config user.email "bot@github-actions"
+          git add "$DOCUMENTATION_FILE"
+          git commit -m "Documentation for tag ${TAG_NAME}" -m "Generated from commit ${GITHUB_SHA:0:7}
+
+          # Convert remote URL from HTTPS to SSH format so we can use our deploy key
+          git remote set-url origin "$(git remote get-url origin | sed 's#http.*com/#git@github.com:#g')"
+
+          # Push the commit to the origin
+          eval `ssh-agent -t 60 -s`
+          echo "$DEPLOY_KEY" | ssh-add -
+          mkdir -p ~/.ssh/
+          ssh-keyscan github.com >> ~/.ssh/known_hosts
+          git push || git push --set-upstream origin gh-pages
+          ssh-agent -k
