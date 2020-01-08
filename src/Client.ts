@@ -363,14 +363,13 @@ export class Client extends Eris.Client implements ClientOptions {
 	}
 }
 
-export declare interface Client extends Eris.Client {
-	on(event: string, listener: Function): this;
+interface YuukoEvents<T> extends Eris.ClientEvents<T> {
 	/**
 	 * @event
 	 * Fired when a command is loaded.
 	 * @param command The command that was loaded
 	 */
-	on(event: 'commandLoaded', listener: (cmd: Command) => void): this;
+	(event: 'commandLoaded', listener: (cmd: Command) => void): T;
 	/**
 	 * @event
 	 * Fired just before a command has its requirements evaluated on an
@@ -380,7 +379,7 @@ export declare interface Client extends Eris.Client {
 	 * @param args The arguments passed to the command handler
 	 * @param context The context object for the command
 	 */
-	on(event: 'preCommand', listener: (cmd: Command, msg: Eris.Message, args: string[], ctx: CommandContext) => void): this;
+	(event: 'preCommand', listener: (cmd: Command, msg: Eris.Message, args: string[], ctx: CommandContext) => void): T;
 	/**
 	 * @event
 	 * Fired after a command is executed.
@@ -389,7 +388,7 @@ export declare interface Client extends Eris.Client {
 	 * @param args The arguments passed to the command handler
 	 * @param context The context object for the command
 	 */
-	on(event: 'postCommand', listener: (cmd: Command, msg: Eris.Message, args: string[], ctx: CommandContext) => void): this;
+	(event: 'postCommand', listener: (cmd: Command, msg: Eris.Message, args: string[], ctx: CommandContext) => void): T;
 	/**
 	 * @event
 	 * Fired if a message starts with a command but no valid command is found
@@ -398,17 +397,9 @@ export declare interface Client extends Eris.Client {
 	 * @param args The arguments passed to the command handler
 	 * @param context The context object for the command
 	 */
-	on(event: 'invalidCommand', listener: (msg: Eris.Message, args: string[], ctx: CommandContext) => void): this;
+	(event: 'invalidCommand', listener: (msg: Eris.Message, args: string[], ctx: CommandContext) => void): T;
 }
 
-// Added event definitions
-// export declare interface Client extends Eris.Client {
-// 	on(event: string, listener: Function): this;
-// 	on(event: 'preCommand' | 'command', listener: (
-// 		command: Command,
-// 		msg: Eris.Message,
-// 		args: string[],
-// 		ctx: CommandContext,
-// 	) => void): this;
-// 	on(event: 'commandLoaded', listener: (command: Command) => void): this;
-// }
+export declare interface Client extends Eris.Client {
+	on: YuukoEvents<this>;
+}
