@@ -387,15 +387,3 @@ interface YuukoEvents<T> extends Eris.ClientEvents<T> {
 export declare interface Client extends Eris.Client {
 	on: YuukoEvents<this>;
 }
-
-// Added event definitions
-// export declare interface Client extends Eris.Client {
-// 	on(event: string, listener: Function): this;
-// 	on(event: 'preCommand' | 'command', listener: (
-// 		command: Command,
-// 		msg: Eris.Message,
-// 		args: string[],
-// 		ctx: CommandContext,
-// 	) => void): this;
-// 	on(event: 'commandLoaded', listener: (command: Command) => void): this;
-// }
