@@ -7,16 +7,31 @@ import {makeArray} from './util';
 /** Check if requirements are met. */
 // TODO this interface is ugly
 async function fulfillsRequirements (requirements: CommandRequirements, msg: Eris.Message, args: string[], ctx: CommandContext) {
-	const {owner, permissions, custom} = requirements;
+	const {owner, guildOnly, dmOnly, permissions, custom} = requirements;
 	const {client} = ctx;
+
 	// Owner checking
 	if (owner && client.app && client.app.owner.id !== msg.author.id) {
 		return false;
 	}
+
+	// Guild-only commands
+	if (guildOnly) {
+		if (!(msg.channel instanceof Eris.GuildChannel)) {
+			return false;
+		}
+	}
+
+	// DM-only commands
+	if (dmOnly) {
+		if (!(msg.channel instanceof Eris.PrivateChannel)) {
+			return false;
+		}
+	}
+
 	// Permissions
 	if (permissions && permissions.length > 0) {
-		// If we require permissions, the command can't be used in direct
-		// messages
+		// Permission checks only make sense in guild channels
 		if (!(msg.channel instanceof Eris.GuildChannel)) {
 			return false;
 		}
@@ -28,10 +43,12 @@ async function fulfillsRequirements (requirements: CommandRequirements, msg: Eri
 			}
 		}
 	}
+
 	// Custom requirement function
 	if (custom && !await custom(msg, args, ctx)) {
 		return false;
 	}
+
 	// If we haven't returned yet, all requirements are met
 	return true;
 }
@@ -40,7 +57,14 @@ async function fulfillsRequirements (requirements: CommandRequirements, msg: Eri
 export interface CommandRequirements {
 	/** If true, the user must be the bot's owner. */
 	owner?: boolean;
-	/** A list of permission strings the user must have. */
+	/** If true, the message must be sent in a server channel. */
+	guildOnly?: boolean;
+	/** If true, the message must be sent in a DM channel. */
+	dmOnly?: boolean;
+	/**
+	 * A list of permission strings the user must have. If set, the `guildOnly`
+	 * option is implied.
+	 */
 	// TODO: use a union of all the string literals we could possibly put here
 	permissions?: string | string[];
 	/** A custom function that must return true to enable the command. */
