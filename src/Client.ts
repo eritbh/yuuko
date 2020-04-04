@@ -1,7 +1,8 @@
 /** @module Yuuko */
 
+import fs from 'fs';
+import path from 'path';
 import * as Eris from 'eris';
-import * as glob from 'glob';
 import {Command} from './Yuuko';
 // TODO: PartialCommandContext is only used in this file, should be defined here
 import {CommandRequirements, PartialCommandContext, CommandContext} from './Command';
@@ -229,11 +230,19 @@ export class Client extends Eris.Client implements ClientOptions {
 
 	/** Load the files in a directory and attempt to add a command from each. */
 	addCommandDir (dirname: string): this {
-		if (!dirname.endsWith('/')) dirname += '/';
-		const pattern = `${dirname}*.[tj]s`;
-		const filenames = glob.sync(pattern);
+		// Synchronous calls are fine with this method because it's only called
+		// on init
+		// eslint-disable-next-line no-sync
+		const filenames = fs.readdirSync(dirname);
 		for (const filename of filenames) {
-			this.addCommandFile(filename);
+			const filepath = path.resolve(dirname, filename);
+			// eslint-disable-next-line no-sync
+			const info = fs.statSync(filepath);
+			if (info && info.isDirectory()) {
+				this.addCommandDir(filepath);
+			} else {
+				this.addCommandFile(filepath);
+			}
 		}
 		return this;
 	}
