@@ -24,7 +24,6 @@
   "dependencies": {},
   "devDependencies": {
     "@geo1088/eslint-config-ts": "^2.0.0",
-    "@types/glob": "^7.1.1",
     "@types/node": "^12.7.5",
     "eslint": "^6.4.0",
     "typedoc": "^0.15.0",
