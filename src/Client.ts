@@ -241,7 +241,12 @@ export class Client extends Eris.Client implements ClientOptions {
 			if (info && info.isDirectory()) {
 				this.addCommandDir(filepath);
 			} else {
-				this.addCommandFile(filepath);
+				// Add files only if they can be required
+				for (const extension of Object.keys(require.extensions)) {
+					if (filepath.endsWith(extension)) {
+						this.addCommandFile(filepath);
+					}
+				}
 			}
 		}
 		return this;
