@@ -1,9 +1,9 @@
 # Yuuko
 
-[![npm module](https://img.shields.io/npm/v/yuuko.svg)](https://www.npmjs.com/package/yuuko)
-[![Discord support server](https://img.shields.io/discord/409839835503788033?color=7289DA&label=support%20server&logo=discord&logoColor=fff)](https://discord.gg/a2N2YCx)
-[![Dependency status](https://img.shields.io/david/Geo1088/yuuko.svg)](https://david-dm.org/geo1088/yuuko)
+[![npm version](https://img.shields.io/npm/v/yuuko.svg)](https://www.npmjs.com/package/yuuko)
+[![npm@next version](https://img.shields.io/npm/v/yuuko/next)](https://www.npmjs.com/package/yuuko/v/next)
 [![Dev dependency status](https://david-dm.org/geo1088/yuuko/dev-status.svg)](https://david-dm.org/geo1088/yuuko?type=dev)
+[![Discord support server](https://img.shields.io/discord/409839835503788033?color=7289DA&label=support%20server&logo=discord&logoColor=fff)](https://discord.gg/a2N2YCx)
 [![Patreon contributions](https://img.shields.io/endpoint.svg?logo=none&label=fund%20on%20Patreon&url=https://shieldsio-patreon.herokuapp.com/geo1088/pledges)](https://www.patreon.com/geo1088)
 
 A zero-dependency Discord command framework for Javascript and Typescript, based on [Eris](https://github.com/abalabahaha/eris). [Read the Documentation.](https://geo1088.me/yuuko)
