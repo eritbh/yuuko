@@ -24,10 +24,10 @@
   "dependencies": {},
   "devDependencies": {
     "@geo1088/eslint-config-ts": "^2.0.0",
-    "@types/node": "^12.7.5",
-    "eslint": "^6.4.0",
-    "typedoc": "^0.15.0",
-    "typescript": "^3.6.3"
+    "@types/node": "^13.11.0",
+    "eslint": "^6.8.0",
+    "typedoc": "^0.17.3",
+    "typescript": "^3.8.3"
   },
   "peerDependencies": {
     "eris": "^0.11.0"
