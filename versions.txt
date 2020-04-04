@@ -1,3 +1,1 @@
-/versions/test2.json
-/versions/test3.json
-/versions/v000000.json
+/versions/v2.0.0-rc2.json
