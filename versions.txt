@@ -1,2 +1,3 @@
 /versions/v2.0.0-rc2.json
 /versions/v2.0.0-rc3.json
+/versions/v2.0.0.json
