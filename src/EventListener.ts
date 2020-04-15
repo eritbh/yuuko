@@ -1,19 +1,14 @@
-import {Client} from 'eris';
+import {Client} from './Client';
+import Eris from 'eris';
 
 /** Class associating an event handler with an event. */
-class EventListener {
-	private event: Parameters<Client['on']>[0];
+export class EventListener {
+	args: Parameters<Client["on"]>;
 
-	private handler: Parameters<Client['on']>[1];
+	constructor (event: 'messageCreate', handler: (msg: Eris.Message) => any);
+	constructor (event: 'channelCreate', handler: (channel: Eris.Channel) => any);
 
-	constructor (...args: Parameters<Client['on']>) {
-		[this.event, this.handler] = args;
+	constructor (event: string, handler: Function) {
+		this.args = [event, handler];
 	}
 }
-
-// The following errors because TS doesn't handle this well:
-// https://github.com/microsoft/TypeScript/issues/32164
-
-// new EventListener('messageCreate', message => {
-// 	message.channel;
-// });

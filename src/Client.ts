@@ -377,7 +377,7 @@ export class Client extends Eris.Client implements ClientOptions {
 	}
 }
 
-interface YuukoEvents<T> extends Eris.ClientEvents<T> {
+export interface ClientEvents<T> extends Eris.ClientEvents<T> {
 	/**
 	 * @event
 	 * Fired when a command is loaded.
@@ -415,5 +415,5 @@ interface YuukoEvents<T> extends Eris.ClientEvents<T> {
 }
 
 export declare interface Client extends Eris.Client {
-	on: YuukoEvents<this>;
+	on: ClientEvents<this>;
 }
