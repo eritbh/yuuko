@@ -3,7 +3,7 @@
 import fs from 'fs';
 import path from 'path';
 import * as Eris from 'eris';
-import {Command} from './Yuuko';
+import {Command, EventListener} from './Yuuko';
 // TODO: PartialCommandContext is only used in this file, should be defined here
 import {CommandRequirements, PartialCommandContext, CommandContext} from './Command';
 import {Resolved, Resolves, makeArray} from './util';
@@ -77,6 +77,9 @@ export class Client extends Eris.Client implements ClientOptions {
 
 	/** A list of all loaded commands. */
 	commands: Command[] = [];
+
+	/** A list of all registered event listeners. */
+	events: EventListener[] = [];
 
 	/**
 	 * The default command, executed if `allowMention` is true and the bot is
@@ -225,6 +228,13 @@ export class Client extends Eris.Client implements ClientOptions {
 		}
 		this.commands.push(command);
 		this.emit('commandLoaded', command);
+		return this;
+	}
+
+	/** Register an EventListener class instance to the client. */
+	addEvent (eventListener: EventListener): this {
+		this.events.push(eventListener);
+		this.on(...eventListener.args);
 		return this;
 	}
 
