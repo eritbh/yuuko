@@ -1,4 +1,4 @@
-import { Client } from './Client';
+import { Client, Command, CommandContext } from './Yuuko';
 import Eris from 'eris';
 
 /** Class associating an event handler with an event. */
@@ -47,6 +47,12 @@ export class EventListener {
 	constructor(event: "warn" | "debug", listener: (message: string, id: number) => void);
 	constructor(event: "shardDisconnect" | "error" | "shardPreReady" | "connect",listener: (err: Error, id: number) => void);
 	constructor(event: "shardReady" | "shardResume", listener: (id: number) => void);
+
+	// Yuuko client events ripped from Client.ts
+	constructor (event: 'commandLoaded', listener: (cmd: Command) => void);
+	constructor (event: 'preCommand', listener: (cmd: Command, msg: Eris.Message, args: string[], ctx: CommandContext) => void);
+	constructor (event: 'postCommand', listener: (cmd: Command, msg: Eris.Message, args: string[], ctx: CommandContext) => void);
+	constructor (event: 'invalidCommand', listener: (msg: Eris.Message, args: string[], ctx: CommandContext) => void);
 
 	constructor(event: string, listener: Function) {
 		this.args = [event, listener];
