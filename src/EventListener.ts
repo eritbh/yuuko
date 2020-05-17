@@ -3,7 +3,11 @@ import Eris from 'eris';
 
 /** Class associating an event handler with an event. */
 export class EventListener {
+	/** The arguments passed to `client.on()` to register this listener */
 	args: Parameters<Client["on"]>;
+	
+	/** The name of the file the event listener was loaded from, if any. */
+	filename?: string;
 
 	// Event list pulled from Eris.EventListeners and Eris.ClientEvents typings, but converted to constructors
 	constructor(event: "ready" | "disconnect", listener: () => void);
