@@ -239,7 +239,7 @@ export class Client extends Eris.Client implements ClientOptions {
 	}
 
 	/** Load the files in a directory and attempt to add a command from each. */
-	addCommandDir (dirname: string): this {
+	addDir (dirname: string): this {
 		// Synchronous calls are fine with this method because it's only called
 		// on init
 		// eslint-disable-next-line no-sync
@@ -249,12 +249,12 @@ export class Client extends Eris.Client implements ClientOptions {
 			// eslint-disable-next-line no-sync
 			const info = fs.statSync(filepath);
 			if (info && info.isDirectory()) {
-				this.addCommandDir(filepath);
+				this.addDir(filepath);
 			} else {
 				// Add files only if they can be required
 				for (const extension of Object.keys(require.extensions)) {
 					if (filepath.endsWith(extension)) {
-						this.addCommandFile(filepath);
+						this.addFile(filepath);
 					}
 				}
 			}
@@ -262,24 +262,27 @@ export class Client extends Eris.Client implements ClientOptions {
 		return this;
 	}
 
-	/** Add a command exported from a file. */
-	// TODO: support exporting multiple commands?
-	addCommandFile (filename: string): this {
+	/** Add a command or event exported from a file. */
+	// TODO: support exporting multiple components?
+	addFile (filename: string): this {
+		// Clear require cache so we always get a fresh copy
 		delete require.cache[filename];
-		// JS files are expected to use `module.exports = new Command(...);`
-		// TS files are expected to use `export default new Command(...);`
 		// eslint-disable-next-line global-require
-		let command = require(filename);
-		if (command.default instanceof Command) {
+		let thing = require(filename);
+		if (thing.default) {
 			// Use object.assign to preserve other exports
 			// TODO: this kinda breaks typescript but it's fine
-			command = Object.assign(command.default, command);
-			delete command.default;
-		} else if (!(command instanceof Command)) {
-			throw new TypeError(`File ${filename} does not export a command`);
+			thing = Object.assign(thing.default, thing);
+			delete thing.default;
 		}
-		command.filename = filename;
-		this.addCommand(command);
+		thing.filename = filename;
+		if (thing instanceof Command) {
+			this.addCommand(thing);
+		} else if (thing instanceof EventListener) {
+			this.addEvent(thing);
+		} else {
+			throw new TypeError('Exported value is not a command or event listener');
+		}
 		return this;
 	}
 
@@ -299,7 +302,7 @@ export class Client extends Eris.Client implements ClientOptions {
 	 * `addCommandDir`. Useful for development to hot-reload commands as you
 	 * work on them.
 	 */
-	reloadCommands (): this {
+	reloadFiles (): this {
 		// Iterates over the list backwards to avoid overwriting indexes (this
 		// rewrites the list in reverse order, but we don't care)
 		let i = this.commands.length;
@@ -307,10 +310,35 @@ export class Client extends Eris.Client implements ClientOptions {
 			const command = this.commands[i];
 			if (command.filename) {
 				this.commands.splice(i, 1);
-				this.addCommandFile(command.filename);
+				this.addFile(command.filename);
 			}
 		}
+		// TODO: also reload event listeners
 		return this;
+	}
+
+	/**
+	 * Alias for `addDir`.
+	 * @deprecated
+	 */
+	addCommandDir (dirname: string): this {
+		return this.addDir(dirname);
+	}
+
+	/**
+	 * Alias for `addFile`.
+	 * @deprecated
+	 */
+	addCommandFile (filename: string): this {
+		return this.addFile(filename);
+	}
+
+	/**
+	 * Alias for `reloadFiles()`.
+	 * @deprecated
+	 */
+	reloadCommands (): this {
+		return this.reloadFiles();
 	}
 
 	/**
