@@ -298,22 +298,22 @@ export class Client extends Eris.Client implements ClientOptions {
 	}
 
 	/**
-	 * Reloads all commands that were loaded via `addCommandFile` and
-	 * `addCommandDir`. Useful for development to hot-reload commands as you
-	 * work on them.
+	 * Reloads all commands and events that were loaded via from files. Useful
+	 * for development to hot-reload components as you work on them.
 	 */
 	reloadFiles (): this {
-		// Iterates over the list backwards to avoid overwriting indexes (this
-		// rewrites the list in reverse order, but we don't care)
-		let i = this.commands.length;
-		while (i--) {
-			const command = this.commands[i];
-			if (command.filename) {
-				this.commands.splice(i, 1);
-				this.addFile(command.filename);
+		for (const list of [this.commands, this.events]) {
+			// Iterate over the lists backwards to avoid overwriting indexes (this
+			// rewrites the lists in reverse order, but we don't care)
+			let i = list.length;
+			while (i--) {
+				const thing = list[i];
+				if (thing.filename) {
+					list.splice(i, 1);
+					this.addFile(thing.filename);
+				}
 			}
 		}
-		// TODO: also reload event listeners
 		return this;
 	}
 
