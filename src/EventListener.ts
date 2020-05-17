@@ -30,7 +30,7 @@ export class EventListener {
 	constructor(event: "guildRoleUpdate", listener: (guild: Eris.Guild, role: Eris.Role, oldRole: Eris.OldRole) => void);
 	constructor(event: "guildUpdate", listener: (guild: Eris.Guild, oldGuild: Eris.OldGuild) => void);
 	constructor(event: "hello", listener: (trace: string[], id: number) => void);
-	constructor(event: "inviteCreate" | "inviteDelete", listener: (guild: Eris.Guild, invite: Eris.Invite) => void);
+	constructor(event: "inviteCreate" | "inviteDelete", listener: (guild: Eris.Guild, invite: Eris.GuildInvite) => void);
 	constructor(event: "messageCreate", listener: (message: Eris.Message) => void);
 	constructor(event: "messageDelete" | "messageReactionRemoveAll", listener: (message: Eris.PossiblyUncachedMessage) => void);
 	constructor(event: "messageReactionRemoveEmoji", listener: (message: Eris.PossiblyUncachedMessage, emoji: Eris.PartialEmoji) => void);
@@ -38,6 +38,7 @@ export class EventListener {
 	constructor(event: "messageReactionAdd" | "messageReactionRemove", listener: (message: Eris.PossiblyUncachedMessage, emoji: Eris.Emoji, userID: string) => void);
 	constructor(event: "messageUpdate", listener: (message: Eris.Message, oldMessage?: Eris.OldMessage) => void);
 	constructor(event: "presenceUpdate", listener: (other: Eris.Member | Eris.Relationship, oldPresence?: Eris.Presence) => void);
+	constructor(event: "rawREST", listener: (request: Eris.RawRESTRequest) => void);
 	constructor(event: "rawWS" | "unknown", listener: (packet: Eris.RawPacket, id: number) => void);
 	constructor(event: "relationshipAdd" | "relationshipRemove", listener: (relationship: Eris.Relationship) => void);
 	constructor(event: "relationshipUpdate", listener: (relationship: Eris.Relationship, oldRelationship: { type: number }) => void);
