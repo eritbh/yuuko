@@ -8,7 +8,11 @@ export default new Command('setname', async (msg, args, {client}) => {
 		await client.editSelf({username: args.join(' ')});
 		await msg.channel.createMessage('Username updated!');
 	} catch (err) {
-		msg.channel.createMessage(`There was an error while changing username.\n\`\`\`\n${err.message}\n\`\`\``).catch(() => {});
+		try {
+			msg.channel.createMessage(`There was an error while changing username.\n\`\`\`\n${err.message}\n\`\`\``);
+		} catch {
+			// pass
+		}
 	}
 }, {
 	owner: true,

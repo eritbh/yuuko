@@ -30,6 +30,7 @@ export default new Command(['setstatus', 'setgame'], (msg, args, {client}) => {
 			status = 'online';
 	}
 	const game = args.join(' ');
+	// @ts-ignore // TODO
 	client.editStatus(status, game ? {name: game} : undefined);
 }, {
 	owner: true,
