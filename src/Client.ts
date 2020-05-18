@@ -3,9 +3,8 @@
 import fs from 'fs';
 import path from 'path';
 import * as Eris from 'eris';
-import {Command, EventListener} from './Yuuko';
-// TODO: PartialCommandContext is only used in this file, should be defined here
-import {CommandRequirements, PartialCommandContext, CommandContext} from './Command';
+import {Command, CommandRequirements, CommandContext} from './Command';
+import {EventListener, EventContext} from './EventListener';
 import {Resolved, Resolves, makeArray} from './util';
 
 /** The options passed to the client constructor. Includes Eris options. */

@@ -1,7 +1,7 @@
 /** @module Yuuko */
 
 import * as Eris from 'eris';
-import {Client} from './Yuuko';
+import {EventContext} from './Yuuko';
 import {makeArray} from './util';
 
 /** Check if requirements are met. */
@@ -47,15 +47,8 @@ export interface CommandRequirements {
 	custom?(msg: Eris.Message, args: string[], ctx: CommandContext): boolean | Promise<boolean>;
 }
 
-/** An object containing context information for processing a command. */
-export interface PartialCommandContext {
-	/** The client that received the message. */
-	client: Client;
-	/** Other keys can be added as necessary by Client#extendContext. */
-	[key: string]: any;
-}
 /** An object containing context information for a command's execution. */
-export interface CommandContext extends PartialCommandContext {
+export interface CommandContext extends EventContext {
 	/** The prefix used to call the command. */
 	prefix: string;
 	/** The name or alias used to call the command. */

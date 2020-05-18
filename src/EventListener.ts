@@ -1,6 +1,14 @@
 import { Client, Command, CommandContext } from './Yuuko';
 import Eris from 'eris';
 
+/** An object containing context information for processing an event. */
+export interface EventContext {
+	/** The client that received the event. */
+	client: Client;
+	/** Other keys can be added as necessary by Client#extendContext. */
+	[key: string]: any;
+}
+
 /** Class associating an event handler with an event. */
 export class EventListener {
 	/** The arguments passed to `client.on()` to register this listener */
