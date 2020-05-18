@@ -5,6 +5,7 @@ import path from 'path';
 import * as Eris from 'eris';
 import {Command, CommandRequirements, CommandContext} from './Command';
 import {EventListener, EventContext} from './EventListener';
+import defaultMessageListener from './defaultMessageListener';
 import {Resolved, Resolves, makeArray} from './util';
 
 /** The options passed to the client constructor. Includes Eris options. */
@@ -30,6 +31,15 @@ export interface ClientOptions extends Eris.ClientOptions {
 	 * for debugging, probably shouldn't be used in production.
 	*/
 	ignoreGlobalRequirements?: boolean;
+
+	/**
+	 * If true, the client does not respond to commands by default, and the user
+	 * must register their own `messageCreate` listener, which can call
+	 * `processCommand` to perform command handling at an arbitrary point during
+	 * the handler's execution
+	 */
+	disableDefaultMessageHandler?: boolean;
+
 }
 
 /** Information returned from the API about the bot's OAuth application. */
@@ -73,6 +83,14 @@ export class Client extends Eris.Client implements ClientOptions {
 	 * for debugging, probably shouldn't be used in production.
 	 */
 	ignoreGlobalRequirements: boolean = false;
+
+	/**
+	 * If true, the client does not respond to commands by default, and the user
+	 * must register their own `messageCreate` listener, which can call
+	 * `processCommand` to perform command handling at an arbitrary point during
+	 * the handler's execution
+	 */
+	disableDefaultMessageHandler: boolean = false;
 
 	/** A list of all loaded commands. */
 	commands: Command[] = [];
@@ -121,14 +139,17 @@ export class Client extends Eris.Client implements ClientOptions {
 		if (options.allowMention !== undefined) this.allowMention = options.allowMention;
 		if (options.ignoreBots !== undefined) this.ignoreBots = options.ignoreBots;
 		if (options.ignoreGlobalRequirements !== undefined) this.ignoreGlobalRequirements = options.ignoreGlobalRequirements;
+		if (options.disableDefaultMessageHandler !== undefined) this.disableDefaultMessageHandler = options.disableDefaultMessageHandler;
 
 		// Warn if we're using an empty prefix
 		if (this.prefix === '') {
 			process.emitWarning('prefx is an empty string; bot will not require a prefix to run commands');
 		}
 
-		// Register the message event listener
-		this.on('messageCreate', this.handleMessage);
+		// Register the default message listener unless it's disabled
+		if (!this.disableDefaultMessageHandler) {
+			this.addEvent(defaultMessageListener);
+		}
 	}
 
 	/** Returns an EventContext object with all the current context */
@@ -159,53 +180,54 @@ export class Client extends Eris.Client implements ClientOptions {
 		return !!this.listeners(name).length;
 	}
 
-	/** Given a message, see if there is a command and process it if so. */
-	private async handleMessage (msg: Eris.Message): Promise<void> {
-		if (!msg.author) return; // this is a bug and shouldn't really happen
-		if (this.ignoreBots && msg.author.bot) return;
-
-		// Construct a partial context (without prefix or command name)
-		const partialContext: EventContext = Object.assign({
-			client: this,
-		}, this.contextAdditions);
+	/** Returns the command as a list of parsed strings, or null if it's not a valid command */
+	async hasCommand (message: Eris.Message): Promise<[string, string, ...string[]] | null> {
 		// Is the message properly prefixed? If not, we can ignore it
-		const matchResult = await this.splitPrefixFromContent(msg, partialContext);
-		if (!matchResult) return;
+		const matchResult = await this.splitPrefixFromContent(message);
+		if (!matchResult) return null;
+
 		// It is! We can
 		const [prefix, content] = matchResult;
 		// If there is no content past the prefix, we don't have a command
 		if (!content) {
 			// But a lone mention will trigger the default command instead
-			if (!prefix || !prefix.match(this.mentionPrefixRegExp!)) return;
-			const defaultCommand = this.defaultCommand;
-			if (!defaultCommand) return;
-			defaultCommand.execute(msg, [], Object.assign({
-				client: this,
-				prefix,
-			}, this.contextAdditions));
-			return;
+			if (!prefix || !prefix.match(this.mentionPrefixRegExp!)) return null;
+			return [prefix, ''];
 		}
-		// Separate command name from arguments and find command object
+
 		const args = content.split(' ');
 		let commandName = args.shift();
-		if (commandName === undefined) return;
+		if (commandName === undefined) return null;
 		if (!this.caseSensitiveCommands) commandName = commandName.toLowerCase();
+		return [prefix, commandName, ...args];
+	}
+
+	/**
+	 * Given a message, tries to parse a command from it. If it is a command,
+	 * executes it and returns `true`; otherwise, returns `false`.
+	 */
+	async processCommand (msg): Promise<boolean> {
+		const commandInfo = await this.hasCommand(msg);
+		if (!commandInfo) return false;
+		const [prefix, commandName, ...args] = commandInfo;
 
 		const command = this.commandForName(commandName);
 		// Construct a full context object now that we have all the info
 		const fullContext: CommandContext = Object.assign({
 			prefix,
 			commandName,
-		}, partialContext);
+		}, this.eventContext);
+
 		// If the message has command but that command is not found
 		if (!command) {
 			this.emit('invalidCommand', msg, args, fullContext);
-			return;
+			return false;
 		}
 		// Do the things
 		this.emit('preCommand', command, msg, args, fullContext);
 		const executed = await command.execute(msg, args, fullContext);
 		if (executed) this.emit('postCommand', command, msg, args, fullContext);
+		return true;
 	}
 
 	/** Adds things to the context objects the client sends. */
@@ -352,7 +374,8 @@ export class Client extends Eris.Client implements ClientOptions {
 	 * given name.
 	 */
 	commandForName (name: string): Command | null {
-		return this.commands.find(c => c.names.includes(name)) || null;
+		if (this.caseSensitiveCommands) return this.commands.find(c => c.names.includes(name)) || null;
+		return this.commands.find(c => c.names.some(n => n.toLowerCase() === name.toLowerCase())) || null;
 	}
 
 	/**
@@ -371,8 +394,9 @@ export class Client extends Eris.Client implements ClientOptions {
 		return this;
 	}
 
-	async getPrefixesForMessage (msg, ctx) {
-		const prefixes = this.prefixFunction && await this.prefixFunction(msg, ctx);
+	async getPrefixesForMessage (msg) {
+		// TODO inlining this context creation is bleh
+		const prefixes = this.prefixFunction && await this.prefixFunction(msg, this.eventContext);
 		if (prefixes == null) {
 			// If we have no custom function or it returned nothing, use default
 			return [this.prefix];
@@ -387,8 +411,8 @@ export class Client extends Eris.Client implements ClientOptions {
 	// @param {Eris.Message} msg The message to process
 	// @returns {Array<String|null>} An array `[prefix, rest]` if the message
 	// matches the prefix, or `[null, null]` if not
-	async splitPrefixFromContent (msg: Eris.Message, ctx: EventContext): Promise<[string, string] | null> {
-		const prefixes = await this.getPrefixesForMessage(msg, ctx);
+	async splitPrefixFromContent (msg: Eris.Message): Promise<[string, string] | null> {
+		const prefixes = await this.getPrefixesForMessage(msg);
 
 		// Traditional prefix checking
 		for (const prefix of prefixes) {
