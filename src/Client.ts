@@ -165,7 +165,7 @@ export class Client extends Eris.Client implements ClientOptions {
 		if (this.ignoreBots && msg.author.bot) return;
 
 		// Construct a partial context (without prefix or command name)
-		const partialContext: PartialCommandContext = Object.assign({
+		const partialContext: EventContext = Object.assign({
 			client: this,
 		}, this.contextAdditions);
 		// Is the message properly prefixed? If not, we can ignore it
@@ -387,7 +387,7 @@ export class Client extends Eris.Client implements ClientOptions {
 	// @param {Eris.Message} msg The message to process
 	// @returns {Array<String|null>} An array `[prefix, rest]` if the message
 	// matches the prefix, or `[null, null]` if not
-	async splitPrefixFromContent (msg: Eris.Message, ctx: PartialCommandContext): Promise<[string, string] | null> {
+	async splitPrefixFromContent (msg: Eris.Message, ctx: EventContext): Promise<[string, string] | null> {
 		const prefixes = await this.getPrefixesForMessage(msg, ctx);
 
 		// Traditional prefix checking
