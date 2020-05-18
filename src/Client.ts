@@ -38,7 +38,7 @@ export interface ClientOptions extends Eris.ClientOptions {
 	 * `processCommand` to perform command handling at an arbitrary point during
 	 * the handler's execution
 	 */
-	disableDefaultMessageHandler?: boolean;
+	disableDefaultMessageListener?: boolean;
 
 }
 
@@ -90,7 +90,7 @@ export class Client extends Eris.Client implements ClientOptions {
 	 * `processCommand` to perform command handling at an arbitrary point during
 	 * the handler's execution
 	 */
-	disableDefaultMessageHandler: boolean = false;
+	disableDefaultMessageListener: boolean = false;
 
 	/** A list of all loaded commands. */
 	commands: Command[] = [];
@@ -139,7 +139,7 @@ export class Client extends Eris.Client implements ClientOptions {
 		if (options.allowMention !== undefined) this.allowMention = options.allowMention;
 		if (options.ignoreBots !== undefined) this.ignoreBots = options.ignoreBots;
 		if (options.ignoreGlobalRequirements !== undefined) this.ignoreGlobalRequirements = options.ignoreGlobalRequirements;
-		if (options.disableDefaultMessageHandler !== undefined) this.disableDefaultMessageHandler = options.disableDefaultMessageHandler;
+		if (options.disableDefaultMessageListener !== undefined) this.disableDefaultMessageListener = options.disableDefaultMessageListener;
 
 		// Warn if we're using an empty prefix
 		if (this.prefix === '') {
@@ -147,7 +147,7 @@ export class Client extends Eris.Client implements ClientOptions {
 		}
 
 		// Register the default message listener unless it's disabled
-		if (!this.disableDefaultMessageHandler) {
+		if (!this.disableDefaultMessageListener) {
 			this.addEvent(defaultMessageListener);
 		}
 	}
