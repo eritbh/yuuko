@@ -41,7 +41,7 @@ export interface ClientOAuthApplication extends Resolved<ReturnType<Client['getO
 // A function that takes a message and a context argument and returns a prefix,
 // an array of prefixes, or void.
 export interface PrefixFunction {
-	(msg: Eris.Message, ctx: PartialCommandContext): Resolves<string | string[] | null | undefined>;
+	(msg: Eris.Message, ctx: EventContext): Resolves<string | string[] | null | undefined>;
 }
 
 /** The client. */
@@ -129,6 +129,11 @@ export class Client extends Eris.Client implements ClientOptions {
 
 		// Register the message event listener
 		this.on('messageCreate', this.handleMessage);
+	}
+
+	/** Returns an EventContext object with all the current context */
+	get eventContext (): EventContext {
+		return Object.assign({client: this}, this.contextAdditions);
 	}
 
 	/**
@@ -233,7 +238,9 @@ export class Client extends Eris.Client implements ClientOptions {
 	/** Register an EventListener class instance to the client. */
 	addEvent (eventListener: EventListener): this {
 		this.events.push(eventListener);
-		this.on(...eventListener.args);
+		this.on(eventListener.args[0], (...args) => {
+			eventListener.args[1](...args, this.eventContext);
+		});
 		return this;
 	}
 
