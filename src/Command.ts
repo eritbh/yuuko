@@ -17,14 +17,14 @@ async function fulfillsRequirements (requirements: CommandRequirements, msg: Eri
 
 	// Guild-only commands
 	if (guildOnly) {
-		if (!(msg.channel instanceof Eris.GuildChannel)) {
+		if (!msg.guildID) {
 			return false;
 		}
 	}
 
 	// DM-only commands
 	if (dmOnly) {
-		if (!(msg.channel instanceof Eris.PrivateChannel)) {
+		if (msg.guildID) {
 			return false;
 		}
 	}
@@ -32,7 +32,7 @@ async function fulfillsRequirements (requirements: CommandRequirements, msg: Eri
 	// Permissions
 	if (permissions && permissions.length > 0) {
 		// Permission checks only make sense in guild channels
-		if (!(msg.channel instanceof Eris.GuildChannel)) {
+		if (!msg.guildID) {
 			return false;
 		}
 		// Calculate permissions of the user and check all we need
