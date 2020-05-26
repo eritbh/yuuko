@@ -87,16 +87,21 @@ export interface CommandContext extends PartialCommandContext {
 }
 
 /** The function to be called when a command is executed. */
-export interface CommandProcess {
+export interface CommandProcess<T extends Eris.Textable = Eris.TextableChannel> {
 	(
 		/** The message object from Eris. */
-		msg: Eris.Message,
+		msg: Eris.Message<T>,
 		/** A space-separated list of arguments to the command. */
 		args: string[],
 		/** An object containing additional context information. */
 		ctx: CommandContext,
 	): void;
 }
+
+// These are slightly silly but they work. Not exposed because there's probably
+// a cleaner way to do this, so hopefully they won't be around for long.
+type GuildCommandProcess = CommandProcess<Eris.GuildTextableChannel>;
+type PrivateCommandProcess = CommandProcess<Eris.PrivateChannel>;
 
 /** Class representing a command. */
 export class Command {
@@ -108,7 +113,7 @@ export class Command {
 	names: string[];
 
 	/** The function executed when the command is triggered. */
-	process: CommandProcess;
+	process: CommandProcess | GuildCommandProcess | PrivateCommandProcess
 
 	/** The requirements for the command being triggered. */
 	requirements: CommandRequirements;
@@ -116,7 +121,14 @@ export class Command {
 	/** The name of the file the command was loaded from, if any. */
 	filename?: string;
 
-	constructor (names: string | string[], process: CommandProcess, requirements?: CommandRequirements) {
+	// For some reason, I cannot get TS to recognize that `CommandProcess` is a
+	// superset of `GuildCommandProcess` and `PrivateCommandProcess`, so for
+	// now we have one more override than we should really need. Oh well.
+	// TODO: Does microsoft/typescript#31023 fix this?
+	constructor (names: string | string[], process: CommandProcess, requirements?: CommandRequirements);
+	constructor (names: string | string[], process: GuildCommandProcess, requirements: CommandRequirements & {guildOnly: true, dmOnly?: false});
+	constructor (names: string | string[], process: PrivateCommandProcess, requirements: CommandRequirements & {dmOnly: true, guildOnly?: false})
+	constructor (names: string | string[], process: CommandProcess | GuildCommandProcess | PrivateCommandProcess, requirements?: CommandRequirements) {
 		if (Array.isArray(names)) {
 			this.names = names;
 		} else {
@@ -152,6 +164,12 @@ export class Command {
 	/** Executes the command process if the permission checks pass. */
 	async execute (msg: Eris.Message, args: string[], ctx: CommandContext): Promise<boolean> {
 		if (!await this.checkPermissions(msg, args, ctx)) return false;
+		// By calling checkPermissions and returning early if it returns false,
+		// we guarantee that messages will be the correct type for the stored
+		// process, so this call is always safe. Restructuring this to properly
+		// use TS type guards would be very messy and would result in duplicate
+		// safety checks that we want to avoid.
+		// @ts-ignore
 		this.process(msg, args, ctx);
 		return true;
 	}
