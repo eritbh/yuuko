@@ -47,7 +47,11 @@ export default new Command('debug', async function debug (msg, args, ctx) {
 	try {
 		outputMsg = await msg.channel.createMessage(message);
 	} catch (err) {
-		msg.channel.createMessage(`Error sending message:\n\`\`\`\n${err}\n\`\`\``).catch(() => {});
+		try {
+			msg.channel.createMessage(`Error sending message:\n\`\`\`\n${err}\n\`\`\``);
+		} catch {
+			// pass
+		}
 		return;
 	}
 
