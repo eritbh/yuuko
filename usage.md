@@ -125,7 +125,7 @@ Additionally, commands take a third parameter, a *context object*. By default, t
 ```js
 // index.js
 const {Client} = require('yuuko');
-const mybot = new CLient({...});
+const mybot = new Client({...});
 mybot.extendContext({
 	myCustomThing: 'This is neat!',
 });
@@ -195,7 +195,7 @@ mybot.once('ready', () => {
 
 # More information
 
-For more info about the methods you can use with Yuuko, check out the [full API documentation](/docs).
+For more info about the methods you can use with Yuuko, check out the [full API documentation](/yuuko/docs).
 
 <button id="language-toggle" onclick="toggleLanguage()">Show Typescript examples</button>
 <style>
