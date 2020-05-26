@@ -32,7 +32,7 @@ async function fulfillsRequirements (requirements: CommandRequirements, msg: Eri
 	// Permissions
 	if (permissions && permissions.length > 0) {
 		// Permission checks only make sense in guild channels
-		if (!msg.guildID) {
+		if (!(msg.channel instanceof Eris.GuildChannel)) {
 			return false;
 		}
 		// Calculate permissions of the user and check all we need
