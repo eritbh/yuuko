@@ -7,16 +7,31 @@ import {makeArray} from './util';
 /** Check if requirements are met. */
 // TODO this interface is ugly
 async function fulfillsRequirements (requirements: CommandRequirements, msg: Eris.Message, args: string[], ctx: CommandContext) {
-	const {owner, permissions, custom} = requirements;
+	const {owner, guildOnly, dmOnly, permissions, custom} = requirements;
 	const {client} = ctx;
+
 	// Owner checking
 	if (owner && client.app && client.app.owner.id !== msg.author.id) {
 		return false;
 	}
+
+	// Guild-only commands
+	if (guildOnly) {
+		if (!msg.guildID) {
+			return false;
+		}
+	}
+
+	// DM-only commands
+	if (dmOnly) {
+		if (msg.guildID) {
+			return false;
+		}
+	}
+
 	// Permissions
 	if (permissions && permissions.length > 0) {
-		// If we require permissions, the command can't be used in direct
-		// messages
+		// Permission checks only make sense in guild channels
 		if (!(msg.channel instanceof Eris.GuildChannel)) {
 			return false;
 		}
@@ -28,10 +43,12 @@ async function fulfillsRequirements (requirements: CommandRequirements, msg: Eri
 			}
 		}
 	}
+
 	// Custom requirement function
 	if (custom && !await custom(msg, args, ctx)) {
 		return false;
 	}
+
 	// If we haven't returned yet, all requirements are met
 	return true;
 }
@@ -40,7 +57,14 @@ async function fulfillsRequirements (requirements: CommandRequirements, msg: Eri
 export interface CommandRequirements {
 	/** If true, the user must be the bot's owner. */
 	owner?: boolean;
-	/** A list of permission strings the user must have. */
+	/** If true, the message must be sent in a server channel. */
+	guildOnly?: boolean;
+	/** If true, the message must be sent in a DM channel. */
+	dmOnly?: boolean;
+	/**
+	 * A list of permission strings the user must have. If set, the `guildOnly`
+	 * option is implied.
+	 */
 	// TODO: use a union of all the string literals we could possibly put here
 	permissions?: string | string[];
 	/** A custom function that must return true to enable the command. */
@@ -56,16 +80,21 @@ export interface CommandContext extends EventContext {
 }
 
 /** The function to be called when a command is executed. */
-export interface CommandProcess {
+export interface CommandProcess<T extends Eris.Textable = Eris.TextableChannel> {
 	(
 		/** The message object from Eris. */
-		msg: Eris.Message,
+		msg: Eris.Message<T>,
 		/** A space-separated list of arguments to the command. */
 		args: string[],
 		/** An object containing additional context information. */
 		ctx: CommandContext,
 	): void;
 }
+
+// These are slightly silly but they work. Not exposed because there's probably
+// a cleaner way to do this, so hopefully they won't be around for long.
+type GuildCommandProcess = CommandProcess<Eris.GuildTextableChannel>;
+type PrivateCommandProcess = CommandProcess<Eris.PrivateChannel>;
 
 /** Class representing a command. */
 export class Command {
@@ -77,7 +106,7 @@ export class Command {
 	names: string[];
 
 	/** The function executed when the command is triggered. */
-	process: CommandProcess;
+	process: CommandProcess | GuildCommandProcess | PrivateCommandProcess
 
 	/** The requirements for the command being triggered. */
 	requirements: CommandRequirements;
@@ -85,7 +114,14 @@ export class Command {
 	/** The name of the file the command was loaded from, if any. */
 	filename?: string;
 
-	constructor (names: string | string[], process: CommandProcess, requirements?: CommandRequirements) {
+	// For some reason, I cannot get TS to recognize that `CommandProcess` is a
+	// superset of `GuildCommandProcess` and `PrivateCommandProcess`, so for
+	// now we have one more override than we should really need. Oh well.
+	// TODO: Does microsoft/typescript#31023 fix this?
+	constructor (names: string | string[], process: CommandProcess, requirements?: CommandRequirements);
+	constructor (names: string | string[], process: GuildCommandProcess, requirements: CommandRequirements & {guildOnly: true, dmOnly?: false});
+	constructor (names: string | string[], process: PrivateCommandProcess, requirements: CommandRequirements & {dmOnly: true, guildOnly?: false})
+	constructor (names: string | string[], process: CommandProcess | GuildCommandProcess | PrivateCommandProcess, requirements?: CommandRequirements) {
 		if (Array.isArray(names)) {
 			this.names = names;
 		} else {
@@ -121,6 +157,12 @@ export class Command {
 	/** Executes the command process if the permission checks pass. */
 	async execute (msg: Eris.Message, args: string[], ctx: CommandContext): Promise<boolean> {
 		if (!await this.checkPermissions(msg, args, ctx)) return false;
+		// By calling checkPermissions and returning early if it returns false,
+		// we guarantee that messages will be the correct type for the stored
+		// process, so this call is always safe. Restructuring this to properly
+		// use TS type guards would be very messy and would result in duplicate
+		// safety checks that we want to avoid.
+		// @ts-ignore
 		this.process(msg, args, ctx);
 		return true;
 	}
