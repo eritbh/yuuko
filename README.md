@@ -19,7 +19,7 @@ $ yarn add --production yuuko eris # yarn
 $ npm install --save --production yuuko eris # npm
 ```
 
-The minimum required Eris version is 0.11.2, though you should use the latest version whenever possible.
+The minimum required Eris version is 0.13.0, though you should use the latest version whenever possible.
 
 ### Development builds
 
