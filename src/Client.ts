@@ -260,9 +260,15 @@ export class Client extends Eris.Client implements ClientOptions {
 	/** Register an EventListener class instance to the client. */
 	addEvent (eventListener: EventListener): this {
 		this.events.push(eventListener);
-		this.on(eventListener.args[0], (...args) => {
+		// The actual function registered as a listener calls the instance's
+		// registered function with the context object as the last parameter. We
+		// store it as a property of the listener so it can be removed later (if
+		// the instance was registered via `addDir`/`addFile`, then it will need
+		// to be removed when calling `reloadFiles`).
+		eventListener.computedListener = (...args) => {
 			eventListener.args[1](...args, this.eventContext);
-		});
+		};
+		this.on(eventListener.args[0], eventListener.computedListener);
 		return this;
 	}
 
@@ -336,6 +342,9 @@ export class Client extends Eris.Client implements ClientOptions {
 			let i = list.length;
 			while (i--) {
 				const thing = list[i];
+				if (thing instanceof EventListener && thing.computedListener) {
+					this.removeListener(thing.args[0], thing.computedListener);
+				}
 				if (thing.filename) {
 					list.splice(i, 1);
 					this.addFile(thing.filename);

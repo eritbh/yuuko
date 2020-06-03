@@ -13,9 +13,19 @@ export interface EventContext {
 export class EventListener {
 	/** The arguments passed to `client.on()` to register this listener */
 	args: Parameters<Client["on"]>;
-	
+
 	/** The name of the file the event listener was loaded from, if any. */
 	filename?: string;
+
+	/**
+	 * The actual function registered to the client as the direct listener. Set
+	 * by the client when this instance is called by Client.addEvent. This is a
+	 * bit of a hack and shouldn't be relied on in its current state. If you
+	 * have a use case that requires access to this property, get in touch and
+	 * I'll see if I can improve the way this is handled to better support you.
+	 * @internal
+	 */
+	computedListener?: (...args: any[]) => void;
 
 	// Event list pulled from Eris.EventListeners and Eris.ClientEvents typings, but converted to constructors
 	constructor(event: "ready" | "disconnect", listener: (context: EventContext) => void);
