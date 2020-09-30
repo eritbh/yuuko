@@ -15,10 +15,12 @@ async function fulfillsRequirements(requirements: CommandRequirements, msg: Eris
 		// If the bot's application info isn't loaded, we can't confirm anything
 		if (!client.app) return false;
 
-		if (client.app.team) {
+		// TODO: remove <any> after https://github.com/bsian03/eris/pull/10 and
+		//       https://github.com/abalabahaha/eris/pull/993
+		if ((<any>client.app).team) {
 			// If the bot is owned by a team, we check their ID and team role
 			// (as of 2020-09-29, Admin/2 is the only role/membership_state)
-			if (!client.app.team.members.some(member => member.membership_state === 2 && member.id === msg.author.id)) {
+			if (!(<any>client.app).team.members.some(member => member.membership_state === 2 && member.id === msg.author.id)) {
 				return false;
 			}
 		} else {
