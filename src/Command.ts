@@ -20,7 +20,7 @@ async function fulfillsRequirements(requirements: CommandRequirements, msg: Eris
 		if ((<any>client.app).team) {
 			// If the bot is owned by a team, we check their ID and team role
 			// (as of 2020-09-29, Admin/2 is the only role/membership_state)
-			if (!(<any>client.app).team.members.some(member => member.membership_state === 2 && member.id === msg.author.id)) {
+			if (!(<any>client.app).team.members.some(member => member.membership_state === 2 && member.user.id === msg.author.id)) {
 				return false;
 			}
 		} else {
