@@ -228,13 +228,22 @@ export class Client extends Eris.Client implements ClientOptions {
 		return this;
 	}
 
-	/** Load the files in a directory and attempt to add a command from each. */
+	/**
+	 * Load the files in a directory and attempt to add a command from each.
+	 * Searches recursively through directories, but ignores files and nested
+	 * directories whose names begin with a period.
+	 */
 	addCommandDir (dirname: string): this {
 		// Synchronous calls are fine with this method because it's only called
 		// on init
 		// eslint-disable-next-line no-sync
 		const filenames = fs.readdirSync(dirname);
 		for (const filename of filenames) {
+			// ignore files/directories that are disabled with a leading dot
+			if (filename.startsWith('.')) {
+				continue;
+			}
+
 			const filepath = path.resolve(dirname, filename);
 			// eslint-disable-next-line no-sync
 			const info = fs.statSync(filepath);
