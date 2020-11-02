@@ -268,7 +268,11 @@ export class Client extends Eris.Client implements ClientOptions {
 		eventListener.computedListener = (...args) => {
 			eventListener.args[1](...args, this.eventContext);
 		};
-		this.on(eventListener.args[0], eventListener.computedListener);
+		if (eventListener.once) {
+			this.once(eventListener.args[0], eventListener.computedListener);
+		} else {
+			this.on(eventListener.args[0], eventListener.computedListener);
+		}
 		return this;
 	}
 
