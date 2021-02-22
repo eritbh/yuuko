@@ -36,6 +36,11 @@ export class EventListener implements EventListenerOptions {
 	 */
 	computedListener?: (...args: any[]) => void;
 
+	/** The name of the event this listener is attached to */
+	get eventName () {
+		return this.args[0];
+	}
+
 	// Event list pulled from Eris.EventListeners and Eris.ClientEvents typings, but converted to constructors
 	constructor(event: "ready" | "disconnect", listener: (context: EventContext) => void, options?: EventListenerOptions);
 	constructor(event: "callCreate" | "callRing" | "callDelete", listener: (call: Eris.Call, context: EventContext) => void, options?: EventListenerOptions);
