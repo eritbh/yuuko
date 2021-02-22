@@ -3,9 +3,9 @@
 import fs from 'fs';
 import path from 'path';
 import * as Eris from 'eris';
-import {Command} from './Yuuko';
-// TODO: PartialCommandContext is only used in this file, should be defined here
-import {CommandRequirements, PartialCommandContext, CommandContext} from './Command';
+import {Command, CommandRequirements, CommandContext} from './Command';
+import {EventListener, EventContext} from './EventListener';
+import defaultMessageListener from './defaultMessageListener';
 import {Resolved, Resolves, makeArray} from './util';
 
 /** The options passed to the client constructor. Includes Eris options. */
@@ -31,6 +31,15 @@ export interface ClientOptions extends Eris.ClientOptions {
 	 * for debugging, probably shouldn't be used in production.
 	*/
 	ignoreGlobalRequirements?: boolean;
+
+	/**
+	 * If true, the client does not respond to commands by default, and the user
+	 * must register their own `messageCreate` listener, which can call
+	 * `processCommand` to perform command handling at an arbitrary point during
+	 * the handler's execution
+	 */
+	disableDefaultMessageListener?: boolean;
+
 }
 
 /** Information returned from the API about the bot's OAuth application. */
@@ -42,7 +51,7 @@ export interface ClientOAuthApplication extends Resolved<ReturnType<Client['getO
 // A function that takes a message and a context argument and returns a prefix,
 // an array of prefixes, or void.
 export interface PrefixFunction {
-	(msg: Eris.Message, ctx: PartialCommandContext): Resolves<string | string[] | null | undefined>;
+	(msg: Eris.Message, ctx: EventContext): Resolves<string | string[] | null | undefined>;
 }
 
 /** The client. */
@@ -75,8 +84,19 @@ export class Client extends Eris.Client implements ClientOptions {
 	 */
 	ignoreGlobalRequirements: boolean = false;
 
+	/**
+	 * If true, the client does not respond to commands by default, and the user
+	 * must register their own `messageCreate` listener, which can call
+	 * `processCommand` to perform command handling at an arbitrary point during
+	 * the handler's execution
+	 */
+	disableDefaultMessageListener: boolean = false;
+
 	/** A list of all loaded commands. */
 	commands: Command[] = [];
+
+	/** A list of all registered event listeners. */
+	events: EventListener[] = [];
 
 	/**
 	 * The default command, executed if `allowMention` is true and the bot is
@@ -119,14 +139,22 @@ export class Client extends Eris.Client implements ClientOptions {
 		if (options.allowMention !== undefined) this.allowMention = options.allowMention;
 		if (options.ignoreBots !== undefined) this.ignoreBots = options.ignoreBots;
 		if (options.ignoreGlobalRequirements !== undefined) this.ignoreGlobalRequirements = options.ignoreGlobalRequirements;
+		if (options.disableDefaultMessageListener !== undefined) this.disableDefaultMessageListener = options.disableDefaultMessageListener;
 
 		// Warn if we're using an empty prefix
 		if (this.prefix === '') {
 			process.emitWarning('prefx is an empty string; bot will not require a prefix to run commands');
 		}
 
-		// Register the message event listener
-		this.on('messageCreate', this.handleMessage);
+		// Register the default message listener unless it's disabled
+		if (!this.disableDefaultMessageListener) {
+			this.addEvent(defaultMessageListener);
+		}
+	}
+
+	/** Returns an EventContext object with all the current context */
+	get eventContext (): EventContext {
+		return Object.assign({client: this}, this.contextAdditions);
 	}
 
 	/**
@@ -152,53 +180,54 @@ export class Client extends Eris.Client implements ClientOptions {
 		return !!this.listeners(name).length;
 	}
 
-	/** Given a message, see if there is a command and process it if so. */
-	private async handleMessage (msg: Eris.Message): Promise<void> {
-		if (!msg.author) return; // this is a bug and shouldn't really happen
-		if (this.ignoreBots && msg.author.bot) return;
-
-		// Construct a partial context (without prefix or command name)
-		const partialContext: PartialCommandContext = Object.assign({
-			client: this,
-		}, this.contextAdditions);
+	/** Returns the command as a list of parsed strings, or null if it's not a valid command */
+	async hasCommand (message: Eris.Message): Promise<[string, string, ...string[]] | null> {
 		// Is the message properly prefixed? If not, we can ignore it
-		const matchResult = await this.splitPrefixFromContent(msg, partialContext);
-		if (!matchResult) return;
+		const matchResult = await this.splitPrefixFromContent(message);
+		if (!matchResult) return null;
+
 		// It is! We can
 		const [prefix, content] = matchResult;
 		// If there is no content past the prefix, we don't have a command
 		if (!content) {
 			// But a lone mention will trigger the default command instead
-			if (!prefix || !prefix.match(this.mentionPrefixRegExp!)) return;
-			const defaultCommand = this.defaultCommand;
-			if (!defaultCommand) return;
-			defaultCommand.execute(msg, [], Object.assign({
-				client: this,
-				prefix,
-			}, this.contextAdditions));
-			return;
+			if (!prefix || !prefix.match(this.mentionPrefixRegExp!)) return null;
+			return [prefix, ''];
 		}
-		// Separate command name from arguments and find command object
+
 		const args = content.split(' ');
 		let commandName = args.shift();
-		if (commandName === undefined) return;
+		if (commandName === undefined) return null;
 		if (!this.caseSensitiveCommands) commandName = commandName.toLowerCase();
+		return [prefix, commandName, ...args];
+	}
+
+	/**
+	 * Given a message, tries to parse a command from it. If it is a command,
+	 * executes it and returns `true`; otherwise, returns `false`.
+	 */
+	async processCommand (msg): Promise<boolean> {
+		const commandInfo = await this.hasCommand(msg);
+		if (!commandInfo) return false;
+		const [prefix, commandName, ...args] = commandInfo;
 
 		const command = this.commandForName(commandName);
 		// Construct a full context object now that we have all the info
 		const fullContext: CommandContext = Object.assign({
 			prefix,
 			commandName,
-		}, partialContext);
+		}, this.eventContext);
+
 		// If the message has command but that command is not found
 		if (!command) {
 			this.emit('invalidCommand', msg, args, fullContext);
-			return;
+			return false;
 		}
 		// Do the things
 		this.emit('preCommand', command, msg, args, fullContext);
 		const executed = await command.execute(msg, args, fullContext);
 		if (executed) this.emit('postCommand', command, msg, args, fullContext);
+		return true;
 	}
 
 	/** Adds things to the context objects the client sends. */
@@ -228,12 +257,31 @@ export class Client extends Eris.Client implements ClientOptions {
 		return this;
 	}
 
+	/** Register an EventListener class instance to the client. */
+	addEvent (eventListener: EventListener): this {
+		this.events.push(eventListener);
+		// The actual function registered as a listener calls the instance's
+		// registered function with the context object as the last parameter. We
+		// store it as a property of the listener so it can be removed later (if
+		// the instance was registered via `addDir`/`addFile`, then it will need
+		// to be removed when calling `reloadFiles`).
+		eventListener.computedListener = (...args) => {
+			eventListener.args[1](...args, this.eventContext);
+		};
+		if (eventListener.once) {
+			this.once(eventListener.args[0], eventListener.computedListener);
+		} else {
+			this.on(eventListener.args[0], eventListener.computedListener);
+		}
+		return this;
+	}
+
 	/**
 	 * Load the files in a directory and attempt to add a command from each.
 	 * Searches recursively through directories, but ignores files and nested
 	 * directories whose names begin with a period.
 	 */
-	addCommandDir (dirname: string): this {
+	addDir (dirname: string): this {
 		// Synchronous calls are fine with this method because it's only called
 		// on init
 		// eslint-disable-next-line no-sync
@@ -248,12 +296,12 @@ export class Client extends Eris.Client implements ClientOptions {
 			// eslint-disable-next-line no-sync
 			const info = fs.statSync(filepath);
 			if (info && info.isDirectory()) {
-				this.addCommandDir(filepath);
+				this.addDir(filepath);
 			} else {
 				// Add files only if they can be required
 				for (const extension of Object.keys(require.extensions)) {
 					if (filepath.endsWith(extension)) {
-						this.addCommandFile(filepath);
+						this.addFile(filepath);
 					}
 				}
 			}
@@ -261,24 +309,27 @@ export class Client extends Eris.Client implements ClientOptions {
 		return this;
 	}
 
-	/** Add a command exported from a file. */
-	// TODO: support exporting multiple commands?
-	addCommandFile (filename: string): this {
+	/** Add a command or event exported from a file. */
+	// TODO: support exporting multiple components?
+	addFile (filename: string): this {
+		// Clear require cache so we always get a fresh copy
 		delete require.cache[filename];
-		// JS files are expected to use `module.exports = new Command(...);`
-		// TS files are expected to use `export default new Command(...);`
 		// eslint-disable-next-line global-require
-		let command = require(filename);
-		if (command.default instanceof Command) {
+		let thing = require(filename);
+		if (thing.default) {
 			// Use object.assign to preserve other exports
 			// TODO: this kinda breaks typescript but it's fine
-			command = Object.assign(command.default, command);
-			delete command.default;
-		} else if (!(command instanceof Command)) {
-			throw new TypeError(`File ${filename} does not export a command`);
+			thing = Object.assign(thing.default, thing);
+			delete thing.default;
 		}
-		command.filename = filename;
-		this.addCommand(command);
+		thing.filename = filename;
+		if (thing instanceof Command) {
+			this.addCommand(thing);
+		} else if (thing instanceof EventListener) {
+			this.addEvent(thing);
+		} else {
+			throw new TypeError('Exported value is not a command or event listener');
+		}
 		return this;
 	}
 
@@ -294,22 +345,50 @@ export class Client extends Eris.Client implements ClientOptions {
 	}
 
 	/**
-	 * Reloads all commands that were loaded via `addCommandFile` and
-	 * `addCommandDir`. Useful for development to hot-reload commands as you
-	 * work on them.
+	 * Reloads all commands and events that were loaded via from files. Useful
+	 * for development to hot-reload components as you work on them.
 	 */
-	reloadCommands (): this {
-		// Iterates over the list backwards to avoid overwriting indexes (this
-		// rewrites the list in reverse order, but we don't care)
-		let i = this.commands.length;
-		while (i--) {
-			const command = this.commands[i];
-			if (command.filename) {
-				this.commands.splice(i, 1);
-				this.addCommandFile(command.filename);
+	reloadFiles (): this {
+		for (const list of [this.commands, this.events]) {
+			// Iterate over the lists backwards to avoid overwriting indexes (this
+			// rewrites the lists in reverse order, but we don't care)
+			let i = list.length;
+			while (i--) {
+				const thing = list[i];
+				if (thing instanceof EventListener && thing.computedListener) {
+					this.removeListener(thing.args[0], thing.computedListener);
+				}
+				if (thing.filename) {
+					list.splice(i, 1);
+					this.addFile(thing.filename);
+				}
 			}
 		}
 		return this;
+	}
+
+	/**
+	 * Alias for `addDir`.
+	 * @deprecated
+	 */
+	addCommandDir (dirname: string): this {
+		return this.addDir(dirname);
+	}
+
+	/**
+	 * Alias for `addFile`.
+	 * @deprecated
+	 */
+	addCommandFile (filename: string): this {
+		return this.addFile(filename);
+	}
+
+	/**
+	 * Alias for `reloadFiles()`.
+	 * @deprecated
+	 */
+	reloadCommands (): this {
+		return this.reloadFiles();
 	}
 
 	/**
@@ -317,7 +396,8 @@ export class Client extends Eris.Client implements ClientOptions {
 	 * given name.
 	 */
 	commandForName (name: string): Command | null {
-		return this.commands.find(c => c.names.includes(name)) || null;
+		if (this.caseSensitiveCommands) return this.commands.find(c => c.names.includes(name)) || null;
+		return this.commands.find(c => c.names.some(n => n.toLowerCase() === name.toLowerCase())) || null;
 	}
 
 	/**
@@ -336,8 +416,9 @@ export class Client extends Eris.Client implements ClientOptions {
 		return this;
 	}
 
-	async getPrefixesForMessage (msg, ctx) {
-		const prefixes = this.prefixFunction && await this.prefixFunction(msg, ctx);
+	async getPrefixesForMessage (msg) {
+		// TODO inlining this context creation is bleh
+		const prefixes = this.prefixFunction && await this.prefixFunction(msg, this.eventContext);
 		if (prefixes == null) {
 			// If we have no custom function or it returned nothing, use default
 			return [this.prefix];
@@ -352,8 +433,8 @@ export class Client extends Eris.Client implements ClientOptions {
 	// @param {Eris.Message} msg The message to process
 	// @returns {Array<String|null>} An array `[prefix, rest]` if the message
 	// matches the prefix, or `[null, null]` if not
-	async splitPrefixFromContent (msg: Eris.Message, ctx: PartialCommandContext): Promise<[string, string] | null> {
-		const prefixes = await this.getPrefixesForMessage(msg, ctx);
+	async splitPrefixFromContent (msg: Eris.Message): Promise<[string, string] | null> {
+		const prefixes = await this.getPrefixesForMessage(msg);
 
 		// Traditional prefix checking
 		for (const prefix of prefixes) {
@@ -386,7 +467,7 @@ export class Client extends Eris.Client implements ClientOptions {
 	}
 }
 
-interface YuukoEvents<T> extends Eris.ClientEvents<T> {
+export interface ClientEvents<T> extends Eris.ClientEvents<T> {
 	/**
 	 * @event
 	 * Fired when a command is loaded.
@@ -424,5 +505,5 @@ interface YuukoEvents<T> extends Eris.ClientEvents<T> {
 }
 
 export declare interface Client extends Eris.Client {
-	on: YuukoEvents<this>;
+	on: ClientEvents<this>;
 }

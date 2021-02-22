@@ -61,7 +61,7 @@ export default new Command([
 		const commandList = (await filterAsync(client.commands, c => c.checkPermissions(msg, args, ctx)))
 			.map(c => `\`${prefix}${c.names[0]}\``)
 			.join(', ');
-		const prefixes = (await client.getPrefixesForMessage(msg, ctx))
+		const prefixes = (await client.getPrefixesForMessage(msg))
 			.filter(p => p !== prefix && client.mentionPrefixRegExp && !client.mentionPrefixRegExp.test(p))
 			.map(p => `\`${p}\``);
 		if (client.allowMention) {
