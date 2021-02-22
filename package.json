@@ -26,8 +26,8 @@
     "@geo1088/eslint-config-ts": "^2.0.0",
     "@types/node": "^13.11.0",
     "eslint": "^6.8.0",
-    "typedoc": "^0.17.3",
-    "typescript": "^3.8.3"
+    "typedoc": "^0.20.27",
+    "typescript": "4"
   },
   "peerDependencies": {
     "eris": "^0.13.0"
