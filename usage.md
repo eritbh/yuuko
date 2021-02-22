@@ -62,7 +62,7 @@ const mybot = new Client({
 	prefix: '!',
 });
 mybot
-	.addCommandDir(path.join(__dirname, 'commands'))
+	.addDir(path.join(__dirname, 'commands'))
 	.connect();
 
 // commands/ping.js
@@ -79,7 +79,7 @@ const mybot = new Client({
 	prefix: '!',
 });
 mybot
-	.addCommandDir(path.join(__dirname, 'commands'))
+	.addDir(path.join(__dirname, 'commands'))
 	.connect();
 
 // commands/ping.js
@@ -129,7 +129,7 @@ const mybot = new Client({...});
 mybot.extendContext({
 	myCustomThing: 'This is neat!',
 });
-mybot.addCommandDir(path.join(__dirname, 'commands')).run();
+mybot.addDir(path.join(__dirname, 'commands')).run();
 
 // commands/test.js
 const {Command} = require('yuuko');
@@ -146,7 +146,7 @@ const mybot = new CLient({...});
 mybot.extendContext({
 	myCustomThing: 'This is neat!',
 });
-mybot.addCommandDir(path.join(__dirname, 'commands')).run();
+mybot.addDir(path.join(__dirname, 'commands')).run();
 
 // commands/test.ts
 import {Command} from 'yuuko';
@@ -177,6 +177,27 @@ mybot.prefixes(message => {
 	return ['! ', '!!'];
 });
 ```
+
+# Listening on events
+
+Yuuko also includes an `EventListener` class, which you can use to split up your event logic with a similar interface to commands. The handler you provide will receive a Yuuko context object, including all your additions (but without the `prefix` and `commandName` entries used with commands).
+
+```js
+const {EventListener} = require('yuuko');
+module.exports = new EventListener('messageCreate', (message, context) => {
+	// Reference properties of the client directly while handling an event
+	console.log(message.author.id === context.client.user.id);
+});
+```
+```ts
+import {EventListener} from 'yuuko';
+export default new EventListener('messageCreate', (message, context) => {
+	// Reference properties of the client directly while handling an event
+	console.log(message.author.id === context.client.user.id);
+});
+```
+
+These listeners can be loaded similarly to commands - they'll be picked up by the `addFile` and `addDir` methods automatically, and you can also use `addEvent` the same way as `addCommand` if you need to load an instance directly.
 
 # Everything Eris
 
