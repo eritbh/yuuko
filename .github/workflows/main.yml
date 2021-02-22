@@ -17,7 +17,7 @@ jobs:
         # Direct dependencies
         yarn install
         # Peer dependencies
-        npm i --no-save eris
+        npm i --no-save eris@0.13
 
     - name: Build Typescript
       run: |
