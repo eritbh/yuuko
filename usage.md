@@ -25,12 +25,12 @@ This code will get you a basic call-response bot up and running. Fill in your to
 const {Client, Command} = require('yuuko');
 
 const mybot = new Client({
-	token: 'feed_me_credentials',
-	prefix: '!',
+  token: 'feed_me_credentials',
+  prefix: '!',
 });
 
 const pingCommand = new Command('ping', message => {
-	message.channel.createMessage('Pong!');
+  message.channel.createMessage('Pong!');
 });
 
 mybot.addCommand(pingCommand).connect();
@@ -39,12 +39,12 @@ mybot.addCommand(pingCommand).connect();
 import {Client, Command} from 'yuuko';
 
 const mybot = new Client({
-	token: 'feed_me_credentials',
-	prefix: '!',
+  token: 'feed_me_credentials',
+  prefix: '!',
 });
 
 const pingCommand = new Command('ping', message => {
-	message.channel.createMessage('Pong!');
+  message.channel.createMessage('Pong!');
 });
 
 mybot.addCommand(pingCommand).connect();
@@ -58,34 +58,34 @@ When you have lots of commands, it becomes impractical to store them all in one 
 // index.js
 const {Client} = require('yuuko');
 const mybot = new Client({
-	token: 'feed_me_credentials',
-	prefix: '!',
+  token: 'feed_me_credentials',
+  prefix: '!',
 });
 mybot
-	.addDir(path.join(__dirname, 'commands'))
-	.connect();
+  .addDir(path.join(__dirname, 'commands'))
+  .connect();
 
 // commands/ping.js
 const {Command} = require('yuuko');
 module.exports = new Command('ping', message => {
-	message.channel.createMessage('Pong!');
+  message.channel.createMessage('Pong!');
 });
 ```
 ```ts
 // index.js
 import {Client} from 'yuuko';
 const mybot = new Client({
-	token: 'feed_me_credentials',
-	prefix: '!',
+  token: 'feed_me_credentials',
+  prefix: '!',
 });
 mybot
-	.addDir(path.join(__dirname, 'commands'))
-	.connect();
+  .addDir(path.join(__dirname, 'commands'))
+  .connect();
 
 // commands/ping.js
 import {Command} from 'yuuko';
 export default new Command('ping', message => {
-	message.channel.createMessage('Pong!');
+  message.channel.createMessage('Pong!');
 });
 ```
 
@@ -95,26 +95,26 @@ The function run when a command is executed takes a second parameter which conta
 
 ```js
 const addCommand = new Command('add', (message, args) => {
-	// Convert the arguments to numbers
-	args = args.map(number => parseInt(number, 10));
-	// Add them all up!
-	let sum = 0;
-	for (const number of args) {
-		sum += number;
-	}
-	msg.channel.createMessage(`The sum is ${sum}!`);
+  // Convert the arguments to numbers
+  args = args.map(number => parseInt(number, 10));
+  // Add them all up!
+  let sum = 0;
+  for (const number of args) {
+    sum += number;
+  }
+  msg.channel.createMessage(`The sum is ${sum}!`);
 });
 ```
 ```ts
 const addCommand = new Command('add', (message, args) => {
-	// Convert the arguments to numbers
-	args = args.map(number => parseInt(number, 10));
-	// Add them all up!
-	let sum = 0;
-	for (const number of args) {
-		sum += number;
-	}
-	msg.channel.createMessage(`The sum is ${sum}!`);
+  // Convert the arguments to numbers
+  args = args.map(number => parseInt(number, 10));
+  // Add them all up!
+  let sum = 0;
+  for (const number of args) {
+    sum += number;
+  }
+  msg.channel.createMessage(`The sum is ${sum}!`);
 });
 ```
 
@@ -127,16 +127,16 @@ Additionally, commands take a third parameter, a *context object*. By default, t
 const {Client} = require('yuuko');
 const mybot = new Client({...});
 mybot.extendContext({
-	myCustomThing: 'This is neat!',
+  myCustomThing: 'This is neat!',
 });
 mybot.addDir(path.join(__dirname, 'commands')).run();
 
 // commands/test.js
 const {Command} = require('yuuko');
 module.exports = new Command('test', (message, args, context) => {
-	context.client // The same as mybot in the first file
-	context.commandName // The name or alias used to call the command
-	context.myCustomThing // The string 'This is neat!' that was set above
+  context.client // The same as mybot in the first file
+  context.commandName // The name or alias used to call the command
+  context.myCustomThing // The string 'This is neat!' that was set above
 });
 ```
 ```ts
@@ -144,16 +144,16 @@ module.exports = new Command('test', (message, args, context) => {
 import {Client} from 'yuuko';
 const mybot = new CLient({...});
 mybot.extendContext({
-	myCustomThing: 'This is neat!',
+  myCustomThing: 'This is neat!',
 });
 mybot.addDir(path.join(__dirname, 'commands')).run();
 
 // commands/test.ts
 import {Command} from 'yuuko';
 export default new Command('test', (message, args, context) => {
-	context.client // The same as mybot in the first file
-	context.commandName // The name or alias used to call the command
-	context.myCustomThing // The string 'This is neat!' that was set above
+  context.client // The same as mybot in the first file
+  context.commandName // The name or alias used to call the command
+  context.myCustomThing // The string 'This is neat!' that was set above
 });
 ```
 
@@ -163,18 +163,18 @@ You can set a function that's used to set a custom prefix on a per-message basis
 
 ```js
 mybot.prefixes(message => {
-	// If we're not in a guild, just use the default
-	if (!message.channel.guild) return;
-	// In guilds, allow two prefixes, "!" and "!!"
-	return ['! ', '!!'];
+  // If we're not in a guild, just use the default
+  if (!message.channel.guild) return;
+  // In guilds, allow two prefixes, "!" and "!!"
+  return ['! ', '!!'];
 });
 ```
 ```ts
 mybot.prefixes(message => {
-	// If we're not in a guild, just use the default
-	if (!message.channel instanceof Eris.GuildChannel) return;
-	// In guilds, allow two prefixes, "!" and "!!"
-	return ['! ', '!!'];
+  // If we're not in a guild, just use the default
+  if (!message.channel instanceof Eris.GuildChannel) return;
+  // In guilds, allow two prefixes, "!" and "!!"
+  return ['! ', '!!'];
 });
 ```
 
@@ -185,15 +185,15 @@ Yuuko also includes an `EventListener` class, which you can use to split up your
 ```js
 const {EventListener} = require('yuuko');
 module.exports = new EventListener('messageCreate', (message, context) => {
-	// Reference properties of the client directly while handling an event
-	console.log(message.author.id === context.client.user.id);
+  // Reference properties of the client directly while handling an event
+  console.log(message.author.id === context.client.user.id);
 });
 ```
 ```ts
 import {EventListener} from 'yuuko';
 export default new EventListener('messageCreate', (message, context) => {
-	// Reference properties of the client directly while handling an event
-	console.log(message.author.id === context.client.user.id);
+  // Reference properties of the client directly while handling an event
+  console.log(message.author.id === context.client.user.id);
 });
 ```
 
@@ -205,12 +205,12 @@ Yuuko's client class extends Eris's, so you can use all the client methods direc
 
 ```js
 mybot.once('ready', () => {
-	console.log('Ready! Logged in as', mybot.user.username);
+  console.log('Ready! Logged in as', mybot.user.username);
 })
 ```
 ```ts
 mybot.once('ready', () => {
-	console.log('Ready! Logged in as', mybot.user.username);
+  console.log('Ready! Logged in as', mybot.user.username);
 })
 ```
 
@@ -221,29 +221,29 @@ For more info about the methods you can use with Yuuko, check out the [full API 
 <button id="language-toggle" onclick="toggleLanguage()">Show Typescript examples</button>
 <style>
 #language-toggle {
-	position: fixed;
-	bottom: 5px;
-	right: 5px;
-	padding: 10px;
-	background: #3cc76d;
-	color: white;
-	border: 0;
-	border-radius: 5px;
-	text-shadow: 0 1px rgba(0,0,0,0.2);
-	font-size: 1.6rem;
+  position: fixed;
+  bottom: 5px;
+  right: 5px;
+  padding: 10px;
+  background: #3cc76d;
+  color: white;
+  border: 0;
+  border-radius: 5px;
+  text-shadow: 0 1px rgba(0,0,0,0.2);
+  font-size: 1.6rem;
 }
 </style>
 <script>
 let ts = true;
 function toggleLanguage () {
-	ts = !ts;
-	document.getElementById('language-toggle').textContent = ts ? 'Show Javascript examples' : 'Show Typescript examples';
-	document.querySelectorAll('.language-js').forEach(element => {
-		element.style.display = ts ? 'none' : 'block';
-	});
-	document.querySelectorAll('.language-ts').forEach(element => {
-		element.style.display = ts ? 'block' : 'none';
-	});
+  ts = !ts;
+  document.getElementById('language-toggle').textContent = ts ? 'Show Javascript examples' : 'Show Typescript examples';
+  document.querySelectorAll('.language-js').forEach(element => {
+    element.style.display = ts ? 'none' : 'block';
+  });
+  document.querySelectorAll('.language-ts').forEach(element => {
+    element.style.display = ts ? 'block' : 'none';
+  });
 }
 toggleLanguage();
 </script>
