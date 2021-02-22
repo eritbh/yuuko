@@ -4,7 +4,7 @@ name: Release documentation
 on:
   push:
     tags:
-      - 'v*'
+      - "v*"
 
 jobs:
   build:
@@ -17,7 +17,7 @@ jobs:
           # Direct dependencies
           yarn install
           # Peer dependencies
-          npm i --no-save eris
+          npm i --no-save eris@0.13
 
       - name: Generate and push documentation
         env:
