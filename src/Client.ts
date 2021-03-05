@@ -393,9 +393,11 @@ export class Client extends Eris.Client implements ClientOptions {
 
 	/**
 	 * Checks the list of registered commands and returns one whch is known by a
-	 * given name.
+	 * given name. Passing an empty string will return the default command, if
+	 * any.
 	 */
 	commandForName (name: string): Command | null {
+		if (name === '') return this.defaultCommand;
 		if (this.caseSensitiveCommands) return this.commands.find(c => c.names.includes(name)) || null;
 		return this.commands.find(c => c.names.some(n => n.toLowerCase() === name.toLowerCase())) || null;
 	}
