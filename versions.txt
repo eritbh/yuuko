@@ -4,3 +4,4 @@
 /versions/v2.0.1.json
 /versions/v2.0.2.json
 /versions/v2.1.0.json
+/versions/v2.1.1.json
