@@ -16,6 +16,9 @@ export default new Command('debug', async function debug (msg, args, ctx) {
 		if (string.startsWith('js')) {
 			string = string.substr(2);
 		}
+		if (string.startsWith('javascript')) {
+			string = string.substr(10);
+		}
 	}
 
 	// Create a dummy console object
