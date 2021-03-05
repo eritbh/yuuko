@@ -153,7 +153,8 @@ export declare class Client extends Eris.Client implements ClientOptions {
     reloadCommands(): this;
     /**
      * Checks the list of registered commands and returns one whch is known by a
-     * given name.
+     * given name. Passing an empty string will return the default command, if
+     * any.
      */
     commandForName(name: string): Command | null;
     /**
