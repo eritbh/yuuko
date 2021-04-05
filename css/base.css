@@ -184,17 +184,22 @@ footer .wrap > * {
     bottom: 0;
     width: 100%;
 }
-footer .github-things {
+footer .footer-links {
     display: inline-flex;
     align-items: center;
     justify-content: center;
 }
-footer .github-things .badge {
-    margin-right: 10px;
+footer .footer-links a + a {
+    margin-left: 10px;
     line-height: 0;
 }
-footer .github-things svg {
-    margin: 10px 0;
+footer .footer-links img {
+    /* Needed for proper vertical centering of the npm badge */
+    display: block;
+}
+footer .footer-links .svg-icon svg {
+    width: 32px;
+    fill: currentcolor;
     filter: drop-shadow(0 1px 0 rgba(0,0,0,0.2));
 }
 
@@ -260,7 +265,7 @@ footer .github-things svg {
         align-items: center;*/
         max-width: 100%;
     }
-    footer .github-things { margin: 10px 0 0;}
+    footer .footer-links { margin: 20px 0 0;}
 }
 
 /* Code highlighting */
