@@ -2,7 +2,7 @@
 import * as Eris from 'eris';
 import { Command, CommandRequirements, CommandContext } from './Command';
 import { EventListener, EventContext } from './EventListener';
-import { Resolved, Resolves } from './util';
+import { Resolves } from './util';
 /** The options passed to the client constructor. Includes Eris options. */
 export interface ClientOptions extends Eris.ClientOptions {
     /** The bot's token. */
@@ -34,9 +34,11 @@ export interface ClientOptions extends Eris.ClientOptions {
      */
     disableDefaultMessageListener?: boolean;
 }
-/** Information returned from the API about the bot's OAuth application. */
-export interface ClientOAuthApplication extends Resolved<ReturnType<Client['getOAuthApplication']>> {
-}
+/**
+ * Information returned from the API about the bot's OAuth application.
+ * @deprecated Use `Eris.OAuthApplicationInfo` instead (this is a direct alias)
+ */
+export declare type ClientOAuthApplication = Eris.OAuthApplicationInfo;
 export interface PrefixFunction {
     (msg: Eris.Message, ctx: EventContext): Resolves<string | string[] | null | undefined>;
 }
