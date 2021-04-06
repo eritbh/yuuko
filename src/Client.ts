@@ -42,11 +42,11 @@ export interface ClientOptions extends Eris.ClientOptions {
 
 }
 
-/** Information returned from the API about the bot's OAuth application. */
-// TODO: obviated by https://github.com/abalabahaha/eris/pull/467
-export interface ClientOAuthApplication extends Resolved<ReturnType<Client['getOAuthApplication']>> {
-	// nothing else added
-}
+/**
+ * Information returned from the API about the bot's OAuth application.
+ * @deprecated Use `Eris.OAuthApplicationInfo` instead (this is a direct alias)
+ */
+export type ClientOAuthApplication = Eris.OAuthApplicationInfo;
 
 // A function that takes a message and a context argument and returns a prefix,
 // an array of prefixes, or void.

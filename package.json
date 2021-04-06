@@ -1,6 +1,6 @@
 {
   "name": "yuuko",
-  "version": "2.1.1",
+  "version": "2.2.0",
   "description": "A Discord bot base that I did for some reason.",
   "main": "dist/Yuuko.js",
   "types": "dist/Yuuko.d.ts",
@@ -14,13 +14,13 @@
     "lint-fix": "eslint --fix src/**/*.ts",
     "prepublishOnly": "eslint src/**/*.ts && tsc"
   },
-  "repository": "Geo1088/yuuko",
-  "author": "Geo1088 <georgej1088@gmail.com>",
+  "repository": "eritbh/yuuko",
+  "author": "eritbh <erin20913@gmail.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/Geo1088/yuuko/issues"
+    "url": "https://github.com/eritbh/yuuko/issues"
   },
-  "homepage": "https://geo1088.github.io/yuuko",
+  "homepage": "https://eritbh.me/yuuko",
   "dependencies": {},
   "devDependencies": {
     "@geo1088/eslint-config-ts": "^2.0.0",
@@ -30,6 +30,6 @@
     "typescript": "4"
   },
   "peerDependencies": {
-    "eris": "^0.13.0"
+    "eris": "^0.15.0"
   }
 }
