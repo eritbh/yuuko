@@ -18,3 +18,51 @@ description: A Discord command framework based on Eris.
 
 # Build settings
 markdown: kramdown
+
+# List of files to include despite their names beginning with underscores.
+#
+# This needs to be at the end of the file because the docs build script adds
+# entries to this list by echoing them into the end of the file.
+include:
+- 'docs/v2.0.0/classes/_client_.client.html'
+- 'docs/v2.0.0/classes/_command_.command.html'
+- 'docs/v2.0.0/interfaces/_client_.clientoauthapplication.html'
+- 'docs/v2.0.0/interfaces/_client_.clientoptions.html'
+- 'docs/v2.0.0/interfaces/_client_.prefixfunction.html'
+- 'docs/v2.0.0/interfaces/_client_.yuukoevents.html'
+- 'docs/v2.0.0/interfaces/_command_.commandcontext.html'
+- 'docs/v2.0.0/interfaces/_command_.commandprocess.html'
+- 'docs/v2.0.0/interfaces/_command_.commandrequirements.html'
+- 'docs/v2.0.0/interfaces/_command_.partialcommandcontext.html'
+- 'docs/v2.0.0/modules/_client_.html'
+- 'docs/v2.0.0/modules/_command_.html'
+- 'docs/v2.0.0/modules/_util_.html'
+- 'docs/v2.0.0/modules/_yuuko_.html'
+- 'docs/v2.0.1/classes/_client_.client.html'
+- 'docs/v2.0.1/classes/_command_.command.html'
+- 'docs/v2.0.1/interfaces/_client_.clientoauthapplication.html'
+- 'docs/v2.0.1/interfaces/_client_.clientoptions.html'
+- 'docs/v2.0.1/interfaces/_client_.prefixfunction.html'
+- 'docs/v2.0.1/interfaces/_client_.yuukoevents.html'
+- 'docs/v2.0.1/interfaces/_command_.commandcontext.html'
+- 'docs/v2.0.1/interfaces/_command_.commandprocess.html'
+- 'docs/v2.0.1/interfaces/_command_.commandrequirements.html'
+- 'docs/v2.0.1/interfaces/_command_.partialcommandcontext.html'
+- 'docs/v2.0.1/modules/_client_.html'
+- 'docs/v2.0.1/modules/_command_.html'
+- 'docs/v2.0.1/modules/_util_.html'
+- 'docs/v2.0.1/modules/_yuuko_.html'
+- 'docs/v2.0.2/classes/_client_.client.html'
+- 'docs/v2.0.2/classes/_command_.command.html'
+- 'docs/v2.0.2/interfaces/_client_.clientoauthapplication.html'
+- 'docs/v2.0.2/interfaces/_client_.clientoptions.html'
+- 'docs/v2.0.2/interfaces/_client_.prefixfunction.html'
+- 'docs/v2.0.2/interfaces/_client_.yuukoevents.html'
+- 'docs/v2.0.2/interfaces/_command_.commandcontext.html'
+- 'docs/v2.0.2/interfaces/_command_.commandprocess.html'
+- 'docs/v2.0.2/interfaces/_command_.commandrequirements.html'
+- 'docs/v2.0.2/interfaces/_command_.partialcommandcontext.html'
+- 'docs/v2.0.2/modules/_client_.html'
+- 'docs/v2.0.2/modules/_command_.html'
+- 'docs/v2.0.2/modules/_util_.html'
+- 'docs/v2.0.2/modules/_yuuko_.html'
