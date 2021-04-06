@@ -36,7 +36,7 @@ jobs:
           cd ..
 
           # Generate documentation file and add file to list of versions
-          yarn run typedoc src --out ".temp/docs/$TAG_NAME"
+          yarn run typedoc src --out ".temp/docs/$TAG_NAME" --readme none
           echo "- '$TAG_NAME'" >> .temp/_data/docs.yml
 
           # Commit to the gh-pages branch
