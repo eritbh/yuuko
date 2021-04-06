@@ -17,7 +17,7 @@ jobs:
           # Direct dependencies
           yarn install
           # Peer dependencies
-          npm i --no-save eris@0.13
+          npm i --no-save eris@0.15
 
       - name: Generate and push documentation
         env:
@@ -25,8 +25,6 @@ jobs:
         run: |
           # Find the tag name
           TAG_NAME="${GITHUB_REF#refs/tags/}"
-          # The documentation JSON will be written to this file on the gh-pages branch
-          DOCUMENTATION_FILE="versions/$TAG_NAME.json"
 
           echo "Generating documentation data for tag $TAG_NAME"
 
@@ -35,17 +33,18 @@ jobs:
           cd .temp
           git checkout gh-pages
           git pull || true
+          cd ..
 
           # Generate documentation file and add file to list of versions
-          # these paths are wach because running typedoc through yarn run breaks cwd somehow
-          yarn run typedoc src --json ".temp/$DOCUMENTATION_FILE"
-          echo "/$DOCUMENTATION_FILE" >> versions.txt
+          yarn run typedoc src --out ".temp/docs/"
+          echo "- '$TAG_NAME'" >> .temp/_data/docs.yml
 
-          # Commit
+          # Commit to the gh-pages branch
+          cd .temp
           git config user.name "Build Bot"
           git config user.email "bot@github-actions"
-          git add "$DOCUMENTATION_FILE" versions.txt
-          git commit -m "Documentation for tag ${TAG_NAME}" -m "Generated from commit ${GITHUB_SHA:0:7}"
+          git add docs _data
+          git commit -m "Documentation for tag $TAG_NAME" -m "Generated from commit ${GITHUB_SHA:0:7}"
 
           # Convert remote URL from HTTPS to SSH format so we can use our deploy key
           git remote set-url origin "$(git remote get-url origin | sed 's#http.*com/#git@github.com:#g')"
