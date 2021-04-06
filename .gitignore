@@ -1,2 +1,10 @@
-_site
+# Jekyll stuff
 .jekyll-cache
+
+# Docs are put directly into _site and need to not be gitignored, but we don't
+# care about the rest of _site since it's automatically generated
+_site/*
+!_site/docs
+_site/docs/*
+# TODO: assumes all tags will start with 'v' and no generated files will be
+!_site/docs/v*
