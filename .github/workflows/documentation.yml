@@ -41,7 +41,7 @@ jobs:
 
           # Add generated files that start with underscores to Jekyll `include`
           cd .temp
-          UNDERSCORE_FILES=(docs/**/_*)
+          UNDERSCORE_FILES=(docs/$TAG_NAME/**/_*)
           for file in "$UNDERSCORES_FILE[@]"; do
             # `include` is the last item of the config file, so we just append
             echo "- '$file'" >> .config.yml
