@@ -1,33 +1,30 @@
 /** @module Yuuko */
 
 import * as Eris from 'eris';
-import { EventContext } from './Yuuko';
-import { makeArray } from './util';
+import {EventContext} from './Yuuko';
+import {makeArray} from './util';
 
 /** Check if requirements are met. */
 // TODO this interface is ugly
-async function fulfillsRequirements(requirements: CommandRequirements, msg: Eris.Message, args: string[], ctx: CommandContext) {
-	const { owner, guildOnly, dmOnly, permissions, custom } = requirements;
-	const { client } = ctx;
+async function fulfillsRequirements (requirements: CommandRequirements, msg: Eris.Message, args: string[], ctx: CommandContext) {
+	const {owner, guildOnly, dmOnly, permissions, custom} = requirements;
+	const {client} = ctx;
 
 	// Owner checking
 	if (owner) {
 		// If the bot's application info isn't loaded, we can't confirm anything
 		if (!client.app) return false;
 
-		// TODO: remove <any> after https://github.com/bsian03/eris/pull/10 and
-		//       https://github.com/abalabahaha/eris/pull/993
-		if ((<any>client.app).team) {
+		if (client.app.team) {
 			// If the bot is owned by a team, we check their ID and team role
 			// (as of 2020-09-29, Admin/2 is the only role/membership_state)
-			if (!(<any>client.app).team.members.some(member => member.membership_state === 2 && member.user.id === msg.author.id)) {
+			// TODO: Remove type assertion after abalabahaha/eris#1171
+			if (!(client.app.team.members as unknown as Eris.OAuthTeamMember[]).some(member => member.membership_state === 2 && member.user.id === msg.author.id)) {
 				return false;
 			}
-		} else {
-			// if the bot is owned by a single user, we check their ID directly
-			if (client.app.owner.id !== msg.author.id) {
-				return false;
-			}
+		} else if (client.app.owner.id !== msg.author.id) {
+			// If the bot is owned by a single user, we check their ID directly
+			return false;
 		}
 	}
 
@@ -81,7 +78,7 @@ export interface CommandRequirements {
 	 * A list of permission strings the user must have. If set, the `guildOnly`
 	 * option is implied.
 	 */
-	permissions?: (keyof Eris.Constants["Permissions"])[];
+	permissions?: (keyof Eris.Constants['Permissions'])[];
 	/** A custom function that must return true to enable the command. */
 	custom?(msg: Eris.Message, args: string[], ctx: CommandContext): boolean | Promise<boolean>;
 }
@@ -134,9 +131,9 @@ export class Command {
 	// now we have one more override than we should really need. Oh well.
 	// TODO: Does microsoft/typescript#31023 fix this?
 	constructor(names: string | string[], process: CommandProcess, requirements?: CommandRequirements);
-	constructor(names: string | string[], process: GuildCommandProcess, requirements: CommandRequirements & { guildOnly: true, dmOnly?: false });
-	constructor(names: string | string[], process: PrivateCommandProcess, requirements: CommandRequirements & { dmOnly: true, guildOnly?: false })
-	constructor(names: string | string[], process: CommandProcess | GuildCommandProcess | PrivateCommandProcess, requirements?: CommandRequirements) {
+	constructor(names: string | string[], process: GuildCommandProcess, requirements: CommandRequirements & { guildOnly: true; dmOnly?: false });
+	constructor(names: string | string[], process: PrivateCommandProcess, requirements: CommandRequirements & { dmOnly: true; guildOnly?: false })
+	constructor (names: string | string[], process: CommandProcess | GuildCommandProcess | PrivateCommandProcess, requirements?: CommandRequirements) {
 		if (Array.isArray(names)) {
 			this.names = names;
 		} else {
@@ -160,7 +157,7 @@ export class Command {
 	}
 
 	/** Checks whether or not a command can be executed. */
-	async checkPermissions(msg: Eris.Message, args: string[], ctx: CommandContext): Promise<boolean> {
+	async checkPermissions (msg: Eris.Message, args: string[], ctx: CommandContext): Promise<boolean> {
 		if (!ctx.client.ignoreGlobalRequirements) {
 			if (!await fulfillsRequirements(ctx.client.globalCommandRequirements, msg, args, ctx)) {
 				return false;
@@ -170,7 +167,7 @@ export class Command {
 	}
 
 	/** Executes the command process if the permission checks pass. */
-	async execute(msg: Eris.Message, args: string[], ctx: CommandContext): Promise<boolean> {
+	async execute (msg: Eris.Message, args: string[], ctx: CommandContext): Promise<boolean> {
 		if (!await this.checkPermissions(msg, args, ctx)) return false;
 		// By calling checkPermissions and returning early if it returns false,
 		// we guarantee that messages will be the correct type for the stored
