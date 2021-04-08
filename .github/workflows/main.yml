@@ -18,6 +18,10 @@ jobs:
         yarn install
         # Peer dependencies
         npm i --no-save eris@0.13
+    
+    - name: Run ESLint
+      run: |
+        yarn run lint
 
     - name: Build Typescript
       run: |
