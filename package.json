@@ -1,6 +1,6 @@
 {
   "name": "yuuko",
-  "version": "2.1.1",
+  "version": "2.2.0",
   "description": "A Discord bot base that I did for some reason.",
   "main": "dist/Yuuko.js",
   "types": "dist/Yuuko.d.ts",
@@ -32,6 +32,6 @@
     "typescript": "4"
   },
   "peerDependencies": {
-    "eris": "^0.13.0"
+    "eris": "^0.15.0"
   }
 }

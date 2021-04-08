@@ -81,8 +81,7 @@ export interface CommandRequirements {
 	 * A list of permission strings the user must have. If set, the `guildOnly`
 	 * option is implied.
 	 */
-	// TODO: use a union of all the string literals we could possibly put here
-	permissions?: string | string[];
+	permissions?: (keyof Eris.Constants["Permissions"])[];
 	/** A custom function that must return true to enable the command. */
 	custom?(msg: Eris.Message, args: string[], ctx: CommandContext): boolean | Promise<boolean>;
 }

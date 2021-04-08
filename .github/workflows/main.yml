@@ -17,7 +17,7 @@ jobs:
         # Direct dependencies
         yarn install
         # Peer dependencies
-        npm i --no-save eris@0.13
+        npm i --no-save eris@0.15
     
     - name: Run ESLint
       run: |
@@ -52,26 +52,27 @@ jobs:
         cp ../LICENSE .
         cp ../README.md .
 
-        # Check for working directory changes; if there's nothing, exit early
-        if git diff-index --quiet HEAD --; then
-          exit 0
+        # If we have changes...
+        if [ -n "$(git status --porcelain)" ]; then
+
+          # Add files to git
+          git add -f dist/** package.json LICENSE README.md
+
+          # Commit
+          git config user.name "Build Bot"
+          git config user.email "bot@github-actions"
+          git commit -m "Build of ${GITHUB_SHA:0:7}"
+        
+          # Convert remote URL from HTTPS to SSH format so we can use our deploy key
+          git remote set-url origin "$(git remote get-url origin | sed 's#http.*com/#git@github.com:#g')"
+          
+          # Push the commit to the origin
+          eval `ssh-agent -t 60 -s`
+          echo "$DEPLOY_KEY" | ssh-add -
+          mkdir -p ~/.ssh/
+          ssh-keyscan github.com >> ~/.ssh/known_hosts
+          git push || git push --set-upstream origin "$BUILDS_BRANCH_NAME"
+          ssh-agent -k
+        else
+          echo "No changes to build output detected"
         fi
-
-        # Add files to git
-        git add -f dist/** package.json LICENSE README.md
-
-        # Commit
-        git config user.name "Build Bot"
-        git config user.email "bot@github-actions"
-        git commit -m "Build of ${GITHUB_SHA:0:7}"
-        
-        # Convert remote URL from HTTPS to SSH format so we can use our deploy key
-        git remote set-url origin "$(git remote get-url origin | sed 's#http.*com/#git@github.com:#g')"
-        
-        # Push the commit to the origin
-        eval `ssh-agent -t 60 -s`
-        echo "$DEPLOY_KEY" | ssh-add -
-        mkdir -p ~/.ssh/
-        ssh-keyscan github.com >> ~/.ssh/known_hosts
-        git push || git push --set-upstream origin "$BUILDS_BRANCH_NAME"
-        ssh-agent -k

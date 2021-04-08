@@ -2,8 +2,9 @@
 
 [![npm version](https://img.shields.io/npm/v/yuuko.svg)](https://www.npmjs.com/package/yuuko)
 [![npm@next version](https://img.shields.io/npm/v/yuuko/next)](https://www.npmjs.com/package/yuuko/v/next)
-[![Dev dependency status](https://david-dm.org/eritbh/yuuko/dev-status.svg)](https://david-dm.org/eritbh/yuuko?type=dev)
+[![Dev dependency status](https://img.shields.io/david/dev/eritbh/yuuko)](https://david-dm.org/eritbh/yuuko?type=dev)
 [![Discord support server](https://img.shields.io/discord/409839835503788033?color=7289DA&label=support%20server&logo=discord&logoColor=fff)](https://discord.gg/a2N2YCx)
+[![Donate on Ko-fi](https://img.shields.io/badge/donate-on%20Ko--fi-FF5E5B?logo=ko-fi&logoColor=white)](https://ko-fi.com/eritbh)
 
 A zero-dependency Discord command framework for Javascript and Typescript, based on [Eris](https://github.com/abalabahaha/eris). [Read the Documentation.](https://eritbh.me/yuuko)
 
