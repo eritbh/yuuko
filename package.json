@@ -10,9 +10,9 @@
   "scripts": {
     "build": "tsc",
     "docs": "typedoc src --out docs/docs --theme minimal",
-    "lint": "eslint src/**/*.ts",
-    "lint-fix": "eslint --fix src/**/*.ts",
-    "prepublishOnly": "eslint src/**/*.ts && tsc"
+    "lint": "eslint 'src/**/*.ts'",
+    "lint-fix": "eslint --fix 'src/**/*.ts'",
+    "prepublishOnly": "eslint 'src/**/*.ts' && tsc"
   },
   "repository": "eritbh/yuuko",
   "author": "eritbh <erin20913@gmail.com>",
