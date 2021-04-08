@@ -13,7 +13,7 @@ export interface CommandRequirements {
      * A list of permission strings the user must have. If set, the `guildOnly`
      * option is implied.
      */
-    permissions?: (keyof Eris.Constants["Permissions"])[];
+    permissions?: (keyof Eris.Constants['Permissions'])[];
     /** A custom function that must return true to enable the command. */
     custom?(msg: Eris.Message, args: string[], ctx: CommandContext): boolean | Promise<boolean>;
 }

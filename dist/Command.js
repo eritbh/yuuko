@@ -43,20 +43,17 @@ function fulfillsRequirements(requirements, msg, args, ctx) {
             // If the bot's application info isn't loaded, we can't confirm anything
             if (!client.app)
                 return false;
-            // TODO: remove <any> after https://github.com/bsian03/eris/pull/10 and
-            //       https://github.com/abalabahaha/eris/pull/993
             if (client.app.team) {
                 // If the bot is owned by a team, we check their ID and team role
                 // (as of 2020-09-29, Admin/2 is the only role/membership_state)
+                // TODO: Remove type assertion after abalabahaha/eris#1171
                 if (!client.app.team.members.some(member => member.membership_state === 2 && member.user.id === msg.author.id)) {
                     return false;
                 }
             }
-            else {
-                // if the bot is owned by a single user, we check their ID directly
-                if (client.app.owner.id !== msg.author.id) {
-                    return false;
-                }
+            else if (client.app.owner.id !== msg.author.id) {
+                // If the bot is owned by a single user, we check their ID directly
+                return false;
             }
         }
         // Guild-only commands

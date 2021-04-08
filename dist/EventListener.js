@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.EventListener = void 0;
 /** Class associating an event handler with an event. */
 class EventListener {
-    constructor(event, listener, { once = false } = {}) {
+    constructor(event, listener, { once = false, } = {}) {
         this.args = [event, listener];
         this.once = once;
     }
