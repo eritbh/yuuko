@@ -28,7 +28,7 @@ function helpText (command: CommandWithHelp, prefix: string) {
  * Array#filter, but resolves to true/false rather than returning true/false.
  * @returns {Array<*>} The filtered array.
  */
-async function filterAsync<T> (array: T[], filter: (el: T, i: number, array: T[]) => Promise<boolean>): Promise<T[]> {
+async function filterAsync<T> (array: T[], filter: (el: T, i: number, arr: T[]) => Promise<boolean>): Promise<T[]> {
 	const bits = await Promise.all(array.map((el, i) => filter(el, i, array)));
 	return array.filter(() => bits.shift());
 }
