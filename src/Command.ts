@@ -202,12 +202,14 @@ export class Command {
 		if (!await this.checkPermissions(msg, args, ctx)) return false;
 
 		// Check if we have a subcommand, and if so, execute that command
-		const subcommand = this.subcommandForName(args[0], ctx.client.caseSensitiveCommands);
-		if (subcommand) {
-			// TODO: Might want to handle this as an array instead, but doing it
-			//       this way for now for backwards compatibility
-			ctx.commandName += ` ${args.shift()}`;
-			return subcommand.execute(msg, args, ctx);
+		if (args.length) {
+			const subcommand = this.subcommandForName(args[0], ctx.client.caseSensitiveCommands);
+			if (subcommand) {
+				// TODO: Might want to handle this as an array instead, but doing it
+				//       this way for now for backwards compatibility
+				ctx.commandName += ` ${args.shift()}`;
+				return subcommand.execute(msg, args, ctx);
+			}
 		}
 
 		// We have no subcommand, so call this command's process
