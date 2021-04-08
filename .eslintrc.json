@@ -1,1 +1,21 @@
-{"extends": "@geo1088/ts"}
+{
+	"extends": "@geo1088",
+	"parser": "@typescript-eslint/parser",
+	"parserOptions": {
+		"ecmaVersion": 6,
+		"sourceType": "module"
+	},
+	"plugins": [
+		"@typescript-eslint"
+	],
+	"rules": {
+		// "valid-jsdoc": "off",
+		"@typescript-eslint/no-unused-vars": [
+			"error",
+			{
+				"varsIgnorePattern": "^_"
+			}
+		],
+		"@typescript-eslint/member-delimiter-style": "error"
+	}
+}
