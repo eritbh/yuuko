@@ -1,1 +1,35 @@
-{"extends": "@geo1088/ts"}
+{
+	"extends": "@geo1088",
+	"parser": "@typescript-eslint/parser",
+	"parserOptions": {
+		"ecmaVersion": 6,
+		"sourceType": "module"
+	},
+	"plugins": [
+		"@typescript-eslint"
+	],
+	"rules": {
+		// Disable valid-jsdoc for typescript
+		"valid-jsdoc": "off",
+
+		// Set delimiter style for interface/object type members
+		"@typescript-eslint/member-delimiter-style": "error",
+
+		// Replace ESLint rules with their typescript-eslint counterparts
+		"lines-between-class-members": "off",
+		"@typescript-eslint/lines-between-class-members": "error",
+		"no-redeclare": "off",
+		"@typescript-eslint/no-redeclare": "error",
+		"no-extra-parens": "off",
+		"@typescript-eslint/no-extra-parens": "error",
+		"no-unused-vars": "off",
+		"@typescript-eslint/no-unused-vars": [
+			"error",
+			{
+				"varsIgnorePattern": "^_"
+			}
+		],
+		"no-use-before-define": "off",
+		"@typescript-eslint/no-use-before-define": "error"
+	}
+}
