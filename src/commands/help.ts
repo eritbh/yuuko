@@ -1,6 +1,5 @@
 /** @module Yuuko */
 
-import { help } from '.';
 import {Command} from '../Yuuko';
 
 /**
