@@ -288,14 +288,21 @@ class Client extends Eris.Client {
             delete thing.default;
         }
         thing.filename = filename;
-        if (thing instanceof Command_1.Command) {
-            this.addCommand(thing);
+        try {
+            if (thing instanceof Command_1.Command) {
+                this.addCommand(thing);
+            }
+            else if (thing instanceof EventListener_1.EventListener) {
+                this.addEvent(thing);
+            }
+            else {
+                throw new TypeError('Exported value is not a command or event listener');
+            }
         }
-        else if (thing instanceof EventListener_1.EventListener) {
-            this.addEvent(thing);
-        }
-        else {
-            throw new TypeError('Exported value is not a command or event listener');
+        catch (error) {
+            // Add filename to errors and re-throw
+            error.filename = filename;
+            throw error;
         }
         return this;
     }
