@@ -349,21 +349,30 @@ export class Client extends Eris.Client implements ClientOptions {
 	 * for development to hot-reload components as you work on them.
 	 */
 	reloadFiles (): this {
+		const filenames: string[] = [];
 		for (const list of [this.commands, this.events]) {
-			// Iterate over the lists backwards to avoid overwriting indexes (this
-			// rewrites the lists in reverse order, but we don't care)
+			// Iterate over each list backwards to avoid overwriting indexes
 			let i = list.length;
 			while (i--) {
 				const thing = list[i];
-				if (thing instanceof EventListener && thing.computedListener) {
-					this.removeListener(thing.args[0], thing.computedListener);
-				}
 				if (thing.filename) {
+					// Remove the thing from the list
 					list.splice(i, 1);
-					this.addFile(thing.filename);
+					// Record the file it came from so we can reload it
+					filenames.push(thing.filename);
+					// If it's an event listener object, remove the listener
+					if (thing instanceof EventListener && thing.computedListener) {
+						this.removeListener(thing.args[0], thing.computedListener);
+					}
 				}
 			}
 		}
+
+		// Reload each unique filename
+		for (const filename of filenames.filter((f, i, a) => a.indexOf(f) === i)) {
+			this.addFile(filename);
+		}
+
 		return this;
 	}
 
