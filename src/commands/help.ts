@@ -13,7 +13,7 @@ import {Command} from '../Yuuko';
  */
 function helpText (command: Command & {help?: any}, displayedCommandName: string, prefix: string) {
 	if (!command.help) {
-		return `No help available for \`${displayedCommandName}\`.`
+		return `No help available for \`${displayedCommandName}\`.`;
 	}
 
 	let txt = '';
@@ -59,14 +59,14 @@ const helpCommand = new Command([
 
 		// Find the command we're talking about
 		let command = client.commandForName(args.shift()!);
-		let parentCommands: Command[] = [];
+		const parentCommands: Command[] = [];
 
 		// If we have a matching command, get help for it
 		if (command) {
 			// If we have more arguments, try to resolve subcommands
 			// Lots of type assertions
 			while (args.length) {
-				let subcommand = command!.subcommandForName(args.shift()!, client.caseSensitiveCommands);
+				const subcommand = command!.subcommandForName(args.shift()!, client.caseSensitiveCommands);
 				if (!subcommand) {
 					// Rather than fail entirely, if there's a subcommand that
 					// doesn't exist, show help for the valid parent command
@@ -77,7 +77,7 @@ const helpCommand = new Command([
 			}
 
 			// Generate the display string for the command based on any parents
-			const commandDisplay = `${prefix}${[...parentCommands.map(c => c.names[0]), command!.names[0]].join(' ')}`
+			const commandDisplay = `${prefix}${[...parentCommands.map(c => c.names[0]), command!.names[0]].join(' ')}`;
 
 			// Generate the help text for this command
 			message = `**=== Help: \`${commandDisplay}\` ===**\n${helpText(command!, commandDisplay, prefix)}`;
