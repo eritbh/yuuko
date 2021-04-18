@@ -39,11 +39,18 @@ jobs:
           yarn run typedoc src/Yuuko.ts --out ".temp/docs/$TAG_NAME" --readme none
           echo "- '$TAG_NAME'" >> .temp/_data/docs.yml
 
-          # Commit to the gh-pages branch
+          # Add generated files that start with underscores to Jekyll `include`
           cd .temp
+          UNDERSCORE_FILES=(docs/$TAG_NAME/**/_*)
+          for file in "$UNDERSCORES_FILE[@]"; do
+            # `include` is the last item of the config file, so we just append
+            echo "- '$file'" >> .config.yml
+          done
+
+          # Commit to the gh-pages branch
           git config user.name "Build Bot"
           git config user.email "bot@github-actions"
-          git add docs _data
+          git add docs _data _config.yml
           git commit -m "Documentation for tag $TAG_NAME" -m "Generated from commit ${GITHUB_SHA:0:7}"
 
           # Convert remote URL from HTTPS to SSH format so we can use our deploy key
