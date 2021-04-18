@@ -93,6 +93,8 @@ function fulfillsRequirements(requirements, msg, args, ctx) {
 /** Class representing a command. */
 class Command {
     constructor(names, process, requirements) {
+        /** Subcommands of this command. */
+        this.subcommands = [];
         if (Array.isArray(names)) {
             this.names = names;
         }
@@ -128,16 +130,51 @@ class Command {
             return fulfillsRequirements(this.requirements, msg, args, ctx);
         });
     }
+    /**
+     * Adds a subcommand to this command.
+     * @param command The subcommand to add
+     */
+    addSubcommand(command) {
+        for (const name of command.names) {
+            for (const otherCommand of this.subcommands) {
+                if (otherCommand.names.includes(name)) {
+                    throw new TypeError(`Two commands have the same name: ${name}`);
+                }
+            }
+        }
+        this.subcommands.push(command);
+        return this;
+    }
+    /**
+     * Checks the list of subcommands and returns one whch is known by a given
+     * name. Passing an empty string will return the default command, if any.
+     */
+    subcommandForName(name, caseSensitive) {
+        if (caseSensitive)
+            return this.subcommands.find(c => c.names.includes(name)) || null;
+        return this.subcommands.find(c => c.names.some(n => n.toLowerCase() === name.toLowerCase())) || null;
+    }
     /** Executes the command process if the permission checks pass. */
     execute(msg, args, ctx) {
         return __awaiter(this, void 0, void 0, function* () {
             if (!(yield this.checkPermissions(msg, args, ctx)))
                 return false;
-            // By calling checkPermissions and returning early if it returns false,
-            // we guarantee that messages will be the correct type for the stored
-            // process, so this call is always safe. Restructuring this to properly
-            // use TS type guards would be very messy and would result in duplicate
-            // safety checks that we want to avoid.
+            // Check if we have a subcommand, and if so, execute that command
+            if (args.length) {
+                const subcommand = this.subcommandForName(args[0], ctx.client.caseSensitiveCommands);
+                if (subcommand) {
+                    // TODO: Might want to handle this as an array instead, but doing it
+                    //       this way for now for backwards compatibility
+                    ctx.commandName += ` ${args.shift()}`;
+                    return subcommand.execute(msg, args, ctx);
+                }
+            }
+            // We have no subcommand, so call this command's process
+            // NOTE: By calling checkPermissions and returning early if it returns
+            //       false, we guarantee that messages will be the correct type for
+            //       the stored process, so this call is always safe. Restructuring
+            //       this to properly use TS type guards would be very messy and
+            //       would result in duplicate safety checks that we want to avoid.
             // @ts-ignore
             this.process(msg, args, ctx);
             return true;

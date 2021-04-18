@@ -50,6 +50,8 @@ export declare class Command {
     requirements: CommandRequirements;
     /** The name of the file the command was loaded from, if any. */
     filename?: string;
+    /** Subcommands of this command. */
+    subcommands: Command[];
     constructor(names: string | string[], process: CommandProcess, requirements?: CommandRequirements);
     constructor(names: string | string[], process: GuildCommandProcess, requirements: CommandRequirements & {
         guildOnly: true;
@@ -61,6 +63,16 @@ export declare class Command {
     });
     /** Checks whether or not a command can be executed. */
     checkPermissions(msg: Eris.Message, args: string[], ctx: CommandContext): Promise<boolean>;
+    /**
+     * Adds a subcommand to this command.
+     * @param command The subcommand to add
+     */
+    addSubcommand(command: Command): this;
+    /**
+     * Checks the list of subcommands and returns one whch is known by a given
+     * name. Passing an empty string will return the default command, if any.
+     */
+    subcommandForName(name: string, caseSensitive: boolean): Command | null;
     /** Executes the command process if the permission checks pass. */
     execute(msg: Eris.Message, args: string[], ctx: CommandContext): Promise<boolean>;
 }
