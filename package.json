@@ -24,7 +24,7 @@
   "dependencies": {},
   "devDependencies": {
     "@geo1088/eslint-config": "^3.1.0",
-    "@types/node": "^13.11.0",
+    "@types/node": "^14.14.41",
     "@typescript-eslint/eslint-plugin": "^4.21.0",
     "@typescript-eslint/parser": "^4.21.0",
     "eslint": "^7.23.0",
