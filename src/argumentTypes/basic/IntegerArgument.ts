@@ -1,4 +1,4 @@
-import {ArgumentType, registerArgumentType} from '../Yuuko';
+import {ArgumentType, registerArgumentType} from '../../Yuuko';
 
 /** An argument that represents an integer number. */
 type NumberArgument = ArgumentType<{

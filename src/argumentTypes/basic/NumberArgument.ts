@@ -1,4 +1,4 @@
-import {ArgumentType, registerArgumentType} from '../Yuuko';
+import {ArgumentType, registerArgumentType} from '../../Yuuko';
 
 /** An argument that represents a floating-pointer number. */
 type NumberArgument = ArgumentType<{
