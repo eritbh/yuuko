@@ -44,6 +44,9 @@ exports.default = new Yuuko_1.Command('debug', function debug(msg, args, ctx) {
             if (string.startsWith('js')) {
                 string = string.substr(2);
             }
+            if (string.startsWith('javascript')) {
+                string = string.substr(10);
+            }
         }
         // Create a dummy console object
         const console = {
@@ -57,8 +60,13 @@ exports.default = new Yuuko_1.Command('debug', function debug(msg, args, ctx) {
         };
         // eslint-disable-next-line no-multi-assign
         console.log = console.error = console.warn = console.info = console._logger.bind(console);
-        // eslint-disable-next-line
-        const c = console; // Convenience
+        // Convenience variables exposed to eval
+        /* eslint-disable */
+        const c = console;
+        const message = msg;
+        const context = ctx;
+        const { client, prefix, commandName } = ctx;
+        /* eslint-enable */
         // Eval the things and send the results
         let result;
         try {
@@ -67,11 +75,11 @@ exports.default = new Yuuko_1.Command('debug', function debug(msg, args, ctx) {
         catch (e) {
             result = e;
         }
-        const message = `\`\`\`js\n${console._formatLines()}${util.inspect(result, inspectOptions)}\n\`\`\``;
+        const outputText = `\`\`\`js\n${console._formatLines()}${util.inspect(result, inspectOptions)}\n\`\`\``;
         // Send the message
         let outputMsg;
         try {
-            outputMsg = yield msg.channel.createMessage(message);
+            outputMsg = yield msg.channel.createMessage(outputText);
         }
         catch (err) {
             try {
