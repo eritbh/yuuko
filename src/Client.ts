@@ -315,26 +315,42 @@ export class Client extends Eris.Client implements ClientOptions {
 		// Clear require cache so we always get a fresh copy
 		delete require.cache[filename];
 		// eslint-disable-next-line global-require
-		let thing = require(filename);
-		if (thing.default) {
-			// Use object.assign to preserve other exports
-			// TODO: this kinda breaks typescript but it's fine
-			thing = Object.assign(thing.default, thing);
-			delete thing.default;
+		let things = require(filename);
+
+		// Resolve es6 module default exports
+		if (things.default) {
+			things = Object.assign(things.default, things);
+			delete things.default;
 		}
-		thing.filename = filename;
-		try {
-			if (thing instanceof Command) {
-				this.addCommand(thing);
-			} else if (thing instanceof EventListener) {
-				this.addEvent(thing);
-			} else {
-				throw new TypeError('Exported value is not a command or event listener');
+
+		// Handle single exports as arrays
+		if (!Array.isArray(things)) {
+			// If a single object was exported
+			things = [things];
+		}
+
+		// register all exported objects
+		for (let thing of things) {
+			// Resolve es6 module exports *again* since we might have an array
+			// of individual es6 modules sometimes
+			if (thing.default) {
+				thing = Object.assign(thing.default, thing);
+				delete thing.default;
 			}
-		} catch (error) {
-			// Add filename to errors and re-throw
-			error.filename = filename;
-			throw error;
+			thing.filename = filename;
+			try {
+				if (thing instanceof Command) {
+					this.addCommand(thing);
+				} else if (thing instanceof EventListener) {
+					this.addEvent(thing);
+				} else {
+					throw new TypeError('Imported value is not a command or event listener');
+				}
+			} catch (error) {
+				// Add filename to errors and re-throw
+				error.filename = filename;
+				throw error;
+			}
 		}
 		return this;
 	}
