@@ -7,7 +7,7 @@ type NumberArgument = ArgumentType<{
 	lowerBound?: number;
 	/** The upper bound of accepted integers. Defaults to `Infinity`. */
 	upperBound?: number;
- }, number>;
+}, number>;
 
 registerArgumentType<NumberArgument>('number', (args, {
 	lowerBound = -Infinity,
