@@ -26,6 +26,8 @@ export interface ClientOptions extends Eris.ClientOptions {
 	allowMention?: boolean;
 	/** If true, messages from other bot accounts will not trigger commands. */
 	ignoreBots?: boolean;
+	/** A set of requirements to check for all commands. */
+	globalCommandRequirements?: CommandRequirements;
 	/**
 	 * If true, requirements set via setGlobalRequirements will be ignored. Used
 	 * for debugging, probably shouldn't be used in production.
@@ -78,6 +80,9 @@ export class Client extends Eris.Client implements ClientOptions {
 	/** If true, messages from other bot accounts will not trigger commands. */
 	ignoreBots: boolean = true;
 
+	/** A set of requirements to check for all commands. */
+	globalCommandRequirements: CommandRequirements = {};
+
 	/**
 	 * If true, requirements set via setGlobalRequirements will be ignored. Used
 	 * for debugging, probably shouldn't be used in production.
@@ -119,9 +124,6 @@ export class Client extends Eris.Client implements ClientOptions {
 	/** An object of stuff to add to the context object for command functions */
 	contextAdditions: object = {};
 
-	/** A requirements object that is applied to all commands */
-	globalCommandRequirements: CommandRequirements = {};
-
 	/** @hidden Whether or not the ready event has been emitted at least once */
 	private _gotReady: boolean = false;
 
@@ -138,6 +140,7 @@ export class Client extends Eris.Client implements ClientOptions {
 		if (options.caseSensitiveCommands !== undefined) this.caseSensitiveCommands = options.caseSensitiveCommands;
 		if (options.allowMention !== undefined) this.allowMention = options.allowMention;
 		if (options.ignoreBots !== undefined) this.ignoreBots = options.ignoreBots;
+		if (options.globalCommandRequirements !== undefined) this.globalCommandRequirements = options.globalCommandRequirements;
 		if (options.ignoreGlobalRequirements !== undefined) this.ignoreGlobalRequirements = options.ignoreGlobalRequirements;
 		if (options.disableDefaultMessageListener !== undefined) this.disableDefaultMessageListener = options.disableDefaultMessageListener;
 
