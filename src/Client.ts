@@ -29,11 +29,11 @@ export interface ClientOptions extends Eris.ClientOptions {
 	/** A set of requirements to check for all commands. */
 	globalCommandRequirements?: CommandRequirements;
 	/**
-	 * If true, requirements set via setGlobalRequirements will be ignored. Used
-	 * for debugging, probably shouldn't be used in production.
+	 * If true, requirements set via the globalCommandRequirements option will
+	 * be ignored.
+	 * @deprecated Pass no `globalCommandRequirements` client option instead.
 	*/
 	ignoreGlobalRequirements?: boolean;
-
 	/**
 	 * If true, the client does not respond to commands by default, and the user
 	 * must register their own `messageCreate` listener, which can call
@@ -41,7 +41,6 @@ export interface ClientOptions extends Eris.ClientOptions {
 	 * the handler's execution
 	 */
 	disableDefaultMessageListener?: boolean;
-
 }
 
 /**
@@ -84,8 +83,9 @@ export class Client extends Eris.Client implements ClientOptions {
 	globalCommandRequirements: CommandRequirements = {};
 
 	/**
-	 * If true, requirements set via setGlobalRequirements will be ignored. Used
+	 * If true, requirements set via `setGlobalRequirements` will be ignored. Used
 	 * for debugging, probably shouldn't be used in production.
+	 * @deprecated Pass no `globalCommandRequirements` client option instead.
 	 */
 	ignoreGlobalRequirements: boolean = false;
 
@@ -239,7 +239,10 @@ export class Client extends Eris.Client implements ClientOptions {
 		return this;
 	}
 
-	/** Set requirements for all commands at once */
+	/**
+	 * Set requirements for all commands at once
+	 * @deprecated Use the `globalCommandRequirements` client option instead.
+	 */
 	setGlobalRequirements (requirements: CommandRequirements) {
 		Object.assign(this.globalCommandRequirements, requirements);
 		return this;
