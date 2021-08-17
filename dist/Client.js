@@ -56,9 +56,12 @@ class Client extends Eris.Client {
         this.allowMention = true;
         /** If true, messages from other bot accounts will not trigger commands. */
         this.ignoreBots = true;
+        /** A set of requirements to check for all commands. */
+        this.globalCommandRequirements = {};
         /**
-         * If true, requirements set via setGlobalRequirements will be ignored. Used
+         * If true, requirements set via `setGlobalRequirements` will be ignored. Used
          * for debugging, probably shouldn't be used in production.
+         * @deprecated Pass no `globalCommandRequirements` client option instead.
          */
         this.ignoreGlobalRequirements = false;
         /**
@@ -86,8 +89,6 @@ class Client extends Eris.Client {
         this.app = null;
         /** An object of stuff to add to the context object for command functions */
         this.contextAdditions = {};
-        /** A requirements object that is applied to all commands */
-        this.globalCommandRequirements = {};
         /** @hidden Whether or not the ready event has been emitted at least once */
         this._gotReady = false;
         // HACK: Technically this is already set by the super constructor, but
@@ -104,6 +105,8 @@ class Client extends Eris.Client {
             this.allowMention = options.allowMention;
         if (options.ignoreBots !== undefined)
             this.ignoreBots = options.ignoreBots;
+        if (options.globalCommandRequirements !== undefined)
+            this.globalCommandRequirements = options.globalCommandRequirements;
         if (options.ignoreGlobalRequirements !== undefined)
             this.ignoreGlobalRequirements = options.ignoreGlobalRequirements;
         if (options.disableDefaultMessageListener !== undefined)
@@ -203,7 +206,10 @@ class Client extends Eris.Client {
         Object.assign(this.contextAdditions, options);
         return this;
     }
-    /** Set requirements for all commands at once */
+    /**
+     * Set requirements for all commands at once
+     * @deprecated Use the `globalCommandRequirements` client option instead.
+     */
     setGlobalRequirements(requirements) {
         Object.assign(this.globalCommandRequirements, requirements);
         return this;
@@ -280,29 +286,42 @@ class Client extends Eris.Client {
         // Clear require cache so we always get a fresh copy
         delete require.cache[filename];
         // eslint-disable-next-line global-require
-        let thing = require(filename);
-        if (thing.default) {
-            // Use object.assign to preserve other exports
-            // TODO: this kinda breaks typescript but it's fine
-            thing = Object.assign(thing.default, thing);
-            delete thing.default;
+        let things = require(filename);
+        // Resolve es6 module default exports
+        if (things.default) {
+            things = Object.assign(things.default, things);
+            delete things.default;
         }
-        thing.filename = filename;
-        try {
-            if (thing instanceof Command_1.Command) {
-                this.addCommand(thing);
-            }
-            else if (thing instanceof EventListener_1.EventListener) {
-                this.addEvent(thing);
-            }
-            else {
-                throw new TypeError('Exported value is not a command or event listener');
-            }
+        // Handle single exports as arrays
+        if (!Array.isArray(things)) {
+            // If a single object was exported
+            things = [things];
         }
-        catch (error) {
-            // Add filename to errors and re-throw
-            error.filename = filename;
-            throw error;
+        // register all exported objects
+        for (let thing of things) {
+            // Resolve es6 module exports *again* since we might have an array
+            // of individual es6 modules sometimes
+            if (thing.default) {
+                thing = Object.assign(thing.default, thing);
+                delete thing.default;
+            }
+            thing.filename = filename;
+            try {
+                if (thing instanceof Command_1.Command) {
+                    this.addCommand(thing);
+                }
+                else if (thing instanceof EventListener_1.EventListener) {
+                    this.addEvent(thing);
+                }
+                else {
+                    throw new TypeError('Imported value is not a command or event listener');
+                }
+            }
+            catch (error) {
+                // Add filename to errors and re-throw
+                error.filename = filename;
+                throw error;
+            }
         }
         return this;
     }

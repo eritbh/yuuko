@@ -34,8 +34,8 @@ export interface CommandProcess<T extends Eris.Textable = Eris.TextableChannel> 
     /** An object containing additional context information. */
     ctx: CommandContext): void;
 }
-declare type GuildCommandProcess = CommandProcess<Eris.GuildTextableChannel>;
-declare type PrivateCommandProcess = CommandProcess<Eris.PrivateChannel>;
+export declare type GuildCommandProcess = CommandProcess<Eris.GuildTextableChannel>;
+export declare type PrivateCommandProcess = CommandProcess<Eris.PrivateChannel>;
 /** Class representing a command. */
 export declare class Command {
     /**
@@ -76,4 +76,3 @@ export declare class Command {
     /** Executes the command process if the permission checks pass. */
     execute(msg: Eris.Message, args: string[], ctx: CommandContext): Promise<boolean>;
 }
-export {};

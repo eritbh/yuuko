@@ -10,6 +10,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.CommandWithHelp = void 0;
 const Yuuko_1 = require("../Yuuko");
 /**
  * Returns the help text for a command.
@@ -50,6 +51,15 @@ function filterAsync(array, filter) {
         return array.filter(() => bits.shift());
     });
 }
+class CommandWithHelp extends Yuuko_1.Command {
+    constructor(names, help, process, requirements) {
+        // Overloads for nice intellisense make things really dumb internally
+        // @ts-expect-error
+        super(names, process, requirements);
+        this.help = help;
+    }
+}
+exports.CommandWithHelp = CommandWithHelp;
 const helpCommand = new Yuuko_1.Command([
     'help',
     'man',

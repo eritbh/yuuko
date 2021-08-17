@@ -21,9 +21,12 @@ export interface ClientOptions extends Eris.ClientOptions {
     allowMention?: boolean;
     /** If true, messages from other bot accounts will not trigger commands. */
     ignoreBots?: boolean;
+    /** A set of requirements to check for all commands. */
+    globalCommandRequirements?: CommandRequirements;
     /**
-     * If true, requirements set via setGlobalRequirements will be ignored. Used
-     * for debugging, probably shouldn't be used in production.
+     * If true, requirements set via the globalCommandRequirements option will
+     * be ignored.
+     * @deprecated Pass no `globalCommandRequirements` client option instead.
     */
     ignoreGlobalRequirements?: boolean;
     /**
@@ -60,9 +63,12 @@ export declare class Client extends Eris.Client implements ClientOptions {
     allowMention: boolean;
     /** If true, messages from other bot accounts will not trigger commands. */
     ignoreBots: boolean;
+    /** A set of requirements to check for all commands. */
+    globalCommandRequirements: CommandRequirements;
     /**
-     * If true, requirements set via setGlobalRequirements will be ignored. Used
+     * If true, requirements set via `setGlobalRequirements` will be ignored. Used
      * for debugging, probably shouldn't be used in production.
+     * @deprecated Pass no `globalCommandRequirements` client option instead.
      */
     ignoreGlobalRequirements: boolean;
     /**
@@ -92,8 +98,6 @@ export declare class Client extends Eris.Client implements ClientOptions {
     app: ClientOAuthApplication | null;
     /** An object of stuff to add to the context object for command functions */
     contextAdditions: object;
-    /** A requirements object that is applied to all commands */
-    globalCommandRequirements: CommandRequirements;
     /** @hidden Whether or not the ready event has been emitted at least once */
     private _gotReady;
     constructor(options: ClientOptions);
@@ -114,7 +118,10 @@ export declare class Client extends Eris.Client implements ClientOptions {
     processCommand(msg: any): Promise<boolean>;
     /** Adds things to the context objects the client sends. */
     extendContext(options: object): this;
-    /** Set requirements for all commands at once */
+    /**
+     * Set requirements for all commands at once
+     * @deprecated Use the `globalCommandRequirements` client option instead.
+     */
     setGlobalRequirements(requirements: CommandRequirements): this;
     /** Register a command to the client. */
     addCommand(command: Command): this;
