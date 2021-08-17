@@ -26,12 +26,14 @@ export interface ClientOptions extends Eris.ClientOptions {
 	allowMention?: boolean;
 	/** If true, messages from other bot accounts will not trigger commands. */
 	ignoreBots?: boolean;
+	/** A set of requirements to check for all commands. */
+	globalCommandRequirements?: CommandRequirements;
 	/**
-	 * If true, requirements set via setGlobalRequirements will be ignored. Used
-	 * for debugging, probably shouldn't be used in production.
+	 * If true, requirements set via the globalCommandRequirements option will
+	 * be ignored.
+	 * @deprecated Pass no `globalCommandRequirements` client option instead.
 	*/
 	ignoreGlobalRequirements?: boolean;
-
 	/**
 	 * If true, the client does not respond to commands by default, and the user
 	 * must register their own `messageCreate` listener, which can call
@@ -39,7 +41,6 @@ export interface ClientOptions extends Eris.ClientOptions {
 	 * the handler's execution
 	 */
 	disableDefaultMessageListener?: boolean;
-
 }
 
 /**
@@ -78,9 +79,13 @@ export class Client extends Eris.Client implements ClientOptions {
 	/** If true, messages from other bot accounts will not trigger commands. */
 	ignoreBots: boolean = true;
 
+	/** A set of requirements to check for all commands. */
+	globalCommandRequirements: CommandRequirements = {};
+
 	/**
-	 * If true, requirements set via setGlobalRequirements will be ignored. Used
+	 * If true, requirements set via `setGlobalRequirements` will be ignored. Used
 	 * for debugging, probably shouldn't be used in production.
+	 * @deprecated Pass no `globalCommandRequirements` client option instead.
 	 */
 	ignoreGlobalRequirements: boolean = false;
 
@@ -119,9 +124,6 @@ export class Client extends Eris.Client implements ClientOptions {
 	/** An object of stuff to add to the context object for command functions */
 	contextAdditions: object = {};
 
-	/** A requirements object that is applied to all commands */
-	globalCommandRequirements: CommandRequirements = {};
-
 	/** @hidden Whether or not the ready event has been emitted at least once */
 	private _gotReady: boolean = false;
 
@@ -138,6 +140,7 @@ export class Client extends Eris.Client implements ClientOptions {
 		if (options.caseSensitiveCommands !== undefined) this.caseSensitiveCommands = options.caseSensitiveCommands;
 		if (options.allowMention !== undefined) this.allowMention = options.allowMention;
 		if (options.ignoreBots !== undefined) this.ignoreBots = options.ignoreBots;
+		if (options.globalCommandRequirements !== undefined) this.globalCommandRequirements = options.globalCommandRequirements;
 		if (options.ignoreGlobalRequirements !== undefined) this.ignoreGlobalRequirements = options.ignoreGlobalRequirements;
 		if (options.disableDefaultMessageListener !== undefined) this.disableDefaultMessageListener = options.disableDefaultMessageListener;
 
@@ -236,7 +239,10 @@ export class Client extends Eris.Client implements ClientOptions {
 		return this;
 	}
 
-	/** Set requirements for all commands at once */
+	/**
+	 * Set requirements for all commands at once
+	 * @deprecated Use the `globalCommandRequirements` client option instead.
+	 */
 	setGlobalRequirements (requirements: CommandRequirements) {
 		Object.assign(this.globalCommandRequirements, requirements);
 		return this;
