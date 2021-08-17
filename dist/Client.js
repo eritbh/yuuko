@@ -56,9 +56,12 @@ class Client extends Eris.Client {
         this.allowMention = true;
         /** If true, messages from other bot accounts will not trigger commands. */
         this.ignoreBots = true;
+        /** A set of requirements to check for all commands. */
+        this.globalCommandRequirements = {};
         /**
-         * If true, requirements set via setGlobalRequirements will be ignored. Used
+         * If true, requirements set via `setGlobalRequirements` will be ignored. Used
          * for debugging, probably shouldn't be used in production.
+         * @deprecated Pass no `globalCommandRequirements` client option instead.
          */
         this.ignoreGlobalRequirements = false;
         /**
@@ -86,8 +89,6 @@ class Client extends Eris.Client {
         this.app = null;
         /** An object of stuff to add to the context object for command functions */
         this.contextAdditions = {};
-        /** A requirements object that is applied to all commands */
-        this.globalCommandRequirements = {};
         /** @hidden Whether or not the ready event has been emitted at least once */
         this._gotReady = false;
         // HACK: Technically this is already set by the super constructor, but
@@ -104,6 +105,8 @@ class Client extends Eris.Client {
             this.allowMention = options.allowMention;
         if (options.ignoreBots !== undefined)
             this.ignoreBots = options.ignoreBots;
+        if (options.globalCommandRequirements !== undefined)
+            this.globalCommandRequirements = options.globalCommandRequirements;
         if (options.ignoreGlobalRequirements !== undefined)
             this.ignoreGlobalRequirements = options.ignoreGlobalRequirements;
         if (options.disableDefaultMessageListener !== undefined)
@@ -203,7 +206,10 @@ class Client extends Eris.Client {
         Object.assign(this.contextAdditions, options);
         return this;
     }
-    /** Set requirements for all commands at once */
+    /**
+     * Set requirements for all commands at once
+     * @deprecated Use the `globalCommandRequirements` client option instead.
+     */
     setGlobalRequirements(requirements) {
         Object.assign(this.globalCommandRequirements, requirements);
         return this;
