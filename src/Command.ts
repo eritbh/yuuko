@@ -103,10 +103,8 @@ export interface CommandProcess<T extends Eris.Textable = Eris.TextableChannel> 
 	): void;
 }
 
-// These are slightly silly but they work. Not exposed because there's probably
-// a cleaner way to do this, so hopefully they won't be around for long.
-type GuildCommandProcess = CommandProcess<Eris.GuildTextableChannel>;
-type PrivateCommandProcess = CommandProcess<Eris.PrivateChannel>;
+export type GuildCommandProcess = CommandProcess<Eris.GuildTextableChannel>;
+export type PrivateCommandProcess = CommandProcess<Eris.PrivateChannel>;
 
 /** Class representing a command. */
 export class Command {
