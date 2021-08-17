@@ -1,0 +1,1998 @@
+<!doctype html>
+<html class="default no-js">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>ShardEvents | yuuko</title>
+	<meta name="description" content="Documentation for yuuko">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="../assets/css/main.css">
+	<script async src="../assets/js/search.js" id="search-script"></script>
+</head>
+<body>
+<header>
+	<div class="tsd-page-toolbar">
+		<div class="container">
+			<div class="table-wrap">
+				<div class="table-cell" id="tsd-search" data-index="../assets/js/search.json" data-base="..">
+					<div class="field">
+						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
+						<input id="tsd-search-field" type="text" />
+					</div>
+					<ul class="results">
+						<li class="state loading">Preparing search index...</li>
+						<li class="state failure">The search index is not available</li>
+					</ul>
+					<a href="../index.html" class="title">yuuko</a>
+				</div>
+				<div class="table-cell" id="tsd-widgets">
+					<div id="tsd-filter">
+						<a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a>
+						<div class="tsd-filter-group">
+							<div class="tsd-select" id="tsd-filter-visibility">
+								<span class="tsd-select-label">All</span>
+								<ul class="tsd-select-list">
+									<li data-value="public">Public</li>
+									<li data-value="protected">Public/Protected</li>
+									<li data-value="private" class="selected">All</li>
+								</ul>
+							</div>
+							<input type="checkbox" id="tsd-filter-inherited" checked />
+							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
+							<input type="checkbox" id="tsd-filter-externals" checked />
+							<label class="tsd-widget" for="tsd-filter-externals">Externals</label>
+						</div>
+					</div>
+					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="tsd-page-title">
+		<div class="container">
+			<ul class="tsd-breadcrumb">
+				<li>
+					<a href="../index.html">yuuko</a>
+				</li>
+				<li>
+					<a href="../modules/eris.html">Eris</a>
+				</li>
+				<li>
+					<a href="eris.shardevents.html">ShardEvents</a>
+				</li>
+			</ul>
+			<h1>Interface ShardEvents&lt;T&gt;</h1>
+		</div>
+	</div>
+</header>
+<div class="container container-main">
+	<div class="row">
+		<div class="col-8 col-content">
+			<section class="tsd-panel tsd-type-parameters">
+				<h3>Type parameters</h3>
+				<ul class="tsd-type-parameters">
+					<li>
+						<h4>T</h4>
+					</li>
+				</ul>
+			</section>
+			<section class="tsd-panel tsd-hierarchy">
+				<h3>Hierarchy</h3>
+				<ul class="tsd-hierarchy">
+					<li>
+						<a href="eris.eventlisteners.html" class="tsd-signature-type" data-tsd-kind="Interface">EventListeners</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span>
+						<ul class="tsd-hierarchy">
+							<li>
+								<span class="target">ShardEvents</span>
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</section>
+			<section class="tsd-panel">
+				<h3 class="tsd-before-signature">Callable</h3>
+				<ul class="tsd-signatures tsd-kind-interface tsd-parent-kind-namespace tsd-has-type-parameter tsd-is-external">
+					<li class="tsd-signature tsd-kind-icon">Shard<wbr>Events<span class="tsd-signature-symbol">(</span>event<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">&quot;resume&quot;</span>, listener<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T</span></li>
+					<li class="tsd-signature tsd-kind-icon">Shard<wbr>Events<span class="tsd-signature-symbol">(</span>event<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">&quot;ready&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;disconnect&quot;</span>, listener<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T</span></li>
+					<li class="tsd-signature tsd-kind-icon">Shard<wbr>Events<span class="tsd-signature-symbol">(</span>event<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">&quot;callCreate&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;callRing&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;callDelete&quot;</span>, listener<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>call<span class="tsd-signature-symbol">: </span><a href="../classes/eris.call.html" class="tsd-signature-type" data-tsd-kind="Class">Call</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T</span></li>
+					<li class="tsd-signature tsd-kind-icon">Shard<wbr>Events<span class="tsd-signature-symbol">(</span>event<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">&quot;callUpdate&quot;</span>, listener<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>call<span class="tsd-signature-symbol">: </span><a href="../classes/eris.call.html" class="tsd-signature-type" data-tsd-kind="Class">Call</a>, oldCall<span class="tsd-signature-symbol">: </span><a href="eris.oldcall.html" class="tsd-signature-type" data-tsd-kind="Interface">OldCall</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T</span></li>
+					<li class="tsd-signature tsd-kind-icon">Shard<wbr>Events<span class="tsd-signature-symbol">(</span>event<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">&quot;channelCreate&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;channelDelete&quot;</span>, listener<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>channel<span class="tsd-signature-symbol">: </span><a href="../modules/eris.html#anychannel" class="tsd-signature-type" data-tsd-kind="Type alias">AnyChannel</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T</span></li>
+					<li class="tsd-signature tsd-kind-icon">Shard<wbr>Events<span class="tsd-signature-symbol">(</span>event<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">&quot;channelPinUpdate&quot;</span>, listener<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>channel<span class="tsd-signature-symbol">: </span><a href="../modules/eris.html#textablechannel" class="tsd-signature-type" data-tsd-kind="Type alias">TextableChannel</a>, timestamp<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, oldTimestamp<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T</span></li>
+					<li class="tsd-signature tsd-kind-icon">Shard<wbr>Events<span class="tsd-signature-symbol">(</span>event<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">&quot;channelRecipientAdd&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;channelRecipientRemove&quot;</span>, listener<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>channel<span class="tsd-signature-symbol">: </span><a href="../classes/eris.groupchannel.html" class="tsd-signature-type" data-tsd-kind="Class">GroupChannel</a>, user<span class="tsd-signature-symbol">: </span><a href="../classes/eris.user.html" class="tsd-signature-type" data-tsd-kind="Class">User</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T</span></li>
+					<li class="tsd-signature tsd-kind-icon">Shard<wbr>Events<span class="tsd-signature-symbol">(</span>event<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">&quot;channelUpdate&quot;</span>, listener<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>channel<span class="tsd-signature-symbol">: </span><a href="../modules/eris.html#anyguildchannel" class="tsd-signature-type" data-tsd-kind="Type alias">AnyGuildChannel</a>, oldChannel<span class="tsd-signature-symbol">: </span><a href="eris.oldguildchannel.html" class="tsd-signature-type" data-tsd-kind="Interface">OldGuildChannel</a><span class="tsd-signature-symbol"> | </span><a href="eris.oldguildtextchannel.html" class="tsd-signature-type" data-tsd-kind="Interface">OldGuildTextChannel</a><span class="tsd-signature-symbol"> | </span><a href="eris.oldguildvoicechannel.html" class="tsd-signature-type" data-tsd-kind="Interface">OldGuildVoiceChannel</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T</span></li>
+					<li class="tsd-signature tsd-kind-icon">Shard<wbr>Events<span class="tsd-signature-symbol">(</span>event<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">&quot;channelUpdate&quot;</span>, listener<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>channel<span class="tsd-signature-symbol">: </span><a href="../classes/eris.groupchannel.html" class="tsd-signature-type" data-tsd-kind="Class">GroupChannel</a>, oldChannel<span class="tsd-signature-symbol">: </span><a href="eris.oldgroupchannel.html" class="tsd-signature-type" data-tsd-kind="Interface">OldGroupChannel</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T</span></li>
+					<li class="tsd-signature tsd-kind-icon">Shard<wbr>Events<span class="tsd-signature-symbol">(</span>event<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">&quot;connect&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;shardPreReady&quot;</span>, listener<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>id<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T</span></li>
+					<li class="tsd-signature tsd-kind-icon">Shard<wbr>Events<span class="tsd-signature-symbol">(</span>event<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">&quot;error&quot;</span>, listener<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>err<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Error</span>, id<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T</span></li>
+					<li class="tsd-signature tsd-kind-icon">Shard<wbr>Events<span class="tsd-signature-symbol">(</span>event<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">&quot;friendSuggestionCreate&quot;</span>, listener<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>user<span class="tsd-signature-symbol">: </span><a href="../classes/eris.user.html" class="tsd-signature-type" data-tsd-kind="Class">User</a>, reasons<span class="tsd-signature-symbol">: </span><a href="../modules/eris.html#friendsuggestionreasons" class="tsd-signature-type" data-tsd-kind="Type alias">FriendSuggestionReasons</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T</span></li>
+					<li class="tsd-signature tsd-kind-icon">Shard<wbr>Events<span class="tsd-signature-symbol">(</span>event<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">&quot;friendSuggestionDelete&quot;</span>, listener<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>user<span class="tsd-signature-symbol">: </span><a href="../classes/eris.user.html" class="tsd-signature-type" data-tsd-kind="Class">User</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T</span></li>
+					<li class="tsd-signature tsd-kind-icon">Shard<wbr>Events<span class="tsd-signature-symbol">(</span>event<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">&quot;guildBanAdd&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;guildBanRemove&quot;</span>, listener<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>guild<span class="tsd-signature-symbol">: </span><a href="../classes/eris.guild.html" class="tsd-signature-type" data-tsd-kind="Class">Guild</a>, user<span class="tsd-signature-symbol">: </span><a href="../classes/eris.user.html" class="tsd-signature-type" data-tsd-kind="Class">User</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T</span></li>
+					<li class="tsd-signature tsd-kind-icon">Shard<wbr>Events<span class="tsd-signature-symbol">(</span>event<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">&quot;guildAvailable&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;guildCreate&quot;</span>, listener<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>guild<span class="tsd-signature-symbol">: </span><a href="../classes/eris.guild.html" class="tsd-signature-type" data-tsd-kind="Class">Guild</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T</span></li>
+					<li class="tsd-signature tsd-kind-icon">Shard<wbr>Events<span class="tsd-signature-symbol">(</span>event<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">&quot;guildDelete&quot;</span>, listener<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>guild<span class="tsd-signature-symbol">: </span><a href="../modules/eris.html#possiblyuncachedguild" class="tsd-signature-type" data-tsd-kind="Type alias">PossiblyUncachedGuild</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T</span></li>
+					<li class="tsd-signature tsd-kind-icon">Shard<wbr>Events<span class="tsd-signature-symbol">(</span>event<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">&quot;guildEmojisUpdate&quot;</span>, listener<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>guild<span class="tsd-signature-symbol">: </span><a href="../modules/eris.html#possiblyuncachedguild" class="tsd-signature-type" data-tsd-kind="Type alias">PossiblyUncachedGuild</a>, emojis<span class="tsd-signature-symbol">: </span><a href="eris.emoji.html" class="tsd-signature-type" data-tsd-kind="Interface">Emoji</a><span class="tsd-signature-symbol">[]</span>, oldEmojis<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><a href="eris.emoji.html" class="tsd-signature-type" data-tsd-kind="Interface">Emoji</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T</span></li>
+					<li class="tsd-signature tsd-kind-icon">Shard<wbr>Events<span class="tsd-signature-symbol">(</span>event<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">&quot;guildMemberAdd&quot;</span>, listener<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>guild<span class="tsd-signature-symbol">: </span><a href="../classes/eris.guild.html" class="tsd-signature-type" data-tsd-kind="Class">Guild</a>, member<span class="tsd-signature-symbol">: </span><a href="../classes/eris.member.html" class="tsd-signature-type" data-tsd-kind="Class">Member</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T</span></li>
+					<li class="tsd-signature tsd-kind-icon">Shard<wbr>Events<span class="tsd-signature-symbol">(</span>event<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">&quot;guildMemberChunk&quot;</span>, listener<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>guild<span class="tsd-signature-symbol">: </span><a href="../classes/eris.guild.html" class="tsd-signature-type" data-tsd-kind="Class">Guild</a>, members<span class="tsd-signature-symbol">: </span><a href="../classes/eris.member.html" class="tsd-signature-type" data-tsd-kind="Class">Member</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T</span></li>
+					<li class="tsd-signature tsd-kind-icon">Shard<wbr>Events<span class="tsd-signature-symbol">(</span>event<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">&quot;guildMemberRemove&quot;</span>, listener<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>guild<span class="tsd-signature-symbol">: </span><a href="../classes/eris.guild.html" class="tsd-signature-type" data-tsd-kind="Class">Guild</a>, member<span class="tsd-signature-symbol">: </span><a href="../classes/eris.member.html" class="tsd-signature-type" data-tsd-kind="Class">Member</a><span class="tsd-signature-symbol"> | </span><a href="eris.memberpartial.html" class="tsd-signature-type" data-tsd-kind="Interface">MemberPartial</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T</span></li>
+					<li class="tsd-signature tsd-kind-icon">Shard<wbr>Events<span class="tsd-signature-symbol">(</span>event<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">&quot;guildMemberUpdate&quot;</span>, listener<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>guild<span class="tsd-signature-symbol">: </span><a href="../classes/eris.guild.html" class="tsd-signature-type" data-tsd-kind="Class">Guild</a>, member<span class="tsd-signature-symbol">: </span><a href="../classes/eris.member.html" class="tsd-signature-type" data-tsd-kind="Class">Member</a>, oldMember<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><a href="eris.oldmember.html" class="tsd-signature-type" data-tsd-kind="Interface">OldMember</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T</span></li>
+					<li class="tsd-signature tsd-kind-icon">Shard<wbr>Events<span class="tsd-signature-symbol">(</span>event<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">&quot;guildRoleCreate&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;guildRoleDelete&quot;</span>, listener<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>guild<span class="tsd-signature-symbol">: </span><a href="../classes/eris.guild.html" class="tsd-signature-type" data-tsd-kind="Class">Guild</a>, role<span class="tsd-signature-symbol">: </span><a href="../classes/eris.role.html" class="tsd-signature-type" data-tsd-kind="Class">Role</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T</span></li>
+					<li class="tsd-signature tsd-kind-icon">Shard<wbr>Events<span class="tsd-signature-symbol">(</span>event<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">&quot;guildRoleUpdate&quot;</span>, listener<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>guild<span class="tsd-signature-symbol">: </span><a href="../classes/eris.guild.html" class="tsd-signature-type" data-tsd-kind="Class">Guild</a>, role<span class="tsd-signature-symbol">: </span><a href="../classes/eris.role.html" class="tsd-signature-type" data-tsd-kind="Class">Role</a>, oldRole<span class="tsd-signature-symbol">: </span><a href="eris.oldrole.html" class="tsd-signature-type" data-tsd-kind="Interface">OldRole</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T</span></li>
+					<li class="tsd-signature tsd-kind-icon">Shard<wbr>Events<span class="tsd-signature-symbol">(</span>event<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">&quot;guildUnavailable&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;unavailableGuildCreate&quot;</span>, listener<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>guild<span class="tsd-signature-symbol">: </span><a href="../classes/eris.unavailableguild.html" class="tsd-signature-type" data-tsd-kind="Class">UnavailableGuild</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T</span></li>
+					<li class="tsd-signature tsd-kind-icon">Shard<wbr>Events<span class="tsd-signature-symbol">(</span>event<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">&quot;guildUpdate&quot;</span>, listener<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>guild<span class="tsd-signature-symbol">: </span><a href="../classes/eris.guild.html" class="tsd-signature-type" data-tsd-kind="Class">Guild</a>, oldGuild<span class="tsd-signature-symbol">: </span><a href="eris.oldguild.html" class="tsd-signature-type" data-tsd-kind="Interface">OldGuild</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T</span></li>
+					<li class="tsd-signature tsd-kind-icon">Shard<wbr>Events<span class="tsd-signature-symbol">(</span>event<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">&quot;hello&quot;</span>, listener<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>trace<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span>, id<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T</span></li>
+					<li class="tsd-signature tsd-kind-icon">Shard<wbr>Events<span class="tsd-signature-symbol">(</span>event<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">&quot;inviteCreate&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;inviteDelete&quot;</span>, listener<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>guild<span class="tsd-signature-symbol">: </span><a href="../classes/eris.guild.html" class="tsd-signature-type" data-tsd-kind="Class">Guild</a>, invite<span class="tsd-signature-symbol">: </span><a href="../classes/eris.invite.html" class="tsd-signature-type" data-tsd-kind="Class">Invite</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">&quot;withMetadata&quot;</span><span class="tsd-signature-symbol">, </span><a href="../modules/eris.html#invitechannel" class="tsd-signature-type" data-tsd-kind="Type alias">InviteChannel</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T</span></li>
+					<li class="tsd-signature tsd-kind-icon">Shard<wbr>Events<span class="tsd-signature-symbol">(</span>event<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">&quot;messageCreate&quot;</span>, listener<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>message<span class="tsd-signature-symbol">: </span><a href="../classes/eris.message.html" class="tsd-signature-type" data-tsd-kind="Class">Message</a><span class="tsd-signature-symbol">&lt;</span><a href="../modules/eris.html#possiblyuncachedtextablechannel" class="tsd-signature-type" data-tsd-kind="Type alias">PossiblyUncachedTextableChannel</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T</span></li>
+					<li class="tsd-signature tsd-kind-icon">Shard<wbr>Events<span class="tsd-signature-symbol">(</span>event<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">&quot;messageDelete&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;messageReactionRemoveAll&quot;</span>, listener<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>message<span class="tsd-signature-symbol">: </span><a href="../modules/eris.html#possiblyuncachedmessage" class="tsd-signature-type" data-tsd-kind="Type alias">PossiblyUncachedMessage</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T</span></li>
+					<li class="tsd-signature tsd-kind-icon">Shard<wbr>Events<span class="tsd-signature-symbol">(</span>event<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">&quot;messageReactionRemoveEmoji&quot;</span>, listener<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>message<span class="tsd-signature-symbol">: </span><a href="../modules/eris.html#possiblyuncachedmessage" class="tsd-signature-type" data-tsd-kind="Type alias">PossiblyUncachedMessage</a>, emoji<span class="tsd-signature-symbol">: </span><a href="eris.partialemoji.html" class="tsd-signature-type" data-tsd-kind="Interface">PartialEmoji</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T</span></li>
+					<li class="tsd-signature tsd-kind-icon">Shard<wbr>Events<span class="tsd-signature-symbol">(</span>event<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">&quot;messageDeleteBulk&quot;</span>, listener<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>messages<span class="tsd-signature-symbol">: </span><a href="../modules/eris.html#possiblyuncachedmessage" class="tsd-signature-type" data-tsd-kind="Type alias">PossiblyUncachedMessage</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T</span></li>
+					<li class="tsd-signature tsd-kind-icon">Shard<wbr>Events<span class="tsd-signature-symbol">(</span>event<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">&quot;messageReactionAdd&quot;</span>, listener<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>message<span class="tsd-signature-symbol">: </span><a href="../modules/eris.html#possiblyuncachedmessage" class="tsd-signature-type" data-tsd-kind="Type alias">PossiblyUncachedMessage</a>, emoji<span class="tsd-signature-symbol">: </span><a href="eris.partialemoji.html" class="tsd-signature-type" data-tsd-kind="Interface">PartialEmoji</a>, reactor<span class="tsd-signature-symbol">: </span><a href="../modules/eris.html#uncached" class="tsd-signature-type" data-tsd-kind="Type alias">Uncached</a><span class="tsd-signature-symbol"> | </span><a href="../classes/eris.member.html" class="tsd-signature-type" data-tsd-kind="Class">Member</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T</span></li>
+					<li class="tsd-signature tsd-kind-icon">Shard<wbr>Events<span class="tsd-signature-symbol">(</span>event<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">&quot;messageReactionRemove&quot;</span>, listener<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>message<span class="tsd-signature-symbol">: </span><a href="../modules/eris.html#possiblyuncachedmessage" class="tsd-signature-type" data-tsd-kind="Type alias">PossiblyUncachedMessage</a>, emoji<span class="tsd-signature-symbol">: </span><a href="eris.partialemoji.html" class="tsd-signature-type" data-tsd-kind="Interface">PartialEmoji</a>, userID<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T</span></li>
+					<li class="tsd-signature tsd-kind-icon">Shard<wbr>Events<span class="tsd-signature-symbol">(</span>event<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">&quot;messageUpdate&quot;</span>, listener<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>message<span class="tsd-signature-symbol">: </span><a href="../classes/eris.message.html" class="tsd-signature-type" data-tsd-kind="Class">Message</a><span class="tsd-signature-symbol">&lt;</span><a href="../modules/eris.html#possiblyuncachedtextablechannel" class="tsd-signature-type" data-tsd-kind="Type alias">PossiblyUncachedTextableChannel</a><span class="tsd-signature-symbol">&gt;</span>, oldMessage<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><a href="eris.oldmessage.html" class="tsd-signature-type" data-tsd-kind="Interface">OldMessage</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T</span></li>
+					<li class="tsd-signature tsd-kind-icon">Shard<wbr>Events<span class="tsd-signature-symbol">(</span>event<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">&quot;presenceUpdate&quot;</span>, listener<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>other<span class="tsd-signature-symbol">: </span><a href="../classes/eris.member.html" class="tsd-signature-type" data-tsd-kind="Class">Member</a><span class="tsd-signature-symbol"> | </span><a href="../classes/eris.relationship.html" class="tsd-signature-type" data-tsd-kind="Class">Relationship</a>, oldPresence<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><a href="eris.presence.html" class="tsd-signature-type" data-tsd-kind="Interface">Presence</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T</span></li>
+					<li class="tsd-signature tsd-kind-icon">Shard<wbr>Events<span class="tsd-signature-symbol">(</span>event<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">&quot;rawREST&quot;</span>, listener<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>request<span class="tsd-signature-symbol">: </span><a href="eris.rawrestrequest.html" class="tsd-signature-type" data-tsd-kind="Interface">RawRESTRequest</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T</span></li>
+					<li class="tsd-signature tsd-kind-icon">Shard<wbr>Events<span class="tsd-signature-symbol">(</span>event<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">&quot;rawWS&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;unknown&quot;</span>, listener<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>packet<span class="tsd-signature-symbol">: </span><a href="eris.rawpacket.html" class="tsd-signature-type" data-tsd-kind="Interface">RawPacket</a>, id<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T</span></li>
+					<li class="tsd-signature tsd-kind-icon">Shard<wbr>Events<span class="tsd-signature-symbol">(</span>event<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">&quot;relationshipAdd&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;relationshipRemove&quot;</span>, listener<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>relationship<span class="tsd-signature-symbol">: </span><a href="../classes/eris.relationship.html" class="tsd-signature-type" data-tsd-kind="Class">Relationship</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T</span></li>
+					<li class="tsd-signature tsd-kind-icon">Shard<wbr>Events<span class="tsd-signature-symbol">(</span>event<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">&quot;relationshipUpdate&quot;</span>, listener<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>relationship<span class="tsd-signature-symbol">: </span><a href="../classes/eris.relationship.html" class="tsd-signature-type" data-tsd-kind="Class">Relationship</a>, oldRelationship<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">{ </span>type<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T</span></li>
+					<li class="tsd-signature tsd-kind-icon">Shard<wbr>Events<span class="tsd-signature-symbol">(</span>event<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">&quot;typingStart&quot;</span>, listener<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>channel<span class="tsd-signature-symbol">: </span><a href="../modules/eris.html#uncached" class="tsd-signature-type" data-tsd-kind="Type alias">Uncached</a><span class="tsd-signature-symbol"> | </span><a href="../classes/eris.textchannel.html" class="tsd-signature-type" data-tsd-kind="Class">TextChannel</a><span class="tsd-signature-symbol"> | </span><a href="../classes/eris.newschannel.html" class="tsd-signature-type" data-tsd-kind="Class">NewsChannel</a>, user<span class="tsd-signature-symbol">: </span><a href="../modules/eris.html#uncached" class="tsd-signature-type" data-tsd-kind="Type alias">Uncached</a><span class="tsd-signature-symbol"> | </span><a href="../classes/eris.user.html" class="tsd-signature-type" data-tsd-kind="Class">User</a>, member<span class="tsd-signature-symbol">: </span><a href="../classes/eris.member.html" class="tsd-signature-type" data-tsd-kind="Class">Member</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T</span></li>
+					<li class="tsd-signature tsd-kind-icon">Shard<wbr>Events<span class="tsd-signature-symbol">(</span>event<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">&quot;typingStart&quot;</span>, listener<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>channel<span class="tsd-signature-symbol">: </span><a href="../modules/eris.html#uncached" class="tsd-signature-type" data-tsd-kind="Type alias">Uncached</a><span class="tsd-signature-symbol"> | </span><a href="../classes/eris.privatechannel.html" class="tsd-signature-type" data-tsd-kind="Class">PrivateChannel</a>, user<span class="tsd-signature-symbol">: </span><a href="../modules/eris.html#uncached" class="tsd-signature-type" data-tsd-kind="Type alias">Uncached</a><span class="tsd-signature-symbol"> | </span><a href="../classes/eris.user.html" class="tsd-signature-type" data-tsd-kind="Class">User</a>, member<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T</span></li>
+					<li class="tsd-signature tsd-kind-icon">Shard<wbr>Events<span class="tsd-signature-symbol">(</span>event<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">&quot;userUpdate&quot;</span>, listener<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>user<span class="tsd-signature-symbol">: </span><a href="../classes/eris.user.html" class="tsd-signature-type" data-tsd-kind="Class">User</a>, oldUser<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><a href="eris.partialuser.html" class="tsd-signature-type" data-tsd-kind="Interface">PartialUser</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T</span></li>
+					<li class="tsd-signature tsd-kind-icon">Shard<wbr>Events<span class="tsd-signature-symbol">(</span>event<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">&quot;voiceChannelJoin&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;voiceChannelLeave&quot;</span>, listener<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>member<span class="tsd-signature-symbol">: </span><a href="../classes/eris.member.html" class="tsd-signature-type" data-tsd-kind="Class">Member</a>, channel<span class="tsd-signature-symbol">: </span><a href="../modules/eris.html#anyvoicechannel" class="tsd-signature-type" data-tsd-kind="Type alias">AnyVoiceChannel</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T</span></li>
+					<li class="tsd-signature tsd-kind-icon">Shard<wbr>Events<span class="tsd-signature-symbol">(</span>event<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">&quot;voiceChannelSwitch&quot;</span>, listener<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>member<span class="tsd-signature-symbol">: </span><a href="../classes/eris.member.html" class="tsd-signature-type" data-tsd-kind="Class">Member</a>, newChannel<span class="tsd-signature-symbol">: </span><a href="../modules/eris.html#anyvoicechannel" class="tsd-signature-type" data-tsd-kind="Type alias">AnyVoiceChannel</a>, oldChannel<span class="tsd-signature-symbol">: </span><a href="../modules/eris.html#anyvoicechannel" class="tsd-signature-type" data-tsd-kind="Type alias">AnyVoiceChannel</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T</span></li>
+					<li class="tsd-signature tsd-kind-icon">Shard<wbr>Events<span class="tsd-signature-symbol">(</span>event<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">&quot;voiceStateUpdate&quot;</span>, listener<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>member<span class="tsd-signature-symbol">: </span><a href="../classes/eris.member.html" class="tsd-signature-type" data-tsd-kind="Class">Member</a>, oldState<span class="tsd-signature-symbol">: </span><a href="eris.oldvoicestate.html" class="tsd-signature-type" data-tsd-kind="Interface">OldVoiceState</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T</span></li>
+					<li class="tsd-signature tsd-kind-icon">Shard<wbr>Events<span class="tsd-signature-symbol">(</span>event<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">&quot;warn&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;debug&quot;</span>, listener<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>message<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, id<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T</span></li>
+					<li class="tsd-signature tsd-kind-icon">Shard<wbr>Events<span class="tsd-signature-symbol">(</span>event<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">&quot;webhooksUpdate&quot;</span>, listener<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>data<span class="tsd-signature-symbol">: </span><a href="eris.webhookdata.html" class="tsd-signature-type" data-tsd-kind="Interface">WebhookData</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T</span></li>
+					<li class="tsd-signature tsd-kind-icon">Shard<wbr>Events<span class="tsd-signature-symbol">(</span>event<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, listener<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">...</span>args<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T</span></li>
+				</ul>
+				<ul class="tsd-descriptions">
+					<li class="tsd-description">
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in node_modules/eris/index.d.ts:571</li>
+							</ul>
+						</aside>
+						<h4 class="tsd-parameters-title">Parameters</h4>
+						<ul class="tsd-parameters">
+							<li>
+								<h5>event: <span class="tsd-signature-type">&quot;resume&quot;</span></h5>
+							</li>
+							<li>
+								<h5>listener: <span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></h5>
+								<ul class="tsd-parameters">
+									<li class="tsd-parameter-signature">
+										<ul class="tsd-signatures tsd-kind-type-literal tsd-is-external">
+											<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+										</ul>
+										<ul class="tsd-descriptions">
+											<li class="tsd-description">
+												<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+											</li>
+										</ul>
+									</li>
+								</ul>
+							</li>
+						</ul>
+						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">T</span></h4>
+					</li>
+					<li class="tsd-description">
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in node_modules/eris/index.d.ts:493</li>
+							</ul>
+						</aside>
+						<h4 class="tsd-parameters-title">Parameters</h4>
+						<ul class="tsd-parameters">
+							<li>
+								<h5>event: <span class="tsd-signature-type">&quot;ready&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;disconnect&quot;</span></h5>
+							</li>
+							<li>
+								<h5>listener: <span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></h5>
+								<ul class="tsd-parameters">
+									<li class="tsd-parameter-signature">
+										<ul class="tsd-signatures tsd-kind-type-literal tsd-is-external">
+											<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+										</ul>
+										<ul class="tsd-descriptions">
+											<li class="tsd-description">
+												<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+											</li>
+										</ul>
+									</li>
+								</ul>
+							</li>
+						</ul>
+						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">T</span></h4>
+					</li>
+					<li class="tsd-description">
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in node_modules/eris/index.d.ts:494</li>
+							</ul>
+						</aside>
+						<h4 class="tsd-parameters-title">Parameters</h4>
+						<ul class="tsd-parameters">
+							<li>
+								<h5>event: <span class="tsd-signature-type">&quot;callCreate&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;callRing&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;callDelete&quot;</span></h5>
+							</li>
+							<li>
+								<h5>listener: <span class="tsd-signature-symbol">(</span>call<span class="tsd-signature-symbol">: </span><a href="../classes/eris.call.html" class="tsd-signature-type" data-tsd-kind="Class">Call</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></h5>
+								<ul class="tsd-parameters">
+									<li class="tsd-parameter-signature">
+										<ul class="tsd-signatures tsd-kind-type-literal tsd-is-external">
+											<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>call<span class="tsd-signature-symbol">: </span><a href="../classes/eris.call.html" class="tsd-signature-type" data-tsd-kind="Class">Call</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+										</ul>
+										<ul class="tsd-descriptions">
+											<li class="tsd-description">
+												<h4 class="tsd-parameters-title">Parameters</h4>
+												<ul class="tsd-parameters">
+													<li>
+														<h5>call: <a href="../classes/eris.call.html" class="tsd-signature-type" data-tsd-kind="Class">Call</a></h5>
+													</li>
+												</ul>
+												<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+											</li>
+										</ul>
+									</li>
+								</ul>
+							</li>
+						</ul>
+						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">T</span></h4>
+					</li>
+					<li class="tsd-description">
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in node_modules/eris/index.d.ts:495</li>
+							</ul>
+						</aside>
+						<h4 class="tsd-parameters-title">Parameters</h4>
+						<ul class="tsd-parameters">
+							<li>
+								<h5>event: <span class="tsd-signature-type">&quot;callUpdate&quot;</span></h5>
+							</li>
+							<li>
+								<h5>listener: <span class="tsd-signature-symbol">(</span>call<span class="tsd-signature-symbol">: </span><a href="../classes/eris.call.html" class="tsd-signature-type" data-tsd-kind="Class">Call</a>, oldCall<span class="tsd-signature-symbol">: </span><a href="eris.oldcall.html" class="tsd-signature-type" data-tsd-kind="Interface">OldCall</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></h5>
+								<ul class="tsd-parameters">
+									<li class="tsd-parameter-signature">
+										<ul class="tsd-signatures tsd-kind-type-literal tsd-is-external">
+											<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>call<span class="tsd-signature-symbol">: </span><a href="../classes/eris.call.html" class="tsd-signature-type" data-tsd-kind="Class">Call</a>, oldCall<span class="tsd-signature-symbol">: </span><a href="eris.oldcall.html" class="tsd-signature-type" data-tsd-kind="Interface">OldCall</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+										</ul>
+										<ul class="tsd-descriptions">
+											<li class="tsd-description">
+												<h4 class="tsd-parameters-title">Parameters</h4>
+												<ul class="tsd-parameters">
+													<li>
+														<h5>call: <a href="../classes/eris.call.html" class="tsd-signature-type" data-tsd-kind="Class">Call</a></h5>
+													</li>
+													<li>
+														<h5>oldCall: <a href="eris.oldcall.html" class="tsd-signature-type" data-tsd-kind="Interface">OldCall</a></h5>
+													</li>
+												</ul>
+												<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+											</li>
+										</ul>
+									</li>
+								</ul>
+							</li>
+						</ul>
+						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">T</span></h4>
+					</li>
+					<li class="tsd-description">
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in node_modules/eris/index.d.ts:496</li>
+							</ul>
+						</aside>
+						<h4 class="tsd-parameters-title">Parameters</h4>
+						<ul class="tsd-parameters">
+							<li>
+								<h5>event: <span class="tsd-signature-type">&quot;channelCreate&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;channelDelete&quot;</span></h5>
+							</li>
+							<li>
+								<h5>listener: <span class="tsd-signature-symbol">(</span>channel<span class="tsd-signature-symbol">: </span><a href="../modules/eris.html#anychannel" class="tsd-signature-type" data-tsd-kind="Type alias">AnyChannel</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></h5>
+								<ul class="tsd-parameters">
+									<li class="tsd-parameter-signature">
+										<ul class="tsd-signatures tsd-kind-type-literal tsd-is-external">
+											<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>channel<span class="tsd-signature-symbol">: </span><a href="../modules/eris.html#anychannel" class="tsd-signature-type" data-tsd-kind="Type alias">AnyChannel</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+										</ul>
+										<ul class="tsd-descriptions">
+											<li class="tsd-description">
+												<h4 class="tsd-parameters-title">Parameters</h4>
+												<ul class="tsd-parameters">
+													<li>
+														<h5>channel: <a href="../modules/eris.html#anychannel" class="tsd-signature-type" data-tsd-kind="Type alias">AnyChannel</a></h5>
+													</li>
+												</ul>
+												<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+											</li>
+										</ul>
+									</li>
+								</ul>
+							</li>
+						</ul>
+						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">T</span></h4>
+					</li>
+					<li class="tsd-description">
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in node_modules/eris/index.d.ts:497</li>
+							</ul>
+						</aside>
+						<h4 class="tsd-parameters-title">Parameters</h4>
+						<ul class="tsd-parameters">
+							<li>
+								<h5>event: <span class="tsd-signature-type">&quot;channelPinUpdate&quot;</span></h5>
+							</li>
+							<li>
+								<h5>listener: <span class="tsd-signature-symbol">(</span>channel<span class="tsd-signature-symbol">: </span><a href="../modules/eris.html#textablechannel" class="tsd-signature-type" data-tsd-kind="Type alias">TextableChannel</a>, timestamp<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, oldTimestamp<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></h5>
+								<ul class="tsd-parameters">
+									<li class="tsd-parameter-signature">
+										<ul class="tsd-signatures tsd-kind-type-literal tsd-is-external">
+											<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>channel<span class="tsd-signature-symbol">: </span><a href="../modules/eris.html#textablechannel" class="tsd-signature-type" data-tsd-kind="Type alias">TextableChannel</a>, timestamp<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, oldTimestamp<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+										</ul>
+										<ul class="tsd-descriptions">
+											<li class="tsd-description">
+												<h4 class="tsd-parameters-title">Parameters</h4>
+												<ul class="tsd-parameters">
+													<li>
+														<h5>channel: <a href="../modules/eris.html#textablechannel" class="tsd-signature-type" data-tsd-kind="Type alias">TextableChannel</a></h5>
+													</li>
+													<li>
+														<h5>timestamp: <span class="tsd-signature-type">number</span></h5>
+													</li>
+													<li>
+														<h5>oldTimestamp: <span class="tsd-signature-type">number</span></h5>
+													</li>
+												</ul>
+												<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+											</li>
+										</ul>
+									</li>
+								</ul>
+							</li>
+						</ul>
+						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">T</span></h4>
+					</li>
+					<li class="tsd-description">
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in node_modules/eris/index.d.ts:501</li>
+							</ul>
+						</aside>
+						<h4 class="tsd-parameters-title">Parameters</h4>
+						<ul class="tsd-parameters">
+							<li>
+								<h5>event: <span class="tsd-signature-type">&quot;channelRecipientAdd&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;channelRecipientRemove&quot;</span></h5>
+							</li>
+							<li>
+								<h5>listener: <span class="tsd-signature-symbol">(</span>channel<span class="tsd-signature-symbol">: </span><a href="../classes/eris.groupchannel.html" class="tsd-signature-type" data-tsd-kind="Class">GroupChannel</a>, user<span class="tsd-signature-symbol">: </span><a href="../classes/eris.user.html" class="tsd-signature-type" data-tsd-kind="Class">User</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></h5>
+								<ul class="tsd-parameters">
+									<li class="tsd-parameter-signature">
+										<ul class="tsd-signatures tsd-kind-type-literal tsd-is-external">
+											<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>channel<span class="tsd-signature-symbol">: </span><a href="../classes/eris.groupchannel.html" class="tsd-signature-type" data-tsd-kind="Class">GroupChannel</a>, user<span class="tsd-signature-symbol">: </span><a href="../classes/eris.user.html" class="tsd-signature-type" data-tsd-kind="Class">User</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+										</ul>
+										<ul class="tsd-descriptions">
+											<li class="tsd-description">
+												<h4 class="tsd-parameters-title">Parameters</h4>
+												<ul class="tsd-parameters">
+													<li>
+														<h5>channel: <a href="../classes/eris.groupchannel.html" class="tsd-signature-type" data-tsd-kind="Class">GroupChannel</a></h5>
+													</li>
+													<li>
+														<h5>user: <a href="../classes/eris.user.html" class="tsd-signature-type" data-tsd-kind="Class">User</a></h5>
+													</li>
+												</ul>
+												<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+											</li>
+										</ul>
+									</li>
+								</ul>
+							</li>
+						</ul>
+						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">T</span></h4>
+					</li>
+					<li class="tsd-description">
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in node_modules/eris/index.d.ts:505</li>
+							</ul>
+						</aside>
+						<h4 class="tsd-parameters-title">Parameters</h4>
+						<ul class="tsd-parameters">
+							<li>
+								<h5>event: <span class="tsd-signature-type">&quot;channelUpdate&quot;</span></h5>
+							</li>
+							<li>
+								<h5>listener: <span class="tsd-signature-symbol">(</span>channel<span class="tsd-signature-symbol">: </span><a href="../modules/eris.html#anyguildchannel" class="tsd-signature-type" data-tsd-kind="Type alias">AnyGuildChannel</a>, oldChannel<span class="tsd-signature-symbol">: </span><a href="eris.oldguildchannel.html" class="tsd-signature-type" data-tsd-kind="Interface">OldGuildChannel</a><span class="tsd-signature-symbol"> | </span><a href="eris.oldguildtextchannel.html" class="tsd-signature-type" data-tsd-kind="Interface">OldGuildTextChannel</a><span class="tsd-signature-symbol"> | </span><a href="eris.oldguildvoicechannel.html" class="tsd-signature-type" data-tsd-kind="Interface">OldGuildVoiceChannel</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></h5>
+								<ul class="tsd-parameters">
+									<li class="tsd-parameter-signature">
+										<ul class="tsd-signatures tsd-kind-type-literal tsd-is-external">
+											<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>channel<span class="tsd-signature-symbol">: </span><a href="../modules/eris.html#anyguildchannel" class="tsd-signature-type" data-tsd-kind="Type alias">AnyGuildChannel</a>, oldChannel<span class="tsd-signature-symbol">: </span><a href="eris.oldguildchannel.html" class="tsd-signature-type" data-tsd-kind="Interface">OldGuildChannel</a><span class="tsd-signature-symbol"> | </span><a href="eris.oldguildtextchannel.html" class="tsd-signature-type" data-tsd-kind="Interface">OldGuildTextChannel</a><span class="tsd-signature-symbol"> | </span><a href="eris.oldguildvoicechannel.html" class="tsd-signature-type" data-tsd-kind="Interface">OldGuildVoiceChannel</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+										</ul>
+										<ul class="tsd-descriptions">
+											<li class="tsd-description">
+												<h4 class="tsd-parameters-title">Parameters</h4>
+												<ul class="tsd-parameters">
+													<li>
+														<h5>channel: <a href="../modules/eris.html#anyguildchannel" class="tsd-signature-type" data-tsd-kind="Type alias">AnyGuildChannel</a></h5>
+													</li>
+													<li>
+														<h5>oldChannel: <a href="eris.oldguildchannel.html" class="tsd-signature-type" data-tsd-kind="Interface">OldGuildChannel</a><span class="tsd-signature-symbol"> | </span><a href="eris.oldguildtextchannel.html" class="tsd-signature-type" data-tsd-kind="Interface">OldGuildTextChannel</a><span class="tsd-signature-symbol"> | </span><a href="eris.oldguildvoicechannel.html" class="tsd-signature-type" data-tsd-kind="Interface">OldGuildVoiceChannel</a></h5>
+													</li>
+												</ul>
+												<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+											</li>
+										</ul>
+									</li>
+								</ul>
+							</li>
+						</ul>
+						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">T</span></h4>
+					</li>
+					<li class="tsd-description">
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in node_modules/eris/index.d.ts:506</li>
+							</ul>
+						</aside>
+						<h4 class="tsd-parameters-title">Parameters</h4>
+						<ul class="tsd-parameters">
+							<li>
+								<h5>event: <span class="tsd-signature-type">&quot;channelUpdate&quot;</span></h5>
+							</li>
+							<li>
+								<h5>listener: <span class="tsd-signature-symbol">(</span>channel<span class="tsd-signature-symbol">: </span><a href="../classes/eris.groupchannel.html" class="tsd-signature-type" data-tsd-kind="Class">GroupChannel</a>, oldChannel<span class="tsd-signature-symbol">: </span><a href="eris.oldgroupchannel.html" class="tsd-signature-type" data-tsd-kind="Interface">OldGroupChannel</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></h5>
+								<ul class="tsd-parameters">
+									<li class="tsd-parameter-signature">
+										<ul class="tsd-signatures tsd-kind-type-literal tsd-is-external">
+											<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>channel<span class="tsd-signature-symbol">: </span><a href="../classes/eris.groupchannel.html" class="tsd-signature-type" data-tsd-kind="Class">GroupChannel</a>, oldChannel<span class="tsd-signature-symbol">: </span><a href="eris.oldgroupchannel.html" class="tsd-signature-type" data-tsd-kind="Interface">OldGroupChannel</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+										</ul>
+										<ul class="tsd-descriptions">
+											<li class="tsd-description">
+												<h4 class="tsd-parameters-title">Parameters</h4>
+												<ul class="tsd-parameters">
+													<li>
+														<h5>channel: <a href="../classes/eris.groupchannel.html" class="tsd-signature-type" data-tsd-kind="Class">GroupChannel</a></h5>
+													</li>
+													<li>
+														<h5>oldChannel: <a href="eris.oldgroupchannel.html" class="tsd-signature-type" data-tsd-kind="Interface">OldGroupChannel</a></h5>
+													</li>
+												</ul>
+												<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+											</li>
+										</ul>
+									</li>
+								</ul>
+							</li>
+						</ul>
+						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">T</span></h4>
+					</li>
+					<li class="tsd-description">
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in node_modules/eris/index.d.ts:507</li>
+							</ul>
+						</aside>
+						<h4 class="tsd-parameters-title">Parameters</h4>
+						<ul class="tsd-parameters">
+							<li>
+								<h5>event: <span class="tsd-signature-type">&quot;connect&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;shardPreReady&quot;</span></h5>
+							</li>
+							<li>
+								<h5>listener: <span class="tsd-signature-symbol">(</span>id<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></h5>
+								<ul class="tsd-parameters">
+									<li class="tsd-parameter-signature">
+										<ul class="tsd-signatures tsd-kind-type-literal tsd-is-external">
+											<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>id<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+										</ul>
+										<ul class="tsd-descriptions">
+											<li class="tsd-description">
+												<h4 class="tsd-parameters-title">Parameters</h4>
+												<ul class="tsd-parameters">
+													<li>
+														<h5>id: <span class="tsd-signature-type">number</span></h5>
+													</li>
+												</ul>
+												<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+											</li>
+										</ul>
+									</li>
+								</ul>
+							</li>
+						</ul>
+						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">T</span></h4>
+					</li>
+					<li class="tsd-description">
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in node_modules/eris/index.d.ts:508</li>
+							</ul>
+						</aside>
+						<h4 class="tsd-parameters-title">Parameters</h4>
+						<ul class="tsd-parameters">
+							<li>
+								<h5>event: <span class="tsd-signature-type">&quot;error&quot;</span></h5>
+							</li>
+							<li>
+								<h5>listener: <span class="tsd-signature-symbol">(</span>err<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Error</span>, id<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></h5>
+								<ul class="tsd-parameters">
+									<li class="tsd-parameter-signature">
+										<ul class="tsd-signatures tsd-kind-type-literal tsd-is-external">
+											<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>err<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Error</span>, id<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+										</ul>
+										<ul class="tsd-descriptions">
+											<li class="tsd-description">
+												<h4 class="tsd-parameters-title">Parameters</h4>
+												<ul class="tsd-parameters">
+													<li>
+														<h5>err: <span class="tsd-signature-type">Error</span></h5>
+													</li>
+													<li>
+														<h5>id: <span class="tsd-signature-type">number</span></h5>
+													</li>
+												</ul>
+												<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+											</li>
+										</ul>
+									</li>
+								</ul>
+							</li>
+						</ul>
+						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">T</span></h4>
+					</li>
+					<li class="tsd-description">
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in node_modules/eris/index.d.ts:509</li>
+							</ul>
+						</aside>
+						<h4 class="tsd-parameters-title">Parameters</h4>
+						<ul class="tsd-parameters">
+							<li>
+								<h5>event: <span class="tsd-signature-type">&quot;friendSuggestionCreate&quot;</span></h5>
+							</li>
+							<li>
+								<h5>listener: <span class="tsd-signature-symbol">(</span>user<span class="tsd-signature-symbol">: </span><a href="../classes/eris.user.html" class="tsd-signature-type" data-tsd-kind="Class">User</a>, reasons<span class="tsd-signature-symbol">: </span><a href="../modules/eris.html#friendsuggestionreasons" class="tsd-signature-type" data-tsd-kind="Type alias">FriendSuggestionReasons</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></h5>
+								<ul class="tsd-parameters">
+									<li class="tsd-parameter-signature">
+										<ul class="tsd-signatures tsd-kind-type-literal tsd-is-external">
+											<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>user<span class="tsd-signature-symbol">: </span><a href="../classes/eris.user.html" class="tsd-signature-type" data-tsd-kind="Class">User</a>, reasons<span class="tsd-signature-symbol">: </span><a href="../modules/eris.html#friendsuggestionreasons" class="tsd-signature-type" data-tsd-kind="Type alias">FriendSuggestionReasons</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+										</ul>
+										<ul class="tsd-descriptions">
+											<li class="tsd-description">
+												<h4 class="tsd-parameters-title">Parameters</h4>
+												<ul class="tsd-parameters">
+													<li>
+														<h5>user: <a href="../classes/eris.user.html" class="tsd-signature-type" data-tsd-kind="Class">User</a></h5>
+													</li>
+													<li>
+														<h5>reasons: <a href="../modules/eris.html#friendsuggestionreasons" class="tsd-signature-type" data-tsd-kind="Type alias">FriendSuggestionReasons</a></h5>
+													</li>
+												</ul>
+												<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+											</li>
+										</ul>
+									</li>
+								</ul>
+							</li>
+						</ul>
+						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">T</span></h4>
+					</li>
+					<li class="tsd-description">
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in node_modules/eris/index.d.ts:510</li>
+							</ul>
+						</aside>
+						<h4 class="tsd-parameters-title">Parameters</h4>
+						<ul class="tsd-parameters">
+							<li>
+								<h5>event: <span class="tsd-signature-type">&quot;friendSuggestionDelete&quot;</span></h5>
+							</li>
+							<li>
+								<h5>listener: <span class="tsd-signature-symbol">(</span>user<span class="tsd-signature-symbol">: </span><a href="../classes/eris.user.html" class="tsd-signature-type" data-tsd-kind="Class">User</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></h5>
+								<ul class="tsd-parameters">
+									<li class="tsd-parameter-signature">
+										<ul class="tsd-signatures tsd-kind-type-literal tsd-is-external">
+											<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>user<span class="tsd-signature-symbol">: </span><a href="../classes/eris.user.html" class="tsd-signature-type" data-tsd-kind="Class">User</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+										</ul>
+										<ul class="tsd-descriptions">
+											<li class="tsd-description">
+												<h4 class="tsd-parameters-title">Parameters</h4>
+												<ul class="tsd-parameters">
+													<li>
+														<h5>user: <a href="../classes/eris.user.html" class="tsd-signature-type" data-tsd-kind="Class">User</a></h5>
+													</li>
+												</ul>
+												<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+											</li>
+										</ul>
+									</li>
+								</ul>
+							</li>
+						</ul>
+						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">T</span></h4>
+					</li>
+					<li class="tsd-description">
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in node_modules/eris/index.d.ts:511</li>
+							</ul>
+						</aside>
+						<h4 class="tsd-parameters-title">Parameters</h4>
+						<ul class="tsd-parameters">
+							<li>
+								<h5>event: <span class="tsd-signature-type">&quot;guildBanAdd&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;guildBanRemove&quot;</span></h5>
+							</li>
+							<li>
+								<h5>listener: <span class="tsd-signature-symbol">(</span>guild<span class="tsd-signature-symbol">: </span><a href="../classes/eris.guild.html" class="tsd-signature-type" data-tsd-kind="Class">Guild</a>, user<span class="tsd-signature-symbol">: </span><a href="../classes/eris.user.html" class="tsd-signature-type" data-tsd-kind="Class">User</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></h5>
+								<ul class="tsd-parameters">
+									<li class="tsd-parameter-signature">
+										<ul class="tsd-signatures tsd-kind-type-literal tsd-is-external">
+											<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>guild<span class="tsd-signature-symbol">: </span><a href="../classes/eris.guild.html" class="tsd-signature-type" data-tsd-kind="Class">Guild</a>, user<span class="tsd-signature-symbol">: </span><a href="../classes/eris.user.html" class="tsd-signature-type" data-tsd-kind="Class">User</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+										</ul>
+										<ul class="tsd-descriptions">
+											<li class="tsd-description">
+												<h4 class="tsd-parameters-title">Parameters</h4>
+												<ul class="tsd-parameters">
+													<li>
+														<h5>guild: <a href="../classes/eris.guild.html" class="tsd-signature-type" data-tsd-kind="Class">Guild</a></h5>
+													</li>
+													<li>
+														<h5>user: <a href="../classes/eris.user.html" class="tsd-signature-type" data-tsd-kind="Class">User</a></h5>
+													</li>
+												</ul>
+												<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+											</li>
+										</ul>
+									</li>
+								</ul>
+							</li>
+						</ul>
+						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">T</span></h4>
+					</li>
+					<li class="tsd-description">
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in node_modules/eris/index.d.ts:512</li>
+							</ul>
+						</aside>
+						<h4 class="tsd-parameters-title">Parameters</h4>
+						<ul class="tsd-parameters">
+							<li>
+								<h5>event: <span class="tsd-signature-type">&quot;guildAvailable&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;guildCreate&quot;</span></h5>
+							</li>
+							<li>
+								<h5>listener: <span class="tsd-signature-symbol">(</span>guild<span class="tsd-signature-symbol">: </span><a href="../classes/eris.guild.html" class="tsd-signature-type" data-tsd-kind="Class">Guild</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></h5>
+								<ul class="tsd-parameters">
+									<li class="tsd-parameter-signature">
+										<ul class="tsd-signatures tsd-kind-type-literal tsd-is-external">
+											<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>guild<span class="tsd-signature-symbol">: </span><a href="../classes/eris.guild.html" class="tsd-signature-type" data-tsd-kind="Class">Guild</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+										</ul>
+										<ul class="tsd-descriptions">
+											<li class="tsd-description">
+												<h4 class="tsd-parameters-title">Parameters</h4>
+												<ul class="tsd-parameters">
+													<li>
+														<h5>guild: <a href="../classes/eris.guild.html" class="tsd-signature-type" data-tsd-kind="Class">Guild</a></h5>
+													</li>
+												</ul>
+												<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+											</li>
+										</ul>
+									</li>
+								</ul>
+							</li>
+						</ul>
+						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">T</span></h4>
+					</li>
+					<li class="tsd-description">
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in node_modules/eris/index.d.ts:513</li>
+							</ul>
+						</aside>
+						<h4 class="tsd-parameters-title">Parameters</h4>
+						<ul class="tsd-parameters">
+							<li>
+								<h5>event: <span class="tsd-signature-type">&quot;guildDelete&quot;</span></h5>
+							</li>
+							<li>
+								<h5>listener: <span class="tsd-signature-symbol">(</span>guild<span class="tsd-signature-symbol">: </span><a href="../modules/eris.html#possiblyuncachedguild" class="tsd-signature-type" data-tsd-kind="Type alias">PossiblyUncachedGuild</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></h5>
+								<ul class="tsd-parameters">
+									<li class="tsd-parameter-signature">
+										<ul class="tsd-signatures tsd-kind-type-literal tsd-is-external">
+											<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>guild<span class="tsd-signature-symbol">: </span><a href="../modules/eris.html#possiblyuncachedguild" class="tsd-signature-type" data-tsd-kind="Type alias">PossiblyUncachedGuild</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+										</ul>
+										<ul class="tsd-descriptions">
+											<li class="tsd-description">
+												<h4 class="tsd-parameters-title">Parameters</h4>
+												<ul class="tsd-parameters">
+													<li>
+														<h5>guild: <a href="../modules/eris.html#possiblyuncachedguild" class="tsd-signature-type" data-tsd-kind="Type alias">PossiblyUncachedGuild</a></h5>
+													</li>
+												</ul>
+												<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+											</li>
+										</ul>
+									</li>
+								</ul>
+							</li>
+						</ul>
+						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">T</span></h4>
+					</li>
+					<li class="tsd-description">
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in node_modules/eris/index.d.ts:514</li>
+							</ul>
+						</aside>
+						<h4 class="tsd-parameters-title">Parameters</h4>
+						<ul class="tsd-parameters">
+							<li>
+								<h5>event: <span class="tsd-signature-type">&quot;guildEmojisUpdate&quot;</span></h5>
+							</li>
+							<li>
+								<h5>listener: <span class="tsd-signature-symbol">(</span>guild<span class="tsd-signature-symbol">: </span><a href="../modules/eris.html#possiblyuncachedguild" class="tsd-signature-type" data-tsd-kind="Type alias">PossiblyUncachedGuild</a>, emojis<span class="tsd-signature-symbol">: </span><a href="eris.emoji.html" class="tsd-signature-type" data-tsd-kind="Interface">Emoji</a><span class="tsd-signature-symbol">[]</span>, oldEmojis<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><a href="eris.emoji.html" class="tsd-signature-type" data-tsd-kind="Interface">Emoji</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></h5>
+								<ul class="tsd-parameters">
+									<li class="tsd-parameter-signature">
+										<ul class="tsd-signatures tsd-kind-type-literal tsd-is-external">
+											<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>guild<span class="tsd-signature-symbol">: </span><a href="../modules/eris.html#possiblyuncachedguild" class="tsd-signature-type" data-tsd-kind="Type alias">PossiblyUncachedGuild</a>, emojis<span class="tsd-signature-symbol">: </span><a href="eris.emoji.html" class="tsd-signature-type" data-tsd-kind="Interface">Emoji</a><span class="tsd-signature-symbol">[]</span>, oldEmojis<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><a href="eris.emoji.html" class="tsd-signature-type" data-tsd-kind="Interface">Emoji</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+										</ul>
+										<ul class="tsd-descriptions">
+											<li class="tsd-description">
+												<h4 class="tsd-parameters-title">Parameters</h4>
+												<ul class="tsd-parameters">
+													<li>
+														<h5>guild: <a href="../modules/eris.html#possiblyuncachedguild" class="tsd-signature-type" data-tsd-kind="Type alias">PossiblyUncachedGuild</a></h5>
+													</li>
+													<li>
+														<h5>emojis: <a href="eris.emoji.html" class="tsd-signature-type" data-tsd-kind="Interface">Emoji</a><span class="tsd-signature-symbol">[]</span></h5>
+													</li>
+													<li>
+														<h5>oldEmojis: <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><a href="eris.emoji.html" class="tsd-signature-type" data-tsd-kind="Interface">Emoji</a><span class="tsd-signature-symbol">[]</span></h5>
+													</li>
+												</ul>
+												<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+											</li>
+										</ul>
+									</li>
+								</ul>
+							</li>
+						</ul>
+						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">T</span></h4>
+					</li>
+					<li class="tsd-description">
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in node_modules/eris/index.d.ts:515</li>
+							</ul>
+						</aside>
+						<h4 class="tsd-parameters-title">Parameters</h4>
+						<ul class="tsd-parameters">
+							<li>
+								<h5>event: <span class="tsd-signature-type">&quot;guildMemberAdd&quot;</span></h5>
+							</li>
+							<li>
+								<h5>listener: <span class="tsd-signature-symbol">(</span>guild<span class="tsd-signature-symbol">: </span><a href="../classes/eris.guild.html" class="tsd-signature-type" data-tsd-kind="Class">Guild</a>, member<span class="tsd-signature-symbol">: </span><a href="../classes/eris.member.html" class="tsd-signature-type" data-tsd-kind="Class">Member</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></h5>
+								<ul class="tsd-parameters">
+									<li class="tsd-parameter-signature">
+										<ul class="tsd-signatures tsd-kind-type-literal tsd-is-external">
+											<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>guild<span class="tsd-signature-symbol">: </span><a href="../classes/eris.guild.html" class="tsd-signature-type" data-tsd-kind="Class">Guild</a>, member<span class="tsd-signature-symbol">: </span><a href="../classes/eris.member.html" class="tsd-signature-type" data-tsd-kind="Class">Member</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+										</ul>
+										<ul class="tsd-descriptions">
+											<li class="tsd-description">
+												<h4 class="tsd-parameters-title">Parameters</h4>
+												<ul class="tsd-parameters">
+													<li>
+														<h5>guild: <a href="../classes/eris.guild.html" class="tsd-signature-type" data-tsd-kind="Class">Guild</a></h5>
+													</li>
+													<li>
+														<h5>member: <a href="../classes/eris.member.html" class="tsd-signature-type" data-tsd-kind="Class">Member</a></h5>
+													</li>
+												</ul>
+												<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+											</li>
+										</ul>
+									</li>
+								</ul>
+							</li>
+						</ul>
+						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">T</span></h4>
+					</li>
+					<li class="tsd-description">
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in node_modules/eris/index.d.ts:516</li>
+							</ul>
+						</aside>
+						<h4 class="tsd-parameters-title">Parameters</h4>
+						<ul class="tsd-parameters">
+							<li>
+								<h5>event: <span class="tsd-signature-type">&quot;guildMemberChunk&quot;</span></h5>
+							</li>
+							<li>
+								<h5>listener: <span class="tsd-signature-symbol">(</span>guild<span class="tsd-signature-symbol">: </span><a href="../classes/eris.guild.html" class="tsd-signature-type" data-tsd-kind="Class">Guild</a>, members<span class="tsd-signature-symbol">: </span><a href="../classes/eris.member.html" class="tsd-signature-type" data-tsd-kind="Class">Member</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></h5>
+								<ul class="tsd-parameters">
+									<li class="tsd-parameter-signature">
+										<ul class="tsd-signatures tsd-kind-type-literal tsd-is-external">
+											<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>guild<span class="tsd-signature-symbol">: </span><a href="../classes/eris.guild.html" class="tsd-signature-type" data-tsd-kind="Class">Guild</a>, members<span class="tsd-signature-symbol">: </span><a href="../classes/eris.member.html" class="tsd-signature-type" data-tsd-kind="Class">Member</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+										</ul>
+										<ul class="tsd-descriptions">
+											<li class="tsd-description">
+												<h4 class="tsd-parameters-title">Parameters</h4>
+												<ul class="tsd-parameters">
+													<li>
+														<h5>guild: <a href="../classes/eris.guild.html" class="tsd-signature-type" data-tsd-kind="Class">Guild</a></h5>
+													</li>
+													<li>
+														<h5>members: <a href="../classes/eris.member.html" class="tsd-signature-type" data-tsd-kind="Class">Member</a><span class="tsd-signature-symbol">[]</span></h5>
+													</li>
+												</ul>
+												<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+											</li>
+										</ul>
+									</li>
+								</ul>
+							</li>
+						</ul>
+						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">T</span></h4>
+					</li>
+					<li class="tsd-description">
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in node_modules/eris/index.d.ts:517</li>
+							</ul>
+						</aside>
+						<h4 class="tsd-parameters-title">Parameters</h4>
+						<ul class="tsd-parameters">
+							<li>
+								<h5>event: <span class="tsd-signature-type">&quot;guildMemberRemove&quot;</span></h5>
+							</li>
+							<li>
+								<h5>listener: <span class="tsd-signature-symbol">(</span>guild<span class="tsd-signature-symbol">: </span><a href="../classes/eris.guild.html" class="tsd-signature-type" data-tsd-kind="Class">Guild</a>, member<span class="tsd-signature-symbol">: </span><a href="../classes/eris.member.html" class="tsd-signature-type" data-tsd-kind="Class">Member</a><span class="tsd-signature-symbol"> | </span><a href="eris.memberpartial.html" class="tsd-signature-type" data-tsd-kind="Interface">MemberPartial</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></h5>
+								<ul class="tsd-parameters">
+									<li class="tsd-parameter-signature">
+										<ul class="tsd-signatures tsd-kind-type-literal tsd-is-external">
+											<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>guild<span class="tsd-signature-symbol">: </span><a href="../classes/eris.guild.html" class="tsd-signature-type" data-tsd-kind="Class">Guild</a>, member<span class="tsd-signature-symbol">: </span><a href="../classes/eris.member.html" class="tsd-signature-type" data-tsd-kind="Class">Member</a><span class="tsd-signature-symbol"> | </span><a href="eris.memberpartial.html" class="tsd-signature-type" data-tsd-kind="Interface">MemberPartial</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+										</ul>
+										<ul class="tsd-descriptions">
+											<li class="tsd-description">
+												<h4 class="tsd-parameters-title">Parameters</h4>
+												<ul class="tsd-parameters">
+													<li>
+														<h5>guild: <a href="../classes/eris.guild.html" class="tsd-signature-type" data-tsd-kind="Class">Guild</a></h5>
+													</li>
+													<li>
+														<h5>member: <a href="../classes/eris.member.html" class="tsd-signature-type" data-tsd-kind="Class">Member</a><span class="tsd-signature-symbol"> | </span><a href="eris.memberpartial.html" class="tsd-signature-type" data-tsd-kind="Interface">MemberPartial</a></h5>
+													</li>
+												</ul>
+												<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+											</li>
+										</ul>
+									</li>
+								</ul>
+							</li>
+						</ul>
+						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">T</span></h4>
+					</li>
+					<li class="tsd-description">
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in node_modules/eris/index.d.ts:518</li>
+							</ul>
+						</aside>
+						<h4 class="tsd-parameters-title">Parameters</h4>
+						<ul class="tsd-parameters">
+							<li>
+								<h5>event: <span class="tsd-signature-type">&quot;guildMemberUpdate&quot;</span></h5>
+							</li>
+							<li>
+								<h5>listener: <span class="tsd-signature-symbol">(</span>guild<span class="tsd-signature-symbol">: </span><a href="../classes/eris.guild.html" class="tsd-signature-type" data-tsd-kind="Class">Guild</a>, member<span class="tsd-signature-symbol">: </span><a href="../classes/eris.member.html" class="tsd-signature-type" data-tsd-kind="Class">Member</a>, oldMember<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><a href="eris.oldmember.html" class="tsd-signature-type" data-tsd-kind="Interface">OldMember</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></h5>
+								<ul class="tsd-parameters">
+									<li class="tsd-parameter-signature">
+										<ul class="tsd-signatures tsd-kind-type-literal tsd-is-external">
+											<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>guild<span class="tsd-signature-symbol">: </span><a href="../classes/eris.guild.html" class="tsd-signature-type" data-tsd-kind="Class">Guild</a>, member<span class="tsd-signature-symbol">: </span><a href="../classes/eris.member.html" class="tsd-signature-type" data-tsd-kind="Class">Member</a>, oldMember<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><a href="eris.oldmember.html" class="tsd-signature-type" data-tsd-kind="Interface">OldMember</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+										</ul>
+										<ul class="tsd-descriptions">
+											<li class="tsd-description">
+												<h4 class="tsd-parameters-title">Parameters</h4>
+												<ul class="tsd-parameters">
+													<li>
+														<h5>guild: <a href="../classes/eris.guild.html" class="tsd-signature-type" data-tsd-kind="Class">Guild</a></h5>
+													</li>
+													<li>
+														<h5>member: <a href="../classes/eris.member.html" class="tsd-signature-type" data-tsd-kind="Class">Member</a></h5>
+													</li>
+													<li>
+														<h5>oldMember: <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><a href="eris.oldmember.html" class="tsd-signature-type" data-tsd-kind="Interface">OldMember</a></h5>
+													</li>
+												</ul>
+												<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+											</li>
+										</ul>
+									</li>
+								</ul>
+							</li>
+						</ul>
+						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">T</span></h4>
+					</li>
+					<li class="tsd-description">
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in node_modules/eris/index.d.ts:522</li>
+							</ul>
+						</aside>
+						<h4 class="tsd-parameters-title">Parameters</h4>
+						<ul class="tsd-parameters">
+							<li>
+								<h5>event: <span class="tsd-signature-type">&quot;guildRoleCreate&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;guildRoleDelete&quot;</span></h5>
+							</li>
+							<li>
+								<h5>listener: <span class="tsd-signature-symbol">(</span>guild<span class="tsd-signature-symbol">: </span><a href="../classes/eris.guild.html" class="tsd-signature-type" data-tsd-kind="Class">Guild</a>, role<span class="tsd-signature-symbol">: </span><a href="../classes/eris.role.html" class="tsd-signature-type" data-tsd-kind="Class">Role</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></h5>
+								<ul class="tsd-parameters">
+									<li class="tsd-parameter-signature">
+										<ul class="tsd-signatures tsd-kind-type-literal tsd-is-external">
+											<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>guild<span class="tsd-signature-symbol">: </span><a href="../classes/eris.guild.html" class="tsd-signature-type" data-tsd-kind="Class">Guild</a>, role<span class="tsd-signature-symbol">: </span><a href="../classes/eris.role.html" class="tsd-signature-type" data-tsd-kind="Class">Role</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+										</ul>
+										<ul class="tsd-descriptions">
+											<li class="tsd-description">
+												<h4 class="tsd-parameters-title">Parameters</h4>
+												<ul class="tsd-parameters">
+													<li>
+														<h5>guild: <a href="../classes/eris.guild.html" class="tsd-signature-type" data-tsd-kind="Class">Guild</a></h5>
+													</li>
+													<li>
+														<h5>role: <a href="../classes/eris.role.html" class="tsd-signature-type" data-tsd-kind="Class">Role</a></h5>
+													</li>
+												</ul>
+												<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+											</li>
+										</ul>
+									</li>
+								</ul>
+							</li>
+						</ul>
+						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">T</span></h4>
+					</li>
+					<li class="tsd-description">
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in node_modules/eris/index.d.ts:523</li>
+							</ul>
+						</aside>
+						<h4 class="tsd-parameters-title">Parameters</h4>
+						<ul class="tsd-parameters">
+							<li>
+								<h5>event: <span class="tsd-signature-type">&quot;guildRoleUpdate&quot;</span></h5>
+							</li>
+							<li>
+								<h5>listener: <span class="tsd-signature-symbol">(</span>guild<span class="tsd-signature-symbol">: </span><a href="../classes/eris.guild.html" class="tsd-signature-type" data-tsd-kind="Class">Guild</a>, role<span class="tsd-signature-symbol">: </span><a href="../classes/eris.role.html" class="tsd-signature-type" data-tsd-kind="Class">Role</a>, oldRole<span class="tsd-signature-symbol">: </span><a href="eris.oldrole.html" class="tsd-signature-type" data-tsd-kind="Interface">OldRole</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></h5>
+								<ul class="tsd-parameters">
+									<li class="tsd-parameter-signature">
+										<ul class="tsd-signatures tsd-kind-type-literal tsd-is-external">
+											<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>guild<span class="tsd-signature-symbol">: </span><a href="../classes/eris.guild.html" class="tsd-signature-type" data-tsd-kind="Class">Guild</a>, role<span class="tsd-signature-symbol">: </span><a href="../classes/eris.role.html" class="tsd-signature-type" data-tsd-kind="Class">Role</a>, oldRole<span class="tsd-signature-symbol">: </span><a href="eris.oldrole.html" class="tsd-signature-type" data-tsd-kind="Interface">OldRole</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+										</ul>
+										<ul class="tsd-descriptions">
+											<li class="tsd-description">
+												<h4 class="tsd-parameters-title">Parameters</h4>
+												<ul class="tsd-parameters">
+													<li>
+														<h5>guild: <a href="../classes/eris.guild.html" class="tsd-signature-type" data-tsd-kind="Class">Guild</a></h5>
+													</li>
+													<li>
+														<h5>role: <a href="../classes/eris.role.html" class="tsd-signature-type" data-tsd-kind="Class">Role</a></h5>
+													</li>
+													<li>
+														<h5>oldRole: <a href="eris.oldrole.html" class="tsd-signature-type" data-tsd-kind="Interface">OldRole</a></h5>
+													</li>
+												</ul>
+												<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+											</li>
+										</ul>
+									</li>
+								</ul>
+							</li>
+						</ul>
+						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">T</span></h4>
+					</li>
+					<li class="tsd-description">
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in node_modules/eris/index.d.ts:524</li>
+							</ul>
+						</aside>
+						<h4 class="tsd-parameters-title">Parameters</h4>
+						<ul class="tsd-parameters">
+							<li>
+								<h5>event: <span class="tsd-signature-type">&quot;guildUnavailable&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;unavailableGuildCreate&quot;</span></h5>
+							</li>
+							<li>
+								<h5>listener: <span class="tsd-signature-symbol">(</span>guild<span class="tsd-signature-symbol">: </span><a href="../classes/eris.unavailableguild.html" class="tsd-signature-type" data-tsd-kind="Class">UnavailableGuild</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></h5>
+								<ul class="tsd-parameters">
+									<li class="tsd-parameter-signature">
+										<ul class="tsd-signatures tsd-kind-type-literal tsd-is-external">
+											<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>guild<span class="tsd-signature-symbol">: </span><a href="../classes/eris.unavailableguild.html" class="tsd-signature-type" data-tsd-kind="Class">UnavailableGuild</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+										</ul>
+										<ul class="tsd-descriptions">
+											<li class="tsd-description">
+												<h4 class="tsd-parameters-title">Parameters</h4>
+												<ul class="tsd-parameters">
+													<li>
+														<h5>guild: <a href="../classes/eris.unavailableguild.html" class="tsd-signature-type" data-tsd-kind="Class">UnavailableGuild</a></h5>
+													</li>
+												</ul>
+												<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+											</li>
+										</ul>
+									</li>
+								</ul>
+							</li>
+						</ul>
+						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">T</span></h4>
+					</li>
+					<li class="tsd-description">
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in node_modules/eris/index.d.ts:525</li>
+							</ul>
+						</aside>
+						<h4 class="tsd-parameters-title">Parameters</h4>
+						<ul class="tsd-parameters">
+							<li>
+								<h5>event: <span class="tsd-signature-type">&quot;guildUpdate&quot;</span></h5>
+							</li>
+							<li>
+								<h5>listener: <span class="tsd-signature-symbol">(</span>guild<span class="tsd-signature-symbol">: </span><a href="../classes/eris.guild.html" class="tsd-signature-type" data-tsd-kind="Class">Guild</a>, oldGuild<span class="tsd-signature-symbol">: </span><a href="eris.oldguild.html" class="tsd-signature-type" data-tsd-kind="Interface">OldGuild</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></h5>
+								<ul class="tsd-parameters">
+									<li class="tsd-parameter-signature">
+										<ul class="tsd-signatures tsd-kind-type-literal tsd-is-external">
+											<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>guild<span class="tsd-signature-symbol">: </span><a href="../classes/eris.guild.html" class="tsd-signature-type" data-tsd-kind="Class">Guild</a>, oldGuild<span class="tsd-signature-symbol">: </span><a href="eris.oldguild.html" class="tsd-signature-type" data-tsd-kind="Interface">OldGuild</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+										</ul>
+										<ul class="tsd-descriptions">
+											<li class="tsd-description">
+												<h4 class="tsd-parameters-title">Parameters</h4>
+												<ul class="tsd-parameters">
+													<li>
+														<h5>guild: <a href="../classes/eris.guild.html" class="tsd-signature-type" data-tsd-kind="Class">Guild</a></h5>
+													</li>
+													<li>
+														<h5>oldGuild: <a href="eris.oldguild.html" class="tsd-signature-type" data-tsd-kind="Interface">OldGuild</a></h5>
+													</li>
+												</ul>
+												<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+											</li>
+										</ul>
+									</li>
+								</ul>
+							</li>
+						</ul>
+						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">T</span></h4>
+					</li>
+					<li class="tsd-description">
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in node_modules/eris/index.d.ts:526</li>
+							</ul>
+						</aside>
+						<h4 class="tsd-parameters-title">Parameters</h4>
+						<ul class="tsd-parameters">
+							<li>
+								<h5>event: <span class="tsd-signature-type">&quot;hello&quot;</span></h5>
+							</li>
+							<li>
+								<h5>listener: <span class="tsd-signature-symbol">(</span>trace<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span>, id<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></h5>
+								<ul class="tsd-parameters">
+									<li class="tsd-parameter-signature">
+										<ul class="tsd-signatures tsd-kind-type-literal tsd-is-external">
+											<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>trace<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span>, id<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+										</ul>
+										<ul class="tsd-descriptions">
+											<li class="tsd-description">
+												<h4 class="tsd-parameters-title">Parameters</h4>
+												<ul class="tsd-parameters">
+													<li>
+														<h5>trace: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></h5>
+													</li>
+													<li>
+														<h5>id: <span class="tsd-signature-type">number</span></h5>
+													</li>
+												</ul>
+												<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+											</li>
+										</ul>
+									</li>
+								</ul>
+							</li>
+						</ul>
+						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">T</span></h4>
+					</li>
+					<li class="tsd-description">
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in node_modules/eris/index.d.ts:527</li>
+							</ul>
+						</aside>
+						<h4 class="tsd-parameters-title">Parameters</h4>
+						<ul class="tsd-parameters">
+							<li>
+								<h5>event: <span class="tsd-signature-type">&quot;inviteCreate&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;inviteDelete&quot;</span></h5>
+							</li>
+							<li>
+								<h5>listener: <span class="tsd-signature-symbol">(</span>guild<span class="tsd-signature-symbol">: </span><a href="../classes/eris.guild.html" class="tsd-signature-type" data-tsd-kind="Class">Guild</a>, invite<span class="tsd-signature-symbol">: </span><a href="../classes/eris.invite.html" class="tsd-signature-type" data-tsd-kind="Class">Invite</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">&quot;withMetadata&quot;</span><span class="tsd-signature-symbol">, </span><a href="../modules/eris.html#invitechannel" class="tsd-signature-type" data-tsd-kind="Type alias">InviteChannel</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></h5>
+								<ul class="tsd-parameters">
+									<li class="tsd-parameter-signature">
+										<ul class="tsd-signatures tsd-kind-type-literal tsd-is-external">
+											<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>guild<span class="tsd-signature-symbol">: </span><a href="../classes/eris.guild.html" class="tsd-signature-type" data-tsd-kind="Class">Guild</a>, invite<span class="tsd-signature-symbol">: </span><a href="../classes/eris.invite.html" class="tsd-signature-type" data-tsd-kind="Class">Invite</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">&quot;withMetadata&quot;</span><span class="tsd-signature-symbol">, </span><a href="../modules/eris.html#invitechannel" class="tsd-signature-type" data-tsd-kind="Type alias">InviteChannel</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+										</ul>
+										<ul class="tsd-descriptions">
+											<li class="tsd-description">
+												<h4 class="tsd-parameters-title">Parameters</h4>
+												<ul class="tsd-parameters">
+													<li>
+														<h5>guild: <a href="../classes/eris.guild.html" class="tsd-signature-type" data-tsd-kind="Class">Guild</a></h5>
+													</li>
+													<li>
+														<h5>invite: <a href="../classes/eris.invite.html" class="tsd-signature-type" data-tsd-kind="Class">Invite</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">&quot;withMetadata&quot;</span><span class="tsd-signature-symbol">, </span><a href="../modules/eris.html#invitechannel" class="tsd-signature-type" data-tsd-kind="Type alias">InviteChannel</a><span class="tsd-signature-symbol">&gt;</span></h5>
+													</li>
+												</ul>
+												<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+											</li>
+										</ul>
+									</li>
+								</ul>
+							</li>
+						</ul>
+						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">T</span></h4>
+					</li>
+					<li class="tsd-description">
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in node_modules/eris/index.d.ts:528</li>
+							</ul>
+						</aside>
+						<h4 class="tsd-parameters-title">Parameters</h4>
+						<ul class="tsd-parameters">
+							<li>
+								<h5>event: <span class="tsd-signature-type">&quot;messageCreate&quot;</span></h5>
+							</li>
+							<li>
+								<h5>listener: <span class="tsd-signature-symbol">(</span>message<span class="tsd-signature-symbol">: </span><a href="../classes/eris.message.html" class="tsd-signature-type" data-tsd-kind="Class">Message</a><span class="tsd-signature-symbol">&lt;</span><a href="../modules/eris.html#possiblyuncachedtextablechannel" class="tsd-signature-type" data-tsd-kind="Type alias">PossiblyUncachedTextableChannel</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></h5>
+								<ul class="tsd-parameters">
+									<li class="tsd-parameter-signature">
+										<ul class="tsd-signatures tsd-kind-type-literal tsd-is-external">
+											<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>message<span class="tsd-signature-symbol">: </span><a href="../classes/eris.message.html" class="tsd-signature-type" data-tsd-kind="Class">Message</a><span class="tsd-signature-symbol">&lt;</span><a href="../modules/eris.html#possiblyuncachedtextablechannel" class="tsd-signature-type" data-tsd-kind="Type alias">PossiblyUncachedTextableChannel</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+										</ul>
+										<ul class="tsd-descriptions">
+											<li class="tsd-description">
+												<h4 class="tsd-parameters-title">Parameters</h4>
+												<ul class="tsd-parameters">
+													<li>
+														<h5>message: <a href="../classes/eris.message.html" class="tsd-signature-type" data-tsd-kind="Class">Message</a><span class="tsd-signature-symbol">&lt;</span><a href="../modules/eris.html#possiblyuncachedtextablechannel" class="tsd-signature-type" data-tsd-kind="Type alias">PossiblyUncachedTextableChannel</a><span class="tsd-signature-symbol">&gt;</span></h5>
+													</li>
+												</ul>
+												<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+											</li>
+										</ul>
+									</li>
+								</ul>
+							</li>
+						</ul>
+						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">T</span></h4>
+					</li>
+					<li class="tsd-description">
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in node_modules/eris/index.d.ts:529</li>
+							</ul>
+						</aside>
+						<h4 class="tsd-parameters-title">Parameters</h4>
+						<ul class="tsd-parameters">
+							<li>
+								<h5>event: <span class="tsd-signature-type">&quot;messageDelete&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;messageReactionRemoveAll&quot;</span></h5>
+							</li>
+							<li>
+								<h5>listener: <span class="tsd-signature-symbol">(</span>message<span class="tsd-signature-symbol">: </span><a href="../modules/eris.html#possiblyuncachedmessage" class="tsd-signature-type" data-tsd-kind="Type alias">PossiblyUncachedMessage</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></h5>
+								<ul class="tsd-parameters">
+									<li class="tsd-parameter-signature">
+										<ul class="tsd-signatures tsd-kind-type-literal tsd-is-external">
+											<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>message<span class="tsd-signature-symbol">: </span><a href="../modules/eris.html#possiblyuncachedmessage" class="tsd-signature-type" data-tsd-kind="Type alias">PossiblyUncachedMessage</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+										</ul>
+										<ul class="tsd-descriptions">
+											<li class="tsd-description">
+												<h4 class="tsd-parameters-title">Parameters</h4>
+												<ul class="tsd-parameters">
+													<li>
+														<h5>message: <a href="../modules/eris.html#possiblyuncachedmessage" class="tsd-signature-type" data-tsd-kind="Type alias">PossiblyUncachedMessage</a></h5>
+													</li>
+												</ul>
+												<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+											</li>
+										</ul>
+									</li>
+								</ul>
+							</li>
+						</ul>
+						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">T</span></h4>
+					</li>
+					<li class="tsd-description">
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in node_modules/eris/index.d.ts:530</li>
+							</ul>
+						</aside>
+						<h4 class="tsd-parameters-title">Parameters</h4>
+						<ul class="tsd-parameters">
+							<li>
+								<h5>event: <span class="tsd-signature-type">&quot;messageReactionRemoveEmoji&quot;</span></h5>
+							</li>
+							<li>
+								<h5>listener: <span class="tsd-signature-symbol">(</span>message<span class="tsd-signature-symbol">: </span><a href="../modules/eris.html#possiblyuncachedmessage" class="tsd-signature-type" data-tsd-kind="Type alias">PossiblyUncachedMessage</a>, emoji<span class="tsd-signature-symbol">: </span><a href="eris.partialemoji.html" class="tsd-signature-type" data-tsd-kind="Interface">PartialEmoji</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></h5>
+								<ul class="tsd-parameters">
+									<li class="tsd-parameter-signature">
+										<ul class="tsd-signatures tsd-kind-type-literal tsd-is-external">
+											<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>message<span class="tsd-signature-symbol">: </span><a href="../modules/eris.html#possiblyuncachedmessage" class="tsd-signature-type" data-tsd-kind="Type alias">PossiblyUncachedMessage</a>, emoji<span class="tsd-signature-symbol">: </span><a href="eris.partialemoji.html" class="tsd-signature-type" data-tsd-kind="Interface">PartialEmoji</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+										</ul>
+										<ul class="tsd-descriptions">
+											<li class="tsd-description">
+												<h4 class="tsd-parameters-title">Parameters</h4>
+												<ul class="tsd-parameters">
+													<li>
+														<h5>message: <a href="../modules/eris.html#possiblyuncachedmessage" class="tsd-signature-type" data-tsd-kind="Type alias">PossiblyUncachedMessage</a></h5>
+													</li>
+													<li>
+														<h5>emoji: <a href="eris.partialemoji.html" class="tsd-signature-type" data-tsd-kind="Interface">PartialEmoji</a></h5>
+													</li>
+												</ul>
+												<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+											</li>
+										</ul>
+									</li>
+								</ul>
+							</li>
+						</ul>
+						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">T</span></h4>
+					</li>
+					<li class="tsd-description">
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in node_modules/eris/index.d.ts:531</li>
+							</ul>
+						</aside>
+						<h4 class="tsd-parameters-title">Parameters</h4>
+						<ul class="tsd-parameters">
+							<li>
+								<h5>event: <span class="tsd-signature-type">&quot;messageDeleteBulk&quot;</span></h5>
+							</li>
+							<li>
+								<h5>listener: <span class="tsd-signature-symbol">(</span>messages<span class="tsd-signature-symbol">: </span><a href="../modules/eris.html#possiblyuncachedmessage" class="tsd-signature-type" data-tsd-kind="Type alias">PossiblyUncachedMessage</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></h5>
+								<ul class="tsd-parameters">
+									<li class="tsd-parameter-signature">
+										<ul class="tsd-signatures tsd-kind-type-literal tsd-is-external">
+											<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>messages<span class="tsd-signature-symbol">: </span><a href="../modules/eris.html#possiblyuncachedmessage" class="tsd-signature-type" data-tsd-kind="Type alias">PossiblyUncachedMessage</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+										</ul>
+										<ul class="tsd-descriptions">
+											<li class="tsd-description">
+												<h4 class="tsd-parameters-title">Parameters</h4>
+												<ul class="tsd-parameters">
+													<li>
+														<h5>messages: <a href="../modules/eris.html#possiblyuncachedmessage" class="tsd-signature-type" data-tsd-kind="Type alias">PossiblyUncachedMessage</a><span class="tsd-signature-symbol">[]</span></h5>
+													</li>
+												</ul>
+												<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+											</li>
+										</ul>
+									</li>
+								</ul>
+							</li>
+						</ul>
+						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">T</span></h4>
+					</li>
+					<li class="tsd-description">
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in node_modules/eris/index.d.ts:532</li>
+							</ul>
+						</aside>
+						<h4 class="tsd-parameters-title">Parameters</h4>
+						<ul class="tsd-parameters">
+							<li>
+								<h5>event: <span class="tsd-signature-type">&quot;messageReactionAdd&quot;</span></h5>
+							</li>
+							<li>
+								<h5>listener: <span class="tsd-signature-symbol">(</span>message<span class="tsd-signature-symbol">: </span><a href="../modules/eris.html#possiblyuncachedmessage" class="tsd-signature-type" data-tsd-kind="Type alias">PossiblyUncachedMessage</a>, emoji<span class="tsd-signature-symbol">: </span><a href="eris.partialemoji.html" class="tsd-signature-type" data-tsd-kind="Interface">PartialEmoji</a>, reactor<span class="tsd-signature-symbol">: </span><a href="../modules/eris.html#uncached" class="tsd-signature-type" data-tsd-kind="Type alias">Uncached</a><span class="tsd-signature-symbol"> | </span><a href="../classes/eris.member.html" class="tsd-signature-type" data-tsd-kind="Class">Member</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></h5>
+								<ul class="tsd-parameters">
+									<li class="tsd-parameter-signature">
+										<ul class="tsd-signatures tsd-kind-type-literal tsd-is-external">
+											<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>message<span class="tsd-signature-symbol">: </span><a href="../modules/eris.html#possiblyuncachedmessage" class="tsd-signature-type" data-tsd-kind="Type alias">PossiblyUncachedMessage</a>, emoji<span class="tsd-signature-symbol">: </span><a href="eris.partialemoji.html" class="tsd-signature-type" data-tsd-kind="Interface">PartialEmoji</a>, reactor<span class="tsd-signature-symbol">: </span><a href="../modules/eris.html#uncached" class="tsd-signature-type" data-tsd-kind="Type alias">Uncached</a><span class="tsd-signature-symbol"> | </span><a href="../classes/eris.member.html" class="tsd-signature-type" data-tsd-kind="Class">Member</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+										</ul>
+										<ul class="tsd-descriptions">
+											<li class="tsd-description">
+												<h4 class="tsd-parameters-title">Parameters</h4>
+												<ul class="tsd-parameters">
+													<li>
+														<h5>message: <a href="../modules/eris.html#possiblyuncachedmessage" class="tsd-signature-type" data-tsd-kind="Type alias">PossiblyUncachedMessage</a></h5>
+													</li>
+													<li>
+														<h5>emoji: <a href="eris.partialemoji.html" class="tsd-signature-type" data-tsd-kind="Interface">PartialEmoji</a></h5>
+													</li>
+													<li>
+														<h5>reactor: <a href="../modules/eris.html#uncached" class="tsd-signature-type" data-tsd-kind="Type alias">Uncached</a><span class="tsd-signature-symbol"> | </span><a href="../classes/eris.member.html" class="tsd-signature-type" data-tsd-kind="Class">Member</a></h5>
+													</li>
+												</ul>
+												<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+											</li>
+										</ul>
+									</li>
+								</ul>
+							</li>
+						</ul>
+						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">T</span></h4>
+					</li>
+					<li class="tsd-description">
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in node_modules/eris/index.d.ts:536</li>
+							</ul>
+						</aside>
+						<h4 class="tsd-parameters-title">Parameters</h4>
+						<ul class="tsd-parameters">
+							<li>
+								<h5>event: <span class="tsd-signature-type">&quot;messageReactionRemove&quot;</span></h5>
+							</li>
+							<li>
+								<h5>listener: <span class="tsd-signature-symbol">(</span>message<span class="tsd-signature-symbol">: </span><a href="../modules/eris.html#possiblyuncachedmessage" class="tsd-signature-type" data-tsd-kind="Type alias">PossiblyUncachedMessage</a>, emoji<span class="tsd-signature-symbol">: </span><a href="eris.partialemoji.html" class="tsd-signature-type" data-tsd-kind="Interface">PartialEmoji</a>, userID<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></h5>
+								<ul class="tsd-parameters">
+									<li class="tsd-parameter-signature">
+										<ul class="tsd-signatures tsd-kind-type-literal tsd-is-external">
+											<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>message<span class="tsd-signature-symbol">: </span><a href="../modules/eris.html#possiblyuncachedmessage" class="tsd-signature-type" data-tsd-kind="Type alias">PossiblyUncachedMessage</a>, emoji<span class="tsd-signature-symbol">: </span><a href="eris.partialemoji.html" class="tsd-signature-type" data-tsd-kind="Interface">PartialEmoji</a>, userID<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+										</ul>
+										<ul class="tsd-descriptions">
+											<li class="tsd-description">
+												<h4 class="tsd-parameters-title">Parameters</h4>
+												<ul class="tsd-parameters">
+													<li>
+														<h5>message: <a href="../modules/eris.html#possiblyuncachedmessage" class="tsd-signature-type" data-tsd-kind="Type alias">PossiblyUncachedMessage</a></h5>
+													</li>
+													<li>
+														<h5>emoji: <a href="eris.partialemoji.html" class="tsd-signature-type" data-tsd-kind="Interface">PartialEmoji</a></h5>
+													</li>
+													<li>
+														<h5>userID: <span class="tsd-signature-type">string</span></h5>
+													</li>
+												</ul>
+												<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+											</li>
+										</ul>
+									</li>
+								</ul>
+							</li>
+						</ul>
+						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">T</span></h4>
+					</li>
+					<li class="tsd-description">
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in node_modules/eris/index.d.ts:540</li>
+							</ul>
+						</aside>
+						<h4 class="tsd-parameters-title">Parameters</h4>
+						<ul class="tsd-parameters">
+							<li>
+								<h5>event: <span class="tsd-signature-type">&quot;messageUpdate&quot;</span></h5>
+							</li>
+							<li>
+								<h5>listener: <span class="tsd-signature-symbol">(</span>message<span class="tsd-signature-symbol">: </span><a href="../classes/eris.message.html" class="tsd-signature-type" data-tsd-kind="Class">Message</a><span class="tsd-signature-symbol">&lt;</span><a href="../modules/eris.html#possiblyuncachedtextablechannel" class="tsd-signature-type" data-tsd-kind="Type alias">PossiblyUncachedTextableChannel</a><span class="tsd-signature-symbol">&gt;</span>, oldMessage<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><a href="eris.oldmessage.html" class="tsd-signature-type" data-tsd-kind="Interface">OldMessage</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></h5>
+								<ul class="tsd-parameters">
+									<li class="tsd-parameter-signature">
+										<ul class="tsd-signatures tsd-kind-type-literal tsd-is-external">
+											<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>message<span class="tsd-signature-symbol">: </span><a href="../classes/eris.message.html" class="tsd-signature-type" data-tsd-kind="Class">Message</a><span class="tsd-signature-symbol">&lt;</span><a href="../modules/eris.html#possiblyuncachedtextablechannel" class="tsd-signature-type" data-tsd-kind="Type alias">PossiblyUncachedTextableChannel</a><span class="tsd-signature-symbol">&gt;</span>, oldMessage<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><a href="eris.oldmessage.html" class="tsd-signature-type" data-tsd-kind="Interface">OldMessage</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+										</ul>
+										<ul class="tsd-descriptions">
+											<li class="tsd-description">
+												<h4 class="tsd-parameters-title">Parameters</h4>
+												<ul class="tsd-parameters">
+													<li>
+														<h5>message: <a href="../classes/eris.message.html" class="tsd-signature-type" data-tsd-kind="Class">Message</a><span class="tsd-signature-symbol">&lt;</span><a href="../modules/eris.html#possiblyuncachedtextablechannel" class="tsd-signature-type" data-tsd-kind="Type alias">PossiblyUncachedTextableChannel</a><span class="tsd-signature-symbol">&gt;</span></h5>
+													</li>
+													<li>
+														<h5>oldMessage: <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><a href="eris.oldmessage.html" class="tsd-signature-type" data-tsd-kind="Interface">OldMessage</a></h5>
+													</li>
+												</ul>
+												<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+											</li>
+										</ul>
+									</li>
+								</ul>
+							</li>
+						</ul>
+						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">T</span></h4>
+					</li>
+					<li class="tsd-description">
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in node_modules/eris/index.d.ts:542</li>
+							</ul>
+						</aside>
+						<h4 class="tsd-parameters-title">Parameters</h4>
+						<ul class="tsd-parameters">
+							<li>
+								<h5>event: <span class="tsd-signature-type">&quot;presenceUpdate&quot;</span></h5>
+							</li>
+							<li>
+								<h5>listener: <span class="tsd-signature-symbol">(</span>other<span class="tsd-signature-symbol">: </span><a href="../classes/eris.member.html" class="tsd-signature-type" data-tsd-kind="Class">Member</a><span class="tsd-signature-symbol"> | </span><a href="../classes/eris.relationship.html" class="tsd-signature-type" data-tsd-kind="Class">Relationship</a>, oldPresence<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><a href="eris.presence.html" class="tsd-signature-type" data-tsd-kind="Interface">Presence</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></h5>
+								<ul class="tsd-parameters">
+									<li class="tsd-parameter-signature">
+										<ul class="tsd-signatures tsd-kind-type-literal tsd-is-external">
+											<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>other<span class="tsd-signature-symbol">: </span><a href="../classes/eris.member.html" class="tsd-signature-type" data-tsd-kind="Class">Member</a><span class="tsd-signature-symbol"> | </span><a href="../classes/eris.relationship.html" class="tsd-signature-type" data-tsd-kind="Class">Relationship</a>, oldPresence<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><a href="eris.presence.html" class="tsd-signature-type" data-tsd-kind="Interface">Presence</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+										</ul>
+										<ul class="tsd-descriptions">
+											<li class="tsd-description">
+												<h4 class="tsd-parameters-title">Parameters</h4>
+												<ul class="tsd-parameters">
+													<li>
+														<h5>other: <a href="../classes/eris.member.html" class="tsd-signature-type" data-tsd-kind="Class">Member</a><span class="tsd-signature-symbol"> | </span><a href="../classes/eris.relationship.html" class="tsd-signature-type" data-tsd-kind="Class">Relationship</a></h5>
+													</li>
+													<li>
+														<h5>oldPresence: <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><a href="eris.presence.html" class="tsd-signature-type" data-tsd-kind="Interface">Presence</a></h5>
+													</li>
+												</ul>
+												<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+											</li>
+										</ul>
+									</li>
+								</ul>
+							</li>
+						</ul>
+						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">T</span></h4>
+					</li>
+					<li class="tsd-description">
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in node_modules/eris/index.d.ts:543</li>
+							</ul>
+						</aside>
+						<h4 class="tsd-parameters-title">Parameters</h4>
+						<ul class="tsd-parameters">
+							<li>
+								<h5>event: <span class="tsd-signature-type">&quot;rawREST&quot;</span></h5>
+							</li>
+							<li>
+								<h5>listener: <span class="tsd-signature-symbol">(</span>request<span class="tsd-signature-symbol">: </span><a href="eris.rawrestrequest.html" class="tsd-signature-type" data-tsd-kind="Interface">RawRESTRequest</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></h5>
+								<ul class="tsd-parameters">
+									<li class="tsd-parameter-signature">
+										<ul class="tsd-signatures tsd-kind-type-literal tsd-is-external">
+											<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>request<span class="tsd-signature-symbol">: </span><a href="eris.rawrestrequest.html" class="tsd-signature-type" data-tsd-kind="Interface">RawRESTRequest</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+										</ul>
+										<ul class="tsd-descriptions">
+											<li class="tsd-description">
+												<h4 class="tsd-parameters-title">Parameters</h4>
+												<ul class="tsd-parameters">
+													<li>
+														<h5>request: <a href="eris.rawrestrequest.html" class="tsd-signature-type" data-tsd-kind="Interface">RawRESTRequest</a></h5>
+													</li>
+												</ul>
+												<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+											</li>
+										</ul>
+									</li>
+								</ul>
+							</li>
+						</ul>
+						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">T</span></h4>
+					</li>
+					<li class="tsd-description">
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in node_modules/eris/index.d.ts:544</li>
+							</ul>
+						</aside>
+						<h4 class="tsd-parameters-title">Parameters</h4>
+						<ul class="tsd-parameters">
+							<li>
+								<h5>event: <span class="tsd-signature-type">&quot;rawWS&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;unknown&quot;</span></h5>
+							</li>
+							<li>
+								<h5>listener: <span class="tsd-signature-symbol">(</span>packet<span class="tsd-signature-symbol">: </span><a href="eris.rawpacket.html" class="tsd-signature-type" data-tsd-kind="Interface">RawPacket</a>, id<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></h5>
+								<ul class="tsd-parameters">
+									<li class="tsd-parameter-signature">
+										<ul class="tsd-signatures tsd-kind-type-literal tsd-is-external">
+											<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>packet<span class="tsd-signature-symbol">: </span><a href="eris.rawpacket.html" class="tsd-signature-type" data-tsd-kind="Interface">RawPacket</a>, id<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+										</ul>
+										<ul class="tsd-descriptions">
+											<li class="tsd-description">
+												<h4 class="tsd-parameters-title">Parameters</h4>
+												<ul class="tsd-parameters">
+													<li>
+														<h5>packet: <a href="eris.rawpacket.html" class="tsd-signature-type" data-tsd-kind="Interface">RawPacket</a></h5>
+													</li>
+													<li>
+														<h5>id: <span class="tsd-signature-type">number</span></h5>
+													</li>
+												</ul>
+												<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+											</li>
+										</ul>
+									</li>
+								</ul>
+							</li>
+						</ul>
+						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">T</span></h4>
+					</li>
+					<li class="tsd-description">
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in node_modules/eris/index.d.ts:545</li>
+							</ul>
+						</aside>
+						<h4 class="tsd-parameters-title">Parameters</h4>
+						<ul class="tsd-parameters">
+							<li>
+								<h5>event: <span class="tsd-signature-type">&quot;relationshipAdd&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;relationshipRemove&quot;</span></h5>
+							</li>
+							<li>
+								<h5>listener: <span class="tsd-signature-symbol">(</span>relationship<span class="tsd-signature-symbol">: </span><a href="../classes/eris.relationship.html" class="tsd-signature-type" data-tsd-kind="Class">Relationship</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></h5>
+								<ul class="tsd-parameters">
+									<li class="tsd-parameter-signature">
+										<ul class="tsd-signatures tsd-kind-type-literal tsd-is-external">
+											<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>relationship<span class="tsd-signature-symbol">: </span><a href="../classes/eris.relationship.html" class="tsd-signature-type" data-tsd-kind="Class">Relationship</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+										</ul>
+										<ul class="tsd-descriptions">
+											<li class="tsd-description">
+												<h4 class="tsd-parameters-title">Parameters</h4>
+												<ul class="tsd-parameters">
+													<li>
+														<h5>relationship: <a href="../classes/eris.relationship.html" class="tsd-signature-type" data-tsd-kind="Class">Relationship</a></h5>
+													</li>
+												</ul>
+												<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+											</li>
+										</ul>
+									</li>
+								</ul>
+							</li>
+						</ul>
+						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">T</span></h4>
+					</li>
+					<li class="tsd-description">
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in node_modules/eris/index.d.ts:546</li>
+							</ul>
+						</aside>
+						<h4 class="tsd-parameters-title">Parameters</h4>
+						<ul class="tsd-parameters">
+							<li>
+								<h5>event: <span class="tsd-signature-type">&quot;relationshipUpdate&quot;</span></h5>
+							</li>
+							<li>
+								<h5>listener: <span class="tsd-signature-symbol">(</span>relationship<span class="tsd-signature-symbol">: </span><a href="../classes/eris.relationship.html" class="tsd-signature-type" data-tsd-kind="Class">Relationship</a>, oldRelationship<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">{ </span>type<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></h5>
+								<ul class="tsd-parameters">
+									<li class="tsd-parameter-signature">
+										<ul class="tsd-signatures tsd-kind-type-literal tsd-is-external">
+											<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>relationship<span class="tsd-signature-symbol">: </span><a href="../classes/eris.relationship.html" class="tsd-signature-type" data-tsd-kind="Class">Relationship</a>, oldRelationship<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">{ </span>type<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+										</ul>
+										<ul class="tsd-descriptions">
+											<li class="tsd-description">
+												<h4 class="tsd-parameters-title">Parameters</h4>
+												<ul class="tsd-parameters">
+													<li>
+														<h5>relationship: <a href="../classes/eris.relationship.html" class="tsd-signature-type" data-tsd-kind="Class">Relationship</a></h5>
+													</li>
+													<li>
+														<h5>oldRelationship: <span class="tsd-signature-symbol">{ </span>type<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> }</span></h5>
+														<ul class="tsd-parameters">
+															<li class="tsd-parameter">
+																<h5>type<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></h5>
+															</li>
+														</ul>
+													</li>
+												</ul>
+												<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+											</li>
+										</ul>
+									</li>
+								</ul>
+							</li>
+						</ul>
+						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">T</span></h4>
+					</li>
+					<li class="tsd-description">
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in node_modules/eris/index.d.ts:550</li>
+							</ul>
+						</aside>
+						<h4 class="tsd-parameters-title">Parameters</h4>
+						<ul class="tsd-parameters">
+							<li>
+								<h5>event: <span class="tsd-signature-type">&quot;typingStart&quot;</span></h5>
+							</li>
+							<li>
+								<h5>listener: <span class="tsd-signature-symbol">(</span>channel<span class="tsd-signature-symbol">: </span><a href="../modules/eris.html#uncached" class="tsd-signature-type" data-tsd-kind="Type alias">Uncached</a><span class="tsd-signature-symbol"> | </span><a href="../classes/eris.textchannel.html" class="tsd-signature-type" data-tsd-kind="Class">TextChannel</a><span class="tsd-signature-symbol"> | </span><a href="../classes/eris.newschannel.html" class="tsd-signature-type" data-tsd-kind="Class">NewsChannel</a>, user<span class="tsd-signature-symbol">: </span><a href="../modules/eris.html#uncached" class="tsd-signature-type" data-tsd-kind="Type alias">Uncached</a><span class="tsd-signature-symbol"> | </span><a href="../classes/eris.user.html" class="tsd-signature-type" data-tsd-kind="Class">User</a>, member<span class="tsd-signature-symbol">: </span><a href="../classes/eris.member.html" class="tsd-signature-type" data-tsd-kind="Class">Member</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></h5>
+								<ul class="tsd-parameters">
+									<li class="tsd-parameter-signature">
+										<ul class="tsd-signatures tsd-kind-type-literal tsd-is-external">
+											<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>channel<span class="tsd-signature-symbol">: </span><a href="../modules/eris.html#uncached" class="tsd-signature-type" data-tsd-kind="Type alias">Uncached</a><span class="tsd-signature-symbol"> | </span><a href="../classes/eris.textchannel.html" class="tsd-signature-type" data-tsd-kind="Class">TextChannel</a><span class="tsd-signature-symbol"> | </span><a href="../classes/eris.newschannel.html" class="tsd-signature-type" data-tsd-kind="Class">NewsChannel</a>, user<span class="tsd-signature-symbol">: </span><a href="../modules/eris.html#uncached" class="tsd-signature-type" data-tsd-kind="Type alias">Uncached</a><span class="tsd-signature-symbol"> | </span><a href="../classes/eris.user.html" class="tsd-signature-type" data-tsd-kind="Class">User</a>, member<span class="tsd-signature-symbol">: </span><a href="../classes/eris.member.html" class="tsd-signature-type" data-tsd-kind="Class">Member</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+										</ul>
+										<ul class="tsd-descriptions">
+											<li class="tsd-description">
+												<h4 class="tsd-parameters-title">Parameters</h4>
+												<ul class="tsd-parameters">
+													<li>
+														<h5>channel: <a href="../modules/eris.html#uncached" class="tsd-signature-type" data-tsd-kind="Type alias">Uncached</a><span class="tsd-signature-symbol"> | </span><a href="../classes/eris.textchannel.html" class="tsd-signature-type" data-tsd-kind="Class">TextChannel</a><span class="tsd-signature-symbol"> | </span><a href="../classes/eris.newschannel.html" class="tsd-signature-type" data-tsd-kind="Class">NewsChannel</a></h5>
+													</li>
+													<li>
+														<h5>user: <a href="../modules/eris.html#uncached" class="tsd-signature-type" data-tsd-kind="Type alias">Uncached</a><span class="tsd-signature-symbol"> | </span><a href="../classes/eris.user.html" class="tsd-signature-type" data-tsd-kind="Class">User</a></h5>
+													</li>
+													<li>
+														<h5>member: <a href="../classes/eris.member.html" class="tsd-signature-type" data-tsd-kind="Class">Member</a></h5>
+													</li>
+												</ul>
+												<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+											</li>
+										</ul>
+									</li>
+								</ul>
+							</li>
+						</ul>
+						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">T</span></h4>
+					</li>
+					<li class="tsd-description">
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in node_modules/eris/index.d.ts:551</li>
+							</ul>
+						</aside>
+						<h4 class="tsd-parameters-title">Parameters</h4>
+						<ul class="tsd-parameters">
+							<li>
+								<h5>event: <span class="tsd-signature-type">&quot;typingStart&quot;</span></h5>
+							</li>
+							<li>
+								<h5>listener: <span class="tsd-signature-symbol">(</span>channel<span class="tsd-signature-symbol">: </span><a href="../modules/eris.html#uncached" class="tsd-signature-type" data-tsd-kind="Type alias">Uncached</a><span class="tsd-signature-symbol"> | </span><a href="../classes/eris.privatechannel.html" class="tsd-signature-type" data-tsd-kind="Class">PrivateChannel</a>, user<span class="tsd-signature-symbol">: </span><a href="../modules/eris.html#uncached" class="tsd-signature-type" data-tsd-kind="Type alias">Uncached</a><span class="tsd-signature-symbol"> | </span><a href="../classes/eris.user.html" class="tsd-signature-type" data-tsd-kind="Class">User</a>, member<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></h5>
+								<ul class="tsd-parameters">
+									<li class="tsd-parameter-signature">
+										<ul class="tsd-signatures tsd-kind-type-literal tsd-is-external">
+											<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>channel<span class="tsd-signature-symbol">: </span><a href="../modules/eris.html#uncached" class="tsd-signature-type" data-tsd-kind="Type alias">Uncached</a><span class="tsd-signature-symbol"> | </span><a href="../classes/eris.privatechannel.html" class="tsd-signature-type" data-tsd-kind="Class">PrivateChannel</a>, user<span class="tsd-signature-symbol">: </span><a href="../modules/eris.html#uncached" class="tsd-signature-type" data-tsd-kind="Type alias">Uncached</a><span class="tsd-signature-symbol"> | </span><a href="../classes/eris.user.html" class="tsd-signature-type" data-tsd-kind="Class">User</a>, member<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+										</ul>
+										<ul class="tsd-descriptions">
+											<li class="tsd-description">
+												<h4 class="tsd-parameters-title">Parameters</h4>
+												<ul class="tsd-parameters">
+													<li>
+														<h5>channel: <a href="../modules/eris.html#uncached" class="tsd-signature-type" data-tsd-kind="Type alias">Uncached</a><span class="tsd-signature-symbol"> | </span><a href="../classes/eris.privatechannel.html" class="tsd-signature-type" data-tsd-kind="Class">PrivateChannel</a></h5>
+													</li>
+													<li>
+														<h5>user: <a href="../modules/eris.html#uncached" class="tsd-signature-type" data-tsd-kind="Type alias">Uncached</a><span class="tsd-signature-symbol"> | </span><a href="../classes/eris.user.html" class="tsd-signature-type" data-tsd-kind="Class">User</a></h5>
+													</li>
+													<li>
+														<h5>member: <span class="tsd-signature-type">null</span></h5>
+													</li>
+												</ul>
+												<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+											</li>
+										</ul>
+									</li>
+								</ul>
+							</li>
+						</ul>
+						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">T</span></h4>
+					</li>
+					<li class="tsd-description">
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in node_modules/eris/index.d.ts:552</li>
+							</ul>
+						</aside>
+						<h4 class="tsd-parameters-title">Parameters</h4>
+						<ul class="tsd-parameters">
+							<li>
+								<h5>event: <span class="tsd-signature-type">&quot;userUpdate&quot;</span></h5>
+							</li>
+							<li>
+								<h5>listener: <span class="tsd-signature-symbol">(</span>user<span class="tsd-signature-symbol">: </span><a href="../classes/eris.user.html" class="tsd-signature-type" data-tsd-kind="Class">User</a>, oldUser<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><a href="eris.partialuser.html" class="tsd-signature-type" data-tsd-kind="Interface">PartialUser</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></h5>
+								<ul class="tsd-parameters">
+									<li class="tsd-parameter-signature">
+										<ul class="tsd-signatures tsd-kind-type-literal tsd-is-external">
+											<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>user<span class="tsd-signature-symbol">: </span><a href="../classes/eris.user.html" class="tsd-signature-type" data-tsd-kind="Class">User</a>, oldUser<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><a href="eris.partialuser.html" class="tsd-signature-type" data-tsd-kind="Interface">PartialUser</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+										</ul>
+										<ul class="tsd-descriptions">
+											<li class="tsd-description">
+												<h4 class="tsd-parameters-title">Parameters</h4>
+												<ul class="tsd-parameters">
+													<li>
+														<h5>user: <a href="../classes/eris.user.html" class="tsd-signature-type" data-tsd-kind="Class">User</a></h5>
+													</li>
+													<li>
+														<h5>oldUser: <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><a href="eris.partialuser.html" class="tsd-signature-type" data-tsd-kind="Interface">PartialUser</a></h5>
+													</li>
+												</ul>
+												<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+											</li>
+										</ul>
+									</li>
+								</ul>
+							</li>
+						</ul>
+						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">T</span></h4>
+					</li>
+					<li class="tsd-description">
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in node_modules/eris/index.d.ts:556</li>
+							</ul>
+						</aside>
+						<h4 class="tsd-parameters-title">Parameters</h4>
+						<ul class="tsd-parameters">
+							<li>
+								<h5>event: <span class="tsd-signature-type">&quot;voiceChannelJoin&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;voiceChannelLeave&quot;</span></h5>
+							</li>
+							<li>
+								<h5>listener: <span class="tsd-signature-symbol">(</span>member<span class="tsd-signature-symbol">: </span><a href="../classes/eris.member.html" class="tsd-signature-type" data-tsd-kind="Class">Member</a>, channel<span class="tsd-signature-symbol">: </span><a href="../modules/eris.html#anyvoicechannel" class="tsd-signature-type" data-tsd-kind="Type alias">AnyVoiceChannel</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></h5>
+								<ul class="tsd-parameters">
+									<li class="tsd-parameter-signature">
+										<ul class="tsd-signatures tsd-kind-type-literal tsd-is-external">
+											<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>member<span class="tsd-signature-symbol">: </span><a href="../classes/eris.member.html" class="tsd-signature-type" data-tsd-kind="Class">Member</a>, channel<span class="tsd-signature-symbol">: </span><a href="../modules/eris.html#anyvoicechannel" class="tsd-signature-type" data-tsd-kind="Type alias">AnyVoiceChannel</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+										</ul>
+										<ul class="tsd-descriptions">
+											<li class="tsd-description">
+												<h4 class="tsd-parameters-title">Parameters</h4>
+												<ul class="tsd-parameters">
+													<li>
+														<h5>member: <a href="../classes/eris.member.html" class="tsd-signature-type" data-tsd-kind="Class">Member</a></h5>
+													</li>
+													<li>
+														<h5>channel: <a href="../modules/eris.html#anyvoicechannel" class="tsd-signature-type" data-tsd-kind="Type alias">AnyVoiceChannel</a></h5>
+													</li>
+												</ul>
+												<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+											</li>
+										</ul>
+									</li>
+								</ul>
+							</li>
+						</ul>
+						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">T</span></h4>
+					</li>
+					<li class="tsd-description">
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in node_modules/eris/index.d.ts:557</li>
+							</ul>
+						</aside>
+						<h4 class="tsd-parameters-title">Parameters</h4>
+						<ul class="tsd-parameters">
+							<li>
+								<h5>event: <span class="tsd-signature-type">&quot;voiceChannelSwitch&quot;</span></h5>
+							</li>
+							<li>
+								<h5>listener: <span class="tsd-signature-symbol">(</span>member<span class="tsd-signature-symbol">: </span><a href="../classes/eris.member.html" class="tsd-signature-type" data-tsd-kind="Class">Member</a>, newChannel<span class="tsd-signature-symbol">: </span><a href="../modules/eris.html#anyvoicechannel" class="tsd-signature-type" data-tsd-kind="Type alias">AnyVoiceChannel</a>, oldChannel<span class="tsd-signature-symbol">: </span><a href="../modules/eris.html#anyvoicechannel" class="tsd-signature-type" data-tsd-kind="Type alias">AnyVoiceChannel</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></h5>
+								<ul class="tsd-parameters">
+									<li class="tsd-parameter-signature">
+										<ul class="tsd-signatures tsd-kind-type-literal tsd-is-external">
+											<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>member<span class="tsd-signature-symbol">: </span><a href="../classes/eris.member.html" class="tsd-signature-type" data-tsd-kind="Class">Member</a>, newChannel<span class="tsd-signature-symbol">: </span><a href="../modules/eris.html#anyvoicechannel" class="tsd-signature-type" data-tsd-kind="Type alias">AnyVoiceChannel</a>, oldChannel<span class="tsd-signature-symbol">: </span><a href="../modules/eris.html#anyvoicechannel" class="tsd-signature-type" data-tsd-kind="Type alias">AnyVoiceChannel</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+										</ul>
+										<ul class="tsd-descriptions">
+											<li class="tsd-description">
+												<h4 class="tsd-parameters-title">Parameters</h4>
+												<ul class="tsd-parameters">
+													<li>
+														<h5>member: <a href="../classes/eris.member.html" class="tsd-signature-type" data-tsd-kind="Class">Member</a></h5>
+													</li>
+													<li>
+														<h5>newChannel: <a href="../modules/eris.html#anyvoicechannel" class="tsd-signature-type" data-tsd-kind="Type alias">AnyVoiceChannel</a></h5>
+													</li>
+													<li>
+														<h5>oldChannel: <a href="../modules/eris.html#anyvoicechannel" class="tsd-signature-type" data-tsd-kind="Type alias">AnyVoiceChannel</a></h5>
+													</li>
+												</ul>
+												<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+											</li>
+										</ul>
+									</li>
+								</ul>
+							</li>
+						</ul>
+						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">T</span></h4>
+					</li>
+					<li class="tsd-description">
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in node_modules/eris/index.d.ts:561</li>
+							</ul>
+						</aside>
+						<h4 class="tsd-parameters-title">Parameters</h4>
+						<ul class="tsd-parameters">
+							<li>
+								<h5>event: <span class="tsd-signature-type">&quot;voiceStateUpdate&quot;</span></h5>
+							</li>
+							<li>
+								<h5>listener: <span class="tsd-signature-symbol">(</span>member<span class="tsd-signature-symbol">: </span><a href="../classes/eris.member.html" class="tsd-signature-type" data-tsd-kind="Class">Member</a>, oldState<span class="tsd-signature-symbol">: </span><a href="eris.oldvoicestate.html" class="tsd-signature-type" data-tsd-kind="Interface">OldVoiceState</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></h5>
+								<ul class="tsd-parameters">
+									<li class="tsd-parameter-signature">
+										<ul class="tsd-signatures tsd-kind-type-literal tsd-is-external">
+											<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>member<span class="tsd-signature-symbol">: </span><a href="../classes/eris.member.html" class="tsd-signature-type" data-tsd-kind="Class">Member</a>, oldState<span class="tsd-signature-symbol">: </span><a href="eris.oldvoicestate.html" class="tsd-signature-type" data-tsd-kind="Interface">OldVoiceState</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+										</ul>
+										<ul class="tsd-descriptions">
+											<li class="tsd-description">
+												<h4 class="tsd-parameters-title">Parameters</h4>
+												<ul class="tsd-parameters">
+													<li>
+														<h5>member: <a href="../classes/eris.member.html" class="tsd-signature-type" data-tsd-kind="Class">Member</a></h5>
+													</li>
+													<li>
+														<h5>oldState: <a href="eris.oldvoicestate.html" class="tsd-signature-type" data-tsd-kind="Interface">OldVoiceState</a></h5>
+													</li>
+												</ul>
+												<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+											</li>
+										</ul>
+									</li>
+								</ul>
+							</li>
+						</ul>
+						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">T</span></h4>
+					</li>
+					<li class="tsd-description">
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in node_modules/eris/index.d.ts:562</li>
+							</ul>
+						</aside>
+						<h4 class="tsd-parameters-title">Parameters</h4>
+						<ul class="tsd-parameters">
+							<li>
+								<h5>event: <span class="tsd-signature-type">&quot;warn&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;debug&quot;</span></h5>
+							</li>
+							<li>
+								<h5>listener: <span class="tsd-signature-symbol">(</span>message<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, id<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></h5>
+								<ul class="tsd-parameters">
+									<li class="tsd-parameter-signature">
+										<ul class="tsd-signatures tsd-kind-type-literal tsd-is-external">
+											<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>message<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, id<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+										</ul>
+										<ul class="tsd-descriptions">
+											<li class="tsd-description">
+												<h4 class="tsd-parameters-title">Parameters</h4>
+												<ul class="tsd-parameters">
+													<li>
+														<h5>message: <span class="tsd-signature-type">string</span></h5>
+													</li>
+													<li>
+														<h5>id: <span class="tsd-signature-type">number</span></h5>
+													</li>
+												</ul>
+												<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+											</li>
+										</ul>
+									</li>
+								</ul>
+							</li>
+						</ul>
+						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">T</span></h4>
+					</li>
+					<li class="tsd-description">
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in node_modules/eris/index.d.ts:563</li>
+							</ul>
+						</aside>
+						<h4 class="tsd-parameters-title">Parameters</h4>
+						<ul class="tsd-parameters">
+							<li>
+								<h5>event: <span class="tsd-signature-type">&quot;webhooksUpdate&quot;</span></h5>
+							</li>
+							<li>
+								<h5>listener: <span class="tsd-signature-symbol">(</span>data<span class="tsd-signature-symbol">: </span><a href="eris.webhookdata.html" class="tsd-signature-type" data-tsd-kind="Interface">WebhookData</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></h5>
+								<ul class="tsd-parameters">
+									<li class="tsd-parameter-signature">
+										<ul class="tsd-signatures tsd-kind-type-literal tsd-is-external">
+											<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>data<span class="tsd-signature-symbol">: </span><a href="eris.webhookdata.html" class="tsd-signature-type" data-tsd-kind="Interface">WebhookData</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+										</ul>
+										<ul class="tsd-descriptions">
+											<li class="tsd-description">
+												<h4 class="tsd-parameters-title">Parameters</h4>
+												<ul class="tsd-parameters">
+													<li>
+														<h5>data: <a href="eris.webhookdata.html" class="tsd-signature-type" data-tsd-kind="Interface">WebhookData</a></h5>
+													</li>
+												</ul>
+												<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+											</li>
+										</ul>
+									</li>
+								</ul>
+							</li>
+						</ul>
+						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">T</span></h4>
+					</li>
+					<li class="tsd-description">
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in node_modules/eris/index.d.ts:564</li>
+							</ul>
+						</aside>
+						<h4 class="tsd-parameters-title">Parameters</h4>
+						<ul class="tsd-parameters">
+							<li>
+								<h5>event: <span class="tsd-signature-type">string</span></h5>
+							</li>
+							<li>
+								<h5>listener: <span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">...</span>args<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></h5>
+								<ul class="tsd-parameters">
+									<li class="tsd-parameter-signature">
+										<ul class="tsd-signatures tsd-kind-type-literal tsd-is-external">
+											<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">...</span>args<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+										</ul>
+										<ul class="tsd-descriptions">
+											<li class="tsd-description">
+												<h4 class="tsd-parameters-title">Parameters</h4>
+												<ul class="tsd-parameters">
+													<li>
+														<h5><span class="tsd-flag ts-flagRest">Rest</span> <span class="tsd-signature-symbol">...</span>args: <span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span></h5>
+													</li>
+												</ul>
+												<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+											</li>
+										</ul>
+									</li>
+								</ul>
+							</li>
+						</ul>
+						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">T</span></h4>
+					</li>
+				</ul>
+			</section>
+		</div>
+		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
+			<nav class="tsd-navigation primary">
+				<ul>
+					<li class=" ">
+						<a href="../index.html">Exports</a>
+					</li>
+					<li class="label tsd-is-external">
+						<span>Externals</span>
+					</li>
+					<li class="current tsd-kind-namespace tsd-is-external">
+						<a href="../modules/eris.html">Eris</a>
+					</li>
+				</ul>
+			</nav>
+			<nav class="tsd-navigation secondary menu-sticky">
+				<ul class="before-current">
+				</ul>
+				<ul class="current">
+					<li class="current tsd-kind-interface tsd-parent-kind-namespace tsd-has-type-parameter tsd-is-external">
+						<a href="eris.shardevents.html" class="tsd-kind-icon">Shard<wbr>Events</a>
+					</li>
+				</ul>
+				<ul class="after-current">
+				</ul>
+			</nav>
+		</div>
+	</div>
+</div>
+<footer class="with-border-bottom">
+	<div class="container">
+		<h2>Legend</h2>
+		<div class="tsd-legend-group">
+			<ul class="tsd-legend">
+				<li class="tsd-kind-constructor tsd-parent-kind-class"><span class="tsd-kind-icon">Constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class"><span class="tsd-kind-icon">Accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-interface"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-interface"><span class="tsd-kind-icon">Method</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-constructor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited constructor</span></li>
+			</ul>
+		</div>
+	</div>
+</footer>
+<div class="container tsd-generator">
+	<p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p>
+</div>
+<div class="overlay"></div>
+<script src="../assets/js/main.js"></script>
+</body>
+</html>
