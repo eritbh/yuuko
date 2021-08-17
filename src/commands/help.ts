@@ -1,6 +1,6 @@
 /** @module Yuuko */
 
-import {Command} from '../Yuuko';
+import {Command, CommandProcess, CommandRequirements, GuildCommandProcess, PrivateCommandProcess} from '../Yuuko';
 
 /**
  * Returns the help text for a command.
@@ -11,7 +11,11 @@ import {Command} from '../Yuuko';
  * in usage examples within the returned text.
  * @returns {string} The help text.
  */
-function helpText (command: Command & {help?: any}, displayedCommandName: string, prefix: string) {
+function helpText (
+	command: CommandWithHelp,
+	displayedCommandName: string,
+	prefix: string,
+) {
 	if (!command.help) {
 		return `No help available for \`${displayedCommandName}\`.`;
 	}
@@ -36,6 +40,25 @@ function helpText (command: Command & {help?: any}, displayedCommandName: string
 async function filterAsync<T> (array: T[], filter: (el: T, i: number, arr: T[]) => Promise<boolean>): Promise<T[]> {
 	const bits = await Promise.all(array.map((el, i) => filter(el, i, array)));
 	return array.filter(() => bits.shift());
+}
+
+export interface CommandHelp {
+	desc?: string;
+	args?: string;
+}
+
+export class CommandWithHelp extends Command {
+	help: CommandHelp;
+
+	constructor (names: string | string[], help: CommandHelp, process: CommandProcess, requirements?: CommandRequirements);
+	constructor (names: string | string[], help: CommandHelp, process: GuildCommandProcess, requirements: CommandRequirements & { guildOnly: true; dmOnly?: false });
+	constructor (names: string | string[], help: CommandHelp, process: PrivateCommandProcess, requirements: CommandRequirements & { dmOnly: true; guildOnly?: false })
+	constructor (names: string | string[], help: CommandHelp, process: CommandProcess | GuildCommandProcess | PrivateCommandProcess, requirements?: CommandRequirements) {
+		// Overloads for nice intellisense make things really dumb internally
+		// @ts-expect-error
+		super(names, process, requirements);
+		this.help = help;
+	}
 }
 
 const helpCommand = new Command([
@@ -80,7 +103,7 @@ const helpCommand = new Command([
 			const commandDisplay = `${prefix}${[...parentCommands.map(c => c.names[0]), command!.names[0]].join(' ')}`;
 
 			// Generate the help text for this command
-			message = `**=== Help: \`${commandDisplay}\` ===**\n${helpText(command!, commandDisplay, prefix)}`;
+			message = `**=== Help: \`${commandDisplay}\` ===**\n${helpText(command as CommandWithHelp, commandDisplay, prefix)}`;
 		} else {
 			// If this command doesn't exist, tell the user
 			message = `**=== Help: Unknown Command ===**\nMake sure you spelled the command name right, and that this bot has it. Do \`${prefix}help\` with no arguments to see a list of commands.`;
