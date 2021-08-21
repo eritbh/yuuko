@@ -142,7 +142,7 @@ module.exports = new Command('test', (message, args, context) => {
 ```ts
 // index.ts
 import {Client} from 'yuuko';
-const mybot = new CLient({...});
+const mybot = new Client({...});
 mybot.extendContext({
   myCustomThing: 'This is neat!',
 });
@@ -156,6 +156,47 @@ export default new Command('test', (message, args, context) => {
   context.myCustomThing // The string 'This is neat!' that was set above
 });
 ```
+
+# Subcommands
+
+Subcommands allow you to create structure and heirarchy in your commands, grouping related features together under a parent command in an intuitive way. Subcommands inherit the requirements of the parent command, but can also include their own requirements. The context object's `commandName` property will also include parent command names, so you can know exactly how the command was called.
+
+```js
+// commands/test.js
+const {Command} = require('yuuko');
+
+module.exports = new Command('foo', (message, args, context) => {
+  message.channel.createMessage('Foo!');
+  context.commandName // The string 'foo'
+}, {
+  guildOnly: true,
+})
+  .addSubcommand(new Command('bar', (message, args, context => {
+    message.channel.createMessage('Bar!');
+    context.commandName 
+  }, {
+    owner: true,
+  })));
+```
+```ts
+// commands/test.js
+import {Command} from 'yuuko';
+
+export default new Command('test', (message, args, context) => {
+  message.channel.createMessage('Test!');
+  context.commandName // The string 'foo'
+}, {
+  guildOnly: true,
+})
+  .addSubcommand(new Command('something', (message, args, context) => {
+    message.channel.createMessage('Secret command!');
+    context.commandName 
+  }, {
+    owner: true,
+  }));
+```
+
+With the command shown in this example, users of your bot can use the `.test` command as long as they're in a server, and only you can use the `.test something` command in server. Nesting subcommands is supported, and commands will receive arguments starting with the first word of the message that doesn't name a subcommand.
 
 # Custom prefixes
 
