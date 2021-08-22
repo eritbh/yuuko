@@ -1,7 +1,7 @@
 {
   "name": "yuuko",
   "version": "2.3.0",
-  "description": "A Discord bot base that I did for some reason.",
+  "description": "No-frills Discord command framework for Eris",
   "main": "dist/Yuuko.js",
   "types": "dist/Yuuko.d.ts",
   "files": [
