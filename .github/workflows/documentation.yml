@@ -12,12 +12,13 @@ jobs:
     steps:
       - uses: actions/checkout@v1
 
+      - uses: actions/setup-node@v2
+        with:
+          node-version: 15 # earliest node that ships with npm@7
+
       - name: Install dependencies
         run: |
-          # Direct dependencies
-          yarn install
-          # Peer dependencies
-          npm i --no-save eris@0.15
+          npm ci
 
       - name: Generate and push documentation
         env:
@@ -36,7 +37,7 @@ jobs:
           cd ..
 
           # Generate documentation file and add file to list of versions
-          yarn run typedoc src/Yuuko.ts --out ".temp/docs/$TAG_NAME" --readme none
+          npx typedoc src/Yuuko.ts --out ".temp/docs/$TAG_NAME" --readme none
           echo "- '$TAG_NAME'" >> .temp/_data/docs.yml
 
           # Add generated files that start with underscores to Jekyll `include`
