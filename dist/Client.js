@@ -40,6 +40,7 @@ const Command_1 = require("./Command");
 const EventListener_1 = require("./EventListener");
 const defaultMessageListener_1 = __importDefault(require("./defaultMessageListener"));
 const util_1 = require("./util");
+const deprecations = __importStar(require("./deprecations"));
 /** The client. */
 class Client extends Eris.Client {
     constructor(options) {
@@ -62,6 +63,7 @@ class Client extends Eris.Client {
          * If true, requirements set via `setGlobalRequirements` will be ignored. Used
          * for debugging, probably shouldn't be used in production.
          * @deprecated Pass no `globalCommandRequirements` client option instead.
+         * See https://github.com/eritbh/yuuko/issues/89
          */
         this.ignoreGlobalRequirements = false;
         /**
@@ -107,8 +109,10 @@ class Client extends Eris.Client {
             this.ignoreBots = options.ignoreBots;
         if (options.globalCommandRequirements !== undefined)
             this.globalCommandRequirements = options.globalCommandRequirements;
-        if (options.ignoreGlobalRequirements !== undefined)
+        if (options.ignoreGlobalRequirements !== undefined) {
+            deprecations.ignoreGlobalRequirements();
             this.ignoreGlobalRequirements = options.ignoreGlobalRequirements;
+        }
         if (options.disableDefaultMessageListener !== undefined)
             this.disableDefaultMessageListener = options.disableDefaultMessageListener;
         // Warn if we're using an empty prefix
@@ -209,8 +213,10 @@ class Client extends Eris.Client {
     /**
      * Set requirements for all commands at once
      * @deprecated Use the `globalCommandRequirements` client option instead.
+     * See https://github.com/eritbh/yuuko/issues/89
      */
     setGlobalRequirements(requirements) {
+        deprecations.setGlobalRequirements();
         Object.assign(this.globalCommandRequirements, requirements);
         return this;
     }
@@ -367,23 +373,27 @@ class Client extends Eris.Client {
     }
     /**
      * Alias for `addDir`.
-     * @deprecated
+     * @deprecated Use `addDir` instead. See
+     * https://github.com/eritbh/yuuko/issues/88
      */
     addCommandDir(dirname) {
+        deprecations.addCommandDir();
         return this.addDir(dirname);
     }
     /**
      * Alias for `addFile`.
-     * @deprecated
+     * @deprecated Use `addFile` instead. See https://github.com/eritbh/yuuko/issues/88
      */
     addCommandFile(filename) {
+        deprecations.addCommandFile();
         return this.addFile(filename);
     }
     /**
      * Alias for `reloadFiles()`.
-     * @deprecated
+     * @deprecated Use `reloadFiles` instead. See https://github.com/eritbh/yuuko/issues/88
      */
     reloadCommands() {
+        deprecations.reloadCommands();
         return this.reloadFiles();
     }
     /**
@@ -455,11 +465,17 @@ class Client extends Eris.Client {
             return null;
         });
     }
-    /** @deprecated Alias of `prefix` */
+    /**
+     * Alias of `prefix`.
+     * @deprecated Use `prefix` instead.
+     * See https://github.com/eritbh/yuuko/issues/90
+     */
     get defaultPrefix() {
+        deprecations.defaultPrefix();
         return this.prefix;
     }
     set defaultPrefix(val) {
+        deprecations.defaultPrefix();
         this.prefix = val;
     }
 }

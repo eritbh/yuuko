@@ -27,6 +27,7 @@ export interface ClientOptions extends Eris.ClientOptions {
      * If true, requirements set via the globalCommandRequirements option will
      * be ignored.
      * @deprecated Pass no `globalCommandRequirements` client option instead.
+     * See https://github.com/eritbh/yuuko/issues/89
     */
     ignoreGlobalRequirements?: boolean;
     /**
@@ -39,7 +40,8 @@ export interface ClientOptions extends Eris.ClientOptions {
 }
 /**
  * Information returned from the API about the bot's OAuth application.
- * @deprecated Use `Eris.OAuthApplicationInfo` instead (this is a direct alias)
+ * @deprecated Use `Eris.OAuthApplicationInfo` instead. See
+ * https://github.com/eritbh/yuuko/issues/91
  */
 export declare type ClientOAuthApplication = Eris.OAuthApplicationInfo;
 export interface PrefixFunction {
@@ -69,6 +71,7 @@ export declare class Client extends Eris.Client implements ClientOptions {
      * If true, requirements set via `setGlobalRequirements` will be ignored. Used
      * for debugging, probably shouldn't be used in production.
      * @deprecated Pass no `globalCommandRequirements` client option instead.
+     * See https://github.com/eritbh/yuuko/issues/89
      */
     ignoreGlobalRequirements: boolean;
     /**
@@ -121,6 +124,7 @@ export declare class Client extends Eris.Client implements ClientOptions {
     /**
      * Set requirements for all commands at once
      * @deprecated Use the `globalCommandRequirements` client option instead.
+     * See https://github.com/eritbh/yuuko/issues/89
      */
     setGlobalRequirements(requirements: CommandRequirements): this;
     /** Register a command to the client. */
@@ -147,17 +151,18 @@ export declare class Client extends Eris.Client implements ClientOptions {
     reloadFiles(): this;
     /**
      * Alias for `addDir`.
-     * @deprecated
+     * @deprecated Use `addDir` instead. See
+     * https://github.com/eritbh/yuuko/issues/88
      */
     addCommandDir(dirname: string): this;
     /**
      * Alias for `addFile`.
-     * @deprecated
+     * @deprecated Use `addFile` instead. See https://github.com/eritbh/yuuko/issues/88
      */
     addCommandFile(filename: string): this;
     /**
      * Alias for `reloadFiles()`.
-     * @deprecated
+     * @deprecated Use `reloadFiles` instead. See https://github.com/eritbh/yuuko/issues/88
      */
     reloadCommands(): this;
     /**
@@ -177,7 +182,11 @@ export declare class Client extends Eris.Client implements ClientOptions {
     prefixes(func: PrefixFunction): this;
     getPrefixesForMessage(msg: any): Promise<string[]>;
     splitPrefixFromContent(msg: Eris.Message): Promise<[string, string] | null>;
-    /** @deprecated Alias of `prefix` */
+    /**
+     * Alias of `prefix`.
+     * @deprecated Use `prefix` instead.
+     * See https://github.com/eritbh/yuuko/issues/90
+     */
     get defaultPrefix(): string;
     set defaultPrefix(val: string);
 }
