@@ -1,0 +1,1532 @@
+<!doctype html>
+<html class="default no-js">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>TextChannel | yuuko</title>
+	<meta name="description" content="Documentation for yuuko">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="../assets/css/main.css">
+	<script async src="../assets/js/search.js" id="search-script"></script>
+</head>
+<body>
+<header>
+	<div class="tsd-page-toolbar">
+		<div class="container">
+			<div class="table-wrap">
+				<div class="table-cell" id="tsd-search" data-index="../assets/js/search.json" data-base="..">
+					<div class="field">
+						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
+						<input id="tsd-search-field" type="text" />
+					</div>
+					<ul class="results">
+						<li class="state loading">Preparing search index...</li>
+						<li class="state failure">The search index is not available</li>
+					</ul>
+					<a href="../index.html" class="title">yuuko</a>
+				</div>
+				<div class="table-cell" id="tsd-widgets">
+					<div id="tsd-filter">
+						<a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a>
+						<div class="tsd-filter-group">
+							<div class="tsd-select" id="tsd-filter-visibility">
+								<span class="tsd-select-label">All</span>
+								<ul class="tsd-select-list">
+									<li data-value="public">Public</li>
+									<li data-value="protected">Public/Protected</li>
+									<li data-value="private" class="selected">All</li>
+								</ul>
+							</div>
+							<input type="checkbox" id="tsd-filter-inherited" checked />
+							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
+							<input type="checkbox" id="tsd-filter-externals" checked />
+							<label class="tsd-widget" for="tsd-filter-externals">Externals</label>
+						</div>
+					</div>
+					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="tsd-page-title">
+		<div class="container">
+			<ul class="tsd-breadcrumb">
+				<li>
+					<a href="../index.html">yuuko</a>
+				</li>
+				<li>
+					<a href="../modules/Eris.html">Eris</a>
+				</li>
+				<li>
+					<a href="Eris.TextChannel.html">TextChannel</a>
+				</li>
+			</ul>
+			<h1>Class TextChannel</h1>
+		</div>
+	</div>
+</header>
+<div class="container container-main">
+	<div class="row">
+		<div class="col-8 col-content">
+			<section class="tsd-panel tsd-hierarchy">
+				<h3>Hierarchy</h3>
+				<ul class="tsd-hierarchy">
+					<li>
+						<a href="Eris.GuildChannel.html" class="tsd-signature-type" data-tsd-kind="Class">GuildChannel</a>
+						<ul class="tsd-hierarchy">
+							<li>
+								<span class="target">TextChannel</span>
+								<ul class="tsd-hierarchy">
+									<li>
+										<a href="Eris.NewsChannel.html" class="tsd-signature-type" data-tsd-kind="Class">NewsChannel</a>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</section>
+			<section class="tsd-panel">
+				<h3>Implements</h3>
+				<ul class="tsd-hierarchy">
+					<li><a href="../interfaces/Eris.GuildTextable.html" class="tsd-signature-type" data-tsd-kind="Interface">GuildTextable</a></li>
+					<li><a href="../interfaces/Eris.Invitable.html" class="tsd-signature-type" data-tsd-kind="Interface">Invitable</a></li>
+				</ul>
+			</section>
+			<section class="tsd-panel-group tsd-index-group">
+				<h2>Index</h2>
+				<section class="tsd-panel tsd-index-panel">
+					<div class="tsd-index-content">
+						<section class="tsd-index-section tsd-is-external">
+							<h3>Constructors</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-constructor tsd-parent-kind-class tsd-is-overwrite tsd-is-external"><a href="Eris.TextChannel.html#constructor" class="tsd-kind-icon">constructor</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section tsd-is-external">
+							<h3>Properties</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-external"><a href="Eris.TextChannel.html#client" class="tsd-kind-icon">client</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-external"><a href="Eris.TextChannel.html#createdAt" class="tsd-kind-icon">created<wbr>At</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-external"><a href="Eris.TextChannel.html#guild" class="tsd-kind-icon">guild</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-external"><a href="Eris.TextChannel.html#id" class="tsd-kind-icon">id</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-external"><a href="Eris.TextChannel.html#lastMessageID" class="tsd-kind-icon">last<wbr>MessageID</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-external"><a href="Eris.TextChannel.html#lastPinTimestamp" class="tsd-kind-icon">last<wbr>Pin<wbr>Timestamp</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-external"><a href="Eris.TextChannel.html#mention" class="tsd-kind-icon">mention</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-external"><a href="Eris.TextChannel.html#messages" class="tsd-kind-icon">messages</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-external"><a href="Eris.TextChannel.html#name" class="tsd-kind-icon">name</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-external"><a href="Eris.TextChannel.html#nsfw" class="tsd-kind-icon">nsfw</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-external"><a href="Eris.TextChannel.html#parentID" class="tsd-kind-icon">parentID</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-external"><a href="Eris.TextChannel.html#permissionOverwrites" class="tsd-kind-icon">permission<wbr>Overwrites</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-external"><a href="Eris.TextChannel.html#position" class="tsd-kind-icon">position</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-external"><a href="Eris.TextChannel.html#rateLimitPerUser" class="tsd-kind-icon">rate<wbr>Limit<wbr>Per<wbr>User</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-external"><a href="Eris.TextChannel.html#topic" class="tsd-kind-icon">topic</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-overwrite tsd-is-external"><a href="Eris.TextChannel.html#type" class="tsd-kind-icon">type</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section tsd-is-external">
+							<h3>Methods</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-external"><a href="Eris.TextChannel.html#addMessageReaction" class="tsd-kind-icon">add<wbr>Message<wbr>Reaction</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-external"><a href="Eris.TextChannel.html#createInvite" class="tsd-kind-icon">create<wbr>Invite</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-external"><a href="Eris.TextChannel.html#createMessage" class="tsd-kind-icon">create<wbr>Message</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-external"><a href="Eris.TextChannel.html#createWebhook" class="tsd-kind-icon">create<wbr>Webhook</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external"><a href="Eris.TextChannel.html#delete" class="tsd-kind-icon">delete</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-external"><a href="Eris.TextChannel.html#deleteMessage" class="tsd-kind-icon">delete<wbr>Message</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-external"><a href="Eris.TextChannel.html#deleteMessages" class="tsd-kind-icon">delete<wbr>Messages</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external"><a href="Eris.TextChannel.html#deletePermission" class="tsd-kind-icon">delete<wbr>Permission</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-overwrite tsd-is-external"><a href="Eris.TextChannel.html#edit" class="tsd-kind-icon">edit</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-external"><a href="Eris.TextChannel.html#editMessage" class="tsd-kind-icon">edit<wbr>Message</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external"><a href="Eris.TextChannel.html#editPermission" class="tsd-kind-icon">edit<wbr>Permission</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external"><a href="Eris.TextChannel.html#editPosition" class="tsd-kind-icon">edit<wbr>Position</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-overwrite tsd-is-external"><a href="Eris.TextChannel.html#getInvites" class="tsd-kind-icon">get<wbr>Invites</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-external"><a href="Eris.TextChannel.html#getMessage" class="tsd-kind-icon">get<wbr>Message</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-external"><a href="Eris.TextChannel.html#getMessageReaction" class="tsd-kind-icon">get<wbr>Message<wbr>Reaction</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-external"><a href="Eris.TextChannel.html#getMessages" class="tsd-kind-icon">get<wbr>Messages</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-external"><a href="Eris.TextChannel.html#getPins" class="tsd-kind-icon">get<wbr>Pins</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-external"><a href="Eris.TextChannel.html#getWebhooks" class="tsd-kind-icon">get<wbr>Webhooks</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external"><a href="Eris.TextChannel.html#inspect" class="tsd-kind-icon">inspect</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external"><a href="Eris.TextChannel.html#permissionsOf" class="tsd-kind-icon">permissions<wbr>Of</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-external"><a href="Eris.TextChannel.html#pinMessage" class="tsd-kind-icon">pin<wbr>Message</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-external"><a href="Eris.TextChannel.html#purge" class="tsd-kind-icon">purge</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-external"><a href="Eris.TextChannel.html#removeMessageReaction" class="tsd-kind-icon">remove<wbr>Message<wbr>Reaction</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-external"><a href="Eris.TextChannel.html#removeMessageReactionEmoji" class="tsd-kind-icon">remove<wbr>Message<wbr>Reaction<wbr>Emoji</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-external"><a href="Eris.TextChannel.html#removeMessageReactions" class="tsd-kind-icon">remove<wbr>Message<wbr>Reactions</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-external"><a href="Eris.TextChannel.html#sendTyping" class="tsd-kind-icon">send<wbr>Typing</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external"><a href="Eris.TextChannel.html#toJSON" class="tsd-kind-icon">toJSON</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external"><a href="Eris.TextChannel.html#toString" class="tsd-kind-icon">to<wbr>String</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-external"><a href="Eris.TextChannel.html#unpinMessage" class="tsd-kind-icon">unpin<wbr>Message</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-external"><a href="Eris.TextChannel.html#unsendMessage" class="tsd-kind-icon">unsend<wbr>Message</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-static tsd-is-external"><a href="Eris.TextChannel.html#from" class="tsd-kind-icon">from</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-static tsd-is-external"><a href="Eris.TextChannel.html#getCreatedAt" class="tsd-kind-icon">get<wbr>Created<wbr>At</a></li>
+							</ul>
+						</section>
+					</div>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group tsd-is-external">
+				<h2>Constructors</h2>
+				<section class="tsd-panel tsd-member tsd-kind-constructor tsd-parent-kind-class tsd-is-overwrite tsd-is-external">
+					<a name="constructor" class="tsd-anchor"></a>
+					<h3>constructor</h3>
+					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class tsd-is-overwrite tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Text<wbr>Channel<span class="tsd-signature-symbol">(</span>data<span class="tsd-signature-symbol">: </span><a href="../interfaces/Eris.BaseData.html" class="tsd-signature-type" data-tsd-kind="Interface">BaseData</a>, guild<span class="tsd-signature-symbol">: </span><a href="Eris.Guild.html" class="tsd-signature-type" data-tsd-kind="Class">Guild</a>, messageLimit<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="Eris.TextChannel.html" class="tsd-signature-type" data-tsd-kind="Class">TextChannel</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Overrides <a href="Eris.GuildChannel.html">GuildChannel</a>.<a href="Eris.GuildChannel.html#constructor">constructor</a></p>
+								<ul>
+									<li>Defined in node_modules/eris/index.d.ts:2522</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>data: <a href="../interfaces/Eris.BaseData.html" class="tsd-signature-type" data-tsd-kind="Interface">BaseData</a></h5>
+								</li>
+								<li>
+									<h5>guild: <a href="Eris.Guild.html" class="tsd-signature-type" data-tsd-kind="Class">Guild</a></h5>
+								</li>
+								<li>
+									<h5>messageLimit: <span class="tsd-signature-type">number</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="Eris.TextChannel.html" class="tsd-signature-type" data-tsd-kind="Class">TextChannel</a></h4>
+						</li>
+					</ul>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group tsd-is-external">
+				<h2>Properties</h2>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-external">
+					<a name="client" class="tsd-anchor"></a>
+					<h3>client</h3>
+					<div class="tsd-signature tsd-kind-icon">client<span class="tsd-signature-symbol">:</span> <a href="Eris.Client.html" class="tsd-signature-type" data-tsd-kind="Class">Client</a></div>
+					<aside class="tsd-sources">
+						<p>Inherited from <a href="Eris.GuildChannel.html">GuildChannel</a>.<a href="Eris.GuildChannel.html#client">client</a></p>
+						<ul>
+							<li>Defined in node_modules/eris/index.d.ts:1421</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-external">
+					<a name="createdAt" class="tsd-anchor"></a>
+					<h3>created<wbr>At</h3>
+					<div class="tsd-signature tsd-kind-icon">created<wbr>At<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<aside class="tsd-sources">
+						<p>Inherited from <a href="Eris.GuildChannel.html">GuildChannel</a>.<a href="Eris.GuildChannel.html#createdAt">createdAt</a></p>
+						<ul>
+							<li>Defined in node_modules/eris/index.d.ts:1422</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-external">
+					<a name="guild" class="tsd-anchor"></a>
+					<h3>guild</h3>
+					<div class="tsd-signature tsd-kind-icon">guild<span class="tsd-signature-symbol">:</span> <a href="Eris.Guild.html" class="tsd-signature-type" data-tsd-kind="Class">Guild</a></div>
+					<aside class="tsd-sources">
+						<p>Inherited from <a href="Eris.GuildChannel.html">GuildChannel</a>.<a href="Eris.GuildChannel.html#guild">guild</a></p>
+						<ul>
+							<li>Defined in node_modules/eris/index.d.ts:2077</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-external">
+					<a name="id" class="tsd-anchor"></a>
+					<h3>id</h3>
+					<div class="tsd-signature tsd-kind-icon">id<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<aside class="tsd-sources">
+						<p>Inherited from <a href="Eris.GuildChannel.html">GuildChannel</a>.<a href="Eris.GuildChannel.html#id">id</a></p>
+						<ul>
+							<li>Defined in node_modules/eris/index.d.ts:1423</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-external">
+					<a name="lastMessageID" class="tsd-anchor"></a>
+					<h3>last<wbr>MessageID</h3>
+					<div class="tsd-signature tsd-kind-icon">last<wbr>MessageID<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<aside class="tsd-sources">
+						<p>Implementation of <a href="../interfaces/Eris.GuildTextable.html">GuildTextable</a>.<a href="../interfaces/Eris.GuildTextable.html#lastMessageID">lastMessageID</a></p>
+						<ul>
+							<li>Defined in node_modules/eris/index.d.ts:2516</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-external">
+					<a name="lastPinTimestamp" class="tsd-anchor"></a>
+					<h3>last<wbr>Pin<wbr>Timestamp</h3>
+					<div class="tsd-signature tsd-kind-icon">last<wbr>Pin<wbr>Timestamp<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span></div>
+					<aside class="tsd-sources">
+						<p>Implementation of <a href="../interfaces/Eris.GuildTextable.html">GuildTextable</a>.<a href="../interfaces/Eris.GuildTextable.html#lastPinTimestamp">lastPinTimestamp</a></p>
+						<ul>
+							<li>Defined in node_modules/eris/index.d.ts:2517</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-external">
+					<a name="mention" class="tsd-anchor"></a>
+					<h3>mention</h3>
+					<div class="tsd-signature tsd-kind-icon">mention<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<aside class="tsd-sources">
+						<p>Inherited from <a href="Eris.GuildChannel.html">GuildChannel</a>.<a href="Eris.GuildChannel.html#mention">mention</a></p>
+						<ul>
+							<li>Defined in node_modules/eris/index.d.ts:1424</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-external">
+					<a name="messages" class="tsd-anchor"></a>
+					<h3>messages</h3>
+					<div class="tsd-signature tsd-kind-icon">messages<span class="tsd-signature-symbol">:</span> <a href="Eris.Collection.html" class="tsd-signature-type" data-tsd-kind="Class">Collection</a><span class="tsd-signature-symbol">&lt;</span><a href="Eris.Message.html" class="tsd-signature-type" data-tsd-kind="Class">Message</a><span class="tsd-signature-symbol">&lt;</span><a href="Eris.TextChannel.html" class="tsd-signature-type" data-tsd-kind="Class">TextChannel</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></div>
+					<aside class="tsd-sources">
+						<p>Implementation of <a href="../interfaces/Eris.GuildTextable.html">GuildTextable</a>.<a href="../interfaces/Eris.GuildTextable.html#messages">messages</a></p>
+						<ul>
+							<li>Defined in node_modules/eris/index.d.ts:2518</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-external">
+					<a name="name" class="tsd-anchor"></a>
+					<h3>name</h3>
+					<div class="tsd-signature tsd-kind-icon">name<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<aside class="tsd-sources">
+						<p>Inherited from <a href="Eris.GuildChannel.html">GuildChannel</a>.<a href="Eris.GuildChannel.html#name">name</a></p>
+						<ul>
+							<li>Defined in node_modules/eris/index.d.ts:2078</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-external">
+					<a name="nsfw" class="tsd-anchor"></a>
+					<h3>nsfw</h3>
+					<div class="tsd-signature tsd-kind-icon">nsfw<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+					<aside class="tsd-sources">
+						<p>Inherited from <a href="Eris.GuildChannel.html">GuildChannel</a>.<a href="Eris.GuildChannel.html#nsfw">nsfw</a></p>
+						<ul>
+							<li>Defined in node_modules/eris/index.d.ts:2079</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-external">
+					<a name="parentID" class="tsd-anchor"></a>
+					<h3>parentID</h3>
+					<div class="tsd-signature tsd-kind-icon">parentID<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></div>
+					<aside class="tsd-sources">
+						<p>Inherited from <a href="Eris.GuildChannel.html">GuildChannel</a>.<a href="Eris.GuildChannel.html#parentID">parentID</a></p>
+						<ul>
+							<li>Defined in node_modules/eris/index.d.ts:2080</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-external">
+					<a name="permissionOverwrites" class="tsd-anchor"></a>
+					<h3>permission<wbr>Overwrites</h3>
+					<div class="tsd-signature tsd-kind-icon">permission<wbr>Overwrites<span class="tsd-signature-symbol">:</span> <a href="Eris.Collection.html" class="tsd-signature-type" data-tsd-kind="Class">Collection</a><span class="tsd-signature-symbol">&lt;</span><a href="Eris.PermissionOverwrite.html" class="tsd-signature-type" data-tsd-kind="Class">PermissionOverwrite</a><span class="tsd-signature-symbol">&gt;</span></div>
+					<aside class="tsd-sources">
+						<p>Inherited from <a href="Eris.GuildChannel.html">GuildChannel</a>.<a href="Eris.GuildChannel.html#permissionOverwrites">permissionOverwrites</a></p>
+						<ul>
+							<li>Defined in node_modules/eris/index.d.ts:2081</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-external">
+					<a name="position" class="tsd-anchor"></a>
+					<h3>position</h3>
+					<div class="tsd-signature tsd-kind-icon">position<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<aside class="tsd-sources">
+						<p>Inherited from <a href="Eris.GuildChannel.html">GuildChannel</a>.<a href="Eris.GuildChannel.html#position">position</a></p>
+						<ul>
+							<li>Defined in node_modules/eris/index.d.ts:2082</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-external">
+					<a name="rateLimitPerUser" class="tsd-anchor"></a>
+					<h3>rate<wbr>Limit<wbr>Per<wbr>User</h3>
+					<div class="tsd-signature tsd-kind-icon">rate<wbr>Limit<wbr>Per<wbr>User<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<aside class="tsd-sources">
+						<p>Implementation of <a href="../interfaces/Eris.GuildTextable.html">GuildTextable</a>.<a href="../interfaces/Eris.GuildTextable.html#rateLimitPerUser">rateLimitPerUser</a></p>
+						<ul>
+							<li>Defined in node_modules/eris/index.d.ts:2519</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-external">
+					<a name="topic" class="tsd-anchor"></a>
+					<h3>topic</h3>
+					<div class="tsd-signature tsd-kind-icon">topic<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></div>
+					<aside class="tsd-sources">
+						<p>Implementation of <a href="../interfaces/Eris.GuildTextable.html">GuildTextable</a>.<a href="../interfaces/Eris.GuildTextable.html#topic">topic</a></p>
+						<ul>
+							<li>Defined in node_modules/eris/index.d.ts:2520</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-overwrite tsd-is-external">
+					<a name="type" class="tsd-anchor"></a>
+					<h3>type</h3>
+					<div class="tsd-signature tsd-kind-icon">type<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">0</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">5</span></div>
+					<aside class="tsd-sources">
+						<p>Overrides <a href="Eris.GuildChannel.html">GuildChannel</a>.<a href="Eris.GuildChannel.html#type">type</a></p>
+						<ul>
+							<li>Defined in node_modules/eris/index.d.ts:2521</li>
+						</ul>
+					</aside>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group tsd-is-external">
+				<h2>Methods</h2>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-external">
+					<a name="addMessageReaction" class="tsd-anchor"></a>
+					<h3>add<wbr>Message<wbr>Reaction</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">add<wbr>Message<wbr>Reaction<span class="tsd-signature-symbol">(</span>messageID<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, reaction<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">add<wbr>Message<wbr>Reaction<span class="tsd-signature-symbol">(</span>messageID<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, reaction<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, userID<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Implementation of <a href="../interfaces/Eris.GuildTextable.html">GuildTextable</a>.<a href="../interfaces/Eris.GuildTextable.html#addMessageReaction">addMessageReaction</a></p>
+								<ul>
+									<li>Defined in node_modules/eris/index.d.ts:2523</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>messageID: <span class="tsd-signature-type">string</span></h5>
+								</li>
+								<li>
+									<h5>reaction: <span class="tsd-signature-type">string</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Implementation of <a href="../interfaces/Eris.GuildTextable.html">GuildTextable</a>.<a href="../interfaces/Eris.GuildTextable.html#addMessageReaction">addMessageReaction</a></p>
+								<ul>
+									<li>Defined in node_modules/eris/index.d.ts:2525</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<dl class="tsd-comment-tags">
+									<dt>deprecated</dt>
+									<dd></dd>
+								</dl>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>messageID: <span class="tsd-signature-type">string</span></h5>
+								</li>
+								<li>
+									<h5>reaction: <span class="tsd-signature-type">string</span></h5>
+								</li>
+								<li>
+									<h5>userID: <span class="tsd-signature-type">string</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-external">
+					<a name="createInvite" class="tsd-anchor"></a>
+					<h3>create<wbr>Invite</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">create<wbr>Invite<span class="tsd-signature-symbol">(</span>options<span class="tsd-signature-symbol">?: </span><a href="../interfaces/Eris.CreateInviteOptions.html" class="tsd-signature-type" data-tsd-kind="Interface">CreateInviteOptions</a>, reason<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="Eris.Invite.html" class="tsd-signature-type" data-tsd-kind="Class">Invite</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">&quot;withMetadata&quot;</span><span class="tsd-signature-symbol">, </span><a href="Eris.TextChannel.html" class="tsd-signature-type" data-tsd-kind="Class">TextChannel</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Implementation of <a href="../interfaces/Eris.Invitable.html">Invitable</a>.<a href="../interfaces/Eris.Invitable.html#createInvite">createInvite</a></p>
+								<ul>
+									<li>Defined in node_modules/eris/index.d.ts:2526</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> options: <a href="../interfaces/Eris.CreateInviteOptions.html" class="tsd-signature-type" data-tsd-kind="Interface">CreateInviteOptions</a></h5>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> reason: <span class="tsd-signature-type">string</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="Eris.Invite.html" class="tsd-signature-type" data-tsd-kind="Class">Invite</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">&quot;withMetadata&quot;</span><span class="tsd-signature-symbol">, </span><a href="Eris.TextChannel.html" class="tsd-signature-type" data-tsd-kind="Class">TextChannel</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-external">
+					<a name="createMessage" class="tsd-anchor"></a>
+					<h3>create<wbr>Message</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">create<wbr>Message<span class="tsd-signature-symbol">(</span>content<span class="tsd-signature-symbol">: </span><a href="../modules/Eris.html#MessageContent" class="tsd-signature-type" data-tsd-kind="Type alias">MessageContent</a>, file<span class="tsd-signature-symbol">?: </span><a href="../interfaces/Eris.MessageFile.html" class="tsd-signature-type" data-tsd-kind="Interface">MessageFile</a><span class="tsd-signature-symbol"> | </span><a href="../interfaces/Eris.MessageFile.html" class="tsd-signature-type" data-tsd-kind="Interface">MessageFile</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="Eris.Message.html" class="tsd-signature-type" data-tsd-kind="Class">Message</a><span class="tsd-signature-symbol">&lt;</span><a href="Eris.TextChannel.html" class="tsd-signature-type" data-tsd-kind="Class">TextChannel</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Implementation of <a href="../interfaces/Eris.GuildTextable.html">GuildTextable</a>.<a href="../interfaces/Eris.GuildTextable.html#createMessage">createMessage</a></p>
+								<ul>
+									<li>Defined in node_modules/eris/index.d.ts:2527</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>content: <a href="../modules/Eris.html#MessageContent" class="tsd-signature-type" data-tsd-kind="Type alias">MessageContent</a></h5>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> file: <a href="../interfaces/Eris.MessageFile.html" class="tsd-signature-type" data-tsd-kind="Interface">MessageFile</a><span class="tsd-signature-symbol"> | </span><a href="../interfaces/Eris.MessageFile.html" class="tsd-signature-type" data-tsd-kind="Interface">MessageFile</a><span class="tsd-signature-symbol">[]</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="Eris.Message.html" class="tsd-signature-type" data-tsd-kind="Class">Message</a><span class="tsd-signature-symbol">&lt;</span><a href="Eris.TextChannel.html" class="tsd-signature-type" data-tsd-kind="Class">TextChannel</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-external">
+					<a name="createWebhook" class="tsd-anchor"></a>
+					<h3>create<wbr>Webhook</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">create<wbr>Webhook<span class="tsd-signature-symbol">(</span>options<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">{ </span>avatar<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>name<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> }</span>, reason<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/Eris.Webhook.html" class="tsd-signature-type" data-tsd-kind="Interface">Webhook</a><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Implementation of <a href="../interfaces/Eris.GuildTextable.html">GuildTextable</a>.<a href="../interfaces/Eris.GuildTextable.html#createWebhook">createWebhook</a></p>
+								<ul>
+									<li>Defined in node_modules/eris/index.d.ts:2528</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>options: <span class="tsd-signature-symbol">{ </span>avatar<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>name<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> }</span></h5>
+									<ul class="tsd-parameters">
+										<li class="tsd-parameter">
+											<h5><span class="tsd-flag ts-flagOptional">Optional</span> avatar<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></h5>
+										</li>
+										<li class="tsd-parameter">
+											<h5>name<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></h5>
+										</li>
+									</ul>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> reason: <span class="tsd-signature-type">string</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/Eris.Webhook.html" class="tsd-signature-type" data-tsd-kind="Interface">Webhook</a><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external">
+					<a name="delete" class="tsd-anchor"></a>
+					<h3>delete</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">delete<span class="tsd-signature-symbol">(</span>reason<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Inherited from <a href="Eris.GuildChannel.html">GuildChannel</a>.<a href="Eris.GuildChannel.html#delete">delete</a></p>
+								<ul>
+									<li>Defined in node_modules/eris/index.d.ts:2085</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> reason: <span class="tsd-signature-type">string</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-external">
+					<a name="deleteMessage" class="tsd-anchor"></a>
+					<h3>delete<wbr>Message</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">delete<wbr>Message<span class="tsd-signature-symbol">(</span>messageID<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, reason<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Implementation of <a href="../interfaces/Eris.GuildTextable.html">GuildTextable</a>.<a href="../interfaces/Eris.GuildTextable.html#deleteMessage">deleteMessage</a></p>
+								<ul>
+									<li>Defined in node_modules/eris/index.d.ts:2529</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>messageID: <span class="tsd-signature-type">string</span></h5>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> reason: <span class="tsd-signature-type">string</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-external">
+					<a name="deleteMessages" class="tsd-anchor"></a>
+					<h3>delete<wbr>Messages</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">delete<wbr>Messages<span class="tsd-signature-symbol">(</span>messageIDs<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span>, reason<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Implementation of <a href="../interfaces/Eris.GuildTextable.html">GuildTextable</a>.<a href="../interfaces/Eris.GuildTextable.html#deleteMessages">deleteMessages</a></p>
+								<ul>
+									<li>Defined in node_modules/eris/index.d.ts:2530</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>messageIDs: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></h5>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> reason: <span class="tsd-signature-type">string</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external">
+					<a name="deletePermission" class="tsd-anchor"></a>
+					<h3>delete<wbr>Permission</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">delete<wbr>Permission<span class="tsd-signature-symbol">(</span>overwriteID<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, reason<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Inherited from <a href="Eris.GuildChannel.html">GuildChannel</a>.<a href="Eris.GuildChannel.html#deletePermission">deletePermission</a></p>
+								<ul>
+									<li>Defined in node_modules/eris/index.d.ts:2086</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>overwriteID: <span class="tsd-signature-type">string</span></h5>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> reason: <span class="tsd-signature-type">string</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-overwrite tsd-is-external">
+					<a name="edit" class="tsd-anchor"></a>
+					<h3>edit</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-overwrite tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">edit<span class="tsd-signature-symbol">(</span>options<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Omit</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/Eris.EditChannelOptions.html" class="tsd-signature-type" data-tsd-kind="Interface">EditChannelOptions</a><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">&quot;icon&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;ownerID&quot;</span><span class="tsd-signature-symbol">&gt;</span>, reason<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="Eris.TextChannel.html" class="tsd-signature-type" data-tsd-kind="Class">TextChannel</a><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Overrides <a href="Eris.GuildChannel.html">GuildChannel</a>.<a href="Eris.GuildChannel.html#edit">edit</a></p>
+								<ul>
+									<li>Defined in node_modules/eris/index.d.ts:2531</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>options: <span class="tsd-signature-type">Omit</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/Eris.EditChannelOptions.html" class="tsd-signature-type" data-tsd-kind="Interface">EditChannelOptions</a><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">&quot;icon&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;ownerID&quot;</span><span class="tsd-signature-symbol">&gt;</span></h5>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> reason: <span class="tsd-signature-type">string</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="Eris.TextChannel.html" class="tsd-signature-type" data-tsd-kind="Class">TextChannel</a><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-external">
+					<a name="editMessage" class="tsd-anchor"></a>
+					<h3>edit<wbr>Message</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">edit<wbr>Message<span class="tsd-signature-symbol">(</span>messageID<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, content<span class="tsd-signature-symbol">: </span><a href="../modules/Eris.html#MessageContent" class="tsd-signature-type" data-tsd-kind="Type alias">MessageContent</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="Eris.Message.html" class="tsd-signature-type" data-tsd-kind="Class">Message</a><span class="tsd-signature-symbol">&lt;</span><a href="Eris.TextChannel.html" class="tsd-signature-type" data-tsd-kind="Class">TextChannel</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Implementation of <a href="../interfaces/Eris.GuildTextable.html">GuildTextable</a>.<a href="../interfaces/Eris.GuildTextable.html#editMessage">editMessage</a></p>
+								<ul>
+									<li>Defined in node_modules/eris/index.d.ts:2532</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>messageID: <span class="tsd-signature-type">string</span></h5>
+								</li>
+								<li>
+									<h5>content: <a href="../modules/Eris.html#MessageContent" class="tsd-signature-type" data-tsd-kind="Type alias">MessageContent</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="Eris.Message.html" class="tsd-signature-type" data-tsd-kind="Class">Message</a><span class="tsd-signature-symbol">&lt;</span><a href="Eris.TextChannel.html" class="tsd-signature-type" data-tsd-kind="Class">TextChannel</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external">
+					<a name="editPermission" class="tsd-anchor"></a>
+					<h3>edit<wbr>Permission</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">edit<wbr>Permission<span class="tsd-signature-symbol">(</span>overwriteID<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, allow<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">bigint</span>, deny<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">bigint</span>, type<span class="tsd-signature-symbol">: </span><a href="../modules/Eris.html#PermissionType" class="tsd-signature-type" data-tsd-kind="Type alias">PermissionType</a>, reason<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="Eris.PermissionOverwrite.html" class="tsd-signature-type" data-tsd-kind="Class">PermissionOverwrite</a><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Inherited from <a href="Eris.GuildChannel.html">GuildChannel</a>.<a href="Eris.GuildChannel.html#editPermission">editPermission</a></p>
+								<ul>
+									<li>Defined in node_modules/eris/index.d.ts:2088</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>overwriteID: <span class="tsd-signature-type">string</span></h5>
+								</li>
+								<li>
+									<h5>allow: <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">bigint</span></h5>
+								</li>
+								<li>
+									<h5>deny: <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">bigint</span></h5>
+								</li>
+								<li>
+									<h5>type: <a href="../modules/Eris.html#PermissionType" class="tsd-signature-type" data-tsd-kind="Type alias">PermissionType</a></h5>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> reason: <span class="tsd-signature-type">string</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="Eris.PermissionOverwrite.html" class="tsd-signature-type" data-tsd-kind="Class">PermissionOverwrite</a><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external">
+					<a name="editPosition" class="tsd-anchor"></a>
+					<h3>edit<wbr>Position</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">edit<wbr>Position<span class="tsd-signature-symbol">(</span>position<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, options<span class="tsd-signature-symbol">?: </span><a href="../interfaces/Eris.EditChannelPositionOptions.html" class="tsd-signature-type" data-tsd-kind="Interface">EditChannelPositionOptions</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Inherited from <a href="Eris.GuildChannel.html">GuildChannel</a>.<a href="Eris.GuildChannel.html#editPosition">editPosition</a></p>
+								<ul>
+									<li>Defined in node_modules/eris/index.d.ts:2095</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>position: <span class="tsd-signature-type">number</span></h5>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> options: <a href="../interfaces/Eris.EditChannelPositionOptions.html" class="tsd-signature-type" data-tsd-kind="Interface">EditChannelPositionOptions</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-overwrite tsd-is-external">
+					<a name="getInvites" class="tsd-anchor"></a>
+					<h3>get<wbr>Invites</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-overwrite tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Invites<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="Eris.Invite.html" class="tsd-signature-type" data-tsd-kind="Class">Invite</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">&quot;withMetadata&quot;</span><span class="tsd-signature-symbol">, </span><a href="Eris.TextChannel.html" class="tsd-signature-type" data-tsd-kind="Class">TextChannel</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Implementation of <a href="../interfaces/Eris.Invitable.html">Invitable</a>.<a href="../interfaces/Eris.Invitable.html#getInvites">getInvites</a></p>
+								<p>Overrides <a href="Eris.GuildChannel.html">GuildChannel</a>.<a href="Eris.GuildChannel.html#getInvites">getInvites</a></p>
+								<ul>
+									<li>Defined in node_modules/eris/index.d.ts:2533</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="Eris.Invite.html" class="tsd-signature-type" data-tsd-kind="Class">Invite</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">&quot;withMetadata&quot;</span><span class="tsd-signature-symbol">, </span><a href="Eris.TextChannel.html" class="tsd-signature-type" data-tsd-kind="Class">TextChannel</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-external">
+					<a name="getMessage" class="tsd-anchor"></a>
+					<h3>get<wbr>Message</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Message<span class="tsd-signature-symbol">(</span>messageID<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="Eris.Message.html" class="tsd-signature-type" data-tsd-kind="Class">Message</a><span class="tsd-signature-symbol">&lt;</span><a href="Eris.TextChannel.html" class="tsd-signature-type" data-tsd-kind="Class">TextChannel</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Implementation of <a href="../interfaces/Eris.GuildTextable.html">GuildTextable</a>.<a href="../interfaces/Eris.GuildTextable.html#getMessage">getMessage</a></p>
+								<ul>
+									<li>Defined in node_modules/eris/index.d.ts:2534</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>messageID: <span class="tsd-signature-type">string</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="Eris.Message.html" class="tsd-signature-type" data-tsd-kind="Class">Message</a><span class="tsd-signature-symbol">&lt;</span><a href="Eris.TextChannel.html" class="tsd-signature-type" data-tsd-kind="Class">TextChannel</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-external">
+					<a name="getMessageReaction" class="tsd-anchor"></a>
+					<h3>get<wbr>Message<wbr>Reaction</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Message<wbr>Reaction<span class="tsd-signature-symbol">(</span>messageID<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, reaction<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, options<span class="tsd-signature-symbol">?: </span><a href="../interfaces/Eris.GetMessageReactionOptions.html" class="tsd-signature-type" data-tsd-kind="Interface">GetMessageReactionOptions</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="Eris.User.html" class="tsd-signature-type" data-tsd-kind="Class">User</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Message<wbr>Reaction<span class="tsd-signature-symbol">(</span>messageID<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, reaction<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, limit<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span>, before<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span>, after<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="Eris.User.html" class="tsd-signature-type" data-tsd-kind="Class">User</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Implementation of <a href="../interfaces/Eris.GuildTextable.html">GuildTextable</a>.<a href="../interfaces/Eris.GuildTextable.html#getMessageReaction">getMessageReaction</a></p>
+								<ul>
+									<li>Defined in node_modules/eris/index.d.ts:2535</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>messageID: <span class="tsd-signature-type">string</span></h5>
+								</li>
+								<li>
+									<h5>reaction: <span class="tsd-signature-type">string</span></h5>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> options: <a href="../interfaces/Eris.GetMessageReactionOptions.html" class="tsd-signature-type" data-tsd-kind="Interface">GetMessageReactionOptions</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="Eris.User.html" class="tsd-signature-type" data-tsd-kind="Class">User</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Implementation of <a href="../interfaces/Eris.GuildTextable.html">GuildTextable</a>.<a href="../interfaces/Eris.GuildTextable.html#getMessageReaction">getMessageReaction</a></p>
+								<ul>
+									<li>Defined in node_modules/eris/index.d.ts:2537</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<dl class="tsd-comment-tags">
+									<dt>deprecated</dt>
+									<dd></dd>
+								</dl>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>messageID: <span class="tsd-signature-type">string</span></h5>
+								</li>
+								<li>
+									<h5>reaction: <span class="tsd-signature-type">string</span></h5>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> limit: <span class="tsd-signature-type">number</span></h5>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> before: <span class="tsd-signature-type">string</span></h5>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> after: <span class="tsd-signature-type">string</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="Eris.User.html" class="tsd-signature-type" data-tsd-kind="Class">User</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-external">
+					<a name="getMessages" class="tsd-anchor"></a>
+					<h3>get<wbr>Messages</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Messages<span class="tsd-signature-symbol">(</span>options<span class="tsd-signature-symbol">?: </span><a href="../interfaces/Eris.GetMessagesOptions.html" class="tsd-signature-type" data-tsd-kind="Interface">GetMessagesOptions</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="Eris.Message.html" class="tsd-signature-type" data-tsd-kind="Class">Message</a><span class="tsd-signature-symbol">&lt;</span><a href="Eris.TextChannel.html" class="tsd-signature-type" data-tsd-kind="Class">TextChannel</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Messages<span class="tsd-signature-symbol">(</span>limit<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span>, before<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span>, after<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span>, around<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="Eris.Message.html" class="tsd-signature-type" data-tsd-kind="Class">Message</a><span class="tsd-signature-symbol">&lt;</span><a href="Eris.TextChannel.html" class="tsd-signature-type" data-tsd-kind="Class">TextChannel</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Implementation of <a href="../interfaces/Eris.GuildTextable.html">GuildTextable</a>.<a href="../interfaces/Eris.GuildTextable.html#getMessages">getMessages</a></p>
+								<ul>
+									<li>Defined in node_modules/eris/index.d.ts:2538</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> options: <a href="../interfaces/Eris.GetMessagesOptions.html" class="tsd-signature-type" data-tsd-kind="Interface">GetMessagesOptions</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="Eris.Message.html" class="tsd-signature-type" data-tsd-kind="Class">Message</a><span class="tsd-signature-symbol">&lt;</span><a href="Eris.TextChannel.html" class="tsd-signature-type" data-tsd-kind="Class">TextChannel</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Implementation of <a href="../interfaces/Eris.GuildTextable.html">GuildTextable</a>.<a href="../interfaces/Eris.GuildTextable.html#getMessages">getMessages</a></p>
+								<ul>
+									<li>Defined in node_modules/eris/index.d.ts:2540</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<dl class="tsd-comment-tags">
+									<dt>deprecated</dt>
+									<dd></dd>
+								</dl>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> limit: <span class="tsd-signature-type">number</span></h5>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> before: <span class="tsd-signature-type">string</span></h5>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> after: <span class="tsd-signature-type">string</span></h5>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> around: <span class="tsd-signature-type">string</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="Eris.Message.html" class="tsd-signature-type" data-tsd-kind="Class">Message</a><span class="tsd-signature-symbol">&lt;</span><a href="Eris.TextChannel.html" class="tsd-signature-type" data-tsd-kind="Class">TextChannel</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-external">
+					<a name="getPins" class="tsd-anchor"></a>
+					<h3>get<wbr>Pins</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Pins<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="Eris.Message.html" class="tsd-signature-type" data-tsd-kind="Class">Message</a><span class="tsd-signature-symbol">&lt;</span><a href="Eris.TextChannel.html" class="tsd-signature-type" data-tsd-kind="Class">TextChannel</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Implementation of <a href="../interfaces/Eris.GuildTextable.html">GuildTextable</a>.<a href="../interfaces/Eris.GuildTextable.html#getPins">getPins</a></p>
+								<ul>
+									<li>Defined in node_modules/eris/index.d.ts:2541</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="Eris.Message.html" class="tsd-signature-type" data-tsd-kind="Class">Message</a><span class="tsd-signature-symbol">&lt;</span><a href="Eris.TextChannel.html" class="tsd-signature-type" data-tsd-kind="Class">TextChannel</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-external">
+					<a name="getWebhooks" class="tsd-anchor"></a>
+					<h3>get<wbr>Webhooks</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Webhooks<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/Eris.Webhook.html" class="tsd-signature-type" data-tsd-kind="Interface">Webhook</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Implementation of <a href="../interfaces/Eris.GuildTextable.html">GuildTextable</a>.<a href="../interfaces/Eris.GuildTextable.html#getWebhooks">getWebhooks</a></p>
+								<ul>
+									<li>Defined in node_modules/eris/index.d.ts:2542</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/Eris.Webhook.html" class="tsd-signature-type" data-tsd-kind="Interface">Webhook</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external">
+					<a name="inspect" class="tsd-anchor"></a>
+					<h3>inspect</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">inspect<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="Eris.TextChannel.html" class="tsd-signature-type" data-tsd-kind="Class">TextChannel</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Inherited from <a href="Eris.GuildChannel.html">GuildChannel</a>.<a href="Eris.GuildChannel.html#inspect">inspect</a></p>
+								<ul>
+									<li>Defined in node_modules/eris/index.d.ts:1364</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-returns-title">Returns <a href="Eris.TextChannel.html" class="tsd-signature-type" data-tsd-kind="Class">TextChannel</a></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external">
+					<a name="permissionsOf" class="tsd-anchor"></a>
+					<h3>permissions<wbr>Of</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">permissions<wbr>Of<span class="tsd-signature-symbol">(</span>memberID<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><a href="Eris.Member.html" class="tsd-signature-type" data-tsd-kind="Class">Member</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="Eris.Permission.html" class="tsd-signature-type" data-tsd-kind="Class">Permission</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Inherited from <a href="Eris.GuildChannel.html">GuildChannel</a>.<a href="Eris.GuildChannel.html#permissionsOf">permissionsOf</a></p>
+								<ul>
+									<li>Defined in node_modules/eris/index.d.ts:2097</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>memberID: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><a href="Eris.Member.html" class="tsd-signature-type" data-tsd-kind="Class">Member</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="Eris.Permission.html" class="tsd-signature-type" data-tsd-kind="Class">Permission</a></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-external">
+					<a name="pinMessage" class="tsd-anchor"></a>
+					<h3>pin<wbr>Message</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">pin<wbr>Message<span class="tsd-signature-symbol">(</span>messageID<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Implementation of <a href="../interfaces/Eris.GuildTextable.html">GuildTextable</a>.<a href="../interfaces/Eris.GuildTextable.html#pinMessage">pinMessage</a></p>
+								<ul>
+									<li>Defined in node_modules/eris/index.d.ts:2543</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>messageID: <span class="tsd-signature-type">string</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-external">
+					<a name="purge" class="tsd-anchor"></a>
+					<h3>purge</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">purge<span class="tsd-signature-symbol">(</span>options<span class="tsd-signature-symbol">: </span><a href="../interfaces/Eris.PurgeChannelOptions.html" class="tsd-signature-type" data-tsd-kind="Interface">PurgeChannelOptions</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">purge<span class="tsd-signature-symbol">(</span>limit<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, filter<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-symbol">(</span>message<span class="tsd-signature-symbol">: </span><a href="Eris.Message.html" class="tsd-signature-type" data-tsd-kind="Class">Message</a><span class="tsd-signature-symbol">&lt;</span><a href="Eris.TextChannel.html" class="tsd-signature-type" data-tsd-kind="Class">TextChannel</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">boolean</span>, before<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span>, after<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span>, reason<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Implementation of <a href="../interfaces/Eris.GuildTextable.html">GuildTextable</a>.<a href="../interfaces/Eris.GuildTextable.html#purge">purge</a></p>
+								<ul>
+									<li>Defined in node_modules/eris/index.d.ts:2544</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>options: <a href="../interfaces/Eris.PurgeChannelOptions.html" class="tsd-signature-type" data-tsd-kind="Interface">PurgeChannelOptions</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Implementation of GuildTextable.purge</p>
+								<ul>
+									<li>Defined in node_modules/eris/index.d.ts:2546</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<dl class="tsd-comment-tags">
+									<dt>deprecated</dt>
+									<dd></dd>
+								</dl>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>limit: <span class="tsd-signature-type">number</span></h5>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> filter: <span class="tsd-signature-symbol">(</span>message<span class="tsd-signature-symbol">: </span><a href="Eris.Message.html" class="tsd-signature-type" data-tsd-kind="Class">Message</a><span class="tsd-signature-symbol">&lt;</span><a href="Eris.TextChannel.html" class="tsd-signature-type" data-tsd-kind="Class">TextChannel</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">boolean</span></h5>
+									<ul class="tsd-parameters">
+										<li class="tsd-parameter-signature">
+											<ul class="tsd-signatures tsd-kind-type-literal tsd-is-external">
+												<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>message<span class="tsd-signature-symbol">: </span><a href="Eris.Message.html" class="tsd-signature-type" data-tsd-kind="Class">Message</a><span class="tsd-signature-symbol">&lt;</span><a href="Eris.TextChannel.html" class="tsd-signature-type" data-tsd-kind="Class">TextChannel</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
+											</ul>
+											<ul class="tsd-descriptions">
+												<li class="tsd-description">
+													<h4 class="tsd-parameters-title">Parameters</h4>
+													<ul class="tsd-parameters">
+														<li>
+															<h5>message: <a href="Eris.Message.html" class="tsd-signature-type" data-tsd-kind="Class">Message</a><span class="tsd-signature-symbol">&lt;</span><a href="Eris.TextChannel.html" class="tsd-signature-type" data-tsd-kind="Class">TextChannel</a><span class="tsd-signature-symbol">&gt;</span></h5>
+														</li>
+													</ul>
+													<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
+												</li>
+											</ul>
+										</li>
+									</ul>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> before: <span class="tsd-signature-type">string</span></h5>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> after: <span class="tsd-signature-type">string</span></h5>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> reason: <span class="tsd-signature-type">string</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-external">
+					<a name="removeMessageReaction" class="tsd-anchor"></a>
+					<h3>remove<wbr>Message<wbr>Reaction</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">remove<wbr>Message<wbr>Reaction<span class="tsd-signature-symbol">(</span>messageID<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, reaction<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, userID<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Implementation of <a href="../interfaces/Eris.GuildTextable.html">GuildTextable</a>.<a href="../interfaces/Eris.GuildTextable.html#removeMessageReaction">removeMessageReaction</a></p>
+								<ul>
+									<li>Defined in node_modules/eris/index.d.ts:2547</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>messageID: <span class="tsd-signature-type">string</span></h5>
+								</li>
+								<li>
+									<h5>reaction: <span class="tsd-signature-type">string</span></h5>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> userID: <span class="tsd-signature-type">string</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-external">
+					<a name="removeMessageReactionEmoji" class="tsd-anchor"></a>
+					<h3>remove<wbr>Message<wbr>Reaction<wbr>Emoji</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">remove<wbr>Message<wbr>Reaction<wbr>Emoji<span class="tsd-signature-symbol">(</span>messageID<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, reaction<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Implementation of <a href="../interfaces/Eris.GuildTextable.html">GuildTextable</a>.<a href="../interfaces/Eris.GuildTextable.html#removeMessageReactionEmoji">removeMessageReactionEmoji</a></p>
+								<ul>
+									<li>Defined in node_modules/eris/index.d.ts:2548</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>messageID: <span class="tsd-signature-type">string</span></h5>
+								</li>
+								<li>
+									<h5>reaction: <span class="tsd-signature-type">string</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-external">
+					<a name="removeMessageReactions" class="tsd-anchor"></a>
+					<h3>remove<wbr>Message<wbr>Reactions</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">remove<wbr>Message<wbr>Reactions<span class="tsd-signature-symbol">(</span>messageID<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Implementation of <a href="../interfaces/Eris.GuildTextable.html">GuildTextable</a>.<a href="../interfaces/Eris.GuildTextable.html#removeMessageReactions">removeMessageReactions</a></p>
+								<ul>
+									<li>Defined in node_modules/eris/index.d.ts:2549</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>messageID: <span class="tsd-signature-type">string</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-external">
+					<a name="sendTyping" class="tsd-anchor"></a>
+					<h3>send<wbr>Typing</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">send<wbr>Typing<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Implementation of <a href="../interfaces/Eris.GuildTextable.html">GuildTextable</a>.<a href="../interfaces/Eris.GuildTextable.html#sendTyping">sendTyping</a></p>
+								<ul>
+									<li>Defined in node_modules/eris/index.d.ts:2550</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external">
+					<a name="toJSON" class="tsd-anchor"></a>
+					<h3>toJSON</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">toJSON<span class="tsd-signature-symbol">(</span>props<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/Eris.JSONCache.html" class="tsd-signature-type" data-tsd-kind="Interface">JSONCache</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Inherited from <a href="Eris.GuildChannel.html">GuildChannel</a>.<a href="Eris.GuildChannel.html#toJSON">toJSON</a></p>
+								<ul>
+									<li>Defined in node_modules/eris/index.d.ts:1366</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> props: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="../interfaces/Eris.JSONCache.html" class="tsd-signature-type" data-tsd-kind="Interface">JSONCache</a></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external">
+					<a name="toString" class="tsd-anchor"></a>
+					<h3>to<wbr>String</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">to<wbr>String<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Inherited from <a href="Eris.GuildChannel.html">GuildChannel</a>.<a href="Eris.GuildChannel.html#toString">toString</a></p>
+								<ul>
+									<li>Defined in node_modules/eris/index.d.ts:1365</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-external">
+					<a name="unpinMessage" class="tsd-anchor"></a>
+					<h3>unpin<wbr>Message</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">unpin<wbr>Message<span class="tsd-signature-symbol">(</span>messageID<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Implementation of <a href="../interfaces/Eris.GuildTextable.html">GuildTextable</a>.<a href="../interfaces/Eris.GuildTextable.html#unpinMessage">unpinMessage</a></p>
+								<ul>
+									<li>Defined in node_modules/eris/index.d.ts:2551</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>messageID: <span class="tsd-signature-type">string</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-external">
+					<a name="unsendMessage" class="tsd-anchor"></a>
+					<h3>unsend<wbr>Message</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">unsend<wbr>Message<span class="tsd-signature-symbol">(</span>messageID<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Implementation of <a href="../interfaces/Eris.GuildTextable.html">GuildTextable</a>.<a href="../interfaces/Eris.GuildTextable.html#unsendMessage">unsendMessage</a></p>
+								<ul>
+									<li>Defined in node_modules/eris/index.d.ts:2552</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>messageID: <span class="tsd-signature-type">string</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-static tsd-is-external">
+					<a name="from" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagStatic">Static</span> from</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-static tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">from<span class="tsd-signature-symbol">(</span>data<span class="tsd-signature-symbol">: </span><a href="../interfaces/Eris.BaseData.html" class="tsd-signature-type" data-tsd-kind="Interface">BaseData</a>, client<span class="tsd-signature-symbol">: </span><a href="Eris.Client.html" class="tsd-signature-type" data-tsd-kind="Class">Client</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../modules/Eris.html#AnyChannel" class="tsd-signature-type" data-tsd-kind="Type alias">AnyChannel</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Inherited from <a href="Eris.GuildChannel.html">GuildChannel</a>.<a href="Eris.GuildChannel.html#from">from</a></p>
+								<ul>
+									<li>Defined in node_modules/eris/index.d.ts:1427</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>data: <a href="../interfaces/Eris.BaseData.html" class="tsd-signature-type" data-tsd-kind="Interface">BaseData</a></h5>
+								</li>
+								<li>
+									<h5>client: <a href="Eris.Client.html" class="tsd-signature-type" data-tsd-kind="Class">Client</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="../modules/Eris.html#AnyChannel" class="tsd-signature-type" data-tsd-kind="Type alias">AnyChannel</a></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-static tsd-is-external">
+					<a name="getCreatedAt" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagStatic">Static</span> get<wbr>Created<wbr>At</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-static tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Created<wbr>At<span class="tsd-signature-symbol">(</span>id<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Inherited from <a href="Eris.GuildChannel.html">GuildChannel</a>.<a href="Eris.GuildChannel.html#getCreatedAt">getCreatedAt</a></p>
+								<ul>
+									<li>Defined in node_modules/eris/index.d.ts:1363</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>id: <span class="tsd-signature-type">string</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
+						</li>
+					</ul>
+				</section>
+			</section>
+		</div>
+		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
+			<nav class="tsd-navigation primary">
+				<ul>
+					<li class=" ">
+						<a href="../index.html">Exports</a>
+					</li>
+					<li class="label tsd-is-external">
+						<span>Externals</span>
+					</li>
+					<li class="current tsd-kind-namespace tsd-is-external">
+						<a href="../modules/Eris.html">Eris</a>
+					</li>
+				</ul>
+			</nav>
+			<nav class="tsd-navigation secondary menu-sticky">
+				<ul class="before-current">
+				</ul>
+				<ul class="current">
+					<li class="current tsd-kind-class tsd-parent-kind-namespace tsd-is-external">
+						<a href="Eris.TextChannel.html" class="tsd-kind-icon">Text<wbr>Channel</a>
+						<ul>
+							<li class=" tsd-kind-constructor tsd-parent-kind-class tsd-is-overwrite tsd-is-external">
+								<a href="Eris.TextChannel.html#constructor" class="tsd-kind-icon">constructor</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-external">
+								<a href="Eris.TextChannel.html#client" class="tsd-kind-icon">client</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-external">
+								<a href="Eris.TextChannel.html#createdAt" class="tsd-kind-icon">created<wbr>At</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-external">
+								<a href="Eris.TextChannel.html#guild" class="tsd-kind-icon">guild</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-external">
+								<a href="Eris.TextChannel.html#id" class="tsd-kind-icon">id</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-external">
+								<a href="Eris.TextChannel.html#lastMessageID" class="tsd-kind-icon">last<wbr>MessageID</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-external">
+								<a href="Eris.TextChannel.html#lastPinTimestamp" class="tsd-kind-icon">last<wbr>Pin<wbr>Timestamp</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-external">
+								<a href="Eris.TextChannel.html#mention" class="tsd-kind-icon">mention</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-external">
+								<a href="Eris.TextChannel.html#messages" class="tsd-kind-icon">messages</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-external">
+								<a href="Eris.TextChannel.html#name" class="tsd-kind-icon">name</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-external">
+								<a href="Eris.TextChannel.html#nsfw" class="tsd-kind-icon">nsfw</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-external">
+								<a href="Eris.TextChannel.html#parentID" class="tsd-kind-icon">parentID</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-external">
+								<a href="Eris.TextChannel.html#permissionOverwrites" class="tsd-kind-icon">permission<wbr>Overwrites</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-external">
+								<a href="Eris.TextChannel.html#position" class="tsd-kind-icon">position</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-external">
+								<a href="Eris.TextChannel.html#rateLimitPerUser" class="tsd-kind-icon">rate<wbr>Limit<wbr>Per<wbr>User</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-external">
+								<a href="Eris.TextChannel.html#topic" class="tsd-kind-icon">topic</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-overwrite tsd-is-external">
+								<a href="Eris.TextChannel.html#type" class="tsd-kind-icon">type</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-external">
+								<a href="Eris.TextChannel.html#addMessageReaction" class="tsd-kind-icon">add<wbr>Message<wbr>Reaction</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-external">
+								<a href="Eris.TextChannel.html#createInvite" class="tsd-kind-icon">create<wbr>Invite</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-external">
+								<a href="Eris.TextChannel.html#createMessage" class="tsd-kind-icon">create<wbr>Message</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-external">
+								<a href="Eris.TextChannel.html#createWebhook" class="tsd-kind-icon">create<wbr>Webhook</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external">
+								<a href="Eris.TextChannel.html#delete" class="tsd-kind-icon">delete</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-external">
+								<a href="Eris.TextChannel.html#deleteMessage" class="tsd-kind-icon">delete<wbr>Message</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-external">
+								<a href="Eris.TextChannel.html#deleteMessages" class="tsd-kind-icon">delete<wbr>Messages</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external">
+								<a href="Eris.TextChannel.html#deletePermission" class="tsd-kind-icon">delete<wbr>Permission</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-overwrite tsd-is-external">
+								<a href="Eris.TextChannel.html#edit" class="tsd-kind-icon">edit</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-external">
+								<a href="Eris.TextChannel.html#editMessage" class="tsd-kind-icon">edit<wbr>Message</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external">
+								<a href="Eris.TextChannel.html#editPermission" class="tsd-kind-icon">edit<wbr>Permission</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external">
+								<a href="Eris.TextChannel.html#editPosition" class="tsd-kind-icon">edit<wbr>Position</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-overwrite tsd-is-external">
+								<a href="Eris.TextChannel.html#getInvites" class="tsd-kind-icon">get<wbr>Invites</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-external">
+								<a href="Eris.TextChannel.html#getMessage" class="tsd-kind-icon">get<wbr>Message</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-external">
+								<a href="Eris.TextChannel.html#getMessageReaction" class="tsd-kind-icon">get<wbr>Message<wbr>Reaction</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-external">
+								<a href="Eris.TextChannel.html#getMessages" class="tsd-kind-icon">get<wbr>Messages</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-external">
+								<a href="Eris.TextChannel.html#getPins" class="tsd-kind-icon">get<wbr>Pins</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-external">
+								<a href="Eris.TextChannel.html#getWebhooks" class="tsd-kind-icon">get<wbr>Webhooks</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external">
+								<a href="Eris.TextChannel.html#inspect" class="tsd-kind-icon">inspect</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external">
+								<a href="Eris.TextChannel.html#permissionsOf" class="tsd-kind-icon">permissions<wbr>Of</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-external">
+								<a href="Eris.TextChannel.html#pinMessage" class="tsd-kind-icon">pin<wbr>Message</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-external">
+								<a href="Eris.TextChannel.html#purge" class="tsd-kind-icon">purge</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-external">
+								<a href="Eris.TextChannel.html#removeMessageReaction" class="tsd-kind-icon">remove<wbr>Message<wbr>Reaction</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-external">
+								<a href="Eris.TextChannel.html#removeMessageReactionEmoji" class="tsd-kind-icon">remove<wbr>Message<wbr>Reaction<wbr>Emoji</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-external">
+								<a href="Eris.TextChannel.html#removeMessageReactions" class="tsd-kind-icon">remove<wbr>Message<wbr>Reactions</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-external">
+								<a href="Eris.TextChannel.html#sendTyping" class="tsd-kind-icon">send<wbr>Typing</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external">
+								<a href="Eris.TextChannel.html#toJSON" class="tsd-kind-icon">toJSON</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external">
+								<a href="Eris.TextChannel.html#toString" class="tsd-kind-icon">to<wbr>String</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-external">
+								<a href="Eris.TextChannel.html#unpinMessage" class="tsd-kind-icon">unpin<wbr>Message</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-external">
+								<a href="Eris.TextChannel.html#unsendMessage" class="tsd-kind-icon">unsend<wbr>Message</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-static tsd-is-external">
+								<a href="Eris.TextChannel.html#from" class="tsd-kind-icon">from</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-static tsd-is-external">
+								<a href="Eris.TextChannel.html#getCreatedAt" class="tsd-kind-icon">get<wbr>Created<wbr>At</a>
+							</li>
+						</ul>
+					</li>
+				</ul>
+				<ul class="after-current">
+				</ul>
+			</nav>
+		</div>
+	</div>
+</div>
+<footer class="with-border-bottom">
+	<div class="container">
+		<h2>Legend</h2>
+		<div class="tsd-legend-group">
+			<ul class="tsd-legend">
+				<li class="tsd-kind-constructor tsd-parent-kind-class"><span class="tsd-kind-icon">Constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class"><span class="tsd-kind-icon">Accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-interface"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-interface"><span class="tsd-kind-icon">Method</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited property</span></li>
+			</ul>
+		</div>
+	</div>
+</footer>
+<div class="container tsd-generator">
+	<p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p>
+</div>
+<div class="overlay"></div>
+<script src="../assets/js/main.js"></script>
+</body>
+</html>
