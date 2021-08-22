@@ -12,9 +12,12 @@ jobs:
     steps:
     - uses: actions/checkout@v1
 
+    - uses: actions/setup-node@v2
+      with:
+        node-version: 15 # earliest node that ships with npm@7
+
     - name: Install dependencies
       run: |
-        npm i -g npm@7
         npm ci
 
     - name: Run ESLint
