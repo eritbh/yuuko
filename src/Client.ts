@@ -220,17 +220,6 @@ export class Client extends Eris.Client implements ClientOptions {
 		return this;
 	}
 
-	/**
-	 * Set requirements for all commands at once
-	 * @deprecated Use the `globalCommandRequirements` client option instead.
-	 * See https://github.com/eritbh/yuuko/issues/89
-	 */
-	setGlobalRequirements (requirements: CommandRequirements) {
-		deprecations.setGlobalRequirements();
-		Object.assign(this.globalCommandRequirements, requirements);
-		return this;
-	}
-
 	/** Register a command to the client. */
 	addCommand (command: Command): this {
 		if (!(command instanceof Command)) throw new TypeError('Not a command');
