@@ -45,13 +45,6 @@ export interface ClientOptions extends Eris.ClientOptions {
 	disableDefaultMessageListener?: boolean;
 }
 
-/**
- * Information returned from the API about the bot's OAuth application.
- * @deprecated Use `Eris.OAuthApplicationInfo` instead. See
- * https://github.com/eritbh/yuuko/issues/91
- */
-export type ClientOAuthApplication = Eris.OAuthApplicationInfo;
-
 // A function that takes a message and a context argument and returns a prefix,
 // an array of prefixes, or void.
 export interface PrefixFunction {
@@ -123,7 +116,7 @@ export class Client extends Eris.Client implements ClientOptions {
 	mentionPrefixRegExp: RegExp | null = null;
 
 	/** Information about the bot's OAuth application. */
-	app: ClientOAuthApplication | null = null;
+	app: Eris.OAuthApplicationInfo | null = null;
 
 	/** An object of stuff to add to the context object for command functions */
 	contextAdditions: object = {};
