@@ -12,14 +12,13 @@ The goal of this module is to provide a starting point for bots of all sizes. Yu
 
 ## Installation
 
-Yuuko expects Eris to be installed as a peer dependency, which allows you to use any forward-compatible Eris version without having to wait for an update to Yuuko. You can install both at once with the following commands:
+Yuuko expects Eris to be installed as a peer dependency, which allows you to use any forward-compatible Eris version without having to wait for an update to Yuuko. Using npm, you can install both at once with this command:
 
 ```bash
-$ yarn add --production yuuko eris # yarn
-$ npm install --save --production yuuko eris # npm
+$ npm install yuuko eris
 ```
 
-The minimum required Eris version is 0.13.0, though you should use the latest version whenever possible.
+Generally, the latest version of Eris is the only one actively tested against. You can try older versions, but there's no guarantee they'll work - Yuuko is often updated to take advantage of the latest changes to Eris.
 
 ### Development builds
 
