@@ -443,21 +443,6 @@ export class Client extends Eris.Client implements ClientOptions {
 		// we got nothing
 		return null;
 	}
-
-	/**
-	 * Alias of `prefix`.
-	 * @deprecated Use `prefix` instead.
-	 * See https://github.com/eritbh/yuuko/issues/90
-	 */
-	get defaultPrefix () {
-		deprecations.defaultPrefix();
-		return this.prefix;
-	}
-
-	set defaultPrefix (val: string) {
-		deprecations.defaultPrefix();
-		this.prefix = val;
-	}
 }
 
 export interface ClientEvents<T> extends Eris.ClientEvents<T> {
