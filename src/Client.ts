@@ -30,13 +30,6 @@ export interface ClientOptions extends Eris.ClientOptions {
 	/** A set of requirements to check for all commands. */
 	globalCommandRequirements?: CommandRequirements;
 	/**
-	 * If true, requirements set via the globalCommandRequirements option will
-	 * be ignored.
-	 * @deprecated Pass no `globalCommandRequirements` client option instead.
-	 * See https://github.com/eritbh/yuuko/issues/89
-	*/
-	ignoreGlobalRequirements?: boolean;
-	/**
 	 * If true, the client does not respond to commands by default, and the user
 	 * must register their own `messageCreate` listener, which can call
 	 * `processCommand` to perform command handling at an arbitrary point during
@@ -77,14 +70,6 @@ export class Client extends Eris.Client implements ClientOptions {
 
 	/** A set of requirements to check for all commands. */
 	globalCommandRequirements: CommandRequirements = {};
-
-	/**
-	 * If true, requirements set via `setGlobalRequirements` will be ignored. Used
-	 * for debugging, probably shouldn't be used in production.
-	 * @deprecated Pass no `globalCommandRequirements` client option instead.
-	 * See https://github.com/eritbh/yuuko/issues/89
-	 */
-	ignoreGlobalRequirements: boolean = false;
 
 	/**
 	 * If true, the client does not respond to commands by default, and the user
@@ -138,10 +123,6 @@ export class Client extends Eris.Client implements ClientOptions {
 		if (options.allowMention !== undefined) this.allowMention = options.allowMention;
 		if (options.ignoreBots !== undefined) this.ignoreBots = options.ignoreBots;
 		if (options.globalCommandRequirements !== undefined) this.globalCommandRequirements = options.globalCommandRequirements;
-		if (options.ignoreGlobalRequirements !== undefined) {
-			deprecations.ignoreGlobalRequirements();
-			this.ignoreGlobalRequirements = options.ignoreGlobalRequirements;
-		}
 		if (options.disableDefaultMessageListener !== undefined) this.disableDefaultMessageListener = options.disableDefaultMessageListener;
 
 		// Warn if we're using an empty prefix
