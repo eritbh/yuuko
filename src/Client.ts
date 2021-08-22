@@ -7,7 +7,6 @@ import {Command, CommandRequirements, CommandContext} from './Command';
 import {EventListener, EventContext} from './EventListener';
 import defaultMessageListener from './defaultMessageListener';
 import {Resolves, makeArray} from './util';
-import * as deprecations from './deprecations';
 
 /** The options passed to the client constructor. Includes Eris options. */
 export interface ClientOptions extends Eris.ClientOptions {
