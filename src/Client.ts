@@ -377,34 +377,6 @@ export class Client extends Eris.Client implements ClientOptions {
 	}
 
 	/**
-	 * Alias for `addDir`.
-	 * @deprecated Use `addDir` instead. See
-	 * https://github.com/eritbh/yuuko/issues/88
-	 */
-	addCommandDir (dirname: string): this {
-		deprecations.addCommandDir();
-		return this.addDir(dirname);
-	}
-
-	/**
-	 * Alias for `addFile`.
-	 * @deprecated Use `addFile` instead. See https://github.com/eritbh/yuuko/issues/88
-	 */
-	addCommandFile (filename: string): this {
-		deprecations.addCommandFile();
-		return this.addFile(filename);
-	}
-
-	/**
-	 * Alias for `reloadFiles()`.
-	 * @deprecated Use `reloadFiles` instead. See https://github.com/eritbh/yuuko/issues/88
-	 */
-	reloadCommands (): this {
-		deprecations.reloadCommands();
-		return this.reloadFiles();
-	}
-
-	/**
 	 * Checks the list of registered commands and returns one whch is known by a
 	 * given name. Passing an empty string will return the default command, if
 	 * any.
