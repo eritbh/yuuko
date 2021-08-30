@@ -127,12 +127,31 @@ export class Command {
 	/** Subcommands of this command. */
 	subcommands: Command[] = [];
 
-	/** Creates a command restricted to use in guilds. */
-	constructor (names: string | string[], process: GuildCommandProcess, requirements: CommandRequirements & { guildOnly: true; dmOnly?: false });
-	/** Creates a command restricted to use in DMs. */
-	constructor (names: string | string[], process: PrivateCommandProcess, requirements: CommandRequirements & { dmOnly: true; guildOnly?: false });
 	/** Creates a command. */
-	constructor (names: string | string[], process: CommandProcess, requirements?: CommandRequirements);
+	constructor (names: string | string[], process: CommandProcess);
+
+	/** Creates a command restricted to use in guilds. */
+	constructor (names: string | string[], requirements: CommandRequirements & { guildOnly: true; dmOnly?: false }, process: GuildCommandProcess);
+	/** Creates a command restricted to use in DMs. */
+	constructor (names: string | string[], requirements: CommandRequirements & { dmOnly: true; guildOnly?: false }, process: PrivateCommandProcess);
+	/** Creates a command. */
+	constructor (names: string | string[], requirements: CommandRequirements, process: CommandProcess);
+
+	/**
+	 * Creates a command restricted to use in guilds.
+	 * @deprecated Use the `new Command(names, requirements, process)` form.
+	 */
+	constructor (names: string | string[], process: GuildCommandProcess, requirements: CommandRequirements & { guildOnly: true; dmOnly?: false });
+	/**
+	 * Creates a command restricted to use in DMs.
+	 * @deprecated Use the `new Command(names, requirements, process)` form.
+	 */
+	constructor (names: string | string[], process: PrivateCommandProcess, requirements: CommandRequirements & { dmOnly: true; guildOnly?: false });
+	/**
+	 * Creates a command.
+	 * @deprecated Use the `new Command(names, requirements, process)` form.
+	 */
+	constructor (names: string | string[], process: CommandProcess, requirements: CommandRequirements);
 
 	/**
 	 * This implememtation signature is really messy to account for all the
@@ -140,13 +159,44 @@ export class Command {
 	 * in documentation or code suggestions.
 	 * @internal
 	 */
-	constructor (names: string | string[], process: CommandProcess | GuildCommandProcess | PrivateCommandProcess, requirements?: CommandRequirements) {
+	// TODO: This can be simplified once process-first forms are removed for v3
+	constructor (...args: [
+		names: string | string[],
+		requirements: CommandRequirements,
+		process: CommandProcess | GuildCommandProcess | PrivateCommandProcess,
+	] | [
+		names: string | string[],
+		process: CommandProcess | GuildCommandProcess | PrivateCommandProcess,
+		requirements: CommandRequirements,
+	] | [
+		names: string | string[],
+		process: CommandProcess,
+	]) {
+		// Names is always the first argument
+		const names = args[0];
 		if (Array.isArray(names)) {
 			this.names = names;
 		} else {
 			this.names = [names];
 		}
 		if (!this.names[0]) throw new TypeError('At least one name is required');
+
+		// Figure out what order the user passed requirements and process
+		let requirements: CommandRequirements | undefined;
+		let process: CommandProcess;
+		if (!args[2]) {
+			// (name, process)
+			requirements = undefined;
+			process = args[1] as CommandProcess;
+		} else if (typeof args[2] === 'function') {
+			// (name, requirements, process)
+			requirements = args[1] as CommandRequirements;
+			process = args[2] as CommandProcess;
+		} else {
+			// (name, process, requirements)
+			requirements = args[2];
+			process = args[1] as CommandProcess;
+		}
 
 		// NOTE: This cast discards away type information related to the
 		//       channels we expect this command to be executed in. The only
