@@ -19,4 +19,4 @@ exports.reloadCommands = warningEmitter('Client#reloadCommands is deprecated. Us
 exports.setGlobalRequirements = warningEmitter('Client#setGlobalRequirements is deprecated. Use the globalCommandRequirements client option instead.', 'yuuko#89');
 exports.ignoreGlobalRequirements = warningEmitter('The ignoreGlobalRequirements client option is deprecated. Pass no globalCommandRequirements client option instead.', 'yuuko#89');
 // https://github.com/eritbh/yuuko/issues/90
-exports.defaultPrefix = warningEmitter('Client#edfaultPrefix is deprecated. Use Client#prefix instead.', 'yuuko#90');
+exports.defaultPrefix = warningEmitter('Client#defaultPrefix is deprecated. Use Client#prefix instead.', 'yuuko#90');
