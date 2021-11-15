@@ -12,20 +12,21 @@ jobs:
     steps:
     - uses: actions/checkout@v1
 
+    - uses: actions/setup-node@v2
+      with:
+        node-version: 15 # earliest node that ships with npm@7
+
     - name: Install dependencies
       run: |
-        # Direct dependencies
-        yarn install
-        # Peer dependencies
-        npm i --no-save eris@0.15
-    
+        npm ci
+
     - name: Run ESLint
       run: |
-        yarn run lint
+        npm run lint
 
     - name: Build Typescript
       run: |
-        yarn run build
+        npm run build
     
     - name: Push build artifacts
       env:

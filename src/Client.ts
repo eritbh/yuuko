@@ -7,6 +7,7 @@ import {Command, CommandRequirements, CommandContext} from './Command';
 import {EventListener, EventContext} from './EventListener';
 import defaultMessageListener from './defaultMessageListener';
 import {Resolves, makeArray} from './util';
+import * as deprecations from './deprecations';
 
 /** The options passed to the client constructor. Includes Eris options. */
 export interface ClientOptions extends Eris.ClientOptions {
@@ -32,6 +33,7 @@ export interface ClientOptions extends Eris.ClientOptions {
 	 * If true, requirements set via the globalCommandRequirements option will
 	 * be ignored.
 	 * @deprecated Pass no `globalCommandRequirements` client option instead.
+	 * See https://github.com/eritbh/yuuko/issues/89
 	*/
 	ignoreGlobalRequirements?: boolean;
 	/**
@@ -45,7 +47,8 @@ export interface ClientOptions extends Eris.ClientOptions {
 
 /**
  * Information returned from the API about the bot's OAuth application.
- * @deprecated Use `Eris.OAuthApplicationInfo` instead (this is a direct alias)
+ * @deprecated Use `Eris.OAuthApplicationInfo` instead. See
+ * https://github.com/eritbh/yuuko/issues/91
  */
 export type ClientOAuthApplication = Eris.OAuthApplicationInfo;
 
@@ -86,6 +89,7 @@ export class Client extends Eris.Client {
 	 * If true, requirements set via `setGlobalRequirements` will be ignored. Used
 	 * for debugging, probably shouldn't be used in production.
 	 * @deprecated Pass no `globalCommandRequirements` client option instead.
+	 * See https://github.com/eritbh/yuuko/issues/89
 	 */
 	ignoreGlobalRequirements: boolean = false;
 
@@ -141,7 +145,10 @@ export class Client extends Eris.Client {
 		if (options.allowMention !== undefined) this.allowMention = options.allowMention;
 		if (options.ignoreBots !== undefined) this.ignoreBots = options.ignoreBots;
 		if (options.globalCommandRequirements !== undefined) this.globalCommandRequirements = options.globalCommandRequirements;
-		if (options.ignoreGlobalRequirements !== undefined) this.ignoreGlobalRequirements = options.ignoreGlobalRequirements;
+		if (options.ignoreGlobalRequirements !== undefined) {
+			deprecations.ignoreGlobalRequirements();
+			this.ignoreGlobalRequirements = options.ignoreGlobalRequirements;
+		}
 		if (options.disableDefaultMessageListener !== undefined) this.disableDefaultMessageListener = options.disableDefaultMessageListener;
 
 		// Warn if we're using an empty prefix
@@ -242,8 +249,10 @@ export class Client extends Eris.Client {
 	/**
 	 * Set requirements for all commands at once
 	 * @deprecated Use the `globalCommandRequirements` client option instead.
+	 * See https://github.com/eritbh/yuuko/issues/89
 	 */
 	setGlobalRequirements (requirements: CommandRequirements) {
+		deprecations.setGlobalRequirements();
 		Object.assign(this.globalCommandRequirements, requirements);
 		return this;
 	}
@@ -406,25 +415,29 @@ export class Client extends Eris.Client {
 
 	/**
 	 * Alias for `addDir`.
-	 * @deprecated
+	 * @deprecated Use `addDir` instead. See
+	 * https://github.com/eritbh/yuuko/issues/88
 	 */
 	addCommandDir (dirname: string): this {
+		deprecations.addCommandDir();
 		return this.addDir(dirname);
 	}
 
 	/**
 	 * Alias for `addFile`.
-	 * @deprecated
+	 * @deprecated Use `addFile` instead. See https://github.com/eritbh/yuuko/issues/88
 	 */
 	addCommandFile (filename: string): this {
+		deprecations.addCommandFile();
 		return this.addFile(filename);
 	}
 
 	/**
 	 * Alias for `reloadFiles()`.
-	 * @deprecated
+	 * @deprecated Use `reloadFiles` instead. See https://github.com/eritbh/yuuko/issues/88
 	 */
 	reloadCommands (): this {
+		deprecations.reloadCommands();
 		return this.reloadFiles();
 	}
 
@@ -496,12 +509,18 @@ export class Client extends Eris.Client {
 		return null;
 	}
 
-	/** @deprecated Alias of `prefix` */
+	/**
+	 * Alias of `prefix`.
+	 * @deprecated Use `prefix` instead.
+	 * See https://github.com/eritbh/yuuko/issues/90
+	 */
 	get defaultPrefix () {
+		deprecations.defaultPrefix();
 		return this.prefix;
 	}
 
 	set defaultPrefix (val: string) {
+		deprecations.defaultPrefix();
 		this.prefix = val;
 	}
 }
