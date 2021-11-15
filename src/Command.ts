@@ -92,6 +92,8 @@ export interface CommandContext extends EventContext {
 }
 
 /** The function to be called when a command is executed. */
+// @ts-expect-error In Eris 0.16, TextableChannel is not assignable to Textable
+// See https://github.com/abalabahaha/eris/pull/1299
 export interface CommandProcess<T extends Eris.Textable = Eris.TextableChannel> {
 	(
 		/** The message object from Eris. */

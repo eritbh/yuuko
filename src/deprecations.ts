@@ -19,4 +19,4 @@ export const setGlobalRequirements = warningEmitter('Client#setGlobalRequirement
 export const ignoreGlobalRequirements = warningEmitter('The ignoreGlobalRequirements client option is deprecated. Pass no globalCommandRequirements client option instead.', 'yuuko#89');
 
 // https://github.com/eritbh/yuuko/issues/90
-export const defaultPrefix = warningEmitter('Client#edfaultPrefix is deprecated. Use Client#prefix instead.', 'yuuko#90');
+export const defaultPrefix = warningEmitter('Client#defaultPrefix is deprecated. Use Client#prefix instead.', 'yuuko#90');
