@@ -244,13 +244,13 @@ class Client extends Eris.Client {
         // the instance was registered via `addDir`/`addFile`, then it will need
         // to be removed when calling `reloadFiles`).
         eventListener.computedListener = (...args) => {
-            eventListener.args[1](...args, this.eventContext);
+            eventListener.listener(...args, this.eventContext);
         };
         if (eventListener.once) {
-            this.once(eventListener.args[0], eventListener.computedListener);
+            this.once(eventListener.eventName, eventListener.computedListener);
         }
         else {
-            this.on(eventListener.args[0], eventListener.computedListener);
+            this.on(eventListener.eventName, eventListener.computedListener);
         }
         return this;
     }
@@ -360,7 +360,7 @@ class Client extends Eris.Client {
                     filenames.push(thing.filename);
                     // If it's an event listener object, remove the listener
                     if (thing instanceof EventListener_1.EventListener && thing.computedListener) {
-                        this.removeListener(thing.args[0], thing.computedListener);
+                        this.off(thing.args[0], thing.computedListener);
                     }
                 }
             }
