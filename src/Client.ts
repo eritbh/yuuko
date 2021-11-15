@@ -5,7 +5,8 @@ import path from 'path';
 import * as Eris from 'eris';
 import {Command, CommandRequirements, CommandContext} from './Command';
 import {EventListener, EventContext} from './EventListener';
-import defaultMessageListener from './defaultMessageListener';
+import defaultCreateMessageListener from './listeners/createMessage';
+import defaultInteractionCreateListener from './listeners/interactionCreate';
 import {Resolves, makeArray} from './util';
 import * as deprecations from './deprecations';
 
@@ -158,7 +159,8 @@ export class Client extends Eris.Client {
 
 		// Register the default message listener unless it's disabled
 		if (!this.disableDefaultMessageListener) {
-			this.addEvent(defaultMessageListener);
+			this.addEvent(defaultCreateMessageListener);
+		}
 		}
 	}
 
