@@ -176,18 +176,27 @@ export class Client extends Eris.Client {
 		// We only want to customize the 'ready' event the first time
 		if (name !== 'ready' || this._gotReady) return super.emit(name, ...args);
 		this._gotReady = true;
-		this.mentionPrefixRegExp = new RegExp(`^<@!?${this.user.id}>\\s?`);
-		this.getOAuthApplication().then(app => {
-			this.app = app;
+		this._performFirstReadySetup().then(() => {
 			/**
 			 * @event Client#ready
 			 * Overridden from the Eris ready event. Functionally the same, but
-			 * only emitted after internal setup of the app and
-			 * prefixMentionRegExp properties.
+			 * only emitted after internal setup.
 			 */
 			super.emit('ready', ...args);
 		});
 		return !!this.listeners(name).length;
+	}
+
+	/**
+	 * Called the first time the client receives the ready event for setup.
+	 * @private
+	 */
+	async _performFirstReadySetup (): Promise<void> {
+		// Generate mention regexp with user ID
+		this.mentionPrefixRegExp = new RegExp(`^<@!?${this.user.id}>\\s?`);
+
+		// Get OAuth application
+		this.app = await this.getOAuthApplication();
 	}
 
 	/** Returns the command as a list of parsed strings, or null if it's not a valid command */
