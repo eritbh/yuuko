@@ -45,6 +45,13 @@ export interface ClientOptions extends Eris.ClientOptions {
 	 * the handler's execution
 	 */
 	disableDefaultMessageListener?: boolean;
+	/**
+	 * If true, the client does not handle interactions by default, and you must
+	 * register your own `interactionCreate` listener, which can call
+	 * `processCommandInteractionResponse` to perform interaction handling at an
+	 * arbitrary point during the handler's execution.
+	 */
+	disableDefaultInteractionListener?: boolean;
 }
 
 /**
@@ -103,6 +110,14 @@ export class Client extends Eris.Client {
 	 */
 	disableDefaultMessageListener: boolean = false;
 
+	/**
+	 * If true, the client does not handle interactions by default, and you must
+	 * register your own `interactionCreate` listener, which can call
+	 * `processCommandInteractionResponse` to perform interaction handling at an
+	 * arbitrary point during the handler's execution.
+	 */
+	disableDefaultInteractionListener?: boolean;
+
 	/** A list of all loaded commands. */
 	commands: Command[] = [];
 
@@ -160,6 +175,7 @@ export class Client extends Eris.Client {
 			this.ignoreGlobalRequirements = options.ignoreGlobalRequirements;
 		}
 		if (options.disableDefaultMessageListener !== undefined) this.disableDefaultMessageListener = options.disableDefaultMessageListener;
+		if (options.disableDefaultInteractionListener !== undefined) this.disableDefaultInteractionListener = options.disableDefaultInteractionListener;
 
 		// Warn if we're using an empty prefix
 		if (this.prefix === '') {
@@ -170,6 +186,9 @@ export class Client extends Eris.Client {
 		if (!this.disableDefaultMessageListener) {
 			this.addEvent(defaultCreateMessageListener);
 		}
+
+		if (!this.disableDefaultInteractionListener) {
+			this.addEvent(defaultInteractionCreateListener);
 		}
 	}
 
