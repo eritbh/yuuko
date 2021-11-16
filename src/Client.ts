@@ -4,6 +4,7 @@ import fs from 'fs';
 import path from 'path';
 import * as Eris from 'eris';
 import {Command, CommandRequirements, CommandContext} from './Command';
+import {SlashCommand} from './SlashCommand';
 import {EventListener, EventContext} from './EventListener';
 import defaultCreateMessageListener from './listeners/createMessage';
 import defaultInteractionCreateListener from './listeners/interactionCreate';
@@ -108,6 +109,14 @@ export class Client extends Eris.Client {
 	/** A list of all registered event listeners. */
 	events: EventListener<any>[] = [];
 
+	/** A list of all loaded application commands. */
+	registeredApplicationCommands: SlashCommand[] = [];
+
+	/**
+	 * A map of application command IDs to their corresponding Yuuko objects.
+	 */
+	slashCommandIDs = new Map<string, SlashCommand>();
+
 	/**
 	 * The default command, executed if `allowMention` is true and the bot is
 	 * pinged without a command
@@ -199,6 +208,23 @@ export class Client extends Eris.Client {
 
 		// Get OAuth application
 		this.app = await this.getOAuthApplication();
+
+		// Get our application commands
+		const guildCommands = await this.getGuildCommands('149327211470520321');
+
+		// Delete all our commands
+		await Promise.all(guildCommands.map(async command => {
+			if (command.application_id !== this.app!.id) {
+				return;
+			}
+			await this.deleteGuildCommand('149327211470520321', command.id);
+		}));
+
+		// Write all the updated commands
+		await Promise.all(this.registeredApplicationCommands.map(async command => {
+			const {id} = await this.createGuildCommand('149327211470520321', command.toJSON());
+			this.slashCommandIDs.set(id, command);
+		}));
 	}
 
 	/** Returns the command as a list of parsed strings, or null if it's not a valid command */
@@ -251,6 +277,30 @@ export class Client extends Eris.Client {
 		return true;
 	}
 
+	/**
+	 * Given an interaction, determines whether the interaction came from a
+	 * command registered from Yuuko. If it did originate from a command,
+	 * executes the appropriate response handler and returns `true`; otherwise,
+	 * returns `false`.
+	 */
+	async processApplicationCommandResponse (interaction: Eris.AnyInteraction | Eris.UnknownInteraction): Promise<boolean> {
+		if (interaction.type !== Eris.Constants.InteractionTypes.APPLICATION_COMMAND) {
+			console.log('???');
+			return false;
+		}
+		// checking `type` ensures the incoming reaction is not unknown type
+		interaction = interaction as Eris.CommandInteraction;
+
+		const command = this.slashCommandIDs.get(interaction.data.id);
+		if (!command) {
+			console.log('uhh');
+			return false;
+		}
+
+		command.process(interaction);
+		return true;
+	}
+
 	/** Adds things to the context objects the client sends. */
 	extendContext (options: object): this {
 		Object.assign(this.contextAdditions, options);
@@ -299,6 +349,11 @@ export class Client extends Eris.Client {
 		} else {
 			this.on(eventListener.eventName, eventListener.computedListener);
 		}
+		return this;
+	}
+
+	addSlashCommand (command: SlashCommand): this {
+		this.registeredApplicationCommands.push(command);
 		return this;
 	}
 
@@ -369,6 +424,8 @@ export class Client extends Eris.Client {
 					this.addCommand(thing);
 				} else if (thing instanceof EventListener) {
 					this.addEvent(thing);
+				} else if (thing instanceof SlashCommand) {
+					this.addSlashCommand(thing);
 				} else {
 					throw new TypeError('Imported value is not a command or event listener');
 				}
