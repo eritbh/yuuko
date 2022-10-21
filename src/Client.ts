@@ -361,7 +361,7 @@ export class Client extends Eris.Client {
 				} else {
 					throw new TypeError('Imported value is not a command or event listener');
 				}
-			} catch (error) {
+			} catch (error: any) {
 				// Add filename to errors and re-throw
 				error.filename = filename;
 				throw error;
