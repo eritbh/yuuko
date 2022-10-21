@@ -9,6 +9,8 @@ A no-frills Discord command framework for [Eris](https://github.com/abalabahaha/
 
 Yuuko's goal is to provide a solid base for Discord bots of all types and sizes, featuring easy support for modular project structures, multiple levels of configuration hooks, and first-class Typescript compatibility in a lightweight package with no extra dependencies. [Read the usage guide][usage] or [check the full API reference][docs].
 
+> **Note**: Due to slow Eris development and low maintainer responsiveness, Yuuko is currently considered in maintenance mode. It will continue to be updated to work with new versions of Eris, but it will probably not get any significant feature updates - including support for slash commands. The author of this project doesn't recommended the use of Eris-based frameworks, including Yuuko, for new projects at this time.
+
 ## Installation
 
 Yuuko expects Eris to be installed as a peer dependency, which allows you to use any forward-compatible Eris version without having to update Yuuko first. Using npm, you can install both at once with this command:
