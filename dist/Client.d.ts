@@ -48,7 +48,7 @@ export interface PrefixFunction {
     (msg: Eris.Message, ctx: EventContext): Resolves<string | string[] | null | undefined>;
 }
 /** The client. */
-export declare class Client extends Eris.Client implements ClientOptions {
+export declare class Client extends Eris.Client {
     /** The token of the bot. */
     token: string;
     /** The prefix used to trigger commands. */
@@ -84,7 +84,7 @@ export declare class Client extends Eris.Client implements ClientOptions {
     /** A list of all loaded commands. */
     commands: Command[];
     /** A list of all registered event listeners. */
-    events: EventListener[];
+    events: EventListener<any>[];
     /**
      * The default command, executed if `allowMention` is true and the bot is
      * pinged without a command
@@ -130,7 +130,7 @@ export declare class Client extends Eris.Client implements ClientOptions {
     /** Register a command to the client. */
     addCommand(command: Command): this;
     /** Register an EventListener class instance to the client. */
-    addEvent(eventListener: EventListener): this;
+    addEvent<T extends keyof ClientEvents>(eventListener: EventListener<T>): this;
     /**
      * Load the files in a directory and attempt to add a command from each.
      * Searches recursively through directories, but ignores files and nested
@@ -190,13 +190,13 @@ export declare class Client extends Eris.Client implements ClientOptions {
     get defaultPrefix(): string;
     set defaultPrefix(val: string);
 }
-export interface ClientEvents<T> extends Eris.ClientEvents<T> {
+export interface ClientEvents extends Eris.ClientEvents {
     /**
      * @event
      * Fired when a command is loaded.
      * @param command The command that was loaded
      */
-    (event: 'commandLoaded', listener: (cmd: Command) => void): T;
+    commandLoaded: [cmd: Command];
     /**
      * @event
      * Fired just before a command has its requirements evaluated on an
@@ -206,7 +206,7 @@ export interface ClientEvents<T> extends Eris.ClientEvents<T> {
      * @param args The arguments passed to the command handler
      * @param context The context object for the command
      */
-    (event: 'preCommand', listener: (cmd: Command, msg: Eris.Message, args: string[], ctx: CommandContext) => void): T;
+    preCommand: [cmd: Command, msg: Eris.Message, args: string[], ctx: CommandContext];
     /**
      * @event
      * Fired after a command is executed.
@@ -215,7 +215,7 @@ export interface ClientEvents<T> extends Eris.ClientEvents<T> {
      * @param args The arguments passed to the command handler
      * @param context The context object for the command
      */
-    (event: 'postCommand', listener: (cmd: Command, msg: Eris.Message, args: string[], ctx: CommandContext) => void): T;
+    postCommand: [cmd: Command, msg: Eris.Message, args: string[], ctx: CommandContext];
     /**
      * @event
      * Fired if a message starts with a command but no valid command is found
@@ -224,8 +224,13 @@ export interface ClientEvents<T> extends Eris.ClientEvents<T> {
      * @param args The arguments passed to the command handler
      * @param context The context object for the command
      */
-    (event: 'invalidCommand', listener: (msg: Eris.Message, args: string[], ctx: CommandContext) => void): T;
+    invalidCommand: [msg: Eris.Message, args: string[], ctx: CommandContext];
 }
 export declare interface Client extends Eris.Client {
-    on: ClientEvents<this>;
+    on<K extends keyof ClientEvents>(event: K, listener: (...args: ClientEvents[K]) => void): this;
+    on(event: string, listener: (...args: any[]) => void): this;
+    once<K extends keyof ClientEvents>(event: K, listener: (...args: ClientEvents[K]) => void): this;
+    once(event: string, listener: (...args: any[]) => void): this;
+    off<K extends keyof ClientEvents>(event: K, listener: (...args: ClientEvents[K]) => void): this;
+    off(event: string, listener: (...args: any[]) => void): this;
 }
