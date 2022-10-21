@@ -8,7 +8,7 @@ function warningEmitter(warning, code) {
         if (hasWarned)
             return;
         hasWarned = true;
-        process_1.emitWarning(warning, 'DeprecationWarning', code);
+        (0, process_1.emitWarning)(warning, 'DeprecationWarning', code);
     };
 }
 // https://github.com/eritbh/yuuko/issues/88

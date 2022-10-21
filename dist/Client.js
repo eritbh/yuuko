@@ -432,7 +432,7 @@ class Client extends Eris.Client {
                 return [this.prefix];
             }
             // Always return as an array, even if we got a single result back
-            return util_1.makeArray(prefixes);
+            return (0, util_1.makeArray)(prefixes);
         });
     }
     // Takes a message, gets the prefix based on the config of any guild it was

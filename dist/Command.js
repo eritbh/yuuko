@@ -112,7 +112,7 @@ class Command {
                 this.requirements.owner = true;
             }
             if (requirements.permissions) {
-                this.requirements.permissions = util_1.makeArray(requirements.permissions);
+                this.requirements.permissions = (0, util_1.makeArray)(requirements.permissions);
             }
             if (requirements.custom) {
                 this.requirements.custom = requirements.custom;

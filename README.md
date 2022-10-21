@@ -2,13 +2,14 @@
 
 [![npm version](https://img.shields.io/npm/v/yuuko.svg)](https://www.npmjs.com/package/yuuko)
 [![npm@next version](https://img.shields.io/npm/v/yuuko/next)](https://www.npmjs.com/package/yuuko/v/next)
-[![Dev dependency status](https://img.shields.io/david/dev/eritbh/yuuko)](https://david-dm.org/eritbh/yuuko?type=dev)
 [![Discord support server](https://img.shields.io/discord/409839835503788033?color=7289DA&label=support%20server&logo=discord&logoColor=fff)](https://discord.gg/a2N2YCx)
 [![Donate on Ko-fi](https://img.shields.io/badge/donate-on%20Ko--fi-FF5E5B?logo=ko-fi&logoColor=white)](https://ko-fi.com/eritbh)
 
 A no-frills Discord command framework for [Eris](https://github.com/abalabahaha/eris).
 
 Yuuko's goal is to provide a solid base for Discord bots of all types and sizes, featuring easy support for modular project structures, multiple levels of configuration hooks, and first-class Typescript compatibility in a lightweight package with no extra dependencies. [Read the usage guide][usage] or [check the full API reference][docs].
+
+> **Note**: Due to slow Eris development and low maintainer responsiveness, Yuuko is currently considered in maintenance mode. It will continue to be updated to work with new versions of Eris, but it will probably not get any significant feature updates - including support for slash commands. The author of this project doesn't recommended the use of Eris-based frameworks, including Yuuko, for new projects at this time.
 
 ## Installation
 
