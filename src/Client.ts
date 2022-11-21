@@ -4,8 +4,10 @@ import fs from 'fs';
 import path from 'path';
 import * as Eris from 'eris';
 import {Command, CommandRequirements, CommandContext} from './Command';
+import {SlashCommand} from './SlashCommand';
 import {EventListener, EventContext} from './EventListener';
-import defaultMessageListener from './defaultMessageListener';
+import defaultCreateMessageListener from './listeners/createMessage';
+import defaultInteractionCreateListener from './listeners/interactionCreate';
 import {Resolves, makeArray} from './util';
 import * as deprecations from './deprecations';
 
@@ -43,6 +45,13 @@ export interface ClientOptions extends Eris.ClientOptions {
 	 * the handler's execution
 	 */
 	disableDefaultMessageListener?: boolean;
+	/**
+	 * If true, the client does not handle interactions by default, and you must
+	 * register your own `interactionCreate` listener, which can call
+	 * `processCommandInteractionResponse` to perform interaction handling at an
+	 * arbitrary point during the handler's execution.
+	 */
+	disableDefaultInteractionListener?: boolean;
 }
 
 /**
@@ -101,11 +110,27 @@ export class Client extends Eris.Client {
 	 */
 	disableDefaultMessageListener: boolean = false;
 
+	/**
+	 * If true, the client does not handle interactions by default, and you must
+	 * register your own `interactionCreate` listener, which can call
+	 * `processCommandInteractionResponse` to perform interaction handling at an
+	 * arbitrary point during the handler's execution.
+	 */
+	disableDefaultInteractionListener?: boolean;
+
 	/** A list of all loaded commands. */
 	commands: Command[] = [];
 
 	/** A list of all registered event listeners. */
 	events: EventListener<any>[] = [];
+
+	/** A list of all loaded application commands. */
+	registeredApplicationCommands: SlashCommand[] = [];
+
+	/**
+	 * A map of application command IDs to their corresponding Yuuko objects.
+	 */
+	slashCommandIDs = new Map<string, SlashCommand>();
 
 	/**
 	 * The default command, executed if `allowMention` is true and the bot is
@@ -150,6 +175,7 @@ export class Client extends Eris.Client {
 			this.ignoreGlobalRequirements = options.ignoreGlobalRequirements;
 		}
 		if (options.disableDefaultMessageListener !== undefined) this.disableDefaultMessageListener = options.disableDefaultMessageListener;
+		if (options.disableDefaultInteractionListener !== undefined) this.disableDefaultInteractionListener = options.disableDefaultInteractionListener;
 
 		// Warn if we're using an empty prefix
 		if (this.prefix === '') {
@@ -158,7 +184,11 @@ export class Client extends Eris.Client {
 
 		// Register the default message listener unless it's disabled
 		if (!this.disableDefaultMessageListener) {
-			this.addEvent(defaultMessageListener);
+			this.addEvent(defaultCreateMessageListener);
+		}
+
+		if (!this.disableDefaultInteractionListener) {
+			this.addEvent(defaultInteractionCreateListener);
 		}
 	}
 
@@ -176,18 +206,44 @@ export class Client extends Eris.Client {
 		// We only want to customize the 'ready' event the first time
 		if (name !== 'ready' || this._gotReady) return super.emit(name, ...args);
 		this._gotReady = true;
-		this.mentionPrefixRegExp = new RegExp(`^<@!?${this.user.id}>\\s?`);
-		this.getOAuthApplication().then(app => {
-			this.app = app;
+		this._performFirstReadySetup().then(() => {
 			/**
 			 * @event Client#ready
 			 * Overridden from the Eris ready event. Functionally the same, but
-			 * only emitted after internal setup of the app and
-			 * prefixMentionRegExp properties.
+			 * only emitted after internal setup.
 			 */
 			super.emit('ready', ...args);
 		});
 		return !!this.listeners(name).length;
+	}
+
+	/**
+	 * Called the first time the client receives the ready event for setup.
+	 * @private
+	 */
+	async _performFirstReadySetup (): Promise<void> {
+		// Generate mention regexp with user ID
+		this.mentionPrefixRegExp = new RegExp(`^<@!?${this.user.id}>\\s?`);
+
+		// Get OAuth application
+		this.app = await this.getOAuthApplication();
+
+		// Get our application commands
+		const guildCommands = await this.getGuildCommands('149327211470520321');
+
+		// Delete all our commands
+		await Promise.all(guildCommands.map(async command => {
+			if (command.application_id !== this.app!.id) {
+				return;
+			}
+			await this.deleteGuildCommand('149327211470520321', command.id);
+		}));
+
+		// Write all the updated commands
+		await Promise.all(this.registeredApplicationCommands.map(async command => {
+			const {id} = await this.createGuildCommand('149327211470520321', command.toJSON());
+			this.slashCommandIDs.set(id, command);
+		}));
 	}
 
 	/** Returns the command as a list of parsed strings, or null if it's not a valid command */
@@ -240,6 +296,30 @@ export class Client extends Eris.Client {
 		return true;
 	}
 
+	/**
+	 * Given an interaction, determines whether the interaction came from a
+	 * command registered from Yuuko. If it did originate from a command,
+	 * executes the appropriate response handler and returns `true`; otherwise,
+	 * returns `false`.
+	 */
+	async processApplicationCommandResponse (interaction: Eris.AnyInteraction | Eris.UnknownInteraction): Promise<boolean> {
+		if (interaction.type !== Eris.Constants.InteractionTypes.APPLICATION_COMMAND) {
+			console.log('???');
+			return false;
+		}
+		// checking `type` ensures the incoming reaction is not unknown type
+		interaction = interaction as Eris.CommandInteraction;
+
+		const command = this.slashCommandIDs.get(interaction.data.id);
+		if (!command) {
+			console.log('uhh');
+			return false;
+		}
+
+		command.process(interaction);
+		return true;
+	}
+
 	/** Adds things to the context objects the client sends. */
 	extendContext (options: object): this {
 		Object.assign(this.contextAdditions, options);
@@ -288,6 +368,11 @@ export class Client extends Eris.Client {
 		} else {
 			this.on(eventListener.eventName, eventListener.computedListener);
 		}
+		return this;
+	}
+
+	addSlashCommand (command: SlashCommand): this {
+		this.registeredApplicationCommands.push(command);
 		return this;
 	}
 
@@ -358,6 +443,8 @@ export class Client extends Eris.Client {
 					this.addCommand(thing);
 				} else if (thing instanceof EventListener) {
 					this.addEvent(thing);
+				} else if (thing instanceof SlashCommand) {
+					this.addSlashCommand(thing);
 				} else {
 					throw new TypeError('Imported value is not a command or event listener');
 				}
