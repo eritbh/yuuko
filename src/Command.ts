@@ -117,7 +117,7 @@ export class Command {
 	names: string[];
 
 	/** The function executed when the command is triggered. */
-	process: CommandProcess | GuildCommandProcess | PrivateCommandProcess
+	process: CommandProcess;
 
 	/** The requirements for the command being triggered. */
 	requirements: CommandRequirements;
@@ -128,22 +128,85 @@ export class Command {
 	/** Subcommands of this command. */
 	subcommands: Command[] = [];
 
-	// For some reason, I cannot get TS to recognize that `CommandProcess` is a
-	// superset of `GuildCommandProcess` and `PrivateCommandProcess`, so for
-	// now we have one more override than we should really need. Oh well.
-	// TODO: Does microsoft/typescript#31023 fix this?
-	constructor(names: string | string[], process: CommandProcess, requirements?: CommandRequirements);
-	constructor(names: string | string[], process: GuildCommandProcess, requirements: CommandRequirements & { guildOnly: true; dmOnly?: false });
-	constructor(names: string | string[], process: PrivateCommandProcess, requirements: CommandRequirements & { dmOnly: true; guildOnly?: false })
-	constructor (names: string | string[], process: CommandProcess | GuildCommandProcess | PrivateCommandProcess, requirements?: CommandRequirements) {
+	/** Creates a command. */
+	constructor (names: string | string[], process: CommandProcess);
+
+	/** Creates a command restricted to use in guilds. */
+	constructor (names: string | string[], requirements: CommandRequirements & { guildOnly: true; dmOnly?: false }, process: GuildCommandProcess);
+	/** Creates a command restricted to use in DMs. */
+	constructor (names: string | string[], requirements: CommandRequirements & { dmOnly: true; guildOnly?: false }, process: PrivateCommandProcess);
+	/** Creates a command. */
+	constructor (names: string | string[], requirements: CommandRequirements, process: CommandProcess);
+
+	/**
+	 * Creates a command restricted to use in guilds.
+	 * @deprecated Use the `new Command(names, requirements, process)` form.
+	 */
+	constructor (names: string | string[], process: GuildCommandProcess, requirements: CommandRequirements & { guildOnly: true; dmOnly?: false });
+	/**
+	 * Creates a command restricted to use in DMs.
+	 * @deprecated Use the `new Command(names, requirements, process)` form.
+	 */
+	constructor (names: string | string[], process: PrivateCommandProcess, requirements: CommandRequirements & { dmOnly: true; guildOnly?: false });
+	/**
+	 * Creates a command.
+	 * @deprecated Use the `new Command(names, requirements, process)` form.
+	 */
+	constructor (names: string | string[], process: CommandProcess, requirements: CommandRequirements);
+
+	/**
+	 * This implememtation signature is really messy to account for all the
+	 * different forms the constructor can take. It doesn't need to be exposed
+	 * in documentation or code suggestions.
+	 * @internal
+	 */
+	// TODO: This can be simplified once process-first forms are removed for v3
+	constructor (...args: [
+		names: string | string[],
+		requirements: CommandRequirements,
+		process: CommandProcess | GuildCommandProcess | PrivateCommandProcess,
+	] | [
+		names: string | string[],
+		process: CommandProcess | GuildCommandProcess | PrivateCommandProcess,
+		requirements: CommandRequirements,
+	] | [
+		names: string | string[],
+		process: CommandProcess,
+	]) {
+		// Names is always the first argument
+		const names = args[0];
 		if (Array.isArray(names)) {
 			this.names = names;
 		} else {
 			this.names = [names];
 		}
 		if (!this.names[0]) throw new TypeError('At least one name is required');
-		this.process = process;
+
+		// Figure out what order the user passed requirements and process
+		let requirements: CommandRequirements | undefined;
+		let process: CommandProcess;
+		if (!args[2]) {
+			// (name, process)
+			requirements = undefined;
+			process = args[1] as CommandProcess;
+		} else if (typeof args[2] === 'function') {
+			// (name, requirements, process)
+			requirements = args[1] as CommandRequirements;
+			process = args[2] as CommandProcess;
+		} else {
+			// (name, process, requirements)
+			requirements = args[2];
+			process = args[1] as CommandProcess;
+		}
+
+		// NOTE: This cast discards away type information related to the
+		//       channels we expect this command to be executed in. The only
+		//       thing preventing e.g. private channel messages from being
+		//       passed to a guild-only command process are the runtime checks
+		//       in Command#execute below.
+		this.process = process as CommandProcess<Eris.TextableChannel>;
 		if (!this.process) throw new TypeError('Process is required');
+
 		this.requirements = {};
 		if (requirements) {
 			if (requirements.owner) {
@@ -211,10 +274,8 @@ export class Command {
 		// We have no subcommand, so call this command's process
 		// NOTE: By calling checkPermissions and returning early if it returns
 		//       false, we guarantee that messages will be the correct type for
-		//       the stored process, so this call is always safe. Restructuring
-		//       this to properly use TS type guards would be very messy and
-		//       would result in duplicate safety checks that we want to avoid.
-		// @ts-ignore
+		//       the stored process, even though we no longer have type info
+		//       about the process.
 		this.process(msg, args, ctx);
 		return true;
 	}
